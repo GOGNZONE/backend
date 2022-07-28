@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -48,6 +49,7 @@ public class Employee {
 	private String employeePassword;
 	
 	@Column(name = "employee_address", length = 80)
+	@ColumnDefault("NULL")
 	private String employeeAddress;
 
 	@Column(name = "employee_email", length = 30, unique = true)
@@ -64,9 +66,11 @@ public class Employee {
 	@Column(name = "employee_role")
 	@Enumerated(value = EnumType.STRING)
 	@NotNull(message = "employee role must not be null")
+	@ColumnDefault("'STAFF'")
 	private EmployeeRole employeeRole;
 	
 	@Column(name = "employee_image", columnDefinition = "TEXT")
+	@ColumnDefault("NULL")
 	private String employeeImage;
 	
 	/**
