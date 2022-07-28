@@ -66,7 +66,7 @@ public class Employee {
 	@Column(name = "employee_role")
 	@Enumerated(value = EnumType.STRING)
 	@NotNull(message = "employee role must not be null")
-	@ColumnDefault("'STAFF'")
+//	@ColumnDefault("'STAFF'")
 	private EmployeeRole employeeRole;
 	
 	@Column(name = "employee_image", columnDefinition = "TEXT")

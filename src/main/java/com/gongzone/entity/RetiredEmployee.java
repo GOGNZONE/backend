@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
  * @version 1.0
  */
 @Entity
-@Table(name = "employee")
+@Table(name = "retired_employee")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
