@@ -43,7 +43,8 @@ public class Employee {
 	@NotNull(message = "name must not be null")
 	private String employeeName;
 	
-	@Column(name = "employee_password", length = 20, nullable = false)
+	@Column(name = "employee_password", length = 20)
+	@NotNull(message = "password must not be null")
 	private String employeePassword;
 	
 	@Column(name = "employee_address", length = 80)
@@ -56,11 +57,13 @@ public class Employee {
 	private String employeePhone;
 	
 	@CreatedDate
-	@Column(name = "employee_hiredate", nullable = false)
+	@Column(name = "employee_hiredate")
+	@NotNull(message = "hiredate must not be null")
 	private LocalDate employeeHiredate;
 	
-	@Column(name = "employee_role", nullable = false)
+	@Column(name = "employee_role")
 	@Enumerated(value = EnumType.STRING)
+	@NotNull(message = "employee role must not be null")
 	private EmployeeRole employeeRole;
 	
 	@Column(name = "employee_image", columnDefinition = "TEXT")
