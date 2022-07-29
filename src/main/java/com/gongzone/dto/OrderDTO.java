@@ -37,6 +37,7 @@ public class OrderDTO {
 	
 	/**
 	 * OrderDTO를 OrderEntity로 변경
+	 * 임시
 	 * @param {OrderDTO}
 	 * @return OrderDTO를 OrderEntity로 변경한 값
 	 */
