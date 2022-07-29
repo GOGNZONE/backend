@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.gongzone.dto.BomDTO;
@@ -71,6 +72,7 @@ public class BOM {
 	
 	@Column(name="bom_received_data")
 	@NotNull
+	@CreatedDate
 	private LocalDateTime bomReceivedData;
 	
 	@Column(name="bom_file")
@@ -112,6 +114,33 @@ public class BOM {
 		
 	}
 
+	
+	/**
+	 * BOM Entity를 BomDTO로 변경
+	 * @param {BOMEntity}
+	 * @return BOM Entity를 BomDTO로 변경
+	 */
+	
+	public BomDTO toDTO(BOM BOMEntity) {
+		BomDTO bomDTO = BomDTO.builder()
+				.bomId(BOMEntity.getBomId())
+				.bomName(BOMEntity.getBomName())
+				.bomQuantity(BOMEntity.getBomQuantity())
+				.bomPrice(BOMEntity.getBomPrice())
+				.bomStandard(BOMEntity.getBomStandard())
+				.bomUnit(BOMEntity.getBomUnit())
+				.bomDescription(BOMEntity.getBomDescription())
+				.bomReceivedData(BOMEntity.getBomReceivedData())
+				.bomFile(BOMEntity.getBomFile())
+				.bomRequiredQuntity(BOMEntity.getBomRequiredQuntity())
+				.productionBomId(BOMEntity.getProductionBomId())
+				.storageId(BOMEntity.getStorageId())
+				.bomParentId(BOMEntity.getBomParentId())
+				.build();
+		return bomDTO;
+	}
+	
+	
 	
 	
 }
