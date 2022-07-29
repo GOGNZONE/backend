@@ -1,12 +1,14 @@
 package com.gongzone.entity;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -61,11 +63,16 @@ public class Employee {
 	@NotNull(message = "hiredate must not be null")
 	private LocalDate employeeHiredate;
 	
-	@Column(name = "employee_role")
-	@Enumerated(value = EnumType.STRING)
-	@NotNull(message = "employee role must not be null")
+//	@Column(name = "employee_role")
+//	@Enumerated(value = EnumType.STRING)
+//	@NotNull(message = "employee role must not be null")
 //	@ColumnDefault("'STAFF'")
-	private EmployeeRole employeeRole;
+//	private EmployeeRole employeeRole;
+	
+	@Column(name = "employee_role")
+	@Builder.Default
+	@ElementCollection(fetch = FetchType.LAZY)
+	private Set<EmployeeRole> roleSet = new HashSet<>();
 	
 	@Column(name = "employee_image", columnDefinition = "TEXT")
 	@ColumnDefault("NULL")
