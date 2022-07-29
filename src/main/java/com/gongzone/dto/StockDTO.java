@@ -35,7 +35,7 @@ public class StockDTO {
 	 * @param {StockDTO}
 	 * @return StockDTO를 StockEntity로 변경한 값
 	 */
-	
+
 	
 	public Stock toEntity(StockDTO stockDTO) {
 		Stock stockEntity = Stock.builder()
