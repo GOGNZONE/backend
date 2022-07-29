@@ -50,4 +50,18 @@ public class ClientAccount {
 	@NotNull(message = "client must not be null")
 	private Client client;
 
+	
+	/**
+	 * 거래처 계좌 정보 수정 메소드
+	 * @param {accountBank, accountNumber, accountDepositor}
+	 * @return void
+	 * @author kimmingyu
+	 * @version 1.0
+	 */
+	
+	public void updateClientAccount(String accountBank, String accountNumber, String accountDepositor) {
+		this.accountBank = accountBank;
+		this.accountNumber = accountNumber;
+		this.accountDepositor = accountDepositor;
+	}
 }
