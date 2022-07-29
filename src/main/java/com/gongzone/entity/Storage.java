@@ -63,6 +63,13 @@ public class Storage {
 		this.storageDescription = storageDescription;
 	}
 	
+	/**
+	 * StorageEntity를StorageDTO로 변경
+	 * @param {StorageEntity}
+	 * @return StorageEntity를 StorageDTO로 변경한 값
+	 */
+	
+	
 	public StorageDTO toDTO(Storage storageEntity) {
 		StorageDTO storageDTO = StorageDTO.builder()
 				.storageId(storageEntity.getStorageId())

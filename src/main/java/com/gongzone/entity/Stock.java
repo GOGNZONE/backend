@@ -57,6 +57,11 @@ public class Stock {
 	@ManyToOne(targetEntity = Storage.class)
 	private Storage storage;
 	
+	/**
+	 * Stock 수정
+	 * @param {stockName, stockQuantity, stockDescription}
+	 * @return 값을 업데이트만 하기때문에 void
+	 */
 	public void updateStock(String stockName, Long stockQuantity, String stockDescription) {
 		this.stockName = stockName;
 		this.stockQuantity = stockQuantity;
@@ -64,14 +69,14 @@ public class Stock {
 	}
 	
 	
+
+	
+	
 	/**
-	 * Stock 수정
-	 * @param {stockEntity}
-	 * @return 값을 업데이트만 하기때문에 void
+	 * StockEntity를 StockDTO로 변경
+	 * @param {StockEntity}
+	 * @return StockEntity를 StockDTO로 변경한 값
 	 */
-	
-	
-	
 	public StockDTO toDTO(Stock stockEntity) {
 		StockDTO stockDTO = StockDTO.builder()
 				.stockId(stockEntity.getStockId())

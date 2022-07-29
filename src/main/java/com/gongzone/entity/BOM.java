@@ -118,7 +118,7 @@ public class BOM {
 	/**
 	 * BOM Entity를 BomDTO로 변경
 	 * @param {BOMEntity}
-	 * @return BOM Entity를 BomDTO로 변경
+	 * @return BOM Entity를 BomDTO로 변경한 값
 	 */
 	
 	public BomDTO toDTO(BOM BOMEntity) {

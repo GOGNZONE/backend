@@ -106,6 +106,12 @@ public class Order {
 	}
 	
 	
+	/**
+	 * OrderEntity를 OrderDTO로 변경
+	 * @param {OrderEntity}
+	 * @return OrderEntity를 OrderDTO로 변경한 값
+	 */
+	
 	public OrderDTO toDTO(Order OrderEntity) {
 		OrderDTO orderDTO = OrderDTO.builder()
 				.orderId(OrderEntity.getOrderId())
