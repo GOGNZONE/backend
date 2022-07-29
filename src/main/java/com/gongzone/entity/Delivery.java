@@ -31,11 +31,11 @@ public class Delivery {
 	private Long deliveryId;
 	
 	@Column(name = "delivery_company_name", length = 30)
-	@NotNull
+	@NotNull(message = "delivery company name cannot be null")
 	private String deliveryCompanyName;
 	
 	@Column(name = "delivery_tracking_number", length = 30)
-	@NotNull
+	@NotNull(message = "delivery tracking number cannot be null")
 	private String deliveryTrackingNumber;
 	
 }

@@ -31,10 +31,11 @@ public class Vehicle {
 	private Long vehicleId;
 	
 	@Column(name = "vehicle_number", length = 10)
-	@NotNull
+	@NotNull(message = "vehicle number cannot be null")
 	private String vehicleNumber;
 	
 	@Column(name = "vehicle_type", length = 10)
+	@NotNull(message = "vehicle type cannot be null")
 	private String vehicleType;
 	
 }
