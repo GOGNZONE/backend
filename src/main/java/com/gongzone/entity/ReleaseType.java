@@ -15,7 +15,7 @@ public enum ReleaseType {
 	private final String releaseType;
 	
 	public String getReleaseType() {
-		return this.releaseType;
+		return this.releaseType; 
 	}
 	
 }
