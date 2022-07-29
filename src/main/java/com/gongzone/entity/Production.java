@@ -80,4 +80,26 @@ public class Production {
 	@JsonIgnore
 	private Client client;
 	
+	/**
+	 * 생산 정보 수정 메서드
+	 * @param {}
+	 * @return void
+	 * @author Hanju Park
+	 * @version 1.0
+	 * */
+	public void updateProduction(String productionName, String productionBrandName, Long productionPrice, int productionQuantity, 
+			String productionFile, String productionStandard, String productionUnit, String productionDescription, LocalDate productionReleasedDate, 
+			LocalDate productionDate) {
+		this.productionName = productionName;
+		this.productionBrandName = productionBrandName;
+		this.productionPrice = productionPrice;
+		this.productionQuantity = productionQuantity;
+		this.productionFile = productionFile;
+		this.productionStandard = productionStandard;
+		this.productionUnit = productionUnit;
+		this.productionDescription = productionDescription;
+		this.productionReleasedDate = productionReleasedDate;
+		this.productionDate = productionDate;
+	}
+	
 }
