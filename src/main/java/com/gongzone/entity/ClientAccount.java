@@ -49,7 +49,6 @@ public class ClientAccount {
 	@JoinColumn(name = "clientId")
 	@NotNull(message = "client must not be null")
 	private Client client;
-
 	
 	/**
 	 * 거래처 계좌 정보 수정 메소드
