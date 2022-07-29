@@ -70,4 +70,21 @@ public class Client {
 	@JsonIgnore
 	private Employee employee;
 	
+	/**
+	 * 거래처 정보 수정 메소드
+	 * @param { clientName, clientTel, clientAddress, clientFile, clientManager}
+	 * @return void
+	 * @author kimmingyu
+	 * @version 1.0
+	 */
+	
+	public void updateClient(String clientName, String clientTel, String clientAddress,
+			String clientFile, String clientManager) {
+		this.clientName = clientName;
+		this.clientTel = clientTel;
+		this.clientAddress = clientAddress;
+		this.clientFile = clientFile;
+		this.clientManager = clientManager;
+	}
+	
 }
