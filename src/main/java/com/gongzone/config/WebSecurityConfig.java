@@ -1,10 +1,13 @@
 package com.gongzone.config;
 
 import org.apache.catalina.filters.CorsFilter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.gongzone.security.JwtAuthenticationFilter;
 
@@ -18,6 +21,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private JwtAuthenticationFilter jwtAuthenticationFilter;
 	
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+ 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// http 시큐리티 빌더
