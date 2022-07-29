@@ -9,10 +9,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -57,5 +61,15 @@ public class Release {
 	@Enumerated(value = EnumType.STRING)
 	@NotNull(message = "release type cannot be null")
 	private ReleaseType releaseType;
+	
+	@ManyToOne
+	@JoinColumn(name = "deliveryId", nullable = true)
+	@JsonIgnore
+	private Delivery delivery;
+	
+	@ManyToOne
+	@JoinColumn(name = "vehicleId", nullable = true)
+	@JsonIgnore
+	private Vehicle vehicle;
 	
 }
