@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -36,7 +34,7 @@ import lombok.NoArgsConstructor;
 @EntityListeners(AuditingEntityListener.class)
 public class Employee {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	@Column(name = "employee_id")
 	private Long employeeId;
 	
