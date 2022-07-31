@@ -75,14 +75,15 @@ public class Production {
 	@NotNull(message = "production date cannot be null")
 	private LocalDate productionDate;
 	
-	@ManyToOne
-	@JoinColumn(name = "clientId", nullable = true)
-	@JsonIgnore
-	private Client client;
+//	@ManyToOne
+//	@JoinColumn(name = "clientId", nullable = true)
+//	@JsonIgnore
+//	private Client client;
 	
 	/**
 	 * 생산 정보 수정 메서드
-	 * @param {}
+	 * @param { productionName, productionBrandName, productionPrice, productionQuantity, 
+	 * 		productionFile, productionStandard, productionUnit, productionDescription, productionReleasedDate, productionDate}
 	 * @return void
 	 * @author Hanju Park
 	 * @version 1.0
