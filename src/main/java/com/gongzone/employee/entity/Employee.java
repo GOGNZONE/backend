@@ -1,4 +1,4 @@
-package com.gongzone.entity;
+package com.gongzone.employee.entity;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,6 +21,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gongzone.client.entity.Client;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
