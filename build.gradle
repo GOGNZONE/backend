@@ -19,17 +19,29 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.mapstruct:mapstruct:1.5.2.Final' // MapStruct
+	// jpa
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	// spring security
 	
+	
+	// Start adding lombok library
 	compileOnly 'org.projectlombok:lombok' 
-	//compileOnly 'org.projectlombok:lombok-mapstruct-binding:0.2.0' // MapStruct
+	annotationProcessor 'org.projectlombok:lombok'
+	// End of adding lombok library
+	
+	// Start adding mapstruct library
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
+	implementation 'org.mapstruct:mapstruct:1.5.2.Final'
+	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0' 
+	// End of adding mapstruct library
+	
+	// validator
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	
+	
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
-	annotationProcessor 'org.projectlombok:lombok' 
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final' // MapStruct
 	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
@@ -38,3 +50,4 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
