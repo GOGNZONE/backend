@@ -8,9 +8,9 @@ import java.util.List;
  * @version 1.0
  * */
 public interface GenericMapper<D, E> {
-	D toDTO(E e);
+	D toDto(E e);
 	E toEntity(D d);
 	
-	List<D> toDTOList(List<E> entityList);
+	List<D> toDtoList(List<E> entityList);
 	List<E> toEntityList(List<D> dtoList);
 }
