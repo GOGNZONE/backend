@@ -87,12 +87,9 @@ public class Order {
 	
 	/**
 	 * 발주 수정
-	 *
 	 * @param {orderDTO}
-	 * @return 값을 업데이트만 하기때문에 void 
+	 * @return  void 
 	 */
-	
-	
 	public void updateOrder(OrderDTO orderDTO) {
 		this.orderProductionName = orderDTO.getOrderProductionName();
 		this.orderProductionBrandName = orderDTO.getOrderProductionBrandName();
@@ -108,8 +105,8 @@ public class Order {
 	
 	/**
 	 * OrderEntity를 OrderDTO로 변경
-	 * @param {OrderEntity}
-	 * @return OrderEntity를 OrderDTO로 변경한 값
+	 * @param {Order}
+	 * @return OrderDTO
 	 */
 	
 	public OrderDTO toDTO(Order OrderEntity) {

@@ -56,7 +56,7 @@ public class Stock {
 	/**
 	 * Stock 수정
 	 * @param {stockName, stockQuantity, stockDescription}
-	 * @return 값을 업데이트만 하기때문에 void
+	 * @return void
 	 */
 	public void updateStock(String stockName, Long stockQuantity, String stockDescription) {
 		this.stockName = stockName;
@@ -66,8 +66,8 @@ public class Stock {
 	
 	/**
 	 * StockEntity를 StockDTO로 변경
-	 * @param {StockEntity}
-	 * @return StockEntity를 StockDTO로 변경한 값
+	 * @param {Stock}
+	 * @return StockDTO
 	 */
 	public StockDTO toDTO(Stock stockEntity) {
 		StockDTO stockDTO = StockDTO.builder()

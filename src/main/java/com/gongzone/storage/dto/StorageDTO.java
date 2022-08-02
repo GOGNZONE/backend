@@ -31,7 +31,7 @@ public class StorageDTO {
 	/**
 	 * StorageDTO를 StorageEntity로 변경
 	 * @param {StorageDTO}
-	 * @return StorageEntity를 StorageDTO로 변경한 값
+	 * @return Storage
 	 */
 	
 	public Storage toEntity(StorageDTO storageDTO) {

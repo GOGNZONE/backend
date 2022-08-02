@@ -8,7 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.storage.entity.Storage;
 
-
+/**
+ * Ã¢°í Repositroy
+ * @author kangdonghyeon
+ * @version 1.0
+ */
 @Repository
 public interface StorageRepository extends JpaRepository<Storage, Long> {
 	public List<Storage> findAll();

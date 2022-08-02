@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * Storage 엔티티
+ * 창고 엔티티
  * @author kangdonghyeon
  * @version 1.0
  */
@@ -53,7 +53,7 @@ public class Storage {
 	/**
 	 * Storage 수정
 	 * @param {storageAddress, storageCategory, storageDescription}
-	 * @return 값을 업데이트만 하기때문에 void
+	 * @return void
 	 */
 	
 	public void updateStorage(String storageAddress, String storageCategory, String storageDescription) {
@@ -64,8 +64,8 @@ public class Storage {
 	
 	/**
 	 * StorageEntity를StorageDTO로 변경
-	 * @param {StorageEntity}
-	 * @return StorageEntity를 StorageDTO로 변경한 값
+	 * @param {Storage}
+	 * @return StorageDTO
 	 */
 	
 	

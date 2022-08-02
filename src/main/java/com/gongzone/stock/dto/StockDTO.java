@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * Stock DTO
+ * 재고 DTO
  * @author kangdonghyeon
  * @version 1.0
  */
@@ -28,9 +28,9 @@ public class StockDTO {
 	private Storage storage;
 	
 	/**
-	 *  StockDTO를 StockEntity로 변경
+	 * StockDTO를 StockEntity로 변경
 	 * @param {StockDTO}
-	 * @return StockDTO를 StockEntity로 변경한 값
+	 * @return Stock
 	 */
 
 	

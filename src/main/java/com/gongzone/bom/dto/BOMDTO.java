@@ -15,9 +15,6 @@ import lombok.NoArgsConstructor;
  * @author kangdonghyeon
  * @version 1.0
  */
-
-
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -40,11 +37,8 @@ public class BOMDTO {
 	/**
 	 * BomDTO를BOMEntity로 변경
 	 * @param {BomDTO}
-	 * @returnBomDTO를BOMEntity로 변경로 변경한 값
+	 * @return BOM
 	 */
-	
-	
-	
 	public BOM toEntity(BOMDTO bomDTO) {
 		BOM bomEntity = BOM.builder()
 				.bomId(bomDTO.getBomId())
