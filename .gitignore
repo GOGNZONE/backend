@@ -128,3 +128,13 @@ Temporary Items
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,eclipse
+.classpath
+.gradle/7.5/checksums/checksums.lock
+.gradle/7.5/checksums/md5-checksums.bin
+.gradle/7.5/checksums/sha1-checksums.bin
+.gradle/7.5/dependencies-accessors/dependencies-accessors.lock
+.gradle/7.5/executionHistory/executionHistory.lock
+.gradle/7.5/fileChanges/last-build.bin
+.gradle/7.5/fileHashes/fileHashes.lock
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.project
