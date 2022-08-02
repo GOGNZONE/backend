@@ -1,4 +1,4 @@
-package com.gongzone.entity;
+package com.gongzone.vehicle.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
