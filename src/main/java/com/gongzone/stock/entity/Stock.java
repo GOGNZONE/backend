@@ -24,10 +24,6 @@ import lombok.NoArgsConstructor;
  * @author kangdonghyeon
  * @version 1.0
  */
-
-
-
-
 @Entity
 @Getter
 @NoArgsConstructor
@@ -67,10 +63,6 @@ public class Stock {
 		this.stockQuantity = stockQuantity;
 		this.stockDescription = stockDescription;
 	}
-	
-	
-
-	
 	
 	/**
 	 * StockEntity를 StockDTO로 변경
