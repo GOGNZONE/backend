@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 생산 관련 요청/응답에 대한 Dto (전체 생산 품목 조회 제외)
+ * 생산 품목 상세 조회, 생산 품목 등록, 생산 품목 수정 Dto
  * @author Hanju Park
  * @version 1.0
  * */
@@ -17,15 +17,25 @@ import lombok.NoArgsConstructor;
 public class ProductionDto {
 	
 	private Long productionId;
+	
 	private String productionName;
+	
 	private String productionBrandName;
+	
 	private Long productionPrice;
+	
 	private int productionQuantity;
+	
 	private String productionFile;
+	
 	private String productionStandard;
+	
 	private String productionUnit;
+	
 	private String productionDescription;
+	
 	private String productionReleasedDate;
+	
 	private String productionDate;
 	
 }
