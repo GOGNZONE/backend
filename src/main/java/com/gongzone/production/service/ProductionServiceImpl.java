@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.production.dto.ProductionDto;
-import com.gongzone.production.dto.ProductionDtoDetail;
+import com.gongzone.production.dto.ProductionFindAllDto;
 import com.gongzone.production.entity.Production;
-import com.gongzone.production.mapper.ProductionDetailMapper;
+import com.gongzone.production.mapper.ProductionFindAllMapper;
 import com.gongzone.production.mapper.ProductionMapper;
 import com.gongzone.production.repository.ProductionRepository;
 
@@ -27,24 +27,24 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductionServiceImpl implements ProductionService {
 	
 	private final ProductionRepository productionRepository;
-	private final ProductionDetailMapper productionDetailMapper = Mappers.getMapper(ProductionDetailMapper.class);
+	private final ProductionFindAllMapper productionFindAllMapper = Mappers.getMapper(ProductionFindAllMapper.class);
 	private final ProductionMapper productionMapper = Mappers.getMapper(ProductionMapper.class);
 	
 	/**
 	 *  전체 생산 목록 조회
-	 *  @return List<ProductionDtoDetail>
+	 *  @return List<ProductionFindAllDto>
 	 */
 	@Override
 	@Transactional(readOnly = true)
-	public List<ProductionDtoDetail> findAllProductions() {
+	public List<ProductionFindAllDto> findAllProductions() {
 		List<Production> productions = productionRepository.findAll();
-		return productionDetailMapper.toDtoList(productions);
+		return productionFindAllMapper.toDtoList(productions);
 	}
 	
 	/**
 	 * 생산 품목 코드(production_id)로 생산 품목 조회
 	 * @param { productionId }
-	 * @return ProductionDTO
+	 * @return ProductionDto
 	 * */
 	@Override
 	@Transactional(readOnly = true)
@@ -55,29 +55,28 @@ public class ProductionServiceImpl implements ProductionService {
 	
 	/**
 	 * 생산 품목 등록
-	 * @param { productionDTO }
+	 * @param { productionDto }
 	 * @return void
 	 * */
 	@Override
 	@Transactional
-	public void insertProduction(ProductionDto productionDTO) {
-		productionRepository.save(toEntity(productionDTO));
+	public void insertProduction(ProductionDto productionDto) {
+		productionRepository.save(toEntity(productionDto));
 	}
 	
 	/**
 	 * 생산 품목 코드(production_id)로 생산 품목 수정
-	 * @param { productionId, productionDTO }
-	 * @return ProductionDTO
+	 * @param { productionId, productionDto }
+	 * @return productionDto
 	 * */
 	@Override
 	@Transactional
-	public void updateProduction(Long productionId, ProductionDto productionDTO) {
+	public void updateProduction(Long productionId, ProductionDto productionDto) {
 		Production production = productionRepository.findById(productionId).orElse(null);
 		log.info("production = {}", production);
-		/****/
-		production.updateProduction(productionDTO.getProductionName(), productionDTO.getProductionBrandName(), productionDTO.getProductionPrice(), 
-				productionDTO.getProductionQuantity(), productionDTO.getProductionFile(), productionDTO.getProductionStandard(), 
-				productionDTO.getProductionUnit(), productionDTO.getProductionDescription(), productionDTO.getProductionReleasedDate());
+		production.updateProduction(productionDto.getProductionName(), productionDto.getProductionBrandName(), productionDto.getProductionPrice(), 
+				productionDto.getProductionQuantity(), productionDto.getProductionFile(), productionDto.getProductionStandard(), 
+				productionDto.getProductionUnit(), productionDto.getProductionDescription(), productionDto.getProductionReleasedDate());
 	}
 
 	/**
