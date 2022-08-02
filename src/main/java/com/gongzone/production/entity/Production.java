@@ -80,6 +80,26 @@ public class Production {
 	private Client client;
 	
 	/**
+	 * ProductionDto Request 클래스를 위한 생성자 메서드
+	 * @param { productionName, productionBrandName, productionPrice, productionQuantity, 
+	 * 		productionFile, productionStandard, productionUnit, productionDescription, productionReleasedDate, productionDate }
+	 * */
+	public Production(String productionName, String productionBrandName, Long productionPrice, 
+			int productionQuantity, String productionFile, String productionStandard, 
+			String productionUnit, String productionDescription, String productionReleasedDate, String productionDate) {
+		this.productionName = productionName;
+		this.productionBrandName = productionBrandName;
+		this.productionPrice = productionPrice;
+		this.productionQuantity = productionQuantity;
+		this.productionFile = productionFile;
+		this.productionStandard = productionStandard;
+		this.productionUnit = productionUnit;
+		this.productionDescription = productionDescription;
+		this.productionReleasedDate = productionReleasedDate;
+		this.productionDate = productionDate;
+	}
+	
+	/**
 	 * ProductionDtoDetail Request 클래스를 위한 생성자 메서드
 	 * @param { productionName, productionBrandName, productionPrice, productionQuantity, productionDescription}
 	 * */
@@ -91,13 +111,7 @@ public class Production {
 		this.productionDescription = productionDescription;
 	}
 	
-	/**
-	 * ProductionDto Request 클래스를 위한 생성자 메서드
-	 * @param {}
-	 * */
-//	public Production() {
-//		
-//	}
+	
 	
 	
 	/**
