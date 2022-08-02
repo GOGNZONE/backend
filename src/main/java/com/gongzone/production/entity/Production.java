@@ -80,16 +80,34 @@ public class Production {
 	private Client client;
 	
 	/**
+	 * ProductionDtoDetail Request 클래스를 위한 생성자 메서드
+	 * @param { productionName, productionBrandName, productionPrice, productionQuantity, productionDescription}
+	 * */
+	public Production(String productionName, String productionBrandName, Long productionPrice, int productionQuantity, String productionDescription) {
+		this.productionName = productionName;
+		this.productionBrandName = productionBrandName;
+		this.productionPrice = productionPrice;
+		this.productionQuantity = productionQuantity;
+		this.productionDescription = productionDescription;
+	}
+	
+	/**
+	 * ProductionDto Request 클래스를 위한 생성자 메서드
+	 * @param {}
+	 * */
+//	public Production() {
+//		
+//	}
+	
+	
+	/**
 	 * 생산 품목 수정 메서드
 	 * @param { productionName, productionBrandName, productionPrice, productionQuantity, 
 	 * 		productionFile, productionStandard, productionUnit, productionDescription, productionReleasedDate, productionDate}
 	 * @return void
-	 * @author Hanju Park
-	 * @version 1.0
 	 * */
 	public void updateProduction(String productionName, String productionBrandName, Long productionPrice, int productionQuantity, 
-			String productionFile, String productionStandard, String productionUnit, String productionDescription, String productionReleasedDate, 
-			String productionDate) {
+			String productionFile, String productionStandard, String productionUnit, String productionDescription, String productionReleasedDate) {
 		this.productionName = productionName;
 		this.productionBrandName = productionBrandName;
 		this.productionPrice = productionPrice;
@@ -99,7 +117,6 @@ public class Production {
 		this.productionUnit = productionUnit;
 		this.productionDescription = productionDescription;
 		this.productionReleasedDate = productionReleasedDate;
-		this.productionDate = productionDate;
 	}
 	
 }
