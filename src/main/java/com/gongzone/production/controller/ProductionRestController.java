@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.production.dto.ProductionDto;
-import com.gongzone.production.dto.ProductionDtoDetail;
+import com.gongzone.production.dto.ProductionFindAllDto;
 import com.gongzone.production.service.ProductionServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -34,17 +34,17 @@ public class ProductionRestController {
 	
 	/**
 	 *  전체 생산 품목 조회
-	 *  @return List<ProductionDTO>
+	 *  @return List<ProductionFindAllDto>
 	 */
 	@GetMapping("/list")
-	public List<ProductionDtoDetail> findAllProductions() {
+	public List<ProductionFindAllDto> findAllProductions() {
 		return productionServiceImpl.findAllProductions();
 	}
 	
 	/**
 	 * 생산 품목 코드(production_id)로 생산 품목 조회
 	 * @param { productionId }
-	 * @return ProductionDTO
+	 * @return ProductionDto
 	 * */
 	@GetMapping("/{productionId}")
 	public ProductionDto findByProductionId(@PathVariable Long productionId) {
@@ -53,26 +53,26 @@ public class ProductionRestController {
 	
 	/**
 	 * 생산 품목 등록
-	 * @param { productionDTO }
+	 * @param { ProductionDto }
 	 * @return void
 	 * */
 	@PostMapping("")
-	public void insertProduction(@Validated @RequestBody final ProductionDto productionDTO) {
-		log.info("@param productionDTO : {}", productionDTO);
-		productionServiceImpl.insertProduction(productionDTO);
+	public void insertProduction(@Validated @RequestBody final ProductionDto productionDto) {
+		log.info("@param productionDTO : {}", productionDto);
+		productionServiceImpl.insertProduction(productionDto);
 	}
 	
 	/**
 	 * 생산 품목 코드(production_id)로 생산 품목 수정
-	 * @param { productionId, productionDTO }
+	 * @param { productionId, productionDto }
 	 * @return void
 	 * */
 	@PutMapping("/{productionId}")
 	public void updateProduction(@PathVariable Long productionId, 
-			@Validated @RequestBody final ProductionDto productionDTO) {
+			@Validated @RequestBody final ProductionDto productionDto) {
 		log.info("@param productionId : {}", productionId);
-		log.info("@param productionDTO : {}", productionDTO);
-		productionServiceImpl.updateProduction(productionId, productionDTO); 
+		log.info("@param productionDTO : {}", productionDto);
+		productionServiceImpl.updateProduction(productionId, productionDto); 
 	}
 	
 	/**
