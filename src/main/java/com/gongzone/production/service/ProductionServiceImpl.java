@@ -12,18 +12,17 @@ import com.gongzone.production.dto.ProductionUpdateDto;
 import com.gongzone.production.entity.Production;
 import com.gongzone.production.mapper.ProductionListMapper;
 import com.gongzone.production.mapper.ProductionMapper;
-import com.gongzone.production.mapper.ProductionUpdateMapper;
 import com.gongzone.production.repository.ProductionRepository;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.slf4j.Slf4j;
 
 /**
  * 생산 서비스 인터페이스 구현체
  * @author Hanju Park
  * @version 1.0
  * */
-@Slf4j
+//@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ProductionServiceImpl implements ProductionService {
@@ -31,7 +30,6 @@ public class ProductionServiceImpl implements ProductionService {
 	private final ProductionRepository productionRepository;
 	private final ProductionListMapper productionListMapper = Mappers.getMapper(ProductionListMapper.class);
 	private final ProductionMapper productionMapper = Mappers.getMapper(ProductionMapper.class);
-	private final ProductionUpdateMapper productionUpdateMapper = Mappers.getMapper(ProductionUpdateMapper.class);
 	
 	/**
 	 *  전체 생산 목록 조회 (ProductionListMapper)
@@ -45,7 +43,7 @@ public class ProductionServiceImpl implements ProductionService {
 	}
 	
 	/**
-	 * 생산 품목 코드(production_id)로 생산 품목 조회 (ProductionMapper)
+	 * 생산 품목 코드(production_id)로 생산 품목 상세 조회 (ProductionMapper)
 	 * @param { productionId }
 	 * @return ProductionDto
 	 * */
@@ -76,9 +74,8 @@ public class ProductionServiceImpl implements ProductionService {
 	@Transactional
 	public void updateProduction(Long productionId, ProductionUpdateDto productionUpdateDto) {
 		Production production = productionRepository.findById(productionId).orElse(null);
-		log.info("production = {}", production);
-//		production.updateProduction(productionUpdateDto);
-		productionUpdateMapper.updateProduction(productionUpdateDto, production);
+//		log.info("production = {}", production);
+		production.updateProduction(productionUpdateDto);
 	}
 
 	/**
@@ -90,7 +87,7 @@ public class ProductionServiceImpl implements ProductionService {
 	@Transactional
 	public void deleteProduction(Long productionId) {
 		Production production = productionRepository.findById(productionId).orElse(null);
-		log.info("production = {}", production);
+//		log.info("production = {}", production);
 		productionRepository.delete(production);
 	}
 	
