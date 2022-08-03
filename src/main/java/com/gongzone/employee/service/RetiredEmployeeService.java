@@ -15,13 +15,15 @@ public interface RetiredEmployeeService {
 	/**
 	 * 퇴사자 상세 조회
 	 * @return RetiredEmployeeDto
+	 * @throws IllegalAccessException 
 	 * */
-	public RetiredEmployeeDto findByRetiredEmployeeId(Long retiredEmployeeId);
+	public RetiredEmployeeDto findByRetiredEmployeeId(Long retiredEmployeeId) throws IllegalAccessException;
 	
 	
 	/**
 	 * 퇴사자 삭제
-	 * @return List<RetiredEmployeeDto> 
+	 * @return void
+	 * @throws IllegalAccessException 
 	 * */
-	public void deleteRetiredEmployee(Long retiredEmployeeId);
+	public void deleteRetiredEmployee(Long retiredEmployeeId) throws IllegalAccessException;
 }

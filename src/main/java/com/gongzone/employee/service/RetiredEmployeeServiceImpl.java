@@ -36,10 +36,12 @@ public class RetiredEmployeeServiceImpl implements RetiredEmployeeService {
 	 * 
 	 * @param { retiredEmployeeId }
 	 * @return void
+	 * @throws IllegalAccessException 
 	 */
 	@Override
-	public void deleteRetiredEmployee(Long retiredEmployeeId) {
-		RetiredEmployee retiredEmployee = retiredEmployeeRepository.findById(retiredEmployeeId).orElseThrow(null);
+	public void deleteRetiredEmployee(Long retiredEmployeeId) throws IllegalAccessException {
+		RetiredEmployee retiredEmployee = retiredEmployeeRepository.findById(retiredEmployeeId).orElseThrow(
+				() -> new IllegalAccessException("해당하는 사원을 찾을 수 없습니다."));
 		
 		retiredEmployeeRepository.delete(retiredEmployee);
 	}
@@ -49,10 +51,12 @@ public class RetiredEmployeeServiceImpl implements RetiredEmployeeService {
 	 * 
 	 * @param { retiredEmployeeId }
 	 * @return RetiredEmployeeDto
+	 * @throws IllegalAccessException 
 	 */
 	@Override
-	public RetiredEmployeeDto findByRetiredEmployeeId(Long retiredEmployeeId) {
-		RetiredEmployee retiredEmployee = retiredEmployeeRepository.findById(retiredEmployeeId).orElseThrow();
+	public RetiredEmployeeDto findByRetiredEmployeeId(Long retiredEmployeeId) throws IllegalAccessException {
+		RetiredEmployee retiredEmployee = retiredEmployeeRepository.findById(retiredEmployeeId).orElseThrow(
+				() -> new IllegalAccessException("해당하는 사원을 찾을 수 없습니다."));
 		
 		return retiredEmployeeMapper.toDto(retiredEmployee);
 	}
