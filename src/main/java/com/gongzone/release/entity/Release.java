@@ -1,7 +1,5 @@
 package com.gongzone.release.entity;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gongzone.client.entity.Client;
 import com.gongzone.delivery.entity.Delivery;
 import com.gongzone.vehicle.entity.Vehicle;
 
@@ -65,12 +64,17 @@ public class Release {
 	private ReleaseType releaseType;
 	
 	@ManyToOne
-	@JoinColumn(name = "deliveryId", nullable = true)
+	@JoinColumn(name="fk_client_id", nullable = true)
+	@JsonIgnore
+	private Client client;
+	
+	@ManyToOne
+	@JoinColumn(name = "fk_delivery_id", nullable = true)
 	@JsonIgnore
 	private Delivery delivery;
 	
 	@ManyToOne
-	@JoinColumn(name = "vehicleId", nullable = true)
+	@JoinColumn(name = "fk_vehicle_id", nullable = true)
 	@JsonIgnore
 	private Vehicle vehicle;
 	
