@@ -1,4 +1,4 @@
-package com.gongzone.production.controller;
+package com.gongzone.production.apiController;
 
 import java.util.List;
 
@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.production.dto.ProductionDto;
-import com.gongzone.production.dto.ProductionFindAllDto;
+import com.gongzone.production.dto.ProductionListDto;
+import com.gongzone.production.dto.ProductionUpdateDto;
 import com.gongzone.production.service.ProductionServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -34,10 +35,10 @@ public class ProductionRestController {
 	
 	/**
 	 *  전체 생산 품목 조회
-	 *  @return List<ProductionFindAllDto>
+	 *  @return List<ProductionListDto>
 	 */
 	@GetMapping("/list")
-	public List<ProductionFindAllDto> findAllProductions() {
+	public List<ProductionListDto> findAllProductions() {
 		return productionServiceImpl.findAllProductions();
 	}
 	
@@ -64,15 +65,15 @@ public class ProductionRestController {
 	
 	/**
 	 * 생산 품목 코드(production_id)로 생산 품목 수정
-	 * @param { productionId, productionDto }
+	 * @param { productionId, productionUpdateDto }
 	 * @return void
 	 * */
 	@PutMapping("/{productionId}")
 	public void updateProduction(@PathVariable Long productionId, 
-			@Validated @RequestBody final ProductionDto productionDto) {
+			@Validated @RequestBody final ProductionUpdateDto productionUpdateDto) {
 		log.info("@param productionId : {}", productionId);
-		log.info("@param productionDTO : {}", productionDto);
-		productionServiceImpl.updateProduction(productionId, productionDto); 
+		log.info("@param productionDTO : {}", productionUpdateDto);
+		productionServiceImpl.updateProduction(productionId, productionUpdateDto); 
 	}
 	
 	/**
