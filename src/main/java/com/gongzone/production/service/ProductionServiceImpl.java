@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.production.dto.ProductionDto;
-import com.gongzone.production.dto.ProductionFindAllDto;
+import com.gongzone.production.dto.ProductionListDto;
+import com.gongzone.production.dto.ProductionUpdateDto;
 import com.gongzone.production.entity.Production;
-import com.gongzone.production.mapper.ProductionFindAllMapper;
+import com.gongzone.production.mapper.ProductionListMapper;
 import com.gongzone.production.mapper.ProductionMapper;
+import com.gongzone.production.mapper.ProductionUpdateMapper;
 import com.gongzone.production.repository.ProductionRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -27,22 +29,23 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductionServiceImpl implements ProductionService {
 	
 	private final ProductionRepository productionRepository;
-	private final ProductionFindAllMapper productionFindAllMapper = Mappers.getMapper(ProductionFindAllMapper.class);
+	private final ProductionListMapper productionListMapper = Mappers.getMapper(ProductionListMapper.class);
 	private final ProductionMapper productionMapper = Mappers.getMapper(ProductionMapper.class);
+	private final ProductionUpdateMapper productionUpdateMapper = Mappers.getMapper(ProductionUpdateMapper.class);
 	
 	/**
-	 *  전체 생산 목록 조회
-	 *  @return List<ProductionFindAllDto>
+	 *  전체 생산 목록 조회 (ProductionListMapper)
+	 *  @return List<ProductionListDto>
 	 */
 	@Override
 	@Transactional(readOnly = true)
-	public List<ProductionFindAllDto> findAllProductions() {
+	public List<ProductionListDto> findAllProductions() {
 		List<Production> productions = productionRepository.findAll();
-		return productionFindAllMapper.toDtoList(productions);
+		return productionListMapper.toDtoList(productions);
 	}
 	
 	/**
-	 * 생산 품목 코드(production_id)로 생산 품목 조회
+	 * 생산 품목 코드(production_id)로 생산 품목 조회 (ProductionMapper)
 	 * @param { productionId }
 	 * @return ProductionDto
 	 * */
@@ -54,7 +57,7 @@ public class ProductionServiceImpl implements ProductionService {
 	}
 	
 	/**
-	 * 생산 품목 등록
+	 * 생산 품목 등록 (ProductionMapper)
 	 * @param { productionDto }
 	 * @return void
 	 * */
@@ -65,18 +68,17 @@ public class ProductionServiceImpl implements ProductionService {
 	}
 	
 	/**
-	 * 생산 품목 코드(production_id)로 생산 품목 수정
-	 * @param { productionId, productionDto }
-	 * @return productionDto
+	 * 생산 품목 코드(production_id)로 생산 품목 수정 (ProductionUpdateMapper)
+	 * @param { productionId, productionUpdateDto }
+	 * @return void
 	 * */
 	@Override
 	@Transactional
-	public void updateProduction(Long productionId, ProductionDto productionDto) {
+	public void updateProduction(Long productionId, ProductionUpdateDto productionUpdateDto) {
 		Production production = productionRepository.findById(productionId).orElse(null);
 		log.info("production = {}", production);
-		production.updateProduction(productionDto.getProductionName(), productionDto.getProductionBrandName(), productionDto.getProductionPrice(), 
-				productionDto.getProductionQuantity(), productionDto.getProductionFile(), productionDto.getProductionStandard(), 
-				productionDto.getProductionUnit(), productionDto.getProductionDescription(), productionDto.getProductionReleasedDate());
+//		production.updateProduction(productionUpdateDto);
+		productionUpdateMapper.updateProduction(productionUpdateDto, production);
 	}
 
 	/**
@@ -99,8 +101,8 @@ public class ProductionServiceImpl implements ProductionService {
 	}
 	
 	/* MapStruct Mapper ProductionDTO ↔ Production */
-	protected Production toEntity(ProductionDto productionDTO) {
-		return productionMapper.toEntity(productionDTO);
+	protected Production toEntity(ProductionDto productionDto) {
+		return productionMapper.toEntity(productionDto);
 	}
 
 }
