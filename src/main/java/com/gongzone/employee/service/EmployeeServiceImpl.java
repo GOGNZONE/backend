@@ -53,14 +53,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeMapper.toDto(employee);
 	}
 
+	/**
+	 * 사원 정보 수정
+	 * 
+	 * @param { employeeId, UpdateEmployeeDto }
+	 * @return void
+	 */
 	@Override
 	@Transactional
 	public void updateEmployee(Long employeeId, UpdateEmployeeDto updateDto) {
-//		Employee employee = employeeRepository.findById(employeeId).orElseThrow(null);
-//		
-//		employee.updateEmployeeInfo(updateEmployeeMapper.toEntity(updateDto));
-	}
+		Employee employee = employeeRepository.findById(employeeId).orElseThrow(null);
+		
+		employee.updateEmployeeInfo(updateEmployeeMapper.toEntity(updateDto));
+	}	
 
+	/**
+	 * 사원 정보 삭제
+	 * 
+	 * @param { employeeId }
+	 * @return void
+	 */
 	@Override
 	@Transactional
 	public void deleteEmployee(Long employeeId) {
