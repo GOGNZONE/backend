@@ -88,7 +88,8 @@ public class Release {
 	
 	/**
 	 * 출고 현황 수정 메서드
-	 * 
+	 * @param { releaseDto }
+	 * @return void
 	 * */
 	public void updateRelease(ReleaseDto releaseDto) {
 		this.releaseDate = releaseDto.getReleaseDate();
