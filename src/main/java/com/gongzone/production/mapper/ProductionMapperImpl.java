@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-02T17:02:29+0900",
+    date = "2022-08-03T09:49:38+0900",
     comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -39,6 +39,29 @@ public class ProductionMapperImpl implements ProductionMapper {
     }
 
     @Override
+    public Production toEntity(ProductionDto d) {
+        if ( d == null ) {
+            return null;
+        }
+
+        Production.ProductionBuilder production = Production.builder();
+
+        production.productionId( d.getProductionId() );
+        production.productionName( d.getProductionName() );
+        production.productionBrandName( d.getProductionBrandName() );
+        production.productionPrice( d.getProductionPrice() );
+        production.productionQuantity( d.getProductionQuantity() );
+        production.productionFile( d.getProductionFile() );
+        production.productionStandard( d.getProductionStandard() );
+        production.productionUnit( d.getProductionUnit() );
+        production.productionDescription( d.getProductionDescription() );
+        production.productionReleasedDate( d.getProductionReleasedDate() );
+        production.productionDate( d.getProductionDate() );
+
+        return production.build();
+    }
+
+    @Override
     public List<ProductionDto> toDtoList(List<Production> entityList) {
         if ( entityList == null ) {
             return null;
@@ -64,5 +87,12 @@ public class ProductionMapperImpl implements ProductionMapper {
         }
 
         return list;
+    }
+
+    @Override
+    public void updateProduction(ProductionDto dto, Production entity) {
+        if ( dto == null ) {
+            return;
+        }
     }
 }
