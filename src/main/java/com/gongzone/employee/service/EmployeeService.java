@@ -23,20 +23,23 @@ public interface EmployeeService {
 	 * 특정 사원 조회
 	 * @param { employeeId }
 	 * @return EmployeeInfoDto
+	 * @throws IllegalAccessException 
 	 * */
-	public EmployeeDto findByEmployeeId(Long employeeId);
+	public EmployeeDto findByEmployeeId(Long employeeId) throws IllegalAccessException;
 	
 	/**
 	 * 사원 수정
 	 * @param { employeeInfoDto }
 	 * @return void
+	 * @throws IllegalAccessException 
 	 * */
-	public void updateEmployee(Long employeeId,UpdateEmployeeDto updateDto);
+	public void updateEmployee(Long employeeId,UpdateEmployeeDto updateDto) throws IllegalAccessException;
 	
 	/**
 	 * 특정 사원 삭제
 	 * @param { employeeId }
 	 * @return void
+	 * @throws IllegalAccessException 
 	 * */
-	public void deleteEmployee(Long employeeId);
+	public void deleteEmployee(Long employeeId) throws IllegalAccessException;
 }
