@@ -1,4 +1,4 @@
-package com.gongzone.entity;
+package com.gongzone.production.entity;
 
 import java.time.LocalDate;
 
@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gongzone.client.entity.Client;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
