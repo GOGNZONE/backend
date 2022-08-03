@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 생산 품목 상세 조회, 생산 품목 등록, 생산 품목 수정 Dto
+ * 
  * @author Hanju Park
  * @version 1.0
  * */
