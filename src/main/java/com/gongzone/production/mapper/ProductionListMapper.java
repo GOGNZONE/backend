@@ -14,23 +14,4 @@ import com.gongzone.production.entity.Production;
 @Mapper(componentModel = "spring")
 public interface ProductionListMapper extends GenericMapper<ProductionListDto, Production>{
 	
-//	@Override
-//	default Production toEntity(ProductionListDto d) {
-//		
-//		if(d == null) {
-//			return null;
-//		}
-//		
-//		String productionName = d.getProductionName();
-//		String productionBrandName = d.getProductionBrandName();
-//		Long productionPrice = d.getProductionPrice();
-//		int productionQuantity = d.getProductionQuantity();
-//		String productionDescription = d.getProductionDescription();
-//		
-//		Production production = new Production(productionName, productionBrandName, productionPrice, productionQuantity, productionDescription);
-//	
-//		return production;
-//		
-//	}
-	
 }
