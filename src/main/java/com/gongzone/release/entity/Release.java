@@ -17,6 +17,8 @@ import org.hibernate.annotations.ColumnDefault;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gongzone.client.entity.Client;
 import com.gongzone.delivery.entity.Delivery;
+import com.gongzone.production.entity.Production;
+import com.gongzone.release.dto.ReleaseDto;
 import com.gongzone.vehicle.entity.Vehicle;
 
 import lombok.AllArgsConstructor;
@@ -69,6 +71,11 @@ public class Release {
 	private Client client;
 	
 	@ManyToOne
+	@JoinColumn(name="fk_production_id", nullable = true)
+	@JsonIgnore
+	private Production production;
+	
+	@ManyToOne
 	@JoinColumn(name = "fk_delivery_id", nullable = true)
 	@JsonIgnore
 	private Delivery delivery;
@@ -77,5 +84,18 @@ public class Release {
 	@JoinColumn(name = "fk_vehicle_id", nullable = true)
 	@JsonIgnore
 	private Vehicle vehicle;
+	
+	
+	/**
+	 * 출고 현황 수정 메서드
+	 * 
+	 * */
+	public void updateRelease(ReleaseDto releaseDto) {
+		this.releaseDate = releaseDto.getReleaseDate();
+		this.releaseDescription = releaseDto.getReleaseDescription();
+		this.releaseQuantity = releaseDto.getReleaseQuantity();
+		this.releaseTotalPrice = releaseDto.getReleaseTotalPrice();
+		this.releaseType = releaseDto.getReleaseType();
+	}
 	
 }
