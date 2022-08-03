@@ -39,7 +39,7 @@ public class Employee {
 	@NotNull(message = "name must not be null")
 	private String employeeName;
 	
-	@Column(name = "employee_password", length = 20)
+	@Column(name = "employee_password", length = 100)
 	@NotNull(message = "password must not be null")
 	private String employeePassword;
 	
