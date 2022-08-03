@@ -1,27 +1,17 @@
 package com.gongzone.employee.entity;
 
-import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gongzone.client.entity.Client;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,7 +29,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@EntityListeners(AuditingEntityListener.class)
 public class Employee {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,7 +39,7 @@ public class Employee {
 	@NotNull(message = "name must not be null")
 	private String employeeName;
 	
-	@Column(name = "employee_password", length = 20)
+	@Column(name = "employee_password", length = 100)
 	@NotNull(message = "password must not be null")
 	private String employeePassword;
 	
@@ -64,47 +53,34 @@ public class Employee {
 	@Column(name = "employee_phone", length = 18 ,unique = true)
 	private String employeePhone;
 	
-	@CreatedDate
 	@Column(name = "employee_hiredate")
 	@NotNull(message = "hiredate must not be null")
-	private LocalDate employeeHiredate;
+	private String employeeHiredate;
 	
 	@Column(name = "employee_role")
 	@Enumerated(value = EnumType.STRING)
 	@NotNull(message = "employee role must not be null")
-//	@ColumnDefault("'STAFF'")
+	@ColumnDefault("'STAFF'")
 	private EmployeeRole employeeRole;
 	
 	@Column(name = "employee_image", columnDefinition = "TEXT")
 	@ColumnDefault("NULL")
 	private String employeeImage;
 	
-	@OneToMany(mappedBy = "employee", fetch = FetchType.EAGER, orphanRemoval = true)
-	@JsonIgnore
-	private List<Client> clients;
-	
 	/**
-	 * 유저 수정
-	 * 
-	 * 
-	 * @param {employeeName, employeePhone, employeeAddress, emmployeeEmail}
+	 * 사원 수정
+	 * @param {UpdateEmployeeDto}
 	 * @return void
 	 */
-	public void updateEmployeeInfo(
-			String employeeName,
-			String employeePhone,
-			String employeeAddress,
-			String employeeEmail) {
-		this.employeeName = employeeName;
-		this.employeePhone = employeePhone;
-		this.employeeAddress = employeeAddress;
-		this.employeeEmail = employeeEmail;
+	public void updateEmployeeInfo(Employee employee) {
+		this.employeeName = employee.getEmployeeName();
+		this.employeePhone = employee.getEmployeePhone();
+		this.employeeAddress = employee.getEmployeeAddress();
+		this.employeeEmail = employee.getEmployeeEmail();
 	}
 	
 	/**
 	 * 패스워드 재설정
-	 * @throws AuthorizationException  authKey가 employeeId와 일치 하지 않습니다.
-	 * 
 	 * @param {employeePassword}
 	 * @return void
 	 */
