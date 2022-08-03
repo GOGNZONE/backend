@@ -3,6 +3,7 @@ package com.gongzone.employee.apiController;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,10 +25,44 @@ public class ApiRetiredEmployeeController {
 	 *  전체 사원 조회
 	 *  @return List<EmployeeListDto>
 	 */
-	@ApiOperation(value = "전체 사원 조회", notes = "전체 사원 조회")
+	@ApiOperation(value = "전체 퇴사자 조회", notes = "전체 퇴사자 조회")
 	@GetMapping("/list")
 	public ResponseEntity<List<RetiredEmployeeDto>> findAllEmployee() {
 		return ResponseEntity.ok(retiredEmployeeService.findAllRetiredEmployee());
 	}
 	
+	/**
+	 * 퇴사자 상세 조회
+	 * @return RetiredEmployeeDto
+	 * @throws IllegalAccessException 
+	 * */
+	@ApiOperation(value = "해당 퇴사자 조회", notes = "해당 퇴사자 조회")
+	@GetMapping("{retiredEmployeeId}")
+	public ResponseEntity<RetiredEmployeeDto> findByRetiredEmployeeId(Long retiredEmployeeId) {
+		try {
+			return ResponseEntity.ok(retiredEmployeeService.findByRetiredEmployeeId(retiredEmployeeId));
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+			// log 생성
+		}
+		return null;
+	}
+	
+	/**
+	 * 퇴사자 삭제
+	 * @return success -> "삭제 성공"
+	 * @throws IllegalAccessException 
+	 * */
+	@DeleteMapping("{retiredEmployeeId}")
+	public ResponseEntity<String> deleteRetiredEmployee(Long retiredEmplyoeeId) {
+		try {
+			retiredEmployeeService.deleteRetiredEmployee(retiredEmplyoeeId);
+			return ResponseEntity.ok("삭제 성공");
+		} catch(Exception e) {
+			e.printStackTrace();
+			// log 추가
+		}
+		return null;
+		
+	}
 }
