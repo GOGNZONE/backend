@@ -12,6 +12,4 @@ import com.gongzone.mapper.GenericMapper;
  * @version 1.0
  * */
 @Mapper(componentModel = "spring")
-public interface EmployeeListMapper extends GenericMapper<EmployeeListDto, Employee> {
-
-}
+public interface EmployeeListMapper extends GenericMapper<EmployeeListDto, Employee> { }
