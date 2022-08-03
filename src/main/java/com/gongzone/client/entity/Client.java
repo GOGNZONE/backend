@@ -66,10 +66,10 @@ public class Client {
 	@Column(name = "client_file", columnDefinition = "TEXT")
 	private String clientFile;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "employeeId", nullable = true)
-//	@JsonIgnore
-//	private Employee employee;
+	@ManyToOne
+	@JoinColumn(name = "employeeId", nullable = true)
+	@JsonIgnore
+	private Employee employee;
 	
 	/**
 	 * 거래처 정보 수정 메소드
