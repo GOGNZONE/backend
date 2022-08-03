@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 전체 출고 목록 조회, 출고 등록 Dto
+ * 출고 상세 조회 Dto (출고방식이 '차량'일 때)
  * @author Hanju Park
  * @version 1.0
  * */
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class ReleaseDto {
+public class ReleaseDetailsVehicleDto {
 	
 	private Long releaseId;
 	
@@ -29,5 +29,7 @@ public class ReleaseDto {
 	private Long releaseTotalPrice;
 	
 	private ReleaseType releaseType;
+	
+	private Client client;
 	
 }
