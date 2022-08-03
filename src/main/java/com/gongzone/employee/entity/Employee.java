@@ -1,23 +1,22 @@
-package com.gongzone.entity;
+package com.gongzone.employee.entity;
 
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,19 +24,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 퇴사자 엔티티
+ * 사원 엔티티
  * @author kimmingyu
  * @version 1.0
  */
 @Entity
-@Table(name = "retired_employee")
+@Table(name = "employee")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@EntityListeners(AuditingEntityListener.class)
-public class RetiredEmployee {
-	
+public class Employee {
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "employee_id")
 	private Long employeeId;
@@ -46,7 +44,7 @@ public class RetiredEmployee {
 	@NotNull(message = "name must not be null")
 	private String employeeName;
 	
-	@Column(name = "employee_password", length = 20)
+	@Column(name = "employee_password", length = 100)
 	@NotNull(message = "password must not be null")
 	private String employeePassword;
 	
@@ -60,23 +58,51 @@ public class RetiredEmployee {
 	@Column(name = "employee_phone", length = 18 ,unique = true)
 	private String employeePhone;
 	
-	@CreatedDate
 	@Column(name = "employee_hiredate")
 	@NotNull(message = "hiredate must not be null")
-	private LocalDate employeeHiredate;
-	
-//	@Column(name = "employee_role")
-//	@Enumerated(value = EnumType.STRING)
-//	@NotNull(message = "employee role must not be null")
-//	@ColumnDefault("'STAFF'")
-//	private EmployeeRole employeeRole;
+	private String employeeHiredate;
 	
 	@Column(name = "employee_role")
-	@Builder.Default
-	@ElementCollection(fetch = FetchType.LAZY)
-	private Set<EmployeeRole> roleSet = new HashSet<>();
+	@Enumerated(value = EnumType.STRING)
+	@NotNull(message = "employee role must not be null")
+	private EmployeeRole employeeRole;
 	
 	@Column(name = "employee_image", columnDefinition = "TEXT")
 	@ColumnDefault("NULL")
 	private String employeeImage;
+	
+	@OneToMany(mappedBy = "employee", fetch = FetchType.EAGER, orphanRemoval = true)
+	@JsonIgnore
+	private List<Client> clients;
+	
+	
+	/**
+	 * 유저 수정
+	 * 
+	 * 
+	 * @param {employeeName, employeePhone, employeeAddress, emmployeeEmail}
+	 * @return void
+	 */
+	public void updateEmployeeInfo(
+			String employeeName,
+			String employeePhone,
+			String employeeAddress,
+			String employeeEmail) {
+		this.employeeName = employeeName;
+		this.employeePhone = employeePhone;
+		this.employeeAddress = employeeAddress;
+		this.employeeEmail = employeeEmail;
+	}
+	
+	/**
+	 * 패스워드 재설정
+	 * @throws AuthorizationException  authKey가 employeeId와 일치 하지 않습니다.
+	 * 
+	 * @param {employeePassword}
+	 * @return void
+	 */
+	public void updateEmployeePassword(String employeePassword) {
+		this.employeePassword = employeePassword;
+	}
+	
 }
