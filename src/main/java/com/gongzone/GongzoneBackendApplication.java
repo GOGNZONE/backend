@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.gongzone.production.controller", "com.gongzone.production.service", "com.gongzone.production.dto" })
+@ComponentScan(basePackages = { "com.gongzone.production.apiController", "com.gongzone.production.service", "com.gongzone.production.dto" })
 @EntityScan(basePackages = { "com.gongzone.production.entity", "com.gongzone.client.entity" })
 @EnableJpaRepositories(basePackages = { "com.gongzone.production.repository" })
 public class GongzoneBackendApplication {
