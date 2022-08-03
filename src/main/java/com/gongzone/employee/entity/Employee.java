@@ -13,8 +13,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
 
-import com.gongzone.employee.dto.UpdateEmployeeDto;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -74,11 +72,11 @@ public class Employee {
 	 * @param {UpdateEmployeeDto}
 	 * @return void
 	 */
-	public void updateEmployeeInfo(UpdateEmployeeDto updateEmployeeDto) {
-		this.employeeName = getEmployeeName();
-		this.employeePhone = getEmployeePhone();
-		this.employeeAddress = getEmployeeAddress();
-		this.employeeEmail = getEmployeeEmail();
+	public void updateEmployeeInfo(Employee employee) {
+		this.employeeName = employee.getEmployeeName();
+		this.employeePhone = employee.getEmployeePhone();
+		this.employeeAddress = employee.getEmployeeAddress();
+		this.employeeEmail = employee.getEmployeeEmail();
 	}
 	
 	/**
