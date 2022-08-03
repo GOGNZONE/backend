@@ -1,7 +1,5 @@
 package com.gongzone.client.entity;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -49,7 +47,6 @@ public class Client {
 	@NotNull(message = "client manager must not be null")
 	private String clientManager;
 	
-	
 	@Column(name = "client_tel", length = 20)
 	@NotNull(message = "client tel must not be null")
 	private String clientTel;
@@ -61,7 +58,7 @@ public class Client {
 	@CreatedDate
 	@Column(name = "client_registered_date")
 	@NotNull(message = "client registered date must not be null")
-	private LocalDate clientRegisteredDate;
+	private String clientRegisteredDate;
 	
 	@Column(name = "client_file", columnDefinition = "TEXT")
 	private String clientFile;
