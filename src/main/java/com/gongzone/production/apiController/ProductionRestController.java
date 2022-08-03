@@ -18,14 +18,14 @@ import com.gongzone.production.dto.ProductionUpdateDto;
 import com.gongzone.production.service.ProductionServiceImpl;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.slf4j.Slf4j;
 
 /**
  * 생산 컨트롤러
  * @author Hanju Park
  * @version 1.0
  * */
-@Slf4j
+//@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/production")
@@ -43,7 +43,7 @@ public class ProductionRestController {
 	}
 	
 	/**
-	 * 생산 품목 코드(production_id)로 생산 품목 조회
+	 * 생산 품목 코드(production_id)로 생산 품목 상세 조회
 	 * @param { productionId }
 	 * @return ProductionDto
 	 * */
@@ -59,7 +59,7 @@ public class ProductionRestController {
 	 * */
 	@PostMapping("")
 	public void insertProduction(@Validated @RequestBody final ProductionDto productionDto) {
-		log.info("@param productionDTO : {}", productionDto);
+//		log.info("@param productionDTO : {}", productionDto);
 		productionServiceImpl.insertProduction(productionDto);
 	}
 	
@@ -71,8 +71,8 @@ public class ProductionRestController {
 	@PutMapping("/{productionId}")
 	public void updateProduction(@PathVariable Long productionId, 
 			@Validated @RequestBody final ProductionUpdateDto productionUpdateDto) {
-		log.info("@param productionId : {}", productionId);
-		log.info("@param productionDTO : {}", productionUpdateDto);
+//		log.info("@param productionId : {}", productionId);
+//		log.info("@param productionDTO : {}", productionUpdateDto);
 		productionServiceImpl.updateProduction(productionId, productionUpdateDto); 
 	}
 	
