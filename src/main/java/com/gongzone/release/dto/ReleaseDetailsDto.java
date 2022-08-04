@@ -3,8 +3,6 @@ package com.gongzone.release.dto;
 import com.gongzone.client.dto.ReleaseClientDto;
 import com.gongzone.delivery.dto.DeliveryDto;
 import com.gongzone.production.dto.ReleaseProductionDto;
-import com.gongzone.release.entity.ReleaseType;
-import com.gongzone.vehicle.dto.VehicleDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,7 +30,7 @@ public class ReleaseDetailsDto {
 	
 	private Long releaseTotalPrice;
 	
-	private ReleaseType releaseType;
+	private String releaseType;
 	
 	// Client Info
 	private ReleaseClientDto releaseClientDto;
@@ -45,8 +43,5 @@ public class ReleaseDetailsDto {
 	
 	// Delivery Info
 	private DeliveryDto deliveryDto;
-	
-	// Vehicle Info
-	private VehicleDto vehicleDto;
 	
 }
