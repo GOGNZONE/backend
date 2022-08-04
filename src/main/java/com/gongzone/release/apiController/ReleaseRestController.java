@@ -17,14 +17,14 @@ import com.gongzone.release.dto.ReleaseDto;
 import com.gongzone.release.service.ReleaseServiceImpl;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.slf4j.Slf4j;
 
 /**
  * 출고 컨트롤러
  * @author Hanju Park
  * @version 1.0
  * */
-@Slf4j
+//@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/release")
@@ -58,7 +58,7 @@ public class ReleaseRestController {
 	 * */
 	@PostMapping("")
 	public void insertRelease(@Validated @RequestBody final ReleaseDto releaseDto) {
-		log.info("@param releaseDto : {}", releaseDto);
+//		log.info("@param releaseDto : {}", releaseDto);
 		releaseServiceImpl.insertRelease(releaseDto);
 	}
 	
@@ -69,8 +69,8 @@ public class ReleaseRestController {
 	 * */
 	@PutMapping("/{releaseId}")
 	public void updateRelease(@PathVariable Long releaseId, @Validated @RequestBody final ReleaseDto releaseDto) {
-		log.info("@param releaseId : {}", releaseId);
-		log.info("@param releaseDto : {}", releaseDto);
+//		log.info("@param releaseId : {}", releaseId);
+//		log.info("@param releaseDto : {}", releaseDto);
 		releaseServiceImpl.updateRelease(releaseId, releaseDto);
 	}
 	
