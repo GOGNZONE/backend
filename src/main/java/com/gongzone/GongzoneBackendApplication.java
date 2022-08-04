@@ -13,17 +13,14 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAspectJAutoProxy
 @EnableScheduling
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.gongzone.production.apiController", "com.gongzone.production.service", "com.gongzone.production.dto" })
-@EntityScan(basePackages = { "com.gongzone.production.entity", "com.gongzone.client.entity", "com.gongzone.employee.entity" })
-@EnableJpaRepositories(basePackages = { "com.gongzone.production.repository" })
-@ComponentScan(basePackages = {"com.gongzone.employee.apiController",
-		"com.gongzone.employee.service",
-		"com.gongzone.employee.dto",
-		"com.gongzone.employee.mapper"})
-@EnableJpaRepositories(basePackages = {"com.gongzone.employee.repository"})
-@EntityScan(basePackages = {"com.gongzone.employee.entity"})
+@EntityScan(basePackages = { "com.gongzone.production.entity", "com.gongzone.client.entity",
+		"com.gongzone.employee.entity" })
+@EnableJpaRepositories(basePackages = { "com.gongzone.production.repository", "com.gongzone.employee.repository" })
+@ComponentScan(basePackages = { "com.gongzone.employee.apiController", "com.gongzone.employee.service",
+		"com.gongzone.employee.dto", "com.gongzone.employee.mapper", "com.gongzone.production.apiController",
+		"com.gongzone.production.service", "com.gongzone.production.dto" })
 public class GongzoneBackendApplication {
-	
+
 //    @Bean
 //    public RestTemplate restTemplate(RestTemplateBuilder builder) {
 //        return builder.build();
