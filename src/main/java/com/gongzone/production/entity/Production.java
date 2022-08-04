@@ -5,15 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.JoinColumn;
-//import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
 
-//import com.fasterxml.jackson.annotation.JsonIgnore;
-//import com.gongzone.client.entity.Client;
 import com.gongzone.production.dto.ProductionUpdateDto;
 
 import lombok.AllArgsConstructor;
@@ -75,11 +71,7 @@ public class Production {
 	@NotNull(message = "production date cannot be null")
 	private String productionDate;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "fk_client_id", nullable = true)
-//	@JsonIgnore
-//	private Client client;
-	
+
 	/**
 	 * 생산 품목 수정 메서드
 	 * @param { productionUpdateDto }
