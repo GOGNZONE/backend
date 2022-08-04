@@ -1,7 +1,7 @@
 cloud:
   aws:
     s3:
-      bucket: gongzonebucket
+      bucket: gongzone1bucket
     region:
       static: ap-northeast-2
     stack:

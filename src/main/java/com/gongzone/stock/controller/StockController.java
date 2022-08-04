@@ -26,8 +26,7 @@ import com.gongzone.stock.service.StockServiceImpl;
 
 
 @RestController  //JSON을 반환하는 컨트롤러
-@RequestMapping("/api/production")
-
+@RequestMapping("/api/stock")
 public class StockController {
 	@Autowired
 	public StockServiceImpl stockService;

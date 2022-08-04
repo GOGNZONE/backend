@@ -50,6 +50,7 @@ public class OrderServiceImpl implements OrderService{
 	 * */
 	@Override
 	public void insertOrder(OrderDTO orderDTO) {
+		System.out.println(orderDTO);
 		Order orderEntity = orderDTO.toEntity(orderDTO);
 		orderRepo.save(orderEntity);
 		

@@ -16,4 +16,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: scott
     url: jdbc:mysql://localhost:3306/gongzone
-
+  profiles:
+    include:
+      - aws
+      - credentials

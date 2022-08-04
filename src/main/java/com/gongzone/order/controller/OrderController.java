@@ -3,6 +3,7 @@ package com.gongzone.order.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import com.gongzone.order.service.OrderServiceImpl;
  * */
 @RestController
 @RequestMapping("/api/order")
+@CrossOrigin(origins = "http://localhost:3000")
 public class OrderController {
 	@Autowired
 	public OrderServiceImpl orderService;
@@ -56,7 +58,8 @@ public class OrderController {
 	 * */
 	@PostMapping("")
 	public void insertOrder(@RequestBody OrderDTO orderDTO) {
-		orderService.insertOrder(orderDTO);
+		System.out.println(orderDTO);
+//		orderService.insertOrder(orderDTO);
 	}
 	
 	

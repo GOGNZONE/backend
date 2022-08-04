@@ -30,7 +30,7 @@ public class OrderDTO {
 	private String orderProductionStandard;
 	private String orderProductionUnit;
 	private String orderProductionDescription;
-	private LocalDateTime orderProductionEndDate;
+	private String orderProductionEndDate;
 	private LocalDateTime orderDate;
 	private Long fkClientId;
 

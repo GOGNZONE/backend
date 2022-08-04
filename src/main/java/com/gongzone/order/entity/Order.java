@@ -1,5 +1,6 @@
 package com.gongzone.order.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.CreatedDate;
 
 import com.gongzone.order.dto.OrderDTO;
 
@@ -53,7 +55,7 @@ public class Order {
 	
 	@Column(name="order_production_quantity", length=6)
 	@ColumnDefault("0")
-	@NotNull
+	@NotNull(message = "orderProductionQuantity must not be null")
 	private int orderProductionQuantity;
 	
 	@Column(name="order_production_file", length=80)
@@ -73,11 +75,12 @@ public class Order {
 	private String orderProductionDescription;
 	
 	@Column(name="order_production_end_date")
-	@NotNull
-	private LocalDateTime orderProductionEndDate;
+	@NotNull(message = "orderProductionEndDate must not be null")
+	private String orderProductionEndDate;
 	
+	@CreatedDate
 	@Column(name="order_date")
-	@NotNull
+	@NotNull(message = "orderDate must not be null")
 	private LocalDateTime orderDate;
 	
 	@Column(name="fk_client_id")
