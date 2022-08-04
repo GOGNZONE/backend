@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,7 +20,7 @@ import com.gongzone.client.entity.Client;
 import com.gongzone.delivery.entity.Delivery;
 import com.gongzone.production.entity.Production;
 import com.gongzone.release.dto.ReleaseDto;
-import com.gongzone.vehicle.entity.Vehicle;
+//import com.gongzone.vehicle.entity.Vehicle;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,6 +38,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@IdClass(ReleaseId.class)
 public class Release {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,8 +72,9 @@ public class Release {
 	@JsonIgnore
 	private Client client;
 	
+	@Id
 	@ManyToOne
-	@JoinColumn(name="fk_production_id", nullable = true)
+	@JoinColumn(name="fk_production_id")
 	@JsonIgnore
 	private Production production;
 	
@@ -80,10 +83,10 @@ public class Release {
 	@JsonIgnore
 	private Delivery delivery;
 	
-	@ManyToOne
-	@JoinColumn(name = "fk_vehicle_id", nullable = true)
-	@JsonIgnore
-	private Vehicle vehicle;
+//	@ManyToOne
+//	@JoinColumn(name = "fk_vehicle_id", nullable = true)
+//	@JsonIgnore
+//	private Vehicle vehicle;
 	
 	
 	/**
