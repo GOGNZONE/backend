@@ -1,14 +1,11 @@
 package com.gongzone.employee.entity;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -36,7 +33,8 @@ import lombok.NoArgsConstructor;
 @EntityListeners(AuditingEntityListener.class)
 public class RetiredEmployee {
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+
 	@Column(name = "employee_id")
 	private Long employeeId;
 	
@@ -44,10 +42,7 @@ public class RetiredEmployee {
 	@NotNull(message = "name must not be null")
 	private String employeeName;
 	
-	@Column(name = "employee_password", length = 20)
-	@NotNull(message = "password must not be null")
-	private String employeePassword;
-	
+
 	@Column(name = "employee_address", length = 80)
 	@ColumnDefault("NULL")
 	private String employeeAddress;
@@ -58,10 +53,16 @@ public class RetiredEmployee {
 	@Column(name = "employee_phone", length = 18 ,unique = true)
 	private String employeePhone;
 	
-	@CreatedDate
+
 	@Column(name = "employee_hiredate")
 	@NotNull(message = "hiredate must not be null")
-	private LocalDate employeeHiredate;
+	private String employeeHiredate;
+	
+	@CreatedDate
+	@Column(name = "employee_retired_date")
+	@NotNull(message = "retired_date must not be null")
+	private String employeeRetiredDate;
+
 	
 	@Column(name = "employee_role")
 	@Enumerated(value = EnumType.STRING)
