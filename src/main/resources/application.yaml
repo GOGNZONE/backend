@@ -7,7 +7,7 @@ spring:
   data:
     jpa:
       repositories:
-        enabled: 'true'
+        enabled: 'true' 
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
