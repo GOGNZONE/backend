@@ -1,22 +1,20 @@
-package com.gongzone.dto;
-
-import java.time.LocalDate;
+package com.gongzone.production.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 생산 DTO
+ * 생산 품목 상세 조회, 생산 품목 등록 Dto
  * @author Hanju Park
  * @version 1.0
  * */
-@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class ProductionDTO {
+@Getter
+public class ProductionDto {
 	
 	private Long productionId;
 	
@@ -28,13 +26,16 @@ public class ProductionDTO {
 	
 	private int productionQuantity;
 	
+	private String productionFile;
+	
 	private String productionStandard;
 	
 	private String productionUnit;
 	
 	private String productionDescription;
 	
-	private LocalDate productionReleaseDate;
+	private String productionReleasedDate;
 	
-	private LocalDate productionDate;
+	private String productionDate;
+	
 }

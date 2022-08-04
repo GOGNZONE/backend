@@ -13,6 +13,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAspectJAutoProxy
 @EnableScheduling
 @SpringBootApplication
+@ComponentScan(basePackages = { "com.gongzone.production.apiController", "com.gongzone.production.service", "com.gongzone.production.dto" })
+@EntityScan(basePackages = { "com.gongzone.production.entity", "com.gongzone.client.entity", "com.gongzone.employee.entity" })
+@EnableJpaRepositories(basePackages = { "com.gongzone.production.repository" })
 @ComponentScan(basePackages = {"com.gongzone.employee.apiController",
 		"com.gongzone.employee.service",
 		"com.gongzone.employee.dto",
