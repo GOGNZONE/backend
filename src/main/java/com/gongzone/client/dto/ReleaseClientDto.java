@@ -1,7 +1,5 @@
 package com.gongzone.client.dto;
 
-import com.gongzone.employee.entity.Employee;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,6 +26,6 @@ public class ReleaseClientDto {
 	
 	private String clientAddress;
 	
-	private Employee employee;
+	private String employeeName;
 	
 }
