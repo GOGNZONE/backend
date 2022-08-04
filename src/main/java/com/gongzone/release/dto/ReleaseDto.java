@@ -1,7 +1,5 @@
 package com.gongzone.release.dto;
 
-import com.gongzone.release.entity.ReleaseType;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,7 +25,5 @@ public class ReleaseDto {
 	private int releaseQuantity;
 	
 	private Long releaseTotalPrice;
-	
-	private ReleaseType releaseType;
 	
 }
