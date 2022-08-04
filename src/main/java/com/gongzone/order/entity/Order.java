@@ -22,7 +22,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * Order ¿£Æ¼Æ¼
+ * Order ì—”í‹°í‹°
  * @version 1.0
  * @author kangdonghyeon
  *
@@ -32,7 +32,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "`order`") // order´Â ¿¹¾à¾î¶ó¼­ ``ºÙ¿©ÁÖ¾úÀ½
+@Table(name = "`order`")
 public class Order {
 	@Id
 	@Column(name="order_id")
@@ -89,7 +89,7 @@ public class Order {
 
 	
 	/**
-	 * ¹ßÁÖ ¼öÁ¤
+	 * ë°œì£¼ ìˆ˜ì •
 	 * @param {orderDTO}
 	 * @return  void 
 	 */
@@ -107,7 +107,7 @@ public class Order {
 	
 	
 	/**
-	 * OrderEntity¸¦ OrderDTO·Î º¯°æ
+	 * OrderEntityë¥¼ OrderDTOë¡œ ë³€ê²½
 	 * @param {Order}
 	 * @return OrderDTO
 	 */

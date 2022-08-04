@@ -35,8 +35,8 @@ public class BOMDTO {
 	private Long bomParentId;
 	
 	/**
-	 * BomDTO¸¦BOMEntity·Î º¯°æ
-	 * @param {BomDTO}
+	 * BomDTOë¥¼ BOMEntityë¡œ ë³€í™˜
+	 * @param {BOMDTO}
 	 * @return BOM
 	 */
 	public BOM toEntity(BOMDTO bomDTO) {

@@ -7,40 +7,40 @@ import com.gongzone.bom.entity.BOM;
 
 
 /**
- * BOM ¼­ºñ½º ÀÎÅÍÆäÀÌ½º
+ * BOM ì„œë¹„ìŠ¤ ì¸í„°í˜ì´ìŠ¤
  * @author kangdonghyeon
  * @version 1.0
  */
 public interface BOMService {
 	/**
-	 *  ÀüÃ¼ BOM Á¶È¸
+	 *  ì „ì²´ BOM ì¡°íšŒ
 	 *  @return List<BOM>
 	 */
 	public List<BOM> findBOM();
 	
 	/**
-	 * BOMÄÚµå(bomId)·Î Á¶È¸
+	 * BOMì½”ë“œ(bomId)ë¡œ ì¡°íšŒ
 	 * @param { bomId }
 	 * @return BOMDTO
 	 * */
 	public BOMDTO findBOMByBomId(Long bomId);
 	
 	/**
-	 * BOM µî·Ï
+	 * BOM ë“±ë¡
 	 * @param { BOMDTO }
 	 * @return void
 	 * */
 	public void insertBOM(BOMDTO bomDTO);
 	
 	/**
-	 * BOM ÄÚµå(bomId)·Î ¼öÁ¤
+	 * BOM ì½”ë“œ(bomId)ë¡œ ìˆ˜ì •
 	 * @param { BOMDTO }
 	 * @return void
 	 * */
 	public void updateBOM(BOMDTO bomDTO);
 	
 	/**
-	 * BOM ÄÚµå(bomId)·Î »èÁ¦
+	 * BOM ì½”ë“œ(bomId)ë¡œ ì‚­ì œ
 	 * @param { bomId }
 	 * @return void
 	 * */

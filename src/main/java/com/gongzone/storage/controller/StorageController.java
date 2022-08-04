@@ -18,7 +18,7 @@ import com.gongzone.storage.service.StorageServiceImpl;
 
 
 /**
- * Ã¢°í ÄÁÆ®·Ñ·¯
+ * ì°½ê³  ì»¨íŠ¸ë¡¤ëŸ¬
  * @author kangdonghyeon
  * @version 1.0
  * */
@@ -31,7 +31,7 @@ public class StorageController {
 	public StorageServiceImpl storageService;
 	
 	/**
-	 *  ÀüÃ¼ Ã¢°í Á¶È¸
+	 *  ì „ì²´ ì°½ê³  ì¡°íšŒ
 	 *  @return  List<Storage>
 	 */
 	@GetMapping("/list")
@@ -40,7 +40,7 @@ public class StorageController {
 	}
 	
 	/**
-	 * Ã¢°í ÄÚµå(storageId)·Î Á¶È¸
+	 * ì°½ê³  ì½”ë“œ(storageId)ë¡œ ì¡°íšŒ
 	 * @param { storageId }
 	 * @return StorageDTO
 	 * */
@@ -51,7 +51,7 @@ public class StorageController {
 	
 	
 	/**
-	 * Ã¢°í µî·Ï
+	 * ì°½ê³  ë“±ë¡
 	 * @param { storageDTO }
 	 * @return void
 	 * */
@@ -62,7 +62,7 @@ public class StorageController {
 	}
 	
 	/**
-	 * Ã¢°í ¼öÁ¤(storageId)·Î »ı»ê Ç°¸ñ ¼öÁ¤
+	 * ì°½ê³  ìˆ˜ì •(storageId)ë¡œ ìƒì‚° í’ˆëª© ìˆ˜ì •
 	 * @param { storageId, storageDTO }
 	 * @return void
 	 * */
@@ -73,7 +73,7 @@ public class StorageController {
 	}
 	
 	/**
-	 * Ã¢°í ÄÚµå(storageId)·Î »ı»ê Ç°¸ñ »èÁ¦
+	 * ì°½ê³  ì½”ë“œ(storageId)ë¡œ ìƒì‚° í’ˆëª© ì‚­ì œ
 	 * @param { storageId }
 	 * @return void
 	 * */

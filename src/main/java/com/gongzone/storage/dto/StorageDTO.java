@@ -29,7 +29,7 @@ public class StorageDTO {
 
 
 	/**
-	 * StorageDTO¸¦ StorageEntity·Î º¯°æ
+	 * StorageDTOë¥¼ StorageEntityë³€í™˜
 	 * @param {StorageDTO}
 	 * @return Storage
 	 */

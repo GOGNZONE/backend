@@ -36,9 +36,9 @@ public class OrderDTO {
 
 	
 	/**
-	 * OrderDTO¸¦ OrderEntity·Î º¯°æ
+	 * OrderDTOë¥¼ OrderEntityë¡œ ë³€í™˜
 	 * @param {OrderDTO}
-	 * @return OrderDTO¸¦ OrderEntity·Î º¯°æÇÑ °ª
+	 * @return Order
 	 */
 	
 	

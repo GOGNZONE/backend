@@ -18,7 +18,7 @@ import com.gongzone.bom.service.BOMServiceImpl;
 
 
 /**
- * BOM ÄÁÆ®·Ñ·¯
+ * BOM ì»¨íŠ¸ë¡¤ëŸ¬
  * @author kangdonghyeon
  * @version 1.0
  */
@@ -30,7 +30,7 @@ public class BOMController {
 	
 	
 	/**
-	 *  ÀüÃ¼ BOM Á¶È¸
+	 *  ì „ì²´ BOM ì¡°íšŒ
 	 *  @return List<BOM>
 	 */
 	@GetMapping("/list")
@@ -39,7 +39,7 @@ public class BOMController {
 	}
 	
 	/**
-	 * BOMÄÚµå(bomId)·Î Á¶È¸
+	 * BOMì½”ë“œ(bomId)ë¡œ ì¡°íšŒ
 	 * @param { bomId }
 	 * @return BOMDTO
 	 * */
@@ -49,7 +49,7 @@ public class BOMController {
 	}
 	
 	/**
-	 * BOM µî·Ï
+	 * BOM ë“±ë¡
 	 * @param { BOMDTO }
 	 * @return void
 	 * */
@@ -59,7 +59,7 @@ public class BOMController {
 	}
 	
 	/**
-	 * BOM ÄÚµå(bomId)·Î ¼öÁ¤
+	 * BOM ì½”ë“œ(bomId)ë¡œ ìˆ˜ì •
 	 * @param { bomId, BOMDTO }
 	 * @return void
 	 * */
@@ -70,7 +70,7 @@ public class BOMController {
 	
 	
 	/**
-	 * BOM ÄÚµå(bomId)·Î »èÁ¦
+	 * BOM ì½”ë“œ(bomId)ë¡œ ì‚­ì œ
 	 * @param { bomId }
 	 * @return void
 	 * */

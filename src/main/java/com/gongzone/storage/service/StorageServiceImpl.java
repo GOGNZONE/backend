@@ -11,7 +11,7 @@ import com.gongzone.storage.repository.StorageRepository;
 
 
 /**
- * Ã¢°í ¼­ºñ½º ÀÎÅÍÆäÀÌ½º ±¸ÇöÃ¼
+ * ì°½ê³  ì„œë¹„ìŠ¤ ì¸í„°í˜ì´ìŠ¤ êµ¬í˜„ì²´
  * @author kangdonghyeon
  * @version 1.0
  * */
@@ -22,7 +22,7 @@ public class StorageServiceImpl implements StorageService {
 	public StorageRepository storageRepo;
 	
 	/**
-	 *  ÀüÃ¼ Ã¢°í Á¶È¸
+	 *  ì „ì²´ ì°½ê³  ì¡°íšŒ
 	 *  @return  List<Storage>
 	 */
 	@Override
@@ -31,7 +31,7 @@ public class StorageServiceImpl implements StorageService {
 	}
 
 	/**
-	 * Ã¢°í ÄÚµå(storageId)·Î Á¶È¸
+	 * ì°½ê³  ì½”ë“œ(storageId)ë¡œ ì¡°íšŒ
 	 * @param { storageId }
 	 * @return StorageDTO
 	 * */
@@ -42,7 +42,7 @@ public class StorageServiceImpl implements StorageService {
 
 	
 	/**
-	 * Ã¢°í µî·Ï
+	 * ì°½ê³  ë“±ë¡
 	 * @param { storageDTO }
 	 * @return void
 	 * */
@@ -53,9 +53,8 @@ public class StorageServiceImpl implements StorageService {
 		
 	}
 
-	
 	/**
-	 * Ã¢°í ¼öÁ¤(StorageId)·Î »ı»ê Ç°¸ñ ¼öÁ¤
+	 * ì°½ê³  ìˆ˜ì •(StorageId)ë¡œ ìƒì‚° í’ˆëª© ìˆ˜ì •
 	 * @param { storageDTO }
 	 * @return void
 	 * */
@@ -68,7 +67,7 @@ public class StorageServiceImpl implements StorageService {
 	}
 
 	/**
-	 * Ã¢°í ÄÚµå(storageId)·Î »ı»ê Ç°¸ñ »èÁ¦
+	 * ì°½ê³  ì½”ë“œ(storageId)ë¡œ ìƒì‚° í’ˆëª© ì‚­ì œ
 	 * @param { storageId }
 	 * @return void
 	 * */

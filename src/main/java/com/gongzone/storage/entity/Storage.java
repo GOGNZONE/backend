@@ -18,11 +18,10 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * Ã¢°í ¿£Æ¼Æ¼
+ * ì°½ê³  ì—”í‹°í‹°
  * @author kangdonghyeon
  * @version 1.0
  */
-
 
 
 @Entity
@@ -51,7 +50,7 @@ public class Storage {
 	
 	
 	/**
-	 * Storage ¼öÁ¤
+	 * Storage ìˆ˜ì •
 	 * @param {storageAddress, storageCategory, storageDescription}
 	 * @return void
 	 */
@@ -63,7 +62,7 @@ public class Storage {
 	}
 	
 	/**
-	 * StorageEntity¸¦StorageDTO·Î º¯°æ
+	 * StorageEntityë¥¼StorageDTOë¡œ ë³€ê²½
 	 * @param {Storage}
 	 * @return StorageDTO
 	 */

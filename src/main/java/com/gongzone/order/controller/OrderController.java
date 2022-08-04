@@ -19,7 +19,7 @@ import com.gongzone.order.service.OrderServiceImpl;
 
 
 /**
- * ¹ßÁÖ ÄÁÆ®·Ñ·¯
+ * ë°œì£¼ ì»¨íŠ¸ë¡¤ëŸ¬
  * @author kangdonghyeon
  * @version 1.0
  * */
@@ -31,7 +31,7 @@ public class OrderController {
 	public OrderServiceImpl orderService;
 	
 	/**
-	 *  ÀüÃ¼ ¹ßÁÖ Á¶È¸
+	 *  ì „ì²´ ë°œì£¼ ì¡°íšŒ
 	 *  @return  List<Order>
 	 */
 	@GetMapping("/list")
@@ -41,7 +41,7 @@ public class OrderController {
 	
 	
 	/**
-	 * ¹ßÁÖ ÄÚµå(orderId)·Î Á¶È¸
+	 * ë°œì£¼ ì½”ë“œ(orderId)ë¡œ ì¡°íšŒ
 	 * @param { orderId }
 	 * @return OrderDTO
 	 * */
@@ -52,7 +52,7 @@ public class OrderController {
 	
 	
 	/**
-	 * ¹ßÁÖ µî·Ï
+	 * ë°œì£¼ ë“±ë¡
 	 * @param { OrderDTO }
 	 * @return void
 	 * */
@@ -64,7 +64,7 @@ public class OrderController {
 	
 	
 	/**
-	 * ¹ßÁÖ ÄÚµå(order_id)·Î ¼öÁ¤
+	 * ë°œì£¼ ì½”ë“œ(order_id)ë¡œ ìˆ˜ì •
 	 * @param { orderId, OrderDTO }
 	 * @return void
 	 * */
@@ -74,7 +74,7 @@ public class OrderController {
 	}
 	
 	/**
-	 * ¹ßÁÖ ÄÚµå(orderId)·Î »èÁ¦
+	 * ë°œì£¼ ì½”ë“œ(orderId)ë¡œ ì‚­ì œ
 	 * @param { orderId }
 	 * @return void
 	 * */

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gongzone.storage.entity.Storage;
 
 /**
- * Ã¢°í Repositroy
+ * ì°½ê³  Repositroy
  * @author kangdonghyeon
  * @version 1.0
  */

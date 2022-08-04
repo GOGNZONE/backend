@@ -23,8 +23,8 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * BOM ¿£Æ¼Æ¼
- * fk ¸ÅÇÎÀü
+ * BOM ì—”í‹°í‹°
+ * fk ë§¤í•‘ì „
  * @version 1.0
  * @author kangdonghyeon
  *
@@ -94,9 +94,9 @@ public class BOM {
 	private Long bomParentId;
 	
 	/**
-	 * BOM ¼öÁ¤
+	 * BOM ìˆ˜ì •
 	 * @param {bomDTO}
-	 * @return °ªÀ» ¾÷µ¥ÀÌÆ®¸¸ ÇÏ±â¶§¹®¿¡ void
+	 * @return ê°’ì„ ì—…ë°ì´íŠ¸ë§Œ í•˜ê¸°ë•Œë¬¸ì— void
 	 */
 	
 	public void updateBOM(BOMDTO bomDTO) {
@@ -114,7 +114,7 @@ public class BOM {
 
 	
 	/**
-	 * BOM Entity¸¦ BomDTO·Î º¯°æ
+	 * BOM Entityë¥¼ BomDTOë¡œ ë³€ê²½
 	 * @param {BOM}
 	 * @return BOMDTO
 	 */

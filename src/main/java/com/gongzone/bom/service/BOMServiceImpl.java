@@ -10,7 +10,7 @@ import com.gongzone.bom.entity.BOM;
 import com.gongzone.bom.repository.BOMRepository;
 
 /**
- * BOM ¼­ºñ½º ÀÎÅÍÆäÀÌ½º ±¸ÇöÃ¼
+ * BOM ì„œë¹„ìŠ¤ ì¸í„°í˜ì´ìŠ¤ êµ¬í˜„ì²´
  * @author kangdonghyeon
  * @version 1.0
  */
@@ -20,7 +20,7 @@ public class BOMServiceImpl implements BOMService{
 	public BOMRepository bomRepo;
 	
 	/**
-	 *  ÀüÃ¼ BOM Á¶È¸
+	 *  ì „ì²´ BOM ì¡°íšŒ
 	 *  @return List<BOM>
 	 */
 	@Override
@@ -29,7 +29,7 @@ public class BOMServiceImpl implements BOMService{
 	}
 
 	/**
-	 * BOMÄÚµå(bomId)·Î Á¶È¸
+	 * BOMì½”ë“œ(bomId)ë¡œ ì¡°íšŒ
 	 * @param { bomId }
 	 * @return BOMDTO
 	 * */
@@ -39,7 +39,7 @@ public class BOMServiceImpl implements BOMService{
 	}
 
 	/**
-	 * BOM µî·Ï
+	 * BOM ë“±ë¡
 	 * @param { BOMDTO }
 	 * @return void
 	 * */
@@ -50,7 +50,7 @@ public class BOMServiceImpl implements BOMService{
 	}
 
 	/**
-	 * BOM ÄÚµå(bomId)·Î ¼öÁ¤
+	 * BOM ì½”ë“œ(bomId)ë¡œ ìˆ˜ì •
 	 * @param { BOMDTO }
 	 * @return void
 	 * */
@@ -63,7 +63,7 @@ public class BOMServiceImpl implements BOMService{
 
 	
 	/**
-	 * BOM ÄÚµå(bomId)·Î »èÁ¦
+	 * BOM ì½”ë“œ(bomId)ë¡œ ì‚­ì œ
 	 * @param { bomId }
 	 * @return void
 	 * */

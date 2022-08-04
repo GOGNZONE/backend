@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * Àç°í DTO
+ * ï¿½ï¿½ï¿½ DTO
  * @author kangdonghyeon
  * @version 1.0
  */
@@ -28,7 +28,7 @@ public class StockDTO {
 	private Storage storage;
 	
 	/**
-	 * StockDTO¸¦ StockEntity·Î º¯°æ
+	 * StockDTOë¥¼ StockEntityë¡œ ë³€í™˜
 	 * @param {StockDTO}
 	 * @return Stock
 	 */

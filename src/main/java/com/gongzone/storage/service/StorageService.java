@@ -6,33 +6,34 @@ import com.gongzone.storage.dto.StorageDTO;
 import com.gongzone.storage.entity.Storage;
 
 /**
- * Ã¢°í ¼­ºñ½º ÀÎÅÍÆäÀÌ½º
+ * ì°½ê³  ì„œë¹„ìŠ¤ ì¸í„°í˜ì´ìŠ¤
  * @author kangdonghyeon
  * @version 1.0
  * */
 public interface StorageService {
 	/**
-	 *  ÀüÃ¼ Ã¢°í Á¶È¸
+	 *  ì „ì²´ ì°½ê³  ì¡°íšŒ
 	 *  @return  List<Storage>
 	 */
 	public List<Storage> findStorage();
 	
 	/**
-	 * Ã¢°í ÄÚµå(storageId)·Î Á¶È¸
+	 * ì°½ê³  ì½”ë“œ(storageId)ë¡œ ì¡°íšŒ
 	 * @param { storageId }
 	 * @return StorageDTO
 	 * */
 	public StorageDTO findStorageByStorageId(Long storageId);
 	
+
 	/**
-	 * Ã¢°í µî·Ï
+	 * ì°½ê³  ë“±ë¡
 	 * @param { storageDTO }
 	 * @return void
 	 * */
 	public void insertStorage(StorageDTO storageDTO);
 	
 	/**
-	 * Ã¢°í ¼öÁ¤(production_id)·Î »ı»ê Ç°¸ñ ¼öÁ¤
+	 * ì°½ê³  ìˆ˜ì •(production_id)ë¡œ ìƒì‚° í’ˆëª© ìˆ˜ì •
 	 * @param { productionId, productionDTO }
 	 * @return void
 	 * */
@@ -40,7 +41,7 @@ public interface StorageService {
 	
 
 	/**
-	 * Ã¢°í ÄÚµå(storageId)·Î »ı»ê Ç°¸ñ »èÁ¦
+	 * ì°½ê³  ì½”ë“œ(storageId)ë¡œ ìƒì‚° í’ˆëª© ì‚­ì œ
 	 * @param { storageId }
 	 * @return void
 	 * */
