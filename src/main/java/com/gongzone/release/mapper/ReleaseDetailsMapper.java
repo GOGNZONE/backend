@@ -12,8 +12,6 @@ import com.gongzone.production.dto.ReleaseProductionDto;
 import com.gongzone.production.mapper.ReleaseProductionMapper;
 import com.gongzone.release.dto.ReleaseDetailsDto;
 import com.gongzone.release.entity.Release;
-import com.gongzone.release.entity.ReleaseType;
-import com.gongzone.vehicle.dto.VehicleDto;
 import com.gongzone.vehicle.mapper.VehicleMapper;
 
 /**
@@ -41,7 +39,7 @@ public interface ReleaseDetailsMapper extends GenericMapper<ReleaseDetailsDto, R
 		String releaseDescription = e.getReleaseDescription();
 		int releaseQuantity = e.getReleaseQuantity();
 		Long releaseTotalPrice = e.getReleaseTotalPrice();
-		ReleaseType releaseType = e.getReleaseType();
+		String releaseType = e.getReleaseType();
 		// Client Info
 		ReleaseClientDto releaseDetailsInClientDto = releaseClientMapper.toDto(e.getClient());
 		// Employee Info
@@ -50,13 +48,11 @@ public interface ReleaseDetailsMapper extends GenericMapper<ReleaseDetailsDto, R
 		ReleaseProductionDto releaseDetailsInProductionDto = releaseProductionMapper.toDto(e.getProduction());
 		// Delivery Info
 		DeliveryDto deliveryDto = deliveryMapper.toDto(e.getDelivery());
-		// Vehicle Info
-		VehicleDto vehicleDto = vehicleMapper.toDto(e.getVehicle());
 		
 		ReleaseDetailsDto releaseDetailsDeliveryDto = new ReleaseDetailsDto(
 				releaseId, releaseDate, releaseDescription, 
 				releaseQuantity, releaseTotalPrice, releaseType, 
-				releaseDetailsInClientDto, releaseDetailsInProductionDto, deliveryDto, vehicleDto);
+				releaseDetailsInClientDto, releaseDetailsInProductionDto, deliveryDto);
 		return releaseDetailsDeliveryDto;
 		
 	}
