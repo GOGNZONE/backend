@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.storage.dto.StorageDTO;
+import com.gongzone.storage.dto.StorageUpdateDTO;
 import com.gongzone.storage.service.StorageServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -68,9 +69,9 @@ public class StorageController {
 	 * @return void
 	 * */
 	@PutMapping("{storageId}")
-	public void updateStorage(@PathVariable Long storageId ,@RequestBody StorageDTO storageDTO ) {
+	public void updateStorage(@PathVariable Long storageId ,@RequestBody StorageUpdateDTO updateDTO ) {
 //		System.out.println(stockDTO);
-		storageService.updateStorage(storageDTO);
+		storageService.updateStorage(storageId,updateDTO);
 	}
 	
 	/**

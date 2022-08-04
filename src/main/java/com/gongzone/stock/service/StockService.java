@@ -17,7 +17,7 @@ public interface StockService {
 	 *  전체 재고 조회
 	 *  @return List<ProductionDtoDetail>
 	 */
-	public List<Stock> findStock();
+	public List<StockDTO> findStock();
 	
 
 	/**

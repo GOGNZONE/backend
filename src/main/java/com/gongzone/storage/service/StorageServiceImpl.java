@@ -8,6 +8,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
 import com.gongzone.storage.dto.StorageDTO;
+import com.gongzone.storage.dto.StorageUpdateDTO;
 import com.gongzone.storage.entity.Storage;
 import com.gongzone.storage.mapper.StorageMapper;
 import com.gongzone.storage.repository.StorageRepository;
@@ -69,9 +70,9 @@ public class StorageServiceImpl implements StorageService {
 	 * @return void
 	 * */
 	@Override
-	public void updateStorage(StorageDTO storageDTO) {
-		Storage storage = storageMapper.toEntity(findStorageByStorageId(storageDTO.getStorageId()));
-		storage.updateStorage(storageDTO.getStorageAddress(), storageDTO.getStorageCategory(), storageDTO.getStorageDescription());
+	public void updateStorage(Long storageId, StorageUpdateDTO updateDTO) {
+		Storage storage = storageMapper.toEntity(findStorageByStorageId(storageId));
+		storage.updateStorage(updateDTO.getStorageAddress(), updateDTO.getStorageCategory(), updateDTO.getStorageDescription());
 		storageRepo.save(storage);
 	}
 

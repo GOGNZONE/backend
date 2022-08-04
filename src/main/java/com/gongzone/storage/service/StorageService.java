@@ -3,6 +3,7 @@ package com.gongzone.storage.service;
 import java.util.List;
 
 import com.gongzone.storage.dto.StorageDTO;
+import com.gongzone.storage.dto.StorageUpdateDTO;
 
 /**
  * 창고 서비스 인터페이스
@@ -31,10 +32,10 @@ public interface StorageService {
 	public void insertStorage(StorageDTO storageDTO);
 	/**
 	 * 창고 수정(production_id)로 생산 품목 수정
-	 * @param { productionId, productionDTO }
+	 * @param { stockId, storageDTO }
 	 * @return void
 	 * */
-	public void updateStorage(StorageDTO storageDTO);
+	public void updateStorage(Long stockId, StorageUpdateDTO updateDTO);
 	
 	/**
 	 * 창고 코드(storageId)로 생산 품목 삭제
