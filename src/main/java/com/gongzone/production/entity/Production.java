@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
  * @version 1.0
  * */
 @Entity
-@Table(name = "production")
+@Table(name = "t_production")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
