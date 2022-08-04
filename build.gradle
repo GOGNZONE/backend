@@ -33,6 +33,7 @@ dependencies {
 	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
 	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
 	
