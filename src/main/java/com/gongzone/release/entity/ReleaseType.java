@@ -9,13 +9,6 @@ import lombok.RequiredArgsConstructor;
  * */
 @RequiredArgsConstructor
 public enum ReleaseType {
-	
-	VEHICLE("배송"), DELIVERY("택배");
-	
-	private final String releaseType;
-	
-	public String getReleaseType() {
-		return this.releaseType; 
-	}
-	
+	VEHICLE,
+	DELIVERY
 }
