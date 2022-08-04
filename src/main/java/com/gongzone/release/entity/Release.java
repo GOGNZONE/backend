@@ -2,10 +2,6 @@ package com.gongzone.release.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -20,7 +16,6 @@ import com.gongzone.client.entity.Client;
 import com.gongzone.delivery.entity.Delivery;
 import com.gongzone.production.entity.Production;
 import com.gongzone.release.dto.ReleaseDto;
-//import com.gongzone.vehicle.entity.Vehicle;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,7 +36,7 @@ import lombok.NoArgsConstructor;
 @IdClass(ReleaseId.class)
 public class Release {
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	@Column(name = "release_id")
 	private Long releaseId;
 	
@@ -62,10 +57,10 @@ public class Release {
 	@ColumnDefault("0")
 	private Long releaseTotalPrice;
 	
-	@Column(name = "release_type", columnDefinition = "ENUM('DELIVERY', 'VEHICLE')")
-	@Enumerated(value = EnumType.STRING)
+	@Column(name = "release_type", length = 10)
 	@NotNull(message = "release type cannot be null")
-	private ReleaseType releaseType;
+	@ColumnDefault("배송")
+	private String releaseType;
 	
 	@ManyToOne
 	@JoinColumn(name="fk_client_id", nullable = true)
@@ -83,12 +78,7 @@ public class Release {
 	@JsonIgnore
 	private Delivery delivery;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "fk_vehicle_id", nullable = true)
-//	@JsonIgnore
-//	private Vehicle vehicle;
-	
-	
+
 	/**
 	 * 출고 현황 수정 메서드
 	 * @param { releaseDto }
@@ -99,7 +89,6 @@ public class Release {
 		this.releaseDescription = releaseDto.getReleaseDescription();
 		this.releaseQuantity = releaseDto.getReleaseQuantity();
 		this.releaseTotalPrice = releaseDto.getReleaseTotalPrice();
-		this.releaseType = releaseDto.getReleaseType();
 	}
 	
 }
