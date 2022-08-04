@@ -2,7 +2,7 @@ package com.gongzone.bom.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.bom.dto.BOMDTO;
-import com.gongzone.bom.entity.BOM;
+import com.gongzone.bom.dto.BOMUpdateDTO;
 import com.gongzone.bom.service.BOMServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -36,7 +36,7 @@ public class BOMController {
 	 *  @return List<BOM>
 	 */
 	@GetMapping("/list")
-	public List<BOM> findBOM(){
+	public List<BOMDTO> findBOM(){
 		return bomService.findBOM();
 	}
 	
@@ -66,8 +66,8 @@ public class BOMController {
 	 * @return void
 	 * */
 	@PutMapping("{bomId}")
-	public void updateBOM(@PathVariable Long bomId,@RequestBody BOMDTO bomDTO) {
-		bomService.updateBOM(bomDTO);
+	public void updateBOM(@PathVariable Long bomId,@RequestBody BOMUpdateDTO updateDTO) {
+		bomService.updateBOM(bomId, updateDTO);
 	}
 	
 	

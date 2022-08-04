@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.stock.dto.StockDTO;
-import com.gongzone.stock.entity.Stock;
+import com.gongzone.stock.dto.StockUpdateDTO;
 import com.gongzone.stock.service.StockServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -34,10 +34,10 @@ public class StockController {
 	
 	/**
 	 *  전체 재고 조회
-	 *  @return List<ProductionDtoDetail>
+	 *  @return List<StockDTO>
 	 */
 	@GetMapping("/list")
-	public List<Stock> getStock(){
+	public List<StockDTO> getStock(){
 		return stockService.findStock();
 	}
 	
@@ -69,10 +69,9 @@ public class StockController {
 	 * @return void
 	 * */
 	@PutMapping("/{stockId}")
-	public void updateStock(@PathVariable Long stockId, @RequestBody StockDTO stockDTO) {
-		stockService.updateStock(stockId, stockDTO);
+	public void updateStock(@PathVariable Long stockId, @RequestBody StockUpdateDTO updateDto) {
+		stockService.updateStock(stockId, updateDto);
 	}
-	
 	
 	/**
 	 * 재고 코드(stockId)로 삭제
@@ -83,7 +82,5 @@ public class StockController {
 	public void deleteStock(@PathVariable Long stockId) {
 		stockService.deleteStock(stockId);
 	}
-	
-	
 }
 

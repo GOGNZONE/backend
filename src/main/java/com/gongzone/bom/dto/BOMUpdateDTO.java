@@ -1,6 +1,5 @@
 package com.gongzone.bom.dto;
 
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,8 +24,5 @@ public class BOMUpdateDTO {
 	private String bomDescription;
 	private String bomFile;
 	private int bomRequiredQuntity;
-	private Long productionBomId;
-	private Long storageId;
-	private Long bomParentId;
 	
 }

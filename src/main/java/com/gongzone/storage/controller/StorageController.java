@@ -35,7 +35,7 @@ public class StorageController {
 	
 	/**
 	 *  전체 창고 조회
-	 *  @return  List<Storage>
+	 *  @return  List<StorageDTO>
 	 */
 	@GetMapping("/list")
 	public List<StorageDTO> getStock(){

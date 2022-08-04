@@ -3,7 +3,7 @@ package com.gongzone.stock.service;
 import java.util.List;
 
 import com.gongzone.stock.dto.StockDTO;
-import com.gongzone.stock.entity.Stock;
+import com.gongzone.stock.dto.StockUpdateDTO;
 
 
 /**
@@ -15,7 +15,7 @@ import com.gongzone.stock.entity.Stock;
 public interface StockService {
 	/**
 	 *  전체 재고 조회
-	 *  @return List<ProductionDtoDetail>
+	 *  @return List<StockDTO>
 	 */
 	public List<StockDTO> findStock();
 	
@@ -40,7 +40,7 @@ public interface StockService {
 	 * @param { stockId, stockDTO }
 	 * @return void
 	 * */
-	public void updateStock(Long stockId, StockDTO stockDTO);
+	public void updateStock(Long stockId, StockUpdateDTO updateDTO);
 	
 	/**
 	 * 재고 코드(stockId)로 삭제

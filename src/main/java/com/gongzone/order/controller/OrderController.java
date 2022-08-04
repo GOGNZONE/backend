@@ -2,7 +2,6 @@ package com.gongzone.order.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.order.dto.OrderDTO;
-import com.gongzone.order.entity.Order;
+import com.gongzone.order.dto.OrderUpdateDTO;
 import com.gongzone.order.service.OrderServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -37,7 +36,7 @@ public class OrderController {
 	 *  @return  List<Order>
 	 */
 	@GetMapping("/list")
-	public List<Order> findOrder(){
+	public List<OrderDTO> findOrder(){
 		return orderService.findOrder();
 	}
 	
@@ -49,7 +48,7 @@ public class OrderController {
 	 * */
 	@GetMapping("/{orderId}")
 	public OrderDTO findOrderByOrderId(@PathVariable Long orderId) {
-		return null;
+		return orderService.findOrderByOrderId(orderId);
 	}
 	
 	
@@ -71,8 +70,8 @@ public class OrderController {
 	 * @return void
 	 * */
 	@PutMapping("{orderId}")
-	public void updateOrder(@PathVariable Long orderId, OrderDTO orderDTO) {
-		orderService.updateOrder(orderDTO);
+	public void updateOrder(@PathVariable Long orderId, OrderUpdateDTO updateDto) {
+		orderService.updateOrder(orderId, updateDto);
 	}
 	
 	/**

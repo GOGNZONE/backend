@@ -6,7 +6,6 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gongzone.order.repository.OrderRepository;
 import com.gongzone.stock.Repository.StockRepository;
 import com.gongzone.stock.dto.StockDTO;
 import com.gongzone.stock.dto.StockUpdateDTO;
@@ -15,41 +14,77 @@ import com.gongzone.stock.mapper.StockMapper;
 
 import lombok.RequiredArgsConstructor;
 
+
+
+/**
+ * 재고 서비스 인터페이스 구현체
+ * @author kangdonghyeon
+ * @version 1.0
+ */
 @Service
 @RequiredArgsConstructor
 public class StockServiceImpl implements StockService{
 	private final StockRepository stockRepo;
 	private final StockMapper stockMapper = Mappers.getMapper(StockMapper.class);
 	
+	
+	/**
+	 *  전체 재고 조회
+	 *  @return List<StockDTO>
+	 */
 	@Override
 	public List<StockDTO> findStock() {
 		List<Stock> list = stockRepo.findAll();
 		return stockMapper.toDtoList(list);
 	}
 
+	/**
+	 * 재고코드(stockId)로 조회
+	 * @param { stockId }
+	 * @return StockDTO
+	 * */
 	@Override
 	public StockDTO findStockByStockId(Long stockId) {
 		return toDTO(stockRepo.findStockByStockId(stockId));
 	}
 
+	/**
+	 * 재고 등록
+	 * @param { stockDTO }
+	 * @return void
+	 * */
 	@Override
 	public void insertStock(StockDTO stockDTO) {
 		stockRepo.save(toEntity(stockDTO));
 		
 	}
 
+	/**
+	 * 재고 코드(stockId)로 수정
+	 * @param { stockId, stockDTO }
+	 * @return void
+	 * */
 	@Override
 	public void updateStock(Long stockId, StockUpdateDTO updateDTO) {
-		// TODO Auto-generated method stub
+		Stock stock = toEntity(findStockByStockId(stockId));
+		stock.updateStock(updateDTO.getStockName(), updateDTO.getStockQuantity(), updateDTO.getStockDescription());
+		stockRepo.save(stock);
 		
 	}
 
+	/**
+	 * 재고 코드(stockId)로 삭제
+	 * @param { stockId }
+	 * @return void
+	 * */
 	@Override
+	@Transactional
 	public void deleteStock(Long stockId) {
-		// TODO Auto-generated method stub
-		
+		stockRepo.deleteByStockId(stockId);
 	}
 
+	
+	
 	/* MapStruct Mapper Production ↔ ProductionDTO */
 	protected StockDTO toDTO(Stock stock) {
 		return stockMapper.toDto(stock);

@@ -32,7 +32,7 @@ public class StorageServiceImpl implements StorageService {
 	
 	/**
 	 *  전체 창고 조회
-	 *  @return  List<Storage>
+	 *  @return  List<StorageDTO>
 	 */
 	@Override
 	@Transactional
@@ -66,7 +66,7 @@ public class StorageServiceImpl implements StorageService {
 
 	/**
 	 * 창고 수정(StorageId)로 생산 품목 수정
-	 * @param { storageDTO }
+	 * @param { stockId, storageDTO }
 	 * @return void
 	 * */
 	@Override

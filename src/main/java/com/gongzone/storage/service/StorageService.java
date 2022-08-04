@@ -13,7 +13,7 @@ import com.gongzone.storage.dto.StorageUpdateDTO;
 public interface StorageService {
 	/**
 	 *  전체 창고 조회
-	 *  @return  List<Storage>
+	 *  @return  List<StorageDTO>
 	 */
 	public List<StorageDTO> findStorage();
 	

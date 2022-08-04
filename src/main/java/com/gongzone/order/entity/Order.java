@@ -16,7 +16,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.gongzone.order.dto.OrderDTO;
+import com.gongzone.order.dto.OrderUpdateDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -93,16 +93,16 @@ public class Order {
 	 * @param {orderDTO}
 	 * @return  void 
 	 */
-	public void updateOrder(OrderDTO orderDTO) {
-		this.orderProductionName = orderDTO.getOrderProductionName();
-		this.orderProductionBrandName = orderDTO.getOrderProductionBrandName();
-		this.orderProductionPrice = orderDTO.getOrderProductionPrice();
-		this.orderProductionQuantity = orderDTO.getOrderProductionQuantity();
-		this.orderProuctionFile = orderDTO.getOrderProuctionFile();
-		this.orderProductionStandard = orderDTO.getOrderProductionStandard();
-		this.orderProductionUnit = orderDTO.getOrderProductionUnit();
-		this.orderProductionDescription = orderDTO.getOrderProductionDescription();
-		this.orderProductionEndDate = orderDTO.getOrderProductionEndDate();
+	public void updateOrder(OrderUpdateDTO updateDTO) {
+		this.orderProductionName = updateDTO.getOrderProductionName();
+		this.orderProductionBrandName = updateDTO.getOrderProductionBrandName();
+		this.orderProductionPrice = updateDTO.getOrderProductionPrice();
+		this.orderProductionQuantity = updateDTO.getOrderProductionQuantity();
+		this.orderProuctionFile = updateDTO.getOrderProuctionFile();
+		this.orderProductionStandard = updateDTO.getOrderProductionStandard();
+		this.orderProductionUnit = updateDTO.getOrderProductionUnit();
+		this.orderProductionDescription = updateDTO.getOrderProductionDescription();
+		this.orderProductionEndDate = updateDTO.getOrderProductionEndDate();
 	}
 	
 	

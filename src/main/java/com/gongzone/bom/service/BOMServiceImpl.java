@@ -2,12 +2,16 @@ package com.gongzone.bom.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.bom.dto.BOMDTO;
+import com.gongzone.bom.dto.BOMUpdateDTO;
 import com.gongzone.bom.entity.BOM;
+import com.gongzone.bom.mapper.BomMapper;
 import com.gongzone.bom.repository.BOMRepository;
+
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,14 +24,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BOMServiceImpl implements BOMService{
 	private final BOMRepository bomRepo;
+	private final BomMapper bomMapper = Mappers.getMapper(BomMapper.class);
+	
 	
 	/**
 	 *  전체 BOM 조회
 	 *  @return List<BOM>
 	 */
 	@Override
-	public List<BOM> findBOM() {
-		return bomRepo.findAll();
+	public List<BOMDTO> findBOM() {
+		List<BOM> list = bomRepo.findAll();
+		return bomMapper.toDtoList(list);
 	}
 
 	/**
@@ -37,7 +44,8 @@ public class BOMServiceImpl implements BOMService{
 	 * */
 	@Override
 	public BOMDTO findBOMByBomId(Long bomId) {
-		return bomRepo.findBOMByBomId(bomId).toDTO(bomRepo.findBOMByBomId(bomId));
+		return toDTO(bomRepo.findBOMByBomId(bomId));
+	
 	}
 
 	/**
@@ -47,8 +55,7 @@ public class BOMServiceImpl implements BOMService{
 	 * */
 	@Override
 	public void insertBOM(BOMDTO bomDTO) {
-		BOM bomEntity = bomDTO.toEntity(bomDTO);
-		bomRepo.save(bomEntity);
+		bomRepo.save(toEntity(bomDTO));
 	}
 
 	/**
@@ -57,9 +64,9 @@ public class BOMServiceImpl implements BOMService{
 	 * @return void
 	 * */
 	@Override
-	public void updateBOM(BOMDTO bomDTO) {
-		BOM bom = findBOMByBomId(bomDTO.getBomId()).toEntity(findBOMByBomId(bomDTO.getBomId()));
-		bom.updateBOM(bomDTO);
+	public void updateBOM(Long bomId, BOMUpdateDTO updateDto) {
+		BOM bom = bomRepo.findBOMByBomId(bomId);
+		bom.updateBOM(updateDto);
 		bomRepo.save(bom);
 	}
 
@@ -70,10 +77,19 @@ public class BOMServiceImpl implements BOMService{
 	 * @return void
 	 * */
 	@Override
+	@Transactional
 	public void deleteBOM(Long bomId) {
 		bomRepo.deleteBOMByBomId(bomId);
 	}
 
+	/* MapStruct Mapper Production ↔ ProductionDTO */
+	protected BOMDTO toDTO(BOM bom) {
+		return bomMapper.toDto(bom);
+	}
 	
+	/* MapStruct Mapper ProductionDTO ↔ Production */
+	protected BOM toEntity(BOMDTO bomDto) {
+		return bomMapper.toEntity(bomDto);
+	}
 	
 }

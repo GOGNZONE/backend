@@ -15,7 +15,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.gongzone.bom.dto.BOMDTO;
+import com.gongzone.bom.dto.BOMUpdateDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -100,16 +100,15 @@ public class BOM {
 	 * @return 값을 업데이트만 하기때문에 void
 	 */
 	
-	public void updateBOM(BOMDTO bomDTO) {
-		this.bomName = bomDTO.getBomName();
-		this.bomQuantity = bomDTO.getBomQuantity();
-		this.bomPrice = bomDTO.getBomPrice();
-		this.bomStandard = bomDTO.getBomStandard();
-		this.bomUnit = bomDTO.getBomUnit();
-		this.bomDescription = bomDTO.getBomDescription();
-		this.bomReceivedData = bomDTO.getBomReceivedData();
-		this.bomFile = bomDTO.getBomFile();
-		this.bomRequiredQuntity = bomDTO.getBomRequiredQuntity();
+	public void updateBOM(BOMUpdateDTO updateDto) {
+		this.bomName = updateDto.getBomName();
+		this.bomQuantity = updateDto.getBomQuantity();
+		this.bomPrice = updateDto.getBomPrice();
+		this.bomStandard = updateDto.getBomStandard();
+		this.bomUnit = updateDto.getBomUnit();
+		this.bomDescription = updateDto.getBomDescription();
+		this.bomFile = updateDto.getBomFile();
+		this.bomRequiredQuntity = updateDto.getBomRequiredQuntity();
 		
 	}
 
