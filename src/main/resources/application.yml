@@ -2,7 +2,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: scott
-    url: jdbc:mysql://localhost:3306/testdb
+    url: jdbc:mysql://localhost:3306/test
     password: tiger
   data:
     jpa:
@@ -14,5 +14,5 @@ spring:
       hibernate:
         format_sql: 'true'
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     show-sql: 'true'
