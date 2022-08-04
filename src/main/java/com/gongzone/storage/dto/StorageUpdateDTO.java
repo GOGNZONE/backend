@@ -7,21 +7,18 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * 창고 DTO
+ * 창고 수정 DTO
  * @author kangdonghyeon
  * @version 1.0
  */
-
-
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 
-public class StorageDTO {
-	private Long storageId;
+public class StorageUpdateDTO {
 	private String storageAddress;
 	private String storageCategory;
 	private String storageDescription;
+
 }

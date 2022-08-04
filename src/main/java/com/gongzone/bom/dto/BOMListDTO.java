@@ -1,7 +1,6 @@
 package com.gongzone.bom.dto;
 
 import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,19 +16,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BOMDTO {
+public class BOMListDTO {
 	private Long bomId;
 	private String bomName;
 	private int bomQuantity;
-	private Long bomPrice;
-	private String bomStandard;
-	private String bomUnit;
 	private String bomDescription;
-	private LocalDateTime bomReceivedData;
-	private String bomFile;
-	private int bomRequiredQuntity;
-	private Long productionBomId;
 	private Long storageId;
-	private Long bomParentId;
-
+	
 }

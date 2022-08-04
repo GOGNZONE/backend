@@ -1,4 +1,4 @@
-package com.gongzone.storage.dto;
+package com.gongzone.stock.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,21 +7,20 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * 창고 DTO
+ * 재고리스트 DTO
  * @author kangdonghyeon
  * @version 1.0
  */
 
-
-
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 
-public class StorageDTO {
-	private Long storageId;
-	private String storageAddress;
-	private String storageCategory;
-	private String storageDescription;
+public class StockListDTO {
+	private Long stockId;
+	private String stockName;
+	private Long stockQuantity;
+	private String stockDescription;
+
 }

@@ -2,7 +2,7 @@ package com.gongzone.storage.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.storage.dto.StorageDTO;
-import com.gongzone.storage.entity.Storage;
 import com.gongzone.storage.service.StorageServiceImpl;
+
+import lombok.RequiredArgsConstructor;
 
 
 /**
@@ -25,17 +26,18 @@ import com.gongzone.storage.service.StorageServiceImpl;
 
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/storage")
 public class StorageController {
-	@Autowired
-	public StorageServiceImpl storageService;
+
+	private final StorageServiceImpl storageService;
 	
 	/**
 	 *  전체 창고 조회
 	 *  @return  List<Storage>
 	 */
 	@GetMapping("/list")
-	public List<Storage> getStock(){
+	public List<StorageDTO> getStock(){
 		return storageService.findStorage();
 	}
 	
@@ -58,7 +60,6 @@ public class StorageController {
 	@PostMapping("")
 	public void insertStorage(@RequestBody StorageDTO storageDTO) {
 		storageService.insertStorage(storageDTO);
-//		System.out.println(storageDTO);
 	}
 	
 	/**

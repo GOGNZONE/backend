@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -20,7 +21,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * Stock ¿£Æ¼Æ¼
+ * ì¬ê³  Entity
  * @author kangdonghyeon
  * @version 1.0
  */
@@ -29,6 +30,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "t_stock")
 public class Stock {
 	@Id
 	@Column(name="stock_id")
@@ -54,7 +56,7 @@ public class Stock {
 	private Storage storage;
 	
 	/**
-	 * Stock ¼öÁ¤
+	 * ì¬ê³  ì—…ë°ì´íŠ¸
 	 * @param {stockName, stockQuantity, stockDescription}
 	 * @return void
 	 */
@@ -65,7 +67,7 @@ public class Stock {
 	}
 	
 	/**
-	 * StockEntity¸¦ StockDTO·Î º¯°æ
+	 * ì¬ê³  Entityë¥¼ ì¬ê³ DTOë¡œ ë³€í™˜
 	 * @param {Stock}
 	 * @return StockDTO
 	 */

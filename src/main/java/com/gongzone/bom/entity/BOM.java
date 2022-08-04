@@ -8,6 +8,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -35,7 +36,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-
+@Table(name = "t_bom")
 public class BOM {
 	@Id
 	@Column(name="bom_id")
@@ -80,7 +81,7 @@ public class BOM {
 	@Column(name="bom_required_quantity",length=6)
 	@ColumnDefault("0")
 	@NotNull
-	private String bomRequiredQuntity;
+	private int bomRequiredQuntity;
 	
 	@Column(name="fk_production_bom_id")
 	@NotNull
@@ -112,32 +113,4 @@ public class BOM {
 		
 	}
 
-	
-	/**
-	 * BOM Entity를 BomDTO로 변경
-	 * @param {BOM}
-	 * @return BOMDTO
-	 */
-	public BOMDTO toDTO(BOM BOMEntity) {
-		BOMDTO bomDTO = BOMDTO.builder()
-				.bomId(BOMEntity.getBomId())
-				.bomName(BOMEntity.getBomName())
-				.bomQuantity(BOMEntity.getBomQuantity())
-				.bomPrice(BOMEntity.getBomPrice())
-				.bomStandard(BOMEntity.getBomStandard())
-				.bomUnit(BOMEntity.getBomUnit())
-				.bomDescription(BOMEntity.getBomDescription())
-				.bomReceivedData(BOMEntity.getBomReceivedData())
-				.bomFile(BOMEntity.getBomFile())
-				.bomRequiredQuntity(BOMEntity.getBomRequiredQuntity())
-				.productionBomId(BOMEntity.getProductionBomId())
-				.storageId(BOMEntity.getStorageId())
-				.bomParentId(BOMEntity.getBomParentId())
-				.build();
-		return bomDTO;
-	}
-	
-	
-	
-	
 }

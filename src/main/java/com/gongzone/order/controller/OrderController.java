@@ -17,6 +17,8 @@ import com.gongzone.order.dto.OrderDTO;
 import com.gongzone.order.entity.Order;
 import com.gongzone.order.service.OrderServiceImpl;
 
+import lombok.RequiredArgsConstructor;
+
 
 /**
  * 발주 컨트롤러
@@ -24,12 +26,12 @@ import com.gongzone.order.service.OrderServiceImpl;
  * @version 1.0
  * */
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/order")
 @CrossOrigin(origins = "http://localhost:3000")
 public class OrderController {
-	@Autowired
-	public OrderServiceImpl orderService;
 	
+	private final OrderServiceImpl orderService;
 	/**
 	 *  전체 발주 조회
 	 *  @return  List<Order>

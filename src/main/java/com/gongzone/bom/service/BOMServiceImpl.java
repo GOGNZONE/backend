@@ -9,15 +9,17 @@ import com.gongzone.bom.dto.BOMDTO;
 import com.gongzone.bom.entity.BOM;
 import com.gongzone.bom.repository.BOMRepository;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * BOM 서비스 인터페이스 구현체
  * @author kangdonghyeon
  * @version 1.0
  */
 @Service
+@RequiredArgsConstructor
 public class BOMServiceImpl implements BOMService{
-	@Autowired
-	public BOMRepository bomRepo;
+	private final BOMRepository bomRepo;
 	
 	/**
 	 *  전체 BOM 조회

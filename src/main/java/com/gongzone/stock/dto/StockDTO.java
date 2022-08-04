@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * ��� DTO
+ * 재고 DTO
  * @author kangdonghyeon
  * @version 1.0
  */

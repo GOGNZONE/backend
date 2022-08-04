@@ -9,20 +9,20 @@ import com.gongzone.order.dto.OrderDTO;
 import com.gongzone.order.entity.Order;
 import com.gongzone.order.repository.OrderRepository;
 
+import lombok.RequiredArgsConstructor;
+
 /**
- * ¹ßÁÖ ¼­ºñ½º ÀÎÅÍÆäÀÌ½º ±¸ÇöÃ¼
+ * ë°œì£¼ ì„œë¹„ìŠ¤ ì¸í„°í˜ì´ìŠ¤ êµ¬í˜„ì²´
  * @author kangdonghyeon
  * @version 1.0
  * */
 @Service
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 	
-	@Autowired
-	public OrderRepository orderRepo;
-	
-	
+	public final OrderRepository orderRepo;
 	/**
-	 *  ÀüÃ¼ ¹ßÁÖ Á¶È¸
+	 *  ì „ì²´ ë°œì£¼ ì¡°íšŒ
 	 *  @return  List<Order>
 	 */
 	@Override
@@ -32,7 +32,7 @@ public class OrderServiceImpl implements OrderService{
 
 	
 	/**
-	 * ¹ßÁÖ ÄÚµå(orderId)·Î Á¶È¸
+	 * ë°œì£¼ ì½”ë“œ(orderId)ë¡œ ì¡°íšŒ
 	 * @param { orderId }
 	 * @return OrderDTO
 	 * */
@@ -44,7 +44,7 @@ public class OrderServiceImpl implements OrderService{
 	
 	
 	/**
-	 * ¹ßÁÖ µî·Ï
+	 * ë°œì£¼ ë“±ë¡
 	 * @param { OrderDTO }
 	 * @return void
 	 * */
@@ -58,7 +58,7 @@ public class OrderServiceImpl implements OrderService{
 
 	
 	/**
-	 * ¹ßÁÖ ÄÚµå(order_id)·Î ¼öÁ¤
+	 * ë°œì£¼ ì½”ë“œ(order_id)ë¡œ ìˆ˜ì •
 	 * @param { OrderDTO }
 	 * @return void
 	 * */
@@ -71,7 +71,7 @@ public class OrderServiceImpl implements OrderService{
 
 	
 	/**
-	 * ¹ßÁÖ ÄÚµå(orderId)·Î »èÁ¦
+	 * ë°œì£¼ ì½”ë“œ(orderId)ë¡œ ì‚­ì œ
 	 * @param { orderId }
 	 * @return void
 	 * */

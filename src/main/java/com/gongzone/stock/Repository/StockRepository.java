@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gongzone.stock.entity.Stock;
 
 /**
- * Àç°í Repositroy
+ * ìž¬ê³  Repository
  * @author kangdonghyeon
  * @version 1.0
  */

@@ -2,7 +2,6 @@ package com.gongzone.stock.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,24 +15,26 @@ import com.gongzone.stock.dto.StockDTO;
 import com.gongzone.stock.entity.Stock;
 import com.gongzone.stock.service.StockServiceImpl;
 
+import lombok.RequiredArgsConstructor;
+
 
 
 /**
- * Àç°í ÄÁÆ®·Ñ·¯
- * @author Hanju Park
+ * ì¬ê³  Controller
+ * @author kangdonghyeon
  * @version 1.0
  * */
 
 
-@RestController  //JSONÀ» ¹İÈ¯ÇÏ´Â ÄÁÆ®·Ñ·¯
+@RestController  
+@RequiredArgsConstructor
 @RequestMapping("/api/stock")
 public class StockController {
-	@Autowired
-	public StockServiceImpl stockService;
+	private final StockServiceImpl stockService;
 	
 	/**
-	 *  ÀüÃ¼ Àç°í Á¶È¸
-	 *  @return List<Stock>
+	 *  ì „ì²´ ì¬ê³  ì¡°íšŒ
+	 *  @return List<ProductionDtoDetail>
 	 */
 	@GetMapping("/list")
 	public List<Stock> getStock(){
@@ -42,7 +43,7 @@ public class StockController {
 	
 	
 	/**
-	 * Àç°í ÄÚµå(stockId)·Î Á¶È¸
+	 * ì¬ê³ ì½”ë“œ(stockId)ë¡œ ì¡°íšŒ
 	 * @param { stockId }
 	 * @return StockDTO
 	 * */
@@ -51,9 +52,8 @@ public class StockController {
 		return stockService.findStockByStockId(stockId);
 	}
 	
-	
 	/**
-	 * Àç°í µî·Ï
+	 * ì¬ê³  ë“±ë¡
 	 * @param { stockDTO }
 	 * @return void
 	 * */
@@ -64,7 +64,7 @@ public class StockController {
 	
 	
 	/**
-	 * Àç°í ÄÚµå(stockId)·Î ¼öÁ¤
+	 * ì¬ê³  ì½”ë“œ(stockId)ë¡œ ìˆ˜ì •
 	 * @param { stockId, stockDTO }
 	 * @return void
 	 * */
@@ -75,7 +75,7 @@ public class StockController {
 	
 	
 	/**
-	 * Àç°í ÄÚµå(stockId)·Î »èÁ¦
+	 * ì¬ê³  ì½”ë“œ(stockId)ë¡œ ì‚­ì œ
 	 * @param { stockId }
 	 * @return void
 	 * */

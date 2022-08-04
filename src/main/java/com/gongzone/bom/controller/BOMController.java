@@ -16,6 +16,8 @@ import com.gongzone.bom.dto.BOMDTO;
 import com.gongzone.bom.entity.BOM;
 import com.gongzone.bom.service.BOMServiceImpl;
 
+import lombok.RequiredArgsConstructor;
+
 
 /**
  * BOM 컨트롤러
@@ -24,9 +26,9 @@ import com.gongzone.bom.service.BOMServiceImpl;
  */
 @RestController
 @RequestMapping("/api/BOM")
+@RequiredArgsConstructor
 public class BOMController {
-	@Autowired
-	public BOMServiceImpl bomService;
+	private final BOMServiceImpl bomService;
 	
 	
 	/**
