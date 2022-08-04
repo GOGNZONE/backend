@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-04T05:28:37+0900",
+    date = "2022-08-04T10:53:12+0900",
     comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -28,7 +28,6 @@ public class ReleaseMapperImpl implements ReleaseMapper {
         releaseDto.releaseDescription( e.getReleaseDescription() );
         releaseDto.releaseQuantity( e.getReleaseQuantity() );
         releaseDto.releaseTotalPrice( e.getReleaseTotalPrice() );
-        releaseDto.releaseType( e.getReleaseType() );
 
         return releaseDto.build();
     }
@@ -46,7 +45,6 @@ public class ReleaseMapperImpl implements ReleaseMapper {
         release.releaseDescription( d.getReleaseDescription() );
         release.releaseQuantity( d.getReleaseQuantity() );
         release.releaseTotalPrice( d.getReleaseTotalPrice() );
-        release.releaseType( d.getReleaseType() );
 
         return release.build();
     }
