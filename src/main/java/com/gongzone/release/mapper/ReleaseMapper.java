@@ -7,7 +7,7 @@ import com.gongzone.release.dto.ReleaseDto;
 import com.gongzone.release.entity.Release;
 
 /**
- * ReleaseListMapper 매핑 인터페이스
+ * ReleaseDto ↔ Release
  * @author Hanju Park
  * @version 1.0
  * */
