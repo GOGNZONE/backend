@@ -8,6 +8,8 @@ group = 'gongzone'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -19,6 +21,9 @@ repositories {
 }
 
 dependencies {
+ 	// spring cloud starter aws
+    implementation('org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE')
+    
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
@@ -32,6 +37,7 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 	
 	// Start adding mapstruct library
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
@@ -41,5 +47,6 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+
 }
 

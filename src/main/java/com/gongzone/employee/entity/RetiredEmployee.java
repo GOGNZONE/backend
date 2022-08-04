@@ -1,11 +1,11 @@
 package com.gongzone.employee.entity;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -34,6 +34,7 @@ import lombok.NoArgsConstructor;
 public class RetiredEmployee {
 	
 	@Id
+
 	@Column(name = "employee_id")
 	private Long employeeId;
 	
@@ -41,6 +42,7 @@ public class RetiredEmployee {
 	@NotNull(message = "name must not be null")
 	private String employeeName;
 	
+
 	@Column(name = "employee_address", length = 80)
 	@ColumnDefault("NULL")
 	private String employeeAddress;
@@ -51,6 +53,7 @@ public class RetiredEmployee {
 	@Column(name = "employee_phone", length = 18 ,unique = true)
 	private String employeePhone;
 	
+
 	@Column(name = "employee_hiredate")
 	@NotNull(message = "hiredate must not be null")
 	private String employeeHiredate;
@@ -59,6 +62,7 @@ public class RetiredEmployee {
 	@Column(name = "employee_retired_date")
 	@NotNull(message = "retired_date must not be null")
 	private String employeeRetiredDate;
+
 	
 	@Column(name = "employee_role")
 	@Enumerated(value = EnumType.STRING)
@@ -69,6 +73,4 @@ public class RetiredEmployee {
 	@Column(name = "employee_image", columnDefinition = "TEXT")
 	@ColumnDefault("NULL")
 	private String employeeImage;
-	
-	
 }
