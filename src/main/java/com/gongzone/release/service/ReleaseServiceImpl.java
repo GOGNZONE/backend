@@ -14,14 +14,14 @@ import com.gongzone.release.mapper.ReleaseDetailsMapper;
 import com.gongzone.release.repository.ReleaseRepository;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.slf4j.Slf4j;
 
 /**
  * 출고 서비스 인터페이스 구현체
  * @author Hanju Park
  * @version 1.0
  * */
-@Slf4j
+//@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ReleaseServiceImpl implements ReleaseService {
@@ -32,7 +32,7 @@ public class ReleaseServiceImpl implements ReleaseService {
 	
 	/**
 	 * 전체 출고 목록 조회
-	 * @return List<ReleaseListDto>
+	 * @return List<ReleaseDto>
 	 * */
 	@Override
 	@Transactional(readOnly = true)
@@ -73,7 +73,7 @@ public class ReleaseServiceImpl implements ReleaseService {
 	@Transactional
 	public void updateRelease(Long releaseId, ReleaseDto releaseDto) {
 		Release release = releaseRepository.findById(releaseId).orElse(null);
-		log.info("release = {}", release);
+//		log.info("release = {}", release);
 		release.updateRelease(releaseDto);
 	}
 
@@ -86,7 +86,7 @@ public class ReleaseServiceImpl implements ReleaseService {
 	@Transactional
 	public void deleteRelease(Long releaseId) {
 		Release release = releaseRepository.findById(releaseId).orElse(null);
-		log.info("release = {}", release);
+//		log.info("release = {}", release);
 		releaseRepository.delete(release);
 	}
 
