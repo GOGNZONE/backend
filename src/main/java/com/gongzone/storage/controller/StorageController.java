@@ -64,7 +64,7 @@ public class StorageController {
 	}
 	
 	/**
-	 * 창고 수정(storageId)로 생산 품목 수정
+	 * 창고 수정(storageId)로 수정
 	 * @param { storageId, storageDTO }
 	 * @return void
 	 * */
@@ -75,7 +75,7 @@ public class StorageController {
 	}
 	
 	/**
-	 * 창고 코드(storageId)로 생산 품목 삭제
+	 * 창고 코드(storageId)로 삭제
 	 * @param { storageId }
 	 * @return void
 	 * */
