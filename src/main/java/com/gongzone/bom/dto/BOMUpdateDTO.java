@@ -24,5 +24,4 @@ public class BOMUpdateDTO {
 	private String bomDescription;
 	private String bomFile;
 	private int bomRequiredQuntity;
-	
 }

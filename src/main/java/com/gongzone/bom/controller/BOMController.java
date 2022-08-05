@@ -45,8 +45,8 @@ public class BOMController {
 	 * @param { bomId }
 	 * @return BOMDTO
 	 * */
-	@GetMapping("/{bomid}")
-	public BOMDTO findBOMByBomId(Long bomId) {
+	@GetMapping("/{bomId}")
+	public BOMDTO findBOMByBomId(@PathVariable Long bomId) {
 		return bomService.findBOMByBomId(bomId);
 	}
 	
@@ -56,7 +56,7 @@ public class BOMController {
 	 * @return void
 	 * */
 	@PostMapping("")
-	public void insertBOM(BOMDTO bomDTO) {
+	public void insertBOM(@RequestBody BOMDTO bomDTO) {
 		bomService.insertBOM(bomDTO);
 	}
 	
@@ -65,8 +65,9 @@ public class BOMController {
 	 * @param { bomId, BOMDTO }
 	 * @return void
 	 * */
-	@PutMapping("{bomId}")
+	@PutMapping("/{bomId}")
 	public void updateBOM(@PathVariable Long bomId,@RequestBody BOMUpdateDTO updateDTO) {
+//		System.out.println(updateDTO);
 		bomService.updateBOM(bomId, updateDTO);
 	}
 	
@@ -76,8 +77,8 @@ public class BOMController {
 	 * @param { bomId }
 	 * @return void
 	 * */
-	@DeleteMapping("/{bomid}")
-	public void deleteBOM(Long bomId) {
+	@DeleteMapping("/{bomId}")
+	public void deleteBOM(@PathVariable Long bomId) {
 		bomService.deleteBOM(bomId);
 	}
 	

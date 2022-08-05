@@ -9,7 +9,7 @@ import com.gongzone.mapper.GenericMapper;
 
 /**
  * BomListMapper 매핑 인터페이스
- * @author Hanju Park
+ * @author kangdonghyeon
  * @version 1.0
  * */
 @Mapper(componentModel = "spring")

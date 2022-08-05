@@ -18,6 +18,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gongzone.bom.dto.BOMUpdateDTO;
 import com.gongzone.production.entity.Production;
 import com.gongzone.storage.entity.Storage;
@@ -101,6 +102,7 @@ public class BOM {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bom_parent_id")
+	@JsonIgnore
 //	@Column(name="bom_parent_id")
 	private BOM bomParent;
 	
