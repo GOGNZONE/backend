@@ -10,7 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.gongzone.s3.service.FileUploadService;
 
 
-
+/**
+ * 파일업로드 Controller
+ * @author kangdonghyeon
+ * @version 1.0
+ * */
 @RequiredArgsConstructor
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")

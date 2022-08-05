@@ -33,9 +33,9 @@ public class BomMapperImpl implements BomMapper {
         bOMDTO.bomReceivedData( e.getBomReceivedData() );
         bOMDTO.bomFile( e.getBomFile() );
         bOMDTO.bomRequiredQuntity( e.getBomRequiredQuntity() );
-        bOMDTO.productionBomId( e.getProductionBomId() );
-        bOMDTO.storageId( e.getStorageId() );
-        bOMDTO.bomParentId( e.getBomParentId() );
+        bOMDTO.production( e.getProduction() );
+        bOMDTO.storage( e.getStorage() );
+        bOMDTO.bomParent( e.getBomParent() );
 
         return bOMDTO.build();
     }
@@ -58,9 +58,9 @@ public class BomMapperImpl implements BomMapper {
         bOM.bomReceivedData( d.getBomReceivedData() );
         bOM.bomFile( d.getBomFile() );
         bOM.bomRequiredQuntity( d.getBomRequiredQuntity() );
-        bOM.productionBomId( d.getProductionBomId() );
-        bOM.storageId( d.getStorageId() );
-        bOM.bomParentId( d.getBomParentId() );
+        bOM.production( d.getProduction() );
+        bOM.storage( d.getStorage() );
+        bOM.bomParent( d.getBomParent());
 
         return bOM.build();
     }

@@ -34,7 +34,7 @@ public class OrderMapperImpl implements OrderMapper {
         orderDTO.orderProductionDescription( e.getOrderProductionDescription() );
         orderDTO.orderProductionEndDate( e.getOrderProductionEndDate() );
         orderDTO.orderDate( e.getOrderDate() );
-        orderDTO.fkClientId( e.getFkClientId() );
+        orderDTO.client( e.getClient() );
 
         return orderDTO.build();
     }
@@ -58,7 +58,7 @@ public class OrderMapperImpl implements OrderMapper {
         order.orderProductionDescription( d.getOrderProductionDescription() );
         order.orderProductionEndDate( d.getOrderProductionEndDate() );
         order.orderDate( d.getOrderDate() );
-        order.fkClientId( d.getFkClientId() );
+        order.client( d.getClient() );
 
         return order.build();
     }

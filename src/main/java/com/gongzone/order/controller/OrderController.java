@@ -2,6 +2,7 @@ package com.gongzone.order.controller;
 
 import java.util.List;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,10 +34,11 @@ public class OrderController {
 	private final OrderServiceImpl orderService;
 	/**
 	 *  전체 발주 조회
-	 *  @return  List<Order>
+	 *  @return  List<OrderDTO>
 	 */
 	@GetMapping("/list")
 	public List<OrderDTO> findOrder(){
+		System.out.println(orderService.findOrder());
 		return orderService.findOrder();
 	}
 	
@@ -58,9 +60,9 @@ public class OrderController {
 	 * @return void
 	 * */
 	@PostMapping("")
-	public void insertOrder(@RequestBody OrderDTO orderDTO) {
-		System.out.println(orderDTO);
-//		orderService.insertOrder(orderDTO);
+	public void insertOrder(@Validated @RequestBody final OrderDTO orderDTO) {
+//		System.out.println(orderDTO);
+		orderService.insertOrder(orderDTO);
 	}
 	
 	

@@ -7,7 +7,7 @@ import com.gongzone.stock.dto.StockUpdateDTO;
 import com.gongzone.stock.entity.Stock;
 
 /**
- * StockUpdateDto 매핑 인터페이스
+ * 재고업데이트 DTO 매핑 인터페이스
  * @author kangdonghyeon
  * @version 1.0
  * */

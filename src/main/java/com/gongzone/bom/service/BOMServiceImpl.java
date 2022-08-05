@@ -29,7 +29,7 @@ public class BOMServiceImpl implements BOMService{
 	
 	/**
 	 *  전체 BOM 조회
-	 *  @return List<BOM>
+	 *  @return List<BOMDTO>
 	 */
 	@Override
 	public List<BOMDTO> findBOM() {

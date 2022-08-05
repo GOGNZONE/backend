@@ -2,6 +2,8 @@ package com.gongzone.order.dto;
 
 import java.time.LocalDateTime;
 
+import com.gongzone.client.entity.Client;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,12 +32,5 @@ public class OrderDTO {
 	private String orderProductionDescription;
 	private String orderProductionEndDate;
 	private LocalDateTime orderDate;
-	private Long fkClientId;
-
-	
-	/**
-	 * OrderDTO를 OrderEntity로 변환
-	 * @param {OrderDTO}
-	 * @return Order
-	 */
+	private Client client;
 }

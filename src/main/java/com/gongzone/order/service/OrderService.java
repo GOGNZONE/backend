@@ -33,7 +33,7 @@ public interface OrderService {
 	
 	/**
 	 * 발주 코드(order_id)로 수정
-	 * @param { OrderDTO }
+	 * @param { orderId, OrderDTO }
 	 * @return void
 	 * */
 	public void updateOrder(Long orderId, OrderUpdateDTO updateDTO);

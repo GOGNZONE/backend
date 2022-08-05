@@ -11,8 +11,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
-
-import com.gongzone.stock.dto.StockDTO;
 import com.gongzone.storage.entity.Storage;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +23,7 @@ import lombok.NoArgsConstructor;
  * @author kangdonghyeon
  * @version 1.0
  */
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -65,23 +64,5 @@ public class Stock {
 		this.stockQuantity = stockQuantity;
 		this.stockDescription = stockDescription;
 	}
-	
-	/**
-	 * 재고 Entity를 재고DTO로 변환
-	 * @param {Stock}
-	 * @return StockDTO
-	 */
-	public StockDTO toDTO(Stock stockEntity) {
-		StockDTO stockDTO = StockDTO.builder()
-				.stockId(stockEntity.getStockId())
-				.stockName(stockEntity.getStockName())
-				.stockQuantity(stockEntity.getStockQuantity())
-				.stockDescription(stockEntity.getStockDescription())
-				.storage(stockEntity.getStorage())
-				.build();
-		return stockDTO;
-	}
-	
-	
 	
 }

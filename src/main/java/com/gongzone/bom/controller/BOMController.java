@@ -33,7 +33,7 @@ public class BOMController {
 	
 	/**
 	 *  전체 BOM 조회
-	 *  @return List<BOM>
+	 *  @return List<BOMDTO>
 	 */
 	@GetMapping("/list")
 	public List<BOMDTO> findBOM(){

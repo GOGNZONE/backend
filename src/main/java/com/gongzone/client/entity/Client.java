@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
  * @version 1.0
  */
 @Entity
-@Table(name = "client")
+@Table(name = "t_client")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor

@@ -2,6 +2,10 @@ package com.gongzone.bom.dto;
 
 import java.time.LocalDateTime;
 
+import com.gongzone.bom.entity.BOM;
+import com.gongzone.production.entity.Production;
+import com.gongzone.storage.entity.Storage;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,8 +32,8 @@ public class BOMDTO {
 	private LocalDateTime bomReceivedData;
 	private String bomFile;
 	private int bomRequiredQuntity;
-	private Long productionBomId;
-	private Long storageId;
-	private Long bomParentId;
+	private Production production;
+	private Storage storage;
+	private BOM bomParent;
 
 }

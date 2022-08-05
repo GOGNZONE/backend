@@ -1,5 +1,7 @@
 package com.gongzone.bom.dto;
 
+import com.gongzone.storage.entity.Storage;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * BOM DTO
+ * BOM리스트 DTO
  * @author kangdonghyeon
  * @version 1.0
  */
@@ -20,6 +22,6 @@ public class BOMListDTO {
 	private String bomName;
 	private int bomQuantity;
 	private String bomDescription;
-	private Long storageId;
+	private Storage storage;
 	
 }

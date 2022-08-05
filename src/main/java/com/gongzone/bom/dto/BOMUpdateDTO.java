@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * BOM DTO
+ * BOM업데이트 DTO
  * @author kangdonghyeon
  * @version 1.0
  */

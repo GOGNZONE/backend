@@ -23,7 +23,7 @@ public class OrderListMapperImpl implements OrderListMapper {
 
         OrderListDTO.OrderListDTOBuilder orderListDTO = OrderListDTO.builder();
 
-        orderListDTO.orderId( e.getOrderId() );
+        orderListDTO.orderId(e.getOrderId());
         orderListDTO.orderProductionName( e.getOrderProductionName() );
         orderListDTO.orderProductionBrandName( e.getOrderProductionBrandName() );
         orderListDTO.orderProductionPrice( e.getOrderProductionPrice() );

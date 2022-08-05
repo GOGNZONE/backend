@@ -2,13 +2,13 @@ package com.gongzone.order.entity;
 
 
 import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -16,15 +16,16 @@ import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gongzone.client.entity.Client;
 import com.gongzone.order.dto.OrderUpdateDTO;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * Order 엔티티
+ * 발주 엔티티
  * @version 1.0
  * @author kangdonghyeon
  *
@@ -36,10 +37,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_order")
+@IdClass(OrderID.class)
 public class Order {
+	
 	@Id
 	@Column(name="order_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long orderId;
 	
 	@Column(name="order_production_name", length=30)
@@ -85,9 +88,13 @@ public class Order {
 	@NotNull(message = "orderDate must not be null")
 	private LocalDateTime orderDate;
 	
-	@Column(name="fk_client_id")
-	private Long fkClientId;
-	
+	@Id
+	@JoinColumn(name="fk_client_id",nullable = true)
+	@JsonIgnore
+//	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Client.class)
+	@ManyToOne
+	private Client client;
+
 	/**
 	 * 발주 수정
 	 * @param {orderDTO}
@@ -104,11 +111,4 @@ public class Order {
 		this.orderProductionDescription = updateDTO.getOrderProductionDescription();
 		this.orderProductionEndDate = updateDTO.getOrderProductionEndDate();
 	}
-	
-	
-	/**
-	 * OrderEntity를 OrderDTO로 변경
-	 * @param {Order}
-	 * @return OrderDTO
-	 */	
 }

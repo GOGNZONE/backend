@@ -5,9 +5,12 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -16,6 +19,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.gongzone.bom.dto.BOMUpdateDTO;
+import com.gongzone.production.entity.Production;
+import com.gongzone.storage.entity.Storage;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +30,6 @@ import lombok.NoArgsConstructor;
 
 /**
  * BOM 엔티티
- * fk 매핑전
  * @version 1.0
  * @author kangdonghyeon
  *
@@ -83,21 +87,31 @@ public class BOM {
 	@NotNull
 	private int bomRequiredQuntity;
 	
-	@Column(name="fk_production_bom_id")
 	@NotNull
-	private Long productionBomId;
+	@JoinColumn(name="fk_production_bom_id")
+	@ManyToOne(targetEntity = Production.class)
+	private Production production;
 	
-	@Column(name="fk_stroage_id")
+	@JoinColumn(name="fk_stroage_id")
+	@ManyToOne(targetEntity = Storage.class)
 	@NotNull
-	private Long storageId;
+	private Storage storage;
 	
-	@Column(name="bom_parent_id")
-	private Long bomParentId;
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bom_parent_id")
+//	@Column(name="bom_parent_id")
+	private BOM bomParent;
+	
+//	@OneToMany(mappedBy = "bomParent")
+//    private List<BOM> child = new ArrayList<>();
+	
 	
 	/**
 	 * BOM 수정
 	 * @param {bomDTO}
-	 * @return 값을 업데이트만 하기때문에 void
+	 * @return void
 	 */
 	
 	public void updateBOM(BOMUpdateDTO updateDto) {

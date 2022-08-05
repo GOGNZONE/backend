@@ -24,7 +24,7 @@ public class FileUploadService {
 		try (InputStream inputStream = file.getInputStream()) {
 			s3Service.uploadFile(inputStream, objectMetadata, fileName);
 		} catch (IOException e) {
-			throw new IllegalArgumentException(String.format("ÆÄÀÏ º¯È¯ Áß ¿¡·¯°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù (%s)", file.getOriginalFilename()));
+			throw new IllegalArgumentException(String.format("íŒŒì¼ ë³€í™˜ ì¤‘ ì—ëŸ¬ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤ (%s)", file.getOriginalFilename()));
 		}
 		return s3Service.getFileUrl(fileName);
 	}
@@ -37,7 +37,7 @@ public class FileUploadService {
 		try {
 			return fileName.substring(fileName.lastIndexOf("."));
 		} catch (StringIndexOutOfBoundsException e) {
-			throw new IllegalArgumentException(String.format("Àß¸øµÈ Çü½ÄÀÇ ÆÄÀÏ (%s) ÀÔ´Ï´Ù", fileName));
+			throw new IllegalArgumentException(String.format("ì˜ëª»ëœ í˜•ì‹ì˜ íŒŒì¼ (%s) ì…ë‹ˆë‹¤", fileName));
 		}
 	}
 
