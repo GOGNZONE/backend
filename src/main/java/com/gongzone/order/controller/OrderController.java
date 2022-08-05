@@ -25,6 +25,7 @@ import lombok.RequiredArgsConstructor;
  * @author kangdonghyeon
  * @version 1.0
  * */
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/order")
@@ -32,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 public class OrderController {
 	
 	private final OrderServiceImpl orderService;
+	
 	/**
 	 *  전체 발주 조회
 	 *  @return  List<OrderDTO>
@@ -60,7 +62,7 @@ public class OrderController {
 	 * @return void
 	 * */
 	@PostMapping("")
-	public void insertOrder(@Validated @RequestBody final OrderDTO orderDTO) {
+	public void insertOrder(@RequestBody OrderDTO orderDTO) {
 //		System.out.println(orderDTO);
 		orderService.insertOrder(orderDTO);
 	}
@@ -71,7 +73,7 @@ public class OrderController {
 	 * @param { orderId, OrderDTO }
 	 * @return void
 	 * */
-	@PutMapping("{orderId}")
+	@PutMapping("/{orderId}")
 	public void updateOrder(@PathVariable Long orderId, OrderUpdateDTO updateDto) {
 		orderService.updateOrder(orderId, updateDto);
 	}
@@ -81,7 +83,7 @@ public class OrderController {
 	 * @param { orderId }
 	 * @return void
 	 * */
-	@DeleteMapping("{orderId}")
+	@DeleteMapping("/{orderId}")
 	public void deleteOrder(@PathVariable Long orderId) {
 		orderService.deleteOrder(orderId);
 	}

@@ -6,7 +6,7 @@ import com.gongzone.client.entity.Client;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
  * @version 1.0
  */
 
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

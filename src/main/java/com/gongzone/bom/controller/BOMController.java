@@ -57,7 +57,8 @@ public class BOMController {
 	 * */
 	@PostMapping("")
 	public void insertBOM(@RequestBody BOMDTO bomDTO) {
-		bomService.insertBOM(bomDTO);
+		System.out.println(bomDTO);
+//		bomService.insertBOM(bomDTO);
 	}
 	
 	/**
