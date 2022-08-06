@@ -9,29 +9,11 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-04T10:53:12+0900",
+    date = "2022-08-04T17:48:34+0900",
     comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
 public class ReleaseClientMapperImpl implements ReleaseClientMapper {
-
-    @Override
-    public ReleaseClientDto toDto(Client e) {
-        if ( e == null ) {
-            return null;
-        }
-
-        ReleaseClientDto.ReleaseClientDtoBuilder releaseClientDto = ReleaseClientDto.builder();
-
-        releaseClientDto.clientId( e.getClientId() );
-        releaseClientDto.clientName( e.getClientName() );
-        releaseClientDto.clientManager( e.getClientManager() );
-        releaseClientDto.clientTel( e.getClientTel() );
-        releaseClientDto.clientAddress( e.getClientAddress() );
-        releaseClientDto.employee( e.getEmployee() );
-
-        return releaseClientDto.build();
-    }
 
     @Override
     public Client toEntity(ReleaseClientDto d) {
@@ -46,7 +28,6 @@ public class ReleaseClientMapperImpl implements ReleaseClientMapper {
         client.clientManager( d.getClientManager() );
         client.clientTel( d.getClientTel() );
         client.clientAddress( d.getClientAddress() );
-        client.employee( d.getEmployee() );
 
         return client.build();
     }
