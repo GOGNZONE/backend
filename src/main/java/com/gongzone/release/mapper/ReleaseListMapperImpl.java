@@ -1,6 +1,6 @@
 package com.gongzone.release.mapper;
 
-import com.gongzone.release.dto.ReleaseDto;
+import com.gongzone.release.dto.ReleaseListDto;
 import com.gongzone.release.entity.Release;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +13,10 @@ import org.springframework.stereotype.Component;
     comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
-public class ReleaseMapperImpl implements ReleaseMapper {
+public class ReleaseListMapperImpl implements ReleaseListMapper {
 
     @Override
-    public Release toEntity(ReleaseDto d) {
+    public Release toEntity(ReleaseListDto d) {
         if ( d == null ) {
             return null;
         }
@@ -25,21 +25,19 @@ public class ReleaseMapperImpl implements ReleaseMapper {
 
         release.releaseId( d.getReleaseId() );
         release.releaseDate( d.getReleaseDate() );
-        release.releaseDescription( d.getReleaseDescription() );
         release.releaseQuantity( d.getReleaseQuantity() );
-        release.releaseTotalPrice( d.getReleaseTotalPrice() );
         release.releaseType( d.getReleaseType() );
 
         return release.build();
     }
 
     @Override
-    public List<ReleaseDto> toDtoList(List<Release> entityList) {
+    public List<ReleaseListDto> toDtoList(List<Release> entityList) {
         if ( entityList == null ) {
             return null;
         }
 
-        List<ReleaseDto> list = new ArrayList<ReleaseDto>( entityList.size() );
+        List<ReleaseListDto> list = new ArrayList<ReleaseListDto>( entityList.size() );
         for ( Release release : entityList ) {
             list.add( toDto( release ) );
         }
@@ -48,14 +46,14 @@ public class ReleaseMapperImpl implements ReleaseMapper {
     }
 
     @Override
-    public List<Release> toEntityList(List<ReleaseDto> dtoList) {
+    public List<Release> toEntityList(List<ReleaseListDto> dtoList) {
         if ( dtoList == null ) {
             return null;
         }
 
         List<Release> list = new ArrayList<Release>( dtoList.size() );
-        for ( ReleaseDto releaseDto : dtoList ) {
-            list.add( toEntity( releaseDto ) );
+        for ( ReleaseListDto releaseListDto : dtoList ) {
+            list.add( toEntity( releaseListDto ) );
         }
 
         return list;
