@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gongzone.release.dto.ReleaseDetailsDto;
 import com.gongzone.release.dto.ReleaseDto;
+import com.gongzone.release.dto.ReleaseInsertUpdateDto;
+import com.gongzone.release.dto.ReleaseListDto;
 import com.gongzone.release.service.ReleaseServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -34,44 +35,41 @@ public class ReleaseRestController {
 	
 	/**
 	 * 전체 출고 목록 조회
-	 * @return List<ReleaseDto>
+	 * @return List<ReleaseListDto>
 	 * */
 	@GetMapping("/list")
-	public List<ReleaseDto> findAllReleases() {
+	public List<ReleaseListDto> findAllReleases() {
 		return releaseServiceImpl.findAllReleases();
 	}
 	
 	/**
 	 * 출고 코드(release_id)로 출고 상세 조회
 	 * @param { releaseId }
-	 * @return ReleaseDetailsDto
+	 * @return ReleaseDto
 	 * */
 	@GetMapping("/{releaseId}")
-	public ReleaseDetailsDto findByReleaseId(@PathVariable Long releaseId) {
+	public ReleaseDto findByReleaseId(@PathVariable Long releaseId) {
 		return releaseServiceImpl.findByReleaseId(releaseId);
 	}
 	
 	/**
 	 * 출고 등록
-	 * @param { releaseDto }
+	 * @param { productionId, releaseInsertUpdateDto }
 	 * @return void
 	 * */
-	@PostMapping("")
-	public void insertRelease(@Validated @RequestBody final ReleaseDto releaseDto) {
-//		log.info("@param releaseDto : {}", releaseDto);
-		releaseServiceImpl.insertRelease(releaseDto);
+	@PostMapping("/{productionId}")
+	public void insertRelease(@PathVariable Long productionId, @Validated @RequestBody final ReleaseInsertUpdateDto releaseInsertUpdateDto) {
+		releaseServiceImpl.insertRelease(productionId, releaseInsertUpdateDto);
 	}
 	
 	/**
 	 * 출고 코드(release_id)로 출고 수정
-	 * @param { releaseId, releaseDto }
+	 * @param { releaseId, releaseInsertUpdateDto }
 	 * @return void
 	 * */
 	@PutMapping("/{releaseId}")
-	public void updateRelease(@PathVariable Long releaseId, @Validated @RequestBody final ReleaseDto releaseDto) {
-//		log.info("@param releaseId : {}", releaseId);
-//		log.info("@param releaseDto : {}", releaseDto);
-		releaseServiceImpl.updateRelease(releaseId, releaseDto);
+	public void updateRelease(@PathVariable Long releaseId, @Validated @RequestBody final ReleaseInsertUpdateDto releaseInsertUpdateDto) {
+		releaseServiceImpl.updateRelease(releaseId, releaseInsertUpdateDto);
 	}
 	
 	/**
