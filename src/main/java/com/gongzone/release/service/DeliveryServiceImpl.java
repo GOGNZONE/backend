@@ -13,7 +13,7 @@ import com.gongzone.release.repository.DeliveryRepository;
 import lombok.RequiredArgsConstructor;
 
 /**
- * 배송 서비스 인터페이스 구현체
+ * 택배 서비스 인터페이스 구현체
  * @author Hanju Park
  * @version 1.0
  * */
