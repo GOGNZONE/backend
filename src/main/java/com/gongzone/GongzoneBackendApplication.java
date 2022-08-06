@@ -23,14 +23,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableJpaRepositories(basePackages = { 
 		"com.gongzone.production.repository", 
 		"com.gongzone.employee.repository",
-		"com.gongzone.release.repository",
-		"com.gongzone.delivery.repository"})
+		"com.gongzone.release.repository"})
 
 @ComponentScan(basePackages = { 
 		"com.gongzone.employee.apiController", 
 		"com.gongzone.employee.dto", 
 		"com.gongzone.employee.service",
-		"com.gongzone.employee.mapper",
 		
 		"com.gongzone.client.dto",
 		
@@ -40,9 +38,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 		
 		"com.gongzone.release.apiController",
 		"com.gongzone.release.dto",
-		"com.gongzone.release.service",
-		
-		"com.gongzone.delivery.dto"})
+		"com.gongzone.release.service"})
 public class GongzoneBackendApplication {
 
 //    @Bean
