@@ -1,21 +1,22 @@
 package com.gongzone.release.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gongzone.client.entity.Client;
 import com.gongzone.delivery.entity.Delivery;
 import com.gongzone.production.entity.Production;
-import com.gongzone.release.dto.ReleaseDto;
+import com.gongzone.release.dto.ReleaseInsertUpdateDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,7 +29,7 @@ import lombok.NoArgsConstructor;
  * @version 1.0
  * */
 @Entity
-@Table(name = "`release`")
+@Table(name = "t_release")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -59,13 +60,8 @@ public class Release {
 	
 	@Column(name = "release_type", length = 10)
 	@NotNull(message = "release type cannot be null")
-	@ColumnDefault("배송")
+	@ColumnDefault("'배송'")
 	private String releaseType;
-	
-	@ManyToOne
-	@JoinColumn(name="fk_client_id", nullable = true)
-	@JsonIgnore
-	private Client client;
 	
 	@Id
 	@ManyToOne
@@ -73,9 +69,8 @@ public class Release {
 	@JsonIgnore
 	private Production production;
 	
-	@ManyToOne
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "fk_delivery_id", nullable = true)
-	@JsonIgnore
 	private Delivery delivery;
 	
 
@@ -84,11 +79,11 @@ public class Release {
 	 * @param { releaseDto }
 	 * @return void
 	 * */
-	public void updateRelease(ReleaseDto releaseDto) {
-		this.releaseDate = releaseDto.getReleaseDate();
-		this.releaseDescription = releaseDto.getReleaseDescription();
-		this.releaseQuantity = releaseDto.getReleaseQuantity();
-		this.releaseTotalPrice = releaseDto.getReleaseTotalPrice();
+	public void updateRelease(ReleaseInsertUpdateDto releaseInsertUpdateDto) {
+		this.releaseDate = releaseInsertUpdateDto.getReleaseDate();
+		this.releaseQuantity = releaseInsertUpdateDto.getReleaseQuantity();
+		this.releaseTotalPrice = releaseInsertUpdateDto.getReleaseTotalPrice();
+		this.releaseDescription = releaseInsertUpdateDto.getReleaseDescription();
 	}
 	
 }
