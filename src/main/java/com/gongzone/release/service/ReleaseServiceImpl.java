@@ -6,11 +6,17 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gongzone.release.dto.ReleaseDetailsDto;
+//import com.gongzone.delivery.entity.Delivery;
+//import com.gongzone.delivery.repository.DeliveryRepository;
+import com.gongzone.production.entity.Production;
+import com.gongzone.production.repository.ProductionRepository;
 import com.gongzone.release.dto.ReleaseDto;
+import com.gongzone.release.dto.ReleaseInsertUpdateDto;
+import com.gongzone.release.dto.ReleaseListDto;
 import com.gongzone.release.entity.Release;
 import com.gongzone.release.mapper.ReleaseMapper;
-import com.gongzone.release.mapper.ReleaseDetailsMapper;
+import com.gongzone.release.mapper.ReleaseInsertUpdateMapper;
+import com.gongzone.release.mapper.ReleaseListMapper;
 import com.gongzone.release.repository.ReleaseRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -27,18 +33,22 @@ import lombok.RequiredArgsConstructor;
 public class ReleaseServiceImpl implements ReleaseService {
 	
 	private final ReleaseRepository releaseRepository;
+	private final ProductionRepository productionRepository;
+//	private final DeliveryRepository deliveryRepository;
+	
+	private final ReleaseListMapper releaseListMapper = Mappers.getMapper(ReleaseListMapper.class);
 	private final ReleaseMapper releaseMapper = Mappers.getMapper(ReleaseMapper.class);
-	private final ReleaseDetailsMapper releaseDetailsMapper = Mappers.getMapper(ReleaseDetailsMapper.class);
+	private final ReleaseInsertUpdateMapper releaseInsertUpdateMapper = Mappers.getMapper(ReleaseInsertUpdateMapper.class);
 	
 	/**
 	 * 전체 출고 목록 조회
-	 * @return List<ReleaseDto>
+	 * @return List<ReleaseListDto>
 	 * */
 	@Override
 	@Transactional(readOnly = true)
-	public List<ReleaseDto> findAllReleases() {
+	public List<ReleaseListDto> findAllReleases() {
 		List<Release> releases = releaseRepository.findAll();
-		return releaseMapper.toDtoList(releases);
+		return releaseListMapper.toDtoList(releases);
 	}
 
 	/**
@@ -48,33 +58,38 @@ public class ReleaseServiceImpl implements ReleaseService {
 	 * */
 	@Override
 	@Transactional(readOnly = true)
-	public ReleaseDetailsDto findByReleaseId(Long releaseId) {
-		Release release = releaseRepository.findById(releaseId).orElse(null);
+	public ReleaseDto findByReleaseId(Long releaseId) {
+		Release release = releaseRepository.findByReleaseId(releaseId);
 		return toDto(release); 
 	}
 
 	/**
 	 * 출고 등록
-	 * @param { releaseDto }
+	 * @param { productionId, releaseDto }
 	 * @return void
 	 * */
 	@Override
 	@Transactional
-	public void insertRelease(ReleaseDto releaseDto) {
-		releaseRepository.save(toEntity(releaseDto));
+	public void insertRelease(Long productionId, ReleaseInsertUpdateDto releaseInsertUpdateDto) {
+		Production production = productionRepository.findById(productionId).orElse(null);
+//		Delivery delivery = deliveryRepository.findById().orElse(null);
+
+		releaseInsertUpdateDto.setProduction(production);
+		releaseInsertUpdateDto.setDelivery(null);
+		
+		releaseRepository.saveRelease(toEntity(releaseInsertUpdateDto));
 	}
 	
 	/**
 	 * 출고 코드(release_id)로 출고 수정
-	 * @param { releaseId, releaseDto }
+	 * @param { releaseId, releaseInsertUpdateDto }
 	 * @return void
 	 * */
 	@Override
 	@Transactional
-	public void updateRelease(Long releaseId, ReleaseDto releaseDto) {
-		Release release = releaseRepository.findById(releaseId).orElse(null);
-//		log.info("release = {}", release);
-		release.updateRelease(releaseDto);
+	public void updateRelease(Long releaseId, ReleaseInsertUpdateDto releaseInsertUpdateDto) {
+		Release release = releaseRepository.findByReleaseId(releaseId);
+		release.updateRelease(releaseInsertUpdateDto);
 	}
 
 	/**
@@ -85,20 +100,20 @@ public class ReleaseServiceImpl implements ReleaseService {
 	@Override
 	@Transactional
 	public void deleteRelease(Long releaseId) {
-		Release release = releaseRepository.findById(releaseId).orElse(null);
-//		log.info("release = {}", release);
-		releaseRepository.delete(release);
+		Release release = releaseRepository.findByReleaseId(releaseId);
+		releaseRepository.deleteRelease(releaseId);
+//		releaseRepository.delete(release);
 	}
 
 	
-	/* MapStruct Mapper Release ↔ ReleaseDto */
-	protected ReleaseDetailsDto toDto(Release release) {
-		return releaseDetailsMapper.toDto(release);
+	/* MapStruct Mapper Release → ReleaseDto */
+	protected ReleaseDto toDto(Release release) {
+		return releaseMapper.toDto(release);
 	}
 	
-	/* MapStruct Mapper ReleaseDto ↔ Release */
-	protected Release toEntity(ReleaseDto releaseDto) {
-		return releaseMapper.toEntity(releaseDto);
+	/* MapStruct Mapper ReleaseInsertDto → Release */
+	protected Release toEntity(ReleaseInsertUpdateDto releaseInsertUpdateDto) {
+		return releaseInsertUpdateMapper.toEntity(releaseInsertUpdateDto);
 	}
 	
 }
