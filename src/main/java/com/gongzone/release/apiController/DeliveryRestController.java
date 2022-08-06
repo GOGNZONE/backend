@@ -12,7 +12,7 @@ import com.gongzone.release.service.DeliveryServiceImpl;
 import lombok.RequiredArgsConstructor;
 
 /**
- * 배송 컨트롤러
+ * 택배 컨트롤러
  * @author Hanju Park
  * @version 1.0
  * */
