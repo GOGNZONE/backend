@@ -92,12 +92,12 @@ public class ProductionServiceImpl implements ProductionService {
 	}
 	
 	
-	/* MapStruct Mapper Production ↔ ProductionDTO */
+	/* MapStruct Mapper Production → ProductionDTO */
 	protected ProductionDto toDTO(Production production) {
 		return productionMapper.toDto(production);
 	}
 	
-	/* MapStruct Mapper ProductionDTO ↔ Production */
+	/* MapStruct Mapper ProductionDTO → Production */
 	protected Production toEntity(ProductionDto productionDto) {
 		return productionMapper.toEntity(productionDto);
 	}
