@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 
 import com.gongzone.client.dto.ReleaseClientDto;
 import com.gongzone.client.entity.Client;
-import com.gongzone.mapper.GenericMapper;
+import com.gongzone.common.mapper.GenericMapper;
 
 /**
  * ReleaseClientDto ↔ Client

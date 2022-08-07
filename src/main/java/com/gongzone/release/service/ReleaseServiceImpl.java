@@ -6,6 +6,8 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gongzone.common.errors.errorcode.CommonErrorCode;
+import com.gongzone.common.errors.exception.RestApiException;
 //import com.gongzone.delivery.entity.Delivery;
 //import com.gongzone.delivery.repository.DeliveryRepository;
 import com.gongzone.production.entity.Production;
@@ -27,14 +29,12 @@ import lombok.RequiredArgsConstructor;
  * @author Hanju Park
  * @version 1.0
  * */
-//@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ReleaseServiceImpl implements ReleaseService {
 	
 	private final ReleaseRepository releaseRepository;
 	private final ProductionRepository productionRepository;
-//	private final DeliveryRepository deliveryRepository;
 	
 	private final ReleaseListMapper releaseListMapper = Mappers.getMapper(ReleaseListMapper.class);
 	private final ReleaseMapper releaseMapper = Mappers.getMapper(ReleaseMapper.class);
@@ -54,25 +54,25 @@ public class ReleaseServiceImpl implements ReleaseService {
 	/**
 	 * 출고 코드(release_id)로 출고 조회
 	 * @param { releaseId }
-	 * @return ReleaseDetailsDto
+	 * @return ReleaseDto
 	 * */
 	@Override
 	@Transactional(readOnly = true)
-	public ReleaseDto findByReleaseId(Long releaseId) {
-		Release release = releaseRepository.findByReleaseId(releaseId);
+	public ReleaseDto findByReleaseId(final Long releaseId) throws RestApiException {
+		Release release = releaseRepository.findByReleaseId(releaseId)
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		return toDto(release); 
 	}
 
 	/**
 	 * 출고 등록
-	 * @param { productionId, releaseDto }
+	 * @param { productionId, releaseInsertUpdateDto }
 	 * @return void
 	 * */
 	@Override
 	@Transactional
-	public void insertRelease(Long productionId, ReleaseInsertUpdateDto releaseInsertUpdateDto) {
+	public void insertRelease(final Long productionId, final ReleaseInsertUpdateDto releaseInsertUpdateDto) {
 		Production production = productionRepository.findById(productionId).orElse(null);
-//		Delivery delivery = deliveryRepository.findById().orElse(null);
 
 		releaseInsertUpdateDto.setProduction(production);
 		releaseInsertUpdateDto.setDelivery(null);
@@ -87,8 +87,9 @@ public class ReleaseServiceImpl implements ReleaseService {
 	 * */
 	@Override
 	@Transactional
-	public void updateRelease(Long releaseId, ReleaseInsertUpdateDto releaseInsertUpdateDto) {
-		Release release = releaseRepository.findByReleaseId(releaseId);
+	public void updateRelease(final Long releaseId, final ReleaseInsertUpdateDto releaseInsertUpdateDto) throws RestApiException {
+		Release release = releaseRepository.findByReleaseId(releaseId)
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		release.updateRelease(releaseInsertUpdateDto);
 	}
 
@@ -99,10 +100,10 @@ public class ReleaseServiceImpl implements ReleaseService {
 	 * */
 	@Override
 	@Transactional
-	public void deleteRelease(Long releaseId) {
-		Release release = releaseRepository.findByReleaseId(releaseId);
+	public void deleteRelease(final Long releaseId) throws RestApiException {
+		Release release = releaseRepository.findByReleaseId(releaseId)
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		releaseRepository.deleteRelease(releaseId);
-//		releaseRepository.delete(release);
 	}
 
 	

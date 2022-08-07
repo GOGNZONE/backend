@@ -1,5 +1,7 @@
 package com.gongzone.release.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,7 +19,7 @@ import com.gongzone.release.entity.ReleaseId;
 public interface ReleaseRepository extends JpaRepository<Release, ReleaseId> {
 
 	@Query(value = "SELECT r FROM Release r WHERE r.releaseId = :releaseId")
-	Release findByReleaseId(@Param("releaseId") Long releaseId);
+	Optional<Release> findByReleaseId(@Param("releaseId") Long releaseId);
 
 	@Modifying
 	@Query(value = "INSERT INTO t_release VALUES (:#{#release.releaseId}, :#{#release.releaseDate}, :#{#release.releaseDescription}, :#{#release.releaseQuantity}, :#{#release.releaseTotalPrice}, :#{#release.releaseType}, :#{#release.production}, :#{#release.delivery}) ", nativeQuery = true)
