@@ -16,6 +16,8 @@ import com.gongzone.client.mapper.ClientListMapper;
 import com.gongzone.client.mapper.ClientMapper;
 import com.gongzone.client.mapper.UpdateClientMapper;
 import com.gongzone.client.repository.ClientRepository;
+import com.gongzone.employee.entity.Employee;
+import com.gongzone.employee.repository.EmployeeRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class ClientServiceImple implements ClientService {
 	
 	private final ClientRepository clientRepository;
+	private final EmployeeRepository employeeRepository;
 	private final ClientInfoMapper clientInfoMapper = Mappers.getMapper(ClientInfoMapper.class);
 	private final ClientListMapper clientListMapper = Mappers.getMapper(ClientListMapper.class);
 	private final ClientMapper clientMapper = Mappers.getMapper(ClientMapper.class);
@@ -64,6 +67,9 @@ public class ClientServiceImple implements ClientService {
 	@Override
 	@Transactional
 	public void saveClient(ClientDto clientDto) {
+		Employee employee = employeeRepository.findById(clientDto.getEmployee().getEmployeeId()).orElseThrow(
+				() -> new IllegalArgumentException("존재하지 않는 사원입니다."));
+		clientDto.setEmployee(employee);
 		clientRepository.save(clientMapper.toEntity(clientDto));
 	}
 

@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AccountDto {
 
+	private Long accountId;
 	private String accountBank;
 	private String accountNumber;
 	private String accountDepositor;

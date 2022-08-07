@@ -1,5 +1,7 @@
 package com.gongzone.client.dto;
 
+import com.gongzone.employee.entity.Employee;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,4 +23,5 @@ public class ClientDto {
 	private String clientTel;
 	private String clientAddress;
 	private String clientFile;
+	private Employee employee;
 }

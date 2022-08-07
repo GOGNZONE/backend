@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -75,7 +76,8 @@ public class Client {
 	@JsonIgnore
 	private Employee employee;
 	
-	@OneToOne
+	@OneToOne(mappedBy = "client", fetch = FetchType.EAGER)
+	@JsonIgnore
 	private ClientAccount clientAccount;
 	
 	/**

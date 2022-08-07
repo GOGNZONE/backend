@@ -1,5 +1,7 @@
 package com.gongzone.client.dto;
 
+import com.gongzone.client.entity.ClientAccount;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,8 +25,6 @@ public class ClientInfoDto {
 	private String clientAddress;
 	private String clientRegisteredDate;
 	private String clientFile;
-	private String accountAccountBank;
-	private String accountNumber;
-	private String accountDepositor;
+	private ClientAccount account;
 	private String employeeName;
 }
