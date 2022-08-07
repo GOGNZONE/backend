@@ -6,6 +6,8 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gongzone.common.errors.errorcode.CommonErrorCode;
+import com.gongzone.common.errors.exception.RestApiException;
 import com.gongzone.production.dto.ProductionDto;
 import com.gongzone.production.dto.ProductionListDto;
 import com.gongzone.production.dto.ProductionUpdateDto;
@@ -15,14 +17,12 @@ import com.gongzone.production.mapper.ProductionMapper;
 import com.gongzone.production.repository.ProductionRepository;
 
 import lombok.RequiredArgsConstructor;
-//import lombok.extern.slf4j.Slf4j;
 
 /**
  * 생산 서비스 인터페이스 구현체
  * @author Hanju Park
  * @version 1.0
  * */
-//@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ProductionServiceImpl implements ProductionService {
@@ -32,7 +32,7 @@ public class ProductionServiceImpl implements ProductionService {
 	private final ProductionMapper productionMapper = Mappers.getMapper(ProductionMapper.class);
 	
 	/**
-	 *  전체 생산 목록 조회 (ProductionListMapper)
+	 *  전체 생산 목록 조회
 	 *  @return List<ProductionListDto>
 	 */
 	@Override
@@ -43,38 +43,39 @@ public class ProductionServiceImpl implements ProductionService {
 	}
 	
 	/**
-	 * 생산 품목 코드(production_id)로 생산 품목 상세 조회 (ProductionMapper)
+	 * 생산 품목 코드(production_id)로 생산 품목 상세 조회
 	 * @param { productionId }
 	 * @return ProductionDto
 	 * */
 	@Override
 	@Transactional(readOnly = true)
-	public ProductionDto findByProductionId(Long productionId) {
-		Production production = productionRepository.findById(productionId).orElse(null);
+	public ProductionDto findByProductionId(final Long productionId) throws RestApiException {
+		Production production = productionRepository.findById(productionId)
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		return toDTO(production);
 	}
 	
 	/**
-	 * 생산 품목 등록 (ProductionMapper)
+	 * 생산 품목 등록
 	 * @param { productionDto }
 	 * @return void
 	 * */
 	@Override
 	@Transactional
-	public void insertProduction(ProductionDto productionDto) {
+	public void insertProduction(final ProductionDto productionDto) {
 		productionRepository.save(toEntity(productionDto));
 	}
 	
 	/**
-	 * 생산 품목 코드(production_id)로 생산 품목 수정 (ProductionUpdateMapper)
+	 * 생산 품목 코드(production_id)로 생산 품목 수정
 	 * @param { productionId, productionUpdateDto }
 	 * @return void
 	 * */
 	@Override
 	@Transactional
-	public void updateProduction(Long productionId, ProductionUpdateDto productionUpdateDto) {
-		Production production = productionRepository.findById(productionId).orElse(null);
-//		log.info("production = {}", production);
+	public void updateProduction(final Long productionId, final ProductionUpdateDto productionUpdateDto) throws RestApiException {
+		Production production = productionRepository.findById(productionId)
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		production.updateProduction(productionUpdateDto);
 	}
 
@@ -85,9 +86,9 @@ public class ProductionServiceImpl implements ProductionService {
 	 * */
 	@Override
 	@Transactional
-	public void deleteProduction(Long productionId) {
-		Production production = productionRepository.findById(productionId).orElse(null);
-//		log.info("production = {}", production);
+	public void deleteProduction(final Long productionId) throws RestApiException {
+		Production production = productionRepository.findById(productionId)
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		productionRepository.delete(production);
 	}
 	
