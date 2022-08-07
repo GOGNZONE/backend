@@ -28,6 +28,7 @@ public class ClientMapperImpl implements ClientMapper {
         clientDto.clientTel( e.getClientTel() );
         clientDto.clientAddress( e.getClientAddress() );
         clientDto.clientFile( e.getClientFile() );
+        clientDto.employee( e.getEmployee() );
 
         return clientDto.build();
     }
@@ -45,6 +46,7 @@ public class ClientMapperImpl implements ClientMapper {
         client.clientTel( d.getClientTel() );
         client.clientAddress( d.getClientAddress() );
         client.clientFile( d.getClientFile() );
+        client.employee( d.getEmployee() );
 
         return client.build();
     }

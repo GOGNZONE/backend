@@ -30,9 +30,8 @@ public interface ClientInfoMapper extends GenericMapper<ClientInfoDto, Client> {
 	        clientInfoDto.clientAddress( e.getClientAddress() );
 	        clientInfoDto.clientRegisteredDate( e.getClientRegisteredDate() );
 	        clientInfoDto.clientFile( e.getClientFile() );
-	        clientInfoDto.accountAccountBank( e.getClientAccount().getAccountBank() );
-	        clientInfoDto.accountNumber( e.getClientAccount().getAccountNumber() );
-	        clientInfoDto.accountDepositor( e.getClientAccount().getAccountDepositor() );
+	        clientInfoDto.account( e.getClientAccount() );
+	        clientInfoDto.employeeName( e.getEmployee().getEmployeeName() );
 
 	        return clientInfoDto.build();
 	}

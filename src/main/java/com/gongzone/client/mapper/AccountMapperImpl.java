@@ -23,6 +23,7 @@ public class AccountMapperImpl implements AccountMapper {
 
         AccountDto.AccountDtoBuilder accountDto = AccountDto.builder();
 
+        accountDto.accountId( e.getAccountId() );
         accountDto.accountBank( e.getAccountBank() );
         accountDto.accountNumber( e.getAccountNumber() );
         accountDto.accountDepositor( e.getAccountDepositor() );
@@ -38,6 +39,7 @@ public class AccountMapperImpl implements AccountMapper {
 
         ClientAccount.ClientAccountBuilder clientAccount = ClientAccount.builder();
 
+        clientAccount.accountId( d.getAccountId() );
         clientAccount.accountBank( d.getAccountBank() );
         clientAccount.accountNumber( d.getAccountNumber() );
         clientAccount.accountDepositor( d.getAccountDepositor() );
