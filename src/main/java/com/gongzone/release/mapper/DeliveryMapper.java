@@ -2,7 +2,7 @@ package com.gongzone.release.mapper;
 
 import org.mapstruct.Mapper;
 
-import com.gongzone.mapper.GenericMapper;
+import com.gongzone.common.mapper.GenericMapper;
 import com.gongzone.release.dto.DeliveryDto;
 import com.gongzone.release.entity.Delivery;
 

@@ -1,5 +1,7 @@
 package com.gongzone.release.apiController;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,19 +20,21 @@ import lombok.RequiredArgsConstructor;
  * */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/delivery")
+@RequestMapping("/api/delivery")
 public class DeliveryRestController {
 	
 	private final DeliveryServiceImpl deliveryServiceImpl;
 	
 	/**
 	 * 배송 등록
-	 * @param { deliveryId, deliveryDto }
-	 * @return void
+	 * @param { deliveryDto }
+	 * @return ResponseEntity<Void>
 	 * */
 	@PostMapping("")
-	public void insertDelivery(@Validated @RequestBody DeliveryDto deliveryDto) {
+	public ResponseEntity<Void> insertDelivery(@RequestBody @Validated final DeliveryDto deliveryDto) {
 		deliveryServiceImpl.insertDelivery(deliveryDto);
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.build();
 	}
 	
 }

@@ -32,7 +32,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 	 * */
 	@Override
 	@Transactional
-	public void insertDelivery(DeliveryDto deliveryDto) {
+	public void insertDelivery(final DeliveryDto deliveryDto) {
 		deliveryRepository.save(toEntity(deliveryDto));
 	}
 	
