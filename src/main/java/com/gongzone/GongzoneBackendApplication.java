@@ -25,7 +25,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 		"com.gongzone.employee.repository",
 		"com.gongzone.release.repository"})
 
-@ComponentScan(basePackages = { 
+@ComponentScan(basePackages = {
+		"com.gongzone.common.errors",
+		
 		"com.gongzone.employee.apiController", 
 		"com.gongzone.employee.dto", 
 		"com.gongzone.employee.service",
