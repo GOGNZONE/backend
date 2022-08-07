@@ -73,4 +73,40 @@ public class ApiAccountController {
 
 	}
 
+	/**
+	 * 특정 거래처 계좌 수정
+	 * 
+	 * @param clientId       Long
+	 * @param AccountDto
+	 * @return success -> 수정 성공
+	 */
+	@ApiOperation(value = "특정 계좌 수정", notes = "특정 계좌 수정")
+	@PutMapping("{accountId}")
+	public ResponseEntity<String> updateAccount(@PathVariable Long accountId, @RequestBody AccountDto accountDto) {
+		try {
+			accountService.updateAccount(accountId, accountDto);
+		} catch(Exception e) {
+			e.printStackTrace();
+			// log
+		}
+		return ResponseEntity.ok("수정 성공");
+	}
+
+	/**
+	 * 특정 거래처 계좌 삭제
+	 * 
+	 * @param clientId       Long
+	 * @return success -> 삭제 성공
+	 */
+	@ApiOperation(value = "특정 계좌 삭제", notes = "특정 계좌 삭제")
+	@PutMapping("{accountId}")
+	public ResponseEntity<String> updateAccount(@PathVariable Long accountId) {
+		try {
+			accountService.deleteAccount(accountId);
+		} catch(Exception e) {
+			e.printStackTrace();
+			// log
+		}
+		return ResponseEntity.ok("삭제 성공");
+	}
 }
