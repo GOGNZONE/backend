@@ -2,7 +2,7 @@ package com.gongzone.storage.mapper;
 
 import org.mapstruct.Mapper;
 
-import com.gongzone.mapper.GenericMapper;
+import com.gongzone.common.mapper.GenericMapper;
 import com.gongzone.storage.dto.StorageDTO;
 import com.gongzone.storage.entity.Storage;
 

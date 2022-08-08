@@ -4,9 +4,6 @@ import java.util.List;
 
 import com.gongzone.client.dto.AccountDto;
 import com.gongzone.client.dto.AccountInfoDto;
-import com.gongzone.client.dto.ClientDto;
-import com.gongzone.client.dto.ClientInfoDto;
-import com.gongzone.client.dto.UpdateClientDto;
 
 /**
  * Client account Service Interface

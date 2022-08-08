@@ -22,9 +22,6 @@ import lombok.Setter;
 @Setter
 public class ReleaseId implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private Long releaseId;

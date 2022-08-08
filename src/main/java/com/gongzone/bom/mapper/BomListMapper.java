@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 
 import com.gongzone.bom.dto.BOMListDTO;
 import com.gongzone.bom.entity.BOM;
-import com.gongzone.mapper.GenericMapper;
+import com.gongzone.common.mapper.GenericMapper;
 
 
 /**

@@ -12,7 +12,6 @@ import com.gongzone.client.entity.Client;
 import com.gongzone.client.entity.ClientAccount;
 import com.gongzone.client.mapper.AccountInfoMapper;
 import com.gongzone.client.mapper.AccountMapper;
-import com.gongzone.client.mapper.ClientMapper;
 import com.gongzone.client.repository.ClientAccountRepository;
 import com.gongzone.client.repository.ClientRepository;
 

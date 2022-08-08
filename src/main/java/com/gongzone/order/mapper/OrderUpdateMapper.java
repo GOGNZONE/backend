@@ -2,7 +2,7 @@ package com.gongzone.order.mapper;
 
 import org.mapstruct.Mapper;
 
-import com.gongzone.mapper.GenericMapper;
+import com.gongzone.common.mapper.GenericMapper;
 import com.gongzone.order.dto.OrderUpdateDTO;
 import com.gongzone.order.entity.Order;
 

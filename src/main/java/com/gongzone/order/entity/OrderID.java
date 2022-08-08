@@ -3,6 +3,12 @@ package com.gongzone.order.entity;
 import java.io.Serializable;
 import com.gongzone.client.entity.Client;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 
 /**
@@ -10,24 +16,17 @@ import com.gongzone.client.entity.Client;
  * @author kangdonghyeon
  * @version 1.0
  * */
-
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@Getter
+@Setter
 public class OrderID implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3439222336493519285L;
+	
+	private static final long serialVersionUID = 1L;
 
-	private Long orderId; 
+	private Long orderId;
 	
 	private Client client; 
 	
-	@Override
-	public int hashCode() {
-		return super.hashCode();
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		return super.equals(obj);
-	}
 }

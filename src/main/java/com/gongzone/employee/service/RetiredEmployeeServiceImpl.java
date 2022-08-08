@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gongzone.employee.dto.RetiredEmployeeDto;
 import com.gongzone.employee.entity.RetiredEmployee;
 import com.gongzone.employee.mapper.RetiredEmployeeMapper;
-import com.gongzone.employee.mapper.RetiredEmployeeMapperImpl;
 import com.gongzone.employee.repository.RetiredEmployeeRepository;
 
 import lombok.RequiredArgsConstructor;

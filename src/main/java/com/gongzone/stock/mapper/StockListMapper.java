@@ -2,7 +2,7 @@ package com.gongzone.stock.mapper;
 
 import org.mapstruct.Mapper;
 
-import com.gongzone.mapper.GenericMapper;
+import com.gongzone.common.mapper.GenericMapper;
 import com.gongzone.stock.dto.StockListDTO;
 import com.gongzone.stock.entity.Stock;
 

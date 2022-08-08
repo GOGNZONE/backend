@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 
 import com.gongzone.client.dto.UpdateClientDto;
 import com.gongzone.client.entity.Client;
-import com.gongzone.mapper.GenericMapper;
+import com.gongzone.common.mapper.GenericMapper;
 
 /**
  * Update Client Mapping Iterface
