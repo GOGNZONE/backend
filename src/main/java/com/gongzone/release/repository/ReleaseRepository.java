@@ -30,5 +30,5 @@ public interface ReleaseRepository extends JpaRepository<Release, ReleaseId> {
 	@Query(value = "DELETE FROM t_release WHERE release_id = :releaseId", nativeQuery = true)
 	@Transactional
 	void deleteRelease(@Param("releaseId") Long releaseId);
-	
+
 }
