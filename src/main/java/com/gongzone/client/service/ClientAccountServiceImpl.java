@@ -12,6 +12,7 @@ import com.gongzone.client.entity.Client;
 import com.gongzone.client.entity.ClientAccount;
 import com.gongzone.client.mapper.AccountInfoMapper;
 import com.gongzone.client.mapper.AccountMapper;
+import com.gongzone.client.mapper.ClientMapper;
 import com.gongzone.client.repository.ClientAccountRepository;
 import com.gongzone.client.repository.ClientRepository;
 
@@ -47,8 +48,7 @@ public class ClientAccountServiceImpl implements ClientAccountService {
 	@Override
 	@Transactional(readOnly = true)
 	public AccountInfoDto findByAccountId(Long accountId) throws IllegalAccessException {
-		ClientAccount account = accountRepository.findById(accountId).orElseThrow(
-				() -> new IllegalArgumentException("해당하는 계좌가 존재하지 않습니다."));
+		ClientAccount account = accountRepository.findById(accountId).orElseThrow();
 		return accountInfoMapper.toDto(account);
 	}
 	
@@ -64,10 +64,9 @@ public class ClientAccountServiceImpl implements ClientAccountService {
 	public void saveAccount(Long clientId, AccountInfoDto accountInfoDto) {
 		Client client = clientRepository.findById(clientId).orElseThrow(
 				() -> new IllegalArgumentException("해당하는 거래처가 존재하지 않습니다."));
-		System.out.println(client);
 		
 		accountInfoDto.setClient(client);
-		ClientAccount account = accountInfoMapper.toEntity(accountInfoDto);
+		ClientAccount account =  accountInfoDto.toEntity();
 		accountRepository.save(account);
 	}
 	
