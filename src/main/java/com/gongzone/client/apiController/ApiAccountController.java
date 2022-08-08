@@ -3,9 +3,11 @@ package com.gongzone.client.apiController;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +45,7 @@ public class ApiAccountController {
 	 */
 	@ApiOperation(value = "특정 계좌 조회", notes = "특정 계좌 조회")
 	@GetMapping("{accountId}")
-	public ResponseEntity<AccountInfoDto> findByAccountId(Long accountId) {
+	public ResponseEntity<AccountInfoDto> findByAccountId(@PathVariable Long accountId) {
 		try {
 			return ResponseEntity.ok(accountService.findByAccountId(accountId));
 		} catch (IllegalAccessException e) {
@@ -99,7 +101,7 @@ public class ApiAccountController {
 	 * @return success -> 삭제 성공
 	 */
 	@ApiOperation(value = "특정 계좌 삭제", notes = "특정 계좌 삭제")
-	@PutMapping("{accountId}")
+	@DeleteMapping("{accountId}")
 	public ResponseEntity<String> updateAccount(@PathVariable Long accountId) {
 		try {
 			accountService.deleteAccount(accountId);
