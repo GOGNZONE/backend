@@ -1,4 +1,4 @@
-package com.gongzone.config;
+package com.gongzone.common.config;
 
 import java.util.HashSet;
 import java.util.Set;

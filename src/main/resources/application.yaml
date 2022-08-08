@@ -7,18 +7,18 @@ spring:
   data:
     jpa:
       repositories:
-        enabled: 'true'
+        enabled: "true"
   jpa:
     open-in-view : 'false'
     database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
       hibernate:
-        format_sql: 'true'
+        format_sql: "true"
     hibernate:
       ddl-auto: none
-    show-sql: 'true'
-  
+    show-sql: "true"
+
   profiles:
-   include:
-     - aws
-     - credentials
+    include:
+      - aws
+      - credentials
