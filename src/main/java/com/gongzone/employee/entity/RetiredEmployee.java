@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
  * @version 1.0
  */
 @Entity
-@Table(name = "retired_employee")
+@Table(name = "t_retired_employee")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,7 +34,6 @@ import lombok.NoArgsConstructor;
 public class RetiredEmployee {
 	
 	@Id
-
 	@Column(name = "employee_id")
 	private Long employeeId;
 	

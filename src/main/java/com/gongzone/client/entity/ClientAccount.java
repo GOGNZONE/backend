@@ -11,6 +11,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +24,7 @@ import lombok.NoArgsConstructor;
  * @version 1.0 
  */
 @Entity
-@Table(name = "client_account")
+@Table(name = "t_client_account")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,9 +47,10 @@ public class ClientAccount {
 	@NotNull(message = "depositor must not be null")
 	private String accountDepositor;
 	
-	@OneToOne(orphanRemoval = true, fetch = FetchType.EAGER)
-	@JoinColumn(name = "clientId")
+	@OneToOne
+	@JoinColumn(name = "client_id")
 	@NotNull(message = "client must not be null")
+	@JsonIgnore
 	private Client client;
 	
 	/**

@@ -1,19 +1,25 @@
 package com.gongzone.client.entity;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,19 +29,20 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 /**
  * 거래처 정보 엔티티
  * @author kimmingyu
  * @version 1.0
  */
 @Entity
-@Table(name = "client")
+@Table(name = "t_client")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @EntityListeners(AuditingEntityListener.class)
-public class Client {
+public class Client implements Persistable<Long> {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "client_id")
@@ -61,7 +68,7 @@ public class Client {
 	@CreatedDate
 	@Column(name = "client_registered_date")
 	@NotNull(message = "client registered date must not be null")
-	private LocalDate clientRegisteredDate;
+	private String clientRegisteredDate;
 	
 	@Column(name = "client_file", columnDefinition = "TEXT")
 	private String clientFile;
@@ -71,6 +78,10 @@ public class Client {
 	@JsonIgnore
 	private Employee employee;
 	
+	@OneToOne(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@JsonIgnore
+	private ClientAccount clientAccount;
+	
 	/**
 	 * 거래처 정보 수정 메소드
 	 * @param { clientName, clientTel, clientAddress, clientFile, clientManager}
@@ -79,13 +90,28 @@ public class Client {
 	 * @version 1.0
 	 */
 	
-	public void updateClient(String clientName, String clientTel, String clientAddress,
-			String clientFile, String clientManager) {
-		this.clientName = clientName;
-		this.clientTel = clientTel;
-		this.clientAddress = clientAddress;
-		this.clientFile = clientFile;
-		this.clientManager = clientManager;
+	public void updateClient(Client client) {
+		this.clientName = client.clientName;
+		this.clientTel = client.clientTel;
+		this.clientAddress = client.clientAddress;
+		this.clientFile = client.clientFile;
+		this.clientManager = client.clientManager;
+	}
+	
+	/* 해당 엔티티를 저장하기 전에 실행 */
+	@PrePersist
+	public void onPrePersist() {
+		this.clientRegisteredDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+	}
+
+	@Override
+	public Long getId() {
+		return clientId;
+	}
+
+	@Override
+	public boolean isNew() {
+		return this.clientRegisteredDate == null;
 	}
 	
 }

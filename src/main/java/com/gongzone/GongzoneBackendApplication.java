@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAspectJAutoProxy
 @EnableScheduling
 @SpringBootApplication
+// entity
 @EntityScan(basePackages = { 
 		"com.gongzone.production.entity", 
 		"com.gongzone.client.entity",
@@ -20,27 +21,35 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 		"com.gongzone.release.entity",
 		"com.gongzone.delivery.entity"})
 
+// Repository
 @EnableJpaRepositories(basePackages = { 
-		"com.gongzone.production.repository", 
+		"com.gongzone.production.repository",
 		"com.gongzone.employee.repository",
-		"com.gongzone.release.repository"})
+		"com.gongzone.release.repository",
+		"com.gongzone.client.repository"})
 
-@ComponentScan(basePackages = {
+@ComponentScan(basePackages = { 
 		"com.gongzone.common.errors",
-		
-		"com.gongzone.employee.apiController", 
-		"com.gongzone.employee.dto", 
-		"com.gongzone.employee.service",
-		
-		"com.gongzone.client.dto",
-		
+    
+    // RestController
+		"com.gongzone.employee.apiController",
 		"com.gongzone.production.apiController",
-		"com.gongzone.production.dto",
+		"com.gongzone.client.apiController",
+    "com.gongzone.release.apiController",
+    
+    // serivce
+		"com.gongzone.employee.service",
+		"com.gongzone.production.service",
+		"com.gongzone.client.service",
+		"com.gongzone.release.service",
 		"com.gongzone.production.service", 
-		
-		"com.gongzone.release.apiController",
+    
+    // DTO
+		"com.gongzone.employee.dto",
+		"com.gongzone.production.dto" ,
+		"com.gongzone.client.dto",
 		"com.gongzone.release.dto",
-		"com.gongzone.release.service"})
+		})
 public class GongzoneBackendApplication {
 
 //    @Bean
