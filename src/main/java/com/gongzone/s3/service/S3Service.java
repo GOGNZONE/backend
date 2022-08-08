@@ -5,8 +5,9 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,13 +18,13 @@ import java.io.IOException;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class S3Service {
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucketName;
 
-    @Autowired
-    private AmazonS3 s3Client;
+    private final AmazonS3 s3Client;
 
     public String uploadFile(MultipartFile file) {
         File fileObj = convertMultiPartFileToFile(file);
