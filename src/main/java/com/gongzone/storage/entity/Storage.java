@@ -5,11 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
-
-import com.gongzone.storage.dto.StorageDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,11 +17,10 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * Ã¢°í ¿£Æ¼Æ¼
+ * ì°½ê³  ì—”í‹°í‹°
  * @author kangdonghyeon
  * @version 1.0
  */
-
 
 
 @Entity
@@ -30,6 +28,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "t_storage")
 public class Storage {
 	@Id
 	@Column(name="storage_id")
@@ -51,7 +50,7 @@ public class Storage {
 	
 	
 	/**
-	 * Storage ¼öÁ¤
+	 * Storage ìˆ˜ì •
 	 * @param {storageAddress, storageCategory, storageDescription}
 	 * @return void
 	 */
@@ -62,26 +61,5 @@ public class Storage {
 		this.storageDescription = storageDescription;
 	}
 	
-	/**
-	 * StorageEntity¸¦StorageDTO·Î º¯°æ
-	 * @param {Storage}
-	 * @return StorageDTO
-	 */
-	
-	
-	public StorageDTO toDTO(Storage storageEntity) {
-		StorageDTO storageDTO = StorageDTO.builder()
-				.storageId(storageEntity.getStorageId())
-				.storageAddress(storageEntity.getStorageAddress())
-				.storageCategory(storageEntity.getStorageCategory())
-				.storageDescription(storageEntity.getStorageDescription())
-				.build();
-		return storageDTO;
-	}
-	
-	
-	
-	
-	
-	
+
 }

@@ -2,77 +2,87 @@ package com.gongzone.storage.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.transaction.Transactional;
+
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
 import com.gongzone.storage.dto.StorageDTO;
+import com.gongzone.storage.dto.StorageUpdateDTO;
 import com.gongzone.storage.entity.Storage;
+import com.gongzone.storage.mapper.StorageMapper;
 import com.gongzone.storage.repository.StorageRepository;
+
+import lombok.RequiredArgsConstructor;
 
 
 /**
- * Ã¢°í ¼­ºñ½º ÀÎÅÍÆäÀÌ½º ±¸ÇöÃ¼
+ * ì°½ê³  ì„œë¹„ìŠ¤ ì¸í„°í˜ì´ìŠ¤ êµ¬í˜„ì²´
  * @author kangdonghyeon
  * @version 1.0
  * */
 @Service
+@RequiredArgsConstructor
 public class StorageServiceImpl implements StorageService {
 
-	@Autowired
-	public StorageRepository storageRepo;
+	
+	private final StorageRepository storageRepo;
+	private final StorageMapper storageMapper = Mappers.getMapper(StorageMapper.class);
+	
 	
 	/**
-	 *  ÀüÃ¼ Ã¢°í Á¶È¸
-	 *  @return  List<Storage>
+	 *  ì „ì²´ ì°½ê³  ì¡°íšŒ
+	 *  @return  List<StorageDTO>
 	 */
 	@Override
-	public List<Storage> findStorage() {
-		return storageRepo.findAll();
+	@Transactional
+	public List<StorageDTO> findStorage() {
+		List<Storage> storage =  storageRepo.findAll();
+		return storageMapper.toDtoList(storage);
 	}
 
+	
 	/**
-	 * Ã¢°í ÄÚµå(storageId)·Î Á¶È¸
+	 * ì°½ê³  ì½”ë“œ(storageId)ë¡œ ì¡°íšŒ
 	 * @param { storageId }
 	 * @return StorageDTO
 	 * */
 	@Override
 	public StorageDTO findStorageByStorageId(Long storageId) {
-		return storageRepo.findByStorageId(storageId).toDTO(storageRepo.findByStorageId(storageId));
+		return storageMapper.toDto(storageRepo.findByStorageId(storageId));
 	}
 
 	
 	/**
-	 * Ã¢°í µî·Ï
+	 * ì°½ê³  ë“±ë¡
 	 * @param { storageDTO }
 	 * @return void
 	 * */
 	@Override
 	public void insertStorage(StorageDTO storageDTO) {
-		Storage storageEntity = storageDTO.toEntity(storageDTO);
+		Storage storageEntity = storageMapper.toEntity(storageDTO);
 		storageRepo.save(storageEntity);
-		
 	}
 
-	
 	/**
-	 * Ã¢°í ¼öÁ¤(StorageId)·Î »ı»ê Ç°¸ñ ¼öÁ¤
-	 * @param { storageDTO }
+	 * ì°½ê³  ìˆ˜ì •(StorageId)ë¡œ ìƒì‚° í’ˆëª© ìˆ˜ì •
+	 * @param { stockId, storageDTO }
 	 * @return void
 	 * */
 	@Override
-	public void updateStorage(StorageDTO storageDTO) {
-		Storage storage = findStorageByStorageId(storageDTO.getStorageId()).toEntity(findStorageByStorageId(storageDTO.getStorageId()));
-		storage.updateStorage(storageDTO.getStorageAddress(), storageDTO.getStorageCategory(), storageDTO.getStorageDescription());
+	public void updateStorage(Long storageId, StorageUpdateDTO updateDTO) {
+		Storage storage = storageMapper.toEntity(findStorageByStorageId(storageId));
+		storage.updateStorage(updateDTO.getStorageAddress(), updateDTO.getStorageCategory(), updateDTO.getStorageDescription());
 		storageRepo.save(storage);
-		
 	}
 
 	/**
-	 * Ã¢°í ÄÚµå(storageId)·Î »ı»ê Ç°¸ñ »èÁ¦
+	 * ì°½ê³  ì½”ë“œ(storageId)ë¡œ ìƒì‚° í’ˆëª© ì‚­ì œ
 	 * @param { storageId }
 	 * @return void
 	 * */
 	@Override
+	@Transactional
 	public void deleteStorage(Long storageId) {
 		storageRepo.deleteByStorageId(storageId);
 		

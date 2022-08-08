@@ -1,6 +1,6 @@
 package com.gongzone.stock.dto;
 
-import com.gongzone.stock.entity.Stock;
+
 import com.gongzone.storage.entity.Storage;
 
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * Àç°í DTO
+ * ìž¬ê³  DTO
  * @author kangdonghyeon
  * @version 1.0
  */
@@ -26,22 +26,4 @@ public class StockDTO {
 	private Long stockQuantity;
 	private String stockDescription;
 	private Storage storage;
-	
-	/**
-	 * StockDTO¸¦ StockEntity·Î º¯°æ
-	 * @param {StockDTO}
-	 * @return Stock
-	 */
-
-	
-	public Stock toEntity(StockDTO stockDTO) {
-		Stock stockEntity = Stock.builder()
-				.stockId(stockDTO.getStockId())
-				.stockName(stockDTO.getStockName())
-				.stockQuantity(stockDTO.getStockQuantity())
-				.stockDescription(stockDTO.getStockDescription())
-				.storage(stockDTO.getStorage())
-				.build();
-		return stockEntity;
-	}
 }

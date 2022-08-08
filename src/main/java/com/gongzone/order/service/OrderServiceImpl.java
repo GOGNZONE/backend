@@ -2,82 +2,100 @@ package com.gongzone.order.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.order.dto.OrderDTO;
+import com.gongzone.order.dto.OrderUpdateDTO;
 import com.gongzone.order.entity.Order;
+import com.gongzone.order.mapper.OrderMapper;
 import com.gongzone.order.repository.OrderRepository;
 
+
+import lombok.RequiredArgsConstructor;
+
 /**
- * ¹ßÁÖ ¼­ºñ½º ÀÎÅÍÆäÀÌ½º ±¸ÇöÃ¼
+ * ë°œì£¼ ì„œë¹„ìŠ¤ ì¸í„°í˜ì´ìŠ¤ êµ¬í˜„ì²´
  * @author kangdonghyeon
  * @version 1.0
  * */
 @Service
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 	
-	@Autowired
-	public OrderRepository orderRepo;
-	
+	private final OrderRepository orderRepo;
+	private final OrderMapper orderMapper = Mappers.getMapper(OrderMapper.class);
 	
 	/**
-	 *  ÀüÃ¼ ¹ßÁÖ Á¶È¸
-	 *  @return  List<Order>
+	 *  ì „ì²´ ë°œì£¼ ì¡°íšŒ
+	 *  @return  List<OrderDTO>
 	 */
 	@Override
-	public List<Order> findOrder() {
-		return orderRepo.findAll();
+	public List<OrderDTO> findOrder() {
+		List<OrderDTO> list = orderMapper.toDtoList(orderRepo.findAll());
+		return list;
 	}
 
 	
 	/**
-	 * ¹ßÁÖ ÄÚµå(orderId)·Î Á¶È¸
+	 * ë°œì£¼ ì½”ë“œ(orderId)ë¡œ ì¡°íšŒ
 	 * @param { orderId }
 	 * @return OrderDTO
 	 * */
 	@Override
 	public OrderDTO findOrderByOrderId(Long orderId) {
-		return orderRepo.findOrderByOrderId(orderId).toDTO(orderRepo.findOrderByOrderId(orderId));
-	}
+			return toDTO(orderRepo.findOrderByOrderId(orderId));
+		}
 
 	
 	
 	/**
-	 * ¹ßÁÖ µî·Ï
+	 * ë°œì£¼ ë“±ë¡
 	 * @param { OrderDTO }
 	 * @return void
 	 * */
 	@Override
 	public void insertOrder(OrderDTO orderDTO) {
-		System.out.println(orderDTO);
-		Order orderEntity = orderDTO.toEntity(orderDTO);
-		orderRepo.save(orderEntity);
+		orderRepo.save(toEntity(orderDTO));
 		
 	}
 
 	
 	/**
-	 * ¹ßÁÖ ÄÚµå(order_id)·Î ¼öÁ¤
+	 * ë°œì£¼ ì½”ë“œ(order_id)ë¡œ ìˆ˜ì •
 	 * @param { OrderDTO }
 	 * @return void
 	 * */
 	@Override
-	public void updateOrder(OrderDTO orderDTO) {
-		Order order = findOrderByOrderId(orderDTO.getOrderId()).toEntity(findOrderByOrderId(orderDTO.getOrderId()));
-		order.updateOrder(orderDTO);
+	public void updateOrder(Long orderId, OrderUpdateDTO updateDTO) {
+		Order order = orderRepo.findOrderByOrderId(orderId);
+		order.updateOrder(updateDTO);
 		orderRepo.save(order);
 	}
 
 	
 	/**
-	 * ¹ßÁÖ ÄÚµå(orderId)·Î »èÁ¦
+	 * ë°œì£¼ ì½”ë“œ(orderId)ë¡œ ì‚­ì œ
 	 * @param { orderId }
 	 * @return void
 	 * */
 	@Override
+	@Transactional
 	public void deleteOrder(Long orderId) {
 		orderRepo.deleteOrderByOrderId(orderId);
 	}
 
+	/* MapStruct Mapper Production â†” ProductionDTO */
+	protected OrderDTO toDTO(Order order) {
+		return orderMapper.toDto(order);
+	}
+	
+	/* MapStruct Mapper ProductionDTO â†” Production */
+	protected Order toEntity(OrderDTO orderDto) {
+		return orderMapper.toEntity(orderDto);
+	}
+	
 }
+	
+

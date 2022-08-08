@@ -5,16 +5,23 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.gongzone.bom.dto.BOMDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gongzone.bom.dto.BOMUpdateDTO;
+import com.gongzone.production.entity.Production;
+import com.gongzone.storage.entity.Storage;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,8 +30,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * BOM ¿£Æ¼Æ¼
- * fk ¸ÅÇÎÀü
+ * BOM ì—”í‹°í‹°
  * @version 1.0
  * @author kangdonghyeon
  *
@@ -35,7 +41,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-
+@Table(name = "t_bom")
 public class BOM {
 	@Id
 	@Column(name="bom_id")
@@ -80,64 +86,46 @@ public class BOM {
 	@Column(name="bom_required_quantity",length=6)
 	@ColumnDefault("0")
 	@NotNull
-	private String bomRequiredQuntity;
+	private int bomRequiredQuntity;
 	
-	@Column(name="fk_production_bom_id")
 	@NotNull
-	private Long productionBomId;
+	@JoinColumn(name="fk_production_bom_id")
+	@ManyToOne(targetEntity = Production.class)
+	private Production production;
 	
-	@Column(name="fk_stroage_id")
+	@JoinColumn(name="fk_stroage_id")
+	@ManyToOne(targetEntity = Storage.class)
 	@NotNull
-	private Long storageId;
+	private Storage storage;
 	
-	@Column(name="bom_parent_id")
-	private Long bomParentId;
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bom_parent_id")
+	@JsonIgnore
+//	@Column(name="bom_parent_id")
+	private BOM bomParent;
+	
+//	@OneToMany(mappedBy = "bomParent")
+//    private List<BOM> child = new ArrayList<>();
+	
 	
 	/**
-	 * BOM ¼öÁ¤
+	 * BOM ìˆ˜ì •
 	 * @param {bomDTO}
-	 * @return °ªÀ» ¾÷µ¥ÀÌÆ®¸¸ ÇÏ±â¶§¹®¿¡ void
+	 * @return void
 	 */
 	
-	public void updateBOM(BOMDTO bomDTO) {
-		this.bomName = bomDTO.getBomName();
-		this.bomQuantity = bomDTO.getBomQuantity();
-		this.bomPrice = bomDTO.getBomPrice();
-		this.bomStandard = bomDTO.getBomStandard();
-		this.bomUnit = bomDTO.getBomUnit();
-		this.bomDescription = bomDTO.getBomDescription();
-		this.bomReceivedData = bomDTO.getBomReceivedData();
-		this.bomFile = bomDTO.getBomFile();
-		this.bomRequiredQuntity = bomDTO.getBomRequiredQuntity();
+	public void updateBOM(BOMUpdateDTO updateDto) {
+		this.bomName = updateDto.getBomName();
+		this.bomQuantity = updateDto.getBomQuantity();
+		this.bomPrice = updateDto.getBomPrice();
+		this.bomStandard = updateDto.getBomStandard();
+		this.bomUnit = updateDto.getBomUnit();
+		this.bomDescription = updateDto.getBomDescription();
+		this.bomFile = updateDto.getBomFile();
+		this.bomRequiredQuntity = updateDto.getBomRequiredQuntity();
 		
 	}
 
-	
-	/**
-	 * BOM Entity¸¦ BomDTO·Î º¯°æ
-	 * @param {BOM}
-	 * @return BOMDTO
-	 */
-	public BOMDTO toDTO(BOM BOMEntity) {
-		BOMDTO bomDTO = BOMDTO.builder()
-				.bomId(BOMEntity.getBomId())
-				.bomName(BOMEntity.getBomName())
-				.bomQuantity(BOMEntity.getBomQuantity())
-				.bomPrice(BOMEntity.getBomPrice())
-				.bomStandard(BOMEntity.getBomStandard())
-				.bomUnit(BOMEntity.getBomUnit())
-				.bomDescription(BOMEntity.getBomDescription())
-				.bomReceivedData(BOMEntity.getBomReceivedData())
-				.bomFile(BOMEntity.getBomFile())
-				.bomRequiredQuntity(BOMEntity.getBomRequiredQuntity())
-				.productionBomId(BOMEntity.getProductionBomId())
-				.storageId(BOMEntity.getStorageId())
-				.bomParentId(BOMEntity.getBomParentId())
-				.build();
-		return bomDTO;
-	}
-	
-	
-	
-	
 }

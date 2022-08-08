@@ -1,8 +1,6 @@
 package com.gongzone.order.controller;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,71 +12,76 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.order.dto.OrderDTO;
-import com.gongzone.order.entity.Order;
+import com.gongzone.order.dto.OrderUpdateDTO;
 import com.gongzone.order.service.OrderServiceImpl;
+
+import lombok.RequiredArgsConstructor;
 
 
 /**
- * ¹ßÁÖ ÄÁÆ®·Ñ·¯
+ * ë°œì£¼ ì»¨íŠ¸ë¡¤ëŸ¬
  * @author kangdonghyeon
  * @version 1.0
  * */
+
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/order")
 @CrossOrigin(origins = "http://localhost:3000")
 public class OrderController {
-	@Autowired
-	public OrderServiceImpl orderService;
+	
+	private final OrderServiceImpl orderService;
 	
 	/**
-	 *  ÀüÃ¼ ¹ßÁÖ Á¶È¸
-	 *  @return  List<Order>
+	 *  ì „ì²´ ë°œì£¼ ì¡°íšŒ
+	 *  @return  List<OrderDTO>
 	 */
 	@GetMapping("/list")
-	public List<Order> findOrder(){
+	public List<OrderDTO> findOrder(){
+		System.out.println(orderService.findOrder());
 		return orderService.findOrder();
 	}
 	
 	
 	/**
-	 * ¹ßÁÖ ÄÚµå(orderId)·Î Á¶È¸
+	 * ë°œì£¼ ì½”ë“œ(orderId)ë¡œ ì¡°íšŒ
 	 * @param { orderId }
 	 * @return OrderDTO
 	 * */
 	@GetMapping("/{orderId}")
 	public OrderDTO findOrderByOrderId(@PathVariable Long orderId) {
-		return null;
+		return orderService.findOrderByOrderId(orderId);
 	}
 	
 	
 	/**
-	 * ¹ßÁÖ µî·Ï
+	 * ë°œì£¼ ë“±ë¡
 	 * @param { OrderDTO }
 	 * @return void
 	 * */
 	@PostMapping("")
 	public void insertOrder(@RequestBody OrderDTO orderDTO) {
-		System.out.println(orderDTO);
-//		orderService.insertOrder(orderDTO);
+//		System.out.println(orderDTO);
+		orderService.insertOrder(orderDTO);
 	}
 	
 	
 	/**
-	 * ¹ßÁÖ ÄÚµå(order_id)·Î ¼öÁ¤
+	 * ë°œì£¼ ì½”ë“œ(order_id)ë¡œ ìˆ˜ì •
 	 * @param { orderId, OrderDTO }
 	 * @return void
 	 * */
-	@PutMapping("{orderId}")
-	public void updateOrder(@PathVariable Long orderId, OrderDTO orderDTO) {
-		orderService.updateOrder(orderDTO);
+	@PutMapping("/{orderId}")
+	public void updateOrder(@PathVariable Long orderId, OrderUpdateDTO updateDto) {
+		orderService.updateOrder(orderId, updateDto);
 	}
 	
 	/**
-	 * ¹ßÁÖ ÄÚµå(orderId)·Î »èÁ¦
+	 * ë°œì£¼ ì½”ë“œ(orderId)ë¡œ ì‚­ì œ
 	 * @param { orderId }
 	 * @return void
 	 * */
-	@DeleteMapping("{orderId}")
+	@DeleteMapping("/{orderId}")
 	public void deleteOrder(@PathVariable Long orderId) {
 		orderService.deleteOrder(orderId);
 	}

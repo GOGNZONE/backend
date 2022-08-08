@@ -2,7 +2,7 @@ package com.gongzone.bom.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,69 +13,73 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.bom.dto.BOMDTO;
-import com.gongzone.bom.entity.BOM;
+import com.gongzone.bom.dto.BOMUpdateDTO;
 import com.gongzone.bom.service.BOMServiceImpl;
+
+import lombok.RequiredArgsConstructor;
 
 
 /**
- * BOM ƒ¡∆Æ∑—∑Ø
+ * BOM Ïª®Ìä∏Î°§Îü¨
  * @author kangdonghyeon
  * @version 1.0
  */
 @RestController
 @RequestMapping("/api/BOM")
+@RequiredArgsConstructor
 public class BOMController {
-	@Autowired
-	public BOMServiceImpl bomService;
+	private final BOMServiceImpl bomService;
 	
 	
 	/**
-	 *  ¿¸√º BOM ¡∂»∏
-	 *  @return List<BOM>
+	 *  Ï†ÑÏ≤¥ BOM Ï°∞Ìöå
+	 *  @return List<BOMDTO>
 	 */
 	@GetMapping("/list")
-	public List<BOM> findBOM(){
+	public List<BOMDTO> findBOM(){
 		return bomService.findBOM();
 	}
 	
 	/**
-	 * BOMƒ⁄µÂ(bomId)∑Œ ¡∂»∏
+	 * BOMÏΩîÎìú(bomId)Î°ú Ï°∞Ìöå
 	 * @param { bomId }
 	 * @return BOMDTO
 	 * */
-	@GetMapping("/{bomid}")
-	public BOMDTO findBOMByBomId(Long bomId) {
+	@GetMapping("/{bomId}")
+	public BOMDTO findBOMByBomId(@PathVariable Long bomId) {
 		return bomService.findBOMByBomId(bomId);
 	}
 	
 	/**
-	 * BOM µÓ∑œ
+	 * BOM Îì±Î°ù
 	 * @param { BOMDTO }
 	 * @return void
 	 * */
 	@PostMapping("")
-	public void insertBOM(BOMDTO bomDTO) {
-		bomService.insertBOM(bomDTO);
+	public void insertBOM(@RequestBody BOMDTO bomDTO) {
+		System.out.println(bomDTO);
+//		bomService.insertBOM(bomDTO);
 	}
 	
 	/**
-	 * BOM ƒ⁄µÂ(bomId)∑Œ ºˆ¡§
+	 * BOM ÏΩîÎìú(bomId)Î°ú ÏàòÏ†ï
 	 * @param { bomId, BOMDTO }
 	 * @return void
 	 * */
-	@PutMapping("{bomId}")
-	public void updateBOM(@PathVariable Long bomId,@RequestBody BOMDTO bomDTO) {
-		bomService.updateBOM(bomDTO);
+	@PutMapping("/{bomId}")
+	public void updateBOM(@PathVariable Long bomId,@RequestBody BOMUpdateDTO updateDTO) {
+//		System.out.println(updateDTO);
+		bomService.updateBOM(bomId, updateDTO);
 	}
 	
 	
 	/**
-	 * BOM ƒ⁄µÂ(bomId)∑Œ ªË¡¶
+	 * BOM ÏΩîÎìú(bomId)Î°ú ÏÇ≠Ï†ú
 	 * @param { bomId }
 	 * @return void
 	 * */
-	@DeleteMapping("/{bomid}")
-	public void deleteBOM(Long bomId) {
+	@DeleteMapping("/{bomId}")
+	public void deleteBOM(@PathVariable Long bomId) {
 		bomService.deleteBOM(bomId);
 	}
 	

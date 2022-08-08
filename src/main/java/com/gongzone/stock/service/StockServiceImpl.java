@@ -2,78 +2,97 @@ package com.gongzone.stock.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.stock.Repository.StockRepository;
 import com.gongzone.stock.dto.StockDTO;
+import com.gongzone.stock.dto.StockUpdateDTO;
 import com.gongzone.stock.entity.Stock;
+import com.gongzone.stock.mapper.StockMapper;
+
+import lombok.RequiredArgsConstructor;
+
+
 
 /**
- * ¿Á∞Ì º≠∫ÒΩ∫ ¿Œ≈Õ∆‰¿ÃΩ∫ ±∏«ˆ√º
+ * Ïû¨Í≥† ÏÑúÎπÑÏä§ Ïù∏ÌÑ∞ÌéòÏù¥Ïä§ Íµ¨ÌòÑÏ≤¥
  * @author kangdonghyeon
  * @version 1.0
  */
-
 @Service
-public class StockServiceImpl implements StockService {
-	@Autowired
-	StockRepository stockRepo;
+@RequiredArgsConstructor
+public class StockServiceImpl implements StockService{
+	private final StockRepository stockRepo;
+	private final StockMapper stockMapper = Mappers.getMapper(StockMapper.class);
+	
 	
 	/**
-	 *  ¿¸√º ¿Á∞Ì ∏Ò∑œ ¡∂»∏
-	 *  @return List<Stock>
+	 *  Ï†ÑÏ≤¥ Ïû¨Í≥† Ï°∞Ìöå
+	 *  @return List<StockDTO>
 	 */
 	@Override
-	public List<Stock> findStock() {
-		return stockRepo.findAll();
+	public List<StockDTO> findStock() {
+		List<Stock> list = stockRepo.findAll();
+		return stockMapper.toDtoList(list);
 	}
-	
-	
-	
+
 	/**
-	 *  ¿Á∞Ì ƒ⁄µÂ(stockId)∑Œ ¡∂»∏
-	 *  @return StockDTO
-	 */
+	 * Ïû¨Í≥†ÏΩîÎìú(stockId)Î°ú Ï°∞Ìöå
+	 * @param { stockId }
+	 * @return StockDTO
+	 * */
 	@Override
 	public StockDTO findStockByStockId(Long stockId) {
-		return stockRepo.findStockByStockId(stockId).toDTO(stockRepo.findStockByStockId(stockId));
+		return toDTO(stockRepo.findStockByStockId(stockId));
 	}
 
-	
 	/**
-	 * ¿Á∞Ì µÓ∑œ
+	 * Ïû¨Í≥† Îì±Î°ù
 	 * @param { stockDTO }
 	 * @return void
 	 * */
 	@Override
 	public void insertStock(StockDTO stockDTO) {
-		Stock stockEntity = stockDTO.toEntity(stockDTO);
-		stockRepo.save(stockEntity);
+		stockRepo.save(toEntity(stockDTO));
+		
 	}
 
-	
 	/**
-	 * ¿Á∞Ì ƒ⁄µÂ(stockId)∑Œ ºˆ¡§
+	 * Ïû¨Í≥† ÏΩîÎìú(stockId)Î°ú ÏàòÏ†ï
 	 * @param { stockId, stockDTO }
 	 * @return void
 	 * */
 	@Override
-	public void updateStock(Long stockId, StockDTO stockDTO) {
-		Stock stock = findStockByStockId(stockDTO.getStockId()).toEntity(findStockByStockId(stockDTO.getStockId()));
-		stock.updateStock(stockDTO.getStockName(), stockDTO.getStockQuantity(), stockDTO.getStockDescription());
+	public void updateStock(Long stockId, StockUpdateDTO updateDTO) {
+		Stock stock = toEntity(findStockByStockId(stockId));
+		stock.updateStock(updateDTO.getStockName(), updateDTO.getStockQuantity(), updateDTO.getStockDescription());
 		stockRepo.save(stock);
+		
 	}
 
-	
 	/**
-	 * ¿Á∞Ì ƒ⁄µÂ(stockId)∑Œ ªË¡¶
+	 * Ïû¨Í≥† ÏΩîÎìú(stockId)Î°ú ÏÇ≠Ï†ú
 	 * @param { stockId }
 	 * @return void
 	 * */
 	@Override
+	@Transactional
 	public void deleteStock(Long stockId) {
 		stockRepo.deleteByStockId(stockId);
 	}
 
+	
+	
+	/* MapStruct Mapper Production ‚Üî ProductionDTO */
+	protected StockDTO toDTO(Stock stock) {
+		return stockMapper.toDto(stock);
+	}
+	
+	/* MapStruct Mapper ProductionDTO ‚Üî Production */
+	protected Stock toEntity(StockDTO stockDto) {
+		return stockMapper.toEntity(stockDto);
+	}
+	
 }

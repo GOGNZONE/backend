@@ -13,43 +13,31 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAspectJAutoProxy
 @EnableScheduling
 @SpringBootApplication
-// entity
 @EntityScan(basePackages = { 
-		"com.gongzone.production.entity", 
-		"com.gongzone.client.entity",
+    "com.gongzone.production.entity", 
+    "com.gongzone.client.entity",
 		"com.gongzone.employee.entity",
-		"com.gongzone.release.entity",
-		"com.gongzone.delivery.entity"})
-
-// Repository
+    "com.gongzone.order.entity",
+    "com.gongzone.bom.entity", 
+    "com.gongzone.storage.entity", 
+    "com.gongzone.stock.entity"})
+    
 @EnableJpaRepositories(basePackages = { 
-		"com.gongzone.production.repository",
-		"com.gongzone.employee.repository",
-		"com.gongzone.release.repository",
-		"com.gongzone.client.repository"})
+"com.gongzone.production.repository", 
+"com.gongzone.employee.repository", 
+"com.gongzone.storage.repository",
+"com.gongzone.stock.repository",
+"com.gongzone.order.repository",
+"com.gongzone.bom.repository"})
 
 @ComponentScan(basePackages = { 
-		"com.gongzone.common.errors",
-    
-    // RestController
-		"com.gongzone.employee.apiController",
-		"com.gongzone.production.apiController",
-		"com.gongzone.client.apiController",
-    "com.gongzone.release.apiController",
-    
-    // serivce
-		"com.gongzone.employee.service",
-		"com.gongzone.production.service",
-		"com.gongzone.client.service",
-		"com.gongzone.release.service",
-		"com.gongzone.production.service", 
-    
-    // DTO
-		"com.gongzone.employee.dto",
-		"com.gongzone.production.dto" ,
-		"com.gongzone.client.dto",
-		"com.gongzone.release.dto",
-		})
+"com.gongzone.production.apiController", "com.gongzone.employee.apiController", "com.gongzone.order.controller", "com.gongzone.bom.controller", "com.gongzone.storage.controller", "com.gongzone.stock.controller", "com.gongzone.s3.controller",
+"com.gongzone.employee.dto", "com.gongzone.production.dto", "com.gongzone.order.dto", "com.gongzone.bom.dto", "com.gongzone.storage.dto", "com.gongzone.stock.dto", 
+"com.gongzone.employee.service", "com.gongzone.production.service", "com.gongzone.order.service", "com.gongzone.bom.service", "com.gongzone.storage.service", "com.gongzone.stock.service","com.gongzone.s3.service",
+"com.gongzone.employee.mapper","com.gongzone.order.mapper", "com.gongzone.bom.mapper", "com.gongzone.storage.mapper", "com.gongzone.stock.mapper", 
+"com.gongzone.s3.config"
+})
+
 public class GongzoneBackendApplication {
 
 //    @Bean

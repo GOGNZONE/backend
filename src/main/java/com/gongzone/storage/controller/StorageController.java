@@ -2,7 +2,7 @@ package com.gongzone.storage.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,34 +13,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.storage.dto.StorageDTO;
-import com.gongzone.storage.entity.Storage;
+import com.gongzone.storage.dto.StorageUpdateDTO;
 import com.gongzone.storage.service.StorageServiceImpl;
+
+import lombok.RequiredArgsConstructor;
 
 
 /**
- * √¢∞Ì ƒ¡∆Æ∑—∑Ø
+ * Ï∞ΩÍ≥† Ïª®Ìä∏Î°§Îü¨
  * @author kangdonghyeon
  * @version 1.0
  * */
 
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/storage")
 public class StorageController {
-	@Autowired
-	public StorageServiceImpl storageService;
+
+	private final StorageServiceImpl storageService;
 	
 	/**
-	 *  ¿¸√º √¢∞Ì ¡∂»∏
-	 *  @return  List<Storage>
+	 *  Ï†ÑÏ≤¥ Ï∞ΩÍ≥† Ï°∞Ìöå
+	 *  @return  List<StorageDTO>
 	 */
 	@GetMapping("/list")
-	public List<Storage> getStock(){
+	public List<StorageDTO> getStock(){
 		return storageService.findStorage();
 	}
 	
 	/**
-	 * √¢∞Ì ƒ⁄µÂ(storageId)∑Œ ¡∂»∏
+	 * Ï∞ΩÍ≥† ÏΩîÎìú(storageId)Î°ú Ï°∞Ìöå
 	 * @param { storageId }
 	 * @return StorageDTO
 	 * */
@@ -51,29 +54,28 @@ public class StorageController {
 	
 	
 	/**
-	 * √¢∞Ì µÓ∑œ
+	 * Ï∞ΩÍ≥† Îì±Î°ù
 	 * @param { storageDTO }
 	 * @return void
 	 * */
 	@PostMapping("")
 	public void insertStorage(@RequestBody StorageDTO storageDTO) {
 		storageService.insertStorage(storageDTO);
-//		System.out.println(storageDTO);
 	}
 	
 	/**
-	 * √¢∞Ì ºˆ¡§(storageId)∑Œ ª˝ªÍ «∞∏Ò ºˆ¡§
+	 * Ï∞ΩÍ≥† ÏàòÏ†ï(storageId)Î°ú ÏàòÏ†ï
 	 * @param { storageId, storageDTO }
 	 * @return void
 	 * */
 	@PutMapping("{storageId}")
-	public void updateStorage(@PathVariable Long storageId ,@RequestBody StorageDTO storageDTO ) {
+	public void updateStorage(@PathVariable Long storageId ,@RequestBody StorageUpdateDTO updateDTO ) {
 //		System.out.println(stockDTO);
-		storageService.updateStorage(storageDTO);
+		storageService.updateStorage(storageId,updateDTO);
 	}
 	
 	/**
-	 * √¢∞Ì ƒ⁄µÂ(storageId)∑Œ ª˝ªÍ «∞∏Ò ªË¡¶
+	 * Ï∞ΩÍ≥† ÏΩîÎìú(storageId)Î°ú ÏÇ≠Ï†ú
 	 * @param { storageId }
 	 * @return void
 	 * */

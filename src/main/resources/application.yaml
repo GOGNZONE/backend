@@ -3,12 +3,14 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: scott
     url: jdbc:mysql://localhost:3306/test
+
     password: tiger
   data:
     jpa:
       repositories:
         enabled: "true"
   jpa:
+    open-in-view : 'false'
     database-platform: org.hibernate.dialect.MySQL8Dialect
     properties:
       hibernate:

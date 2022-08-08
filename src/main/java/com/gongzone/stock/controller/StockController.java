@@ -2,7 +2,6 @@ package com.gongzone.stock.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,36 +12,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.stock.dto.StockDTO;
-import com.gongzone.stock.entity.Stock;
+import com.gongzone.stock.dto.StockUpdateDTO;
 import com.gongzone.stock.service.StockServiceImpl;
+
+import lombok.RequiredArgsConstructor;
 
 
 
 /**
- * ¿Á∞Ì ƒ¡∆Æ∑—∑Ø
- * @author Hanju Park
+ * Ïû¨Í≥† Controller
+ * @author kangdonghyeon
  * @version 1.0
  * */
-
-
-@RestController  //JSON¿ª π›»Ø«œ¥¬ ƒ¡∆Æ∑—∑Ø
+@RestController  
+@RequiredArgsConstructor
 @RequestMapping("/api/stock")
 public class StockController {
-	@Autowired
-	public StockServiceImpl stockService;
+	private final StockServiceImpl stockService;
 	
 	/**
-	 *  ¿¸√º ¿Á∞Ì ¡∂»∏
-	 *  @return List<Stock>
+	 *  Ï†ÑÏ≤¥ Ïû¨Í≥† Ï°∞Ìöå
+	 *  @return List<StockDTO>
 	 */
 	@GetMapping("/list")
-	public List<Stock> getStock(){
+	public List<StockDTO> getStock(){
 		return stockService.findStock();
 	}
 	
 	
 	/**
-	 * ¿Á∞Ì ƒ⁄µÂ(stockId)∑Œ ¡∂»∏
+	 * Ïû¨Í≥†ÏΩîÎìú(stockId)Î°ú Ï°∞Ìöå
 	 * @param { stockId }
 	 * @return StockDTO
 	 * */
@@ -51,9 +50,8 @@ public class StockController {
 		return stockService.findStockByStockId(stockId);
 	}
 	
-	
 	/**
-	 * ¿Á∞Ì µÓ∑œ
+	 * Ïû¨Í≥† Îì±Î°ù
 	 * @param { stockDTO }
 	 * @return void
 	 * */
@@ -64,18 +62,17 @@ public class StockController {
 	
 	
 	/**
-	 * ¿Á∞Ì ƒ⁄µÂ(stockId)∑Œ ºˆ¡§
+	 * Ïû¨Í≥† ÏΩîÎìú(stockId)Î°ú ÏàòÏ†ï
 	 * @param { stockId, stockDTO }
 	 * @return void
 	 * */
 	@PutMapping("/{stockId}")
-	public void updateStock(@PathVariable Long stockId, @RequestBody StockDTO stockDTO) {
-		stockService.updateStock(stockId, stockDTO);
+	public void updateStock(@PathVariable Long stockId, @RequestBody StockUpdateDTO updateDto) {
+		stockService.updateStock(stockId, updateDto);
 	}
 	
-	
 	/**
-	 * ¿Á∞Ì ƒ⁄µÂ(stockId)∑Œ ªË¡¶
+	 * Ïû¨Í≥† ÏΩîÎìú(stockId)Î°ú ÏÇ≠Ï†ú
 	 * @param { stockId }
 	 * @return void
 	 * */
@@ -83,7 +80,5 @@ public class StockController {
 	public void deleteStock(@PathVariable Long stockId) {
 		stockService.deleteStock(stockId);
 	}
-	
-	
 }
 

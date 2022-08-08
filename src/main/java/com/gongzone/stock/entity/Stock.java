@@ -7,11 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
-
-import com.gongzone.stock.dto.StockDTO;
 import com.gongzone.storage.entity.Storage;
 
 import lombok.AllArgsConstructor;
@@ -20,15 +19,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * Stock ø£∆º∆º
+ * Ïû¨Í≥† Entity
  * @author kangdonghyeon
  * @version 1.0
  */
+
 @Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "t_stock")
 public class Stock {
 	@Id
 	@Column(name="stock_id")
@@ -54,7 +55,7 @@ public class Stock {
 	private Storage storage;
 	
 	/**
-	 * Stock ºˆ¡§
+	 * Ïû¨Í≥† ÏóÖÎç∞Ïù¥Ìä∏
 	 * @param {stockName, stockQuantity, stockDescription}
 	 * @return void
 	 */
@@ -63,23 +64,5 @@ public class Stock {
 		this.stockQuantity = stockQuantity;
 		this.stockDescription = stockDescription;
 	}
-	
-	/**
-	 * StockEntity∏¶ StockDTO∑Œ ∫Ø∞Ê
-	 * @param {Stock}
-	 * @return StockDTO
-	 */
-	public StockDTO toDTO(Stock stockEntity) {
-		StockDTO stockDTO = StockDTO.builder()
-				.stockId(stockEntity.getStockId())
-				.stockName(stockEntity.getStockName())
-				.stockQuantity(stockEntity.getStockQuantity())
-				.stockDescription(stockEntity.getStockDescription())
-				.storage(stockEntity.getStorage())
-				.build();
-		return stockDTO;
-	}
-	
-	
 	
 }

@@ -3,44 +3,43 @@ package com.gongzone.order.service;
 import java.util.List;
 
 import com.gongzone.order.dto.OrderDTO;
-import com.gongzone.order.entity.Order;
-
+import com.gongzone.order.dto.OrderUpdateDTO;
 /**
- * ¹ßÁÖ ¼­ºñ½º ÀÎÅÍÆäÀÌ½º
+ * ë°œì£¼ ì„œë¹„ìŠ¤ ì¸í„°í˜ì´ìŠ¤
  * @author kangdonghyeon
  * @version 1.0
  * */
 public interface OrderService {
 	
 	/**
-	 *  ÀüÃ¼ ¹ßÁÖ Á¶È¸
-	 *  @return  List<Order>
+	 *  ì „ì²´ ë°œì£¼ ì¡°íšŒ
+	 *  @return  List<OrderDTO>
 	 */
-	public List<Order> findOrder();
+	public List<OrderDTO> findOrder();
 	
 	/**
-	 * ¹ßÁÖ ÄÚµå(orderId)·Î Á¶È¸
+	 * ë°œì£¼ ì½”ë“œ(orderId)ë¡œ ì¡°íšŒ
 	 * @param { orderId }
 	 * @return OrderDTO
 	 * */
 	public OrderDTO findOrderByOrderId(Long orderId);
 	
 	/**
-	 * ¹ßÁÖ µî·Ï
+	 * ë°œì£¼ ë“±ë¡
 	 * @param { OrderDTO }
 	 * @return void
 	 * */
 	public void insertOrder(OrderDTO orderDTO);
 	
 	/**
-	 * ¹ßÁÖ ÄÚµå(order_id)·Î ¼öÁ¤
-	 * @param { OrderDTO }
+	 * ë°œì£¼ ì½”ë“œ(order_id)ë¡œ ìˆ˜ì •
+	 * @param { orderId, OrderDTO }
 	 * @return void
 	 * */
-	public void updateOrder(OrderDTO orderDTO);
+	public void updateOrder(Long orderId, OrderUpdateDTO updateDTO);
 	
 	/**
-	 * ¹ßÁÖ ÄÚµå(orderId)·Î »èÁ¦
+	 * ë°œì£¼ ì½”ë“œ(orderId)ë¡œ ì‚­ì œ
 	 * @param { orderId }
 	 * @return void
 	 * */

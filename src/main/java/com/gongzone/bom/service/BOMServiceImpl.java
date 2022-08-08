@@ -2,76 +2,94 @@ package com.gongzone.bom.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.bom.dto.BOMDTO;
+import com.gongzone.bom.dto.BOMUpdateDTO;
 import com.gongzone.bom.entity.BOM;
+import com.gongzone.bom.mapper.BomMapper;
 import com.gongzone.bom.repository.BOMRepository;
 
+
+import lombok.RequiredArgsConstructor;
+
 /**
- * BOM º≠∫ÒΩ∫ ¿Œ≈Õ∆‰¿ÃΩ∫ ±∏«ˆ√º
+ * BOM ÏÑúÎπÑÏä§ Ïù∏ÌÑ∞ÌéòÏù¥Ïä§ Íµ¨ÌòÑÏ≤¥
  * @author kangdonghyeon
  * @version 1.0
  */
 @Service
+@RequiredArgsConstructor
 public class BOMServiceImpl implements BOMService{
-	@Autowired
-	public BOMRepository bomRepo;
+	private final BOMRepository bomRepo;
+	private final BomMapper bomMapper = Mappers.getMapper(BomMapper.class);
+	
 	
 	/**
-	 *  ¿¸√º BOM ¡∂»∏
-	 *  @return List<BOM>
+	 *  Ï†ÑÏ≤¥ BOM Ï°∞Ìöå
+	 *  @return List<BOMDTO>
 	 */
 	@Override
-	public List<BOM> findBOM() {
-		return bomRepo.findAll();
+	public List<BOMDTO> findBOM() {
+		List<BOM> list = bomRepo.findAll();
+		return bomMapper.toDtoList(list);
 	}
 
 	/**
-	 * BOMƒ⁄µÂ(bomId)∑Œ ¡∂»∏
+	 * BOMÏΩîÎìú(bomId)Î°ú Ï°∞Ìöå
 	 * @param { bomId }
 	 * @return BOMDTO
 	 * */
 	@Override
 	public BOMDTO findBOMByBomId(Long bomId) {
-		return bomRepo.findBOMByBomId(bomId).toDTO(bomRepo.findBOMByBomId(bomId));
+		return toDTO(bomRepo.findBOMByBomId(bomId));
+	
 	}
 
 	/**
-	 * BOM µÓ∑œ
+	 * BOM Îì±Î°ù
 	 * @param { BOMDTO }
 	 * @return void
 	 * */
 	@Override
 	public void insertBOM(BOMDTO bomDTO) {
-		BOM bomEntity = bomDTO.toEntity(bomDTO);
-		bomRepo.save(bomEntity);
+		bomRepo.save(toEntity(bomDTO));
 	}
 
 	/**
-	 * BOM ƒ⁄µÂ(bomId)∑Œ ºˆ¡§
+	 * BOM ÏΩîÎìú(bomId)Î°ú ÏàòÏ†ï
 	 * @param { BOMDTO }
 	 * @return void
 	 * */
 	@Override
-	public void updateBOM(BOMDTO bomDTO) {
-		BOM bom = findBOMByBomId(bomDTO.getBomId()).toEntity(findBOMByBomId(bomDTO.getBomId()));
-		bom.updateBOM(bomDTO);
+	public void updateBOM(Long bomId, BOMUpdateDTO updateDto) {
+		BOM bom = bomRepo.findBOMByBomId(bomId);
+		bom.updateBOM(updateDto);
 		bomRepo.save(bom);
 	}
 
 	
 	/**
-	 * BOM ƒ⁄µÂ(bomId)∑Œ ªË¡¶
+	 * BOM ÏΩîÎìú(bomId)Î°ú ÏÇ≠Ï†ú
 	 * @param { bomId }
 	 * @return void
 	 * */
 	@Override
+	@Transactional
 	public void deleteBOM(Long bomId) {
 		bomRepo.deleteBOMByBomId(bomId);
 	}
 
+	/* MapStruct Mapper Production ‚Üî ProductionDTO */
+	protected BOMDTO toDTO(BOM bom) {
+		return bomMapper.toDto(bom);
+	}
 	
+	/* MapStruct Mapper ProductionDTO ‚Üî Production */
+	protected BOM toEntity(BOMDTO bomDto) {
+		return bomMapper.toEntity(bomDto);
+	}
 	
 }

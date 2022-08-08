@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
     value = "org.mapstruct.ap.MappingProcessor",
     date = "2022-08-05T11:36:39+0900",
     comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 17.0.3 (Eclipse Adoptium)"
+
 )
 @Component
 public class ProductionListMapperImpl implements ProductionListMapper {

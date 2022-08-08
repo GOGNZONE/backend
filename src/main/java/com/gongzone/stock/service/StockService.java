@@ -3,32 +3,32 @@ package com.gongzone.stock.service;
 import java.util.List;
 
 import com.gongzone.stock.dto.StockDTO;
-import com.gongzone.stock.entity.Stock;
+import com.gongzone.stock.dto.StockUpdateDTO;
 
 
 /**
- * Àç°í ¼­ºñ½º ÀÎÅÍÆäÀÌ½º
+ * ì¬ê³  ì„œë¹„ìŠ¤ ì¸í„°í˜ì´ìŠ¤
  * @author kangdonghyeon
  * @version 1.0
  */
 
 public interface StockService {
 	/**
-	 *  ÀüÃ¼ Àç°í Á¶È¸
-	 *  @return List<ProductionDtoDetail>
+	 *  ì „ì²´ ì¬ê³  ì¡°íšŒ
+	 *  @return List<StockDTO>
 	 */
-	public List<Stock> findStock();
+	public List<StockDTO> findStock();
 	
 
 	/**
-	 * Àç°íÄÚµå(stockId)·Î Á¶È¸
+	 * ì¬ê³ ì½”ë“œ(stockId)ë¡œ ì¡°íšŒ
 	 * @param { stockId }
 	 * @return StockDTO
 	 * */
 	public StockDTO findStockByStockId(Long stockId);
 	
 	/**
-	 * Àç°í µî·Ï
+	 * ì¬ê³  ë“±ë¡
 	 * @param { stockDTO }
 	 * @return void
 	 * */
@@ -36,15 +36,14 @@ public interface StockService {
 	
 	
 	/**
-	 * Àç°í ÄÚµå(stockId)·Î ¼öÁ¤
+	 * ì¬ê³  ì½”ë“œ(stockId)ë¡œ ìˆ˜ì •
 	 * @param { stockId, stockDTO }
 	 * @return void
 	 * */
-	public void updateStock(Long stockId, StockDTO stockDTO);
-	
+	public void updateStock(Long stockId, StockUpdateDTO updateDTO);
 	
 	/**
-	 * Àç°í ÄÚµå(stockId)·Î »èÁ¦
+	 * ì¬ê³  ì½”ë“œ(stockId)ë¡œ ì‚­ì œ
 	 * @param { stockId }
 	 * @return void
 	 * */

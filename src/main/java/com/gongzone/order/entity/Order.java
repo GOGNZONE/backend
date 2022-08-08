@@ -1,28 +1,31 @@
 package com.gongzone.order.entity;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.EntityListeners;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.gongzone.order.dto.OrderDTO;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gongzone.client.entity.Client;
+import com.gongzone.order.dto.OrderUpdateDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * Order ¿£Æ¼Æ¼
+ * ë°œì£¼ ì—”í‹°í‹°
  * @version 1.0
  * @author kangdonghyeon
  *
@@ -32,13 +35,15 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "`order`") // order´Â ¿¹¾à¾î¶ó¼­ ``ºÙ¿©ÁÖ¾úÀ½
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "t_order")
+@IdClass(OrderID.class)
 public class Order {
+	
 	@Id
 	@Column(name="order_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long orderId;
-	
 	
 	@Column(name="order_production_name", length=30)
 	@NotNull
@@ -83,55 +88,27 @@ public class Order {
 	@NotNull(message = "orderDate must not be null")
 	private LocalDateTime orderDate;
 	
-	@Column(name="fk_client_id")
-	private Long fkClientId;
-	
+	@Id
+	@JoinColumn(name="fk_client_id",nullable = true)
+	@JsonIgnore
+//	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Client.class)
+	@ManyToOne
+	private Client client;
 
-	
 	/**
-	 * ¹ßÁÖ ¼öÁ¤
+	 * ë°œì£¼ ìˆ˜ì •
 	 * @param {orderDTO}
 	 * @return  void 
 	 */
-	public void updateOrder(OrderDTO orderDTO) {
-		this.orderProductionName = orderDTO.getOrderProductionName();
-		this.orderProductionBrandName = orderDTO.getOrderProductionBrandName();
-		this.orderProductionPrice = orderDTO.getOrderProductionPrice();
-		this.orderProductionQuantity = orderDTO.getOrderProductionQuantity();
-		this.orderProuctionFile = orderDTO.getOrderProuctionFile();
-		this.orderProductionStandard = orderDTO.getOrderProductionStandard();
-		this.orderProductionUnit = orderDTO.getOrderProductionUnit();
-		this.orderProductionDescription = orderDTO.getOrderProductionDescription();
-		this.orderProductionEndDate = orderDTO.getOrderProductionEndDate();
+	public void updateOrder(OrderUpdateDTO updateDTO) {
+		this.orderProductionName = updateDTO.getOrderProductionName();
+		this.orderProductionBrandName = updateDTO.getOrderProductionBrandName();
+		this.orderProductionPrice = updateDTO.getOrderProductionPrice();
+		this.orderProductionQuantity = updateDTO.getOrderProductionQuantity();
+		this.orderProuctionFile = updateDTO.getOrderProuctionFile();
+		this.orderProductionStandard = updateDTO.getOrderProductionStandard();
+		this.orderProductionUnit = updateDTO.getOrderProductionUnit();
+		this.orderProductionDescription = updateDTO.getOrderProductionDescription();
+		this.orderProductionEndDate = updateDTO.getOrderProductionEndDate();
 	}
-	
-	
-	/**
-	 * OrderEntity¸¦ OrderDTO·Î º¯°æ
-	 * @param {Order}
-	 * @return OrderDTO
-	 */
-	
-	public OrderDTO toDTO(Order OrderEntity) {
-		OrderDTO orderDTO = OrderDTO.builder()
-				.orderId(OrderEntity.getOrderId())
-				.orderProductionName(OrderEntity.getOrderProductionName())
-				.orderProductionBrandName(OrderEntity.getOrderProductionBrandName())
-				.orderProductionPrice(OrderEntity.getOrderProductionPrice())
-				.orderProductionQuantity(OrderEntity.getOrderProductionQuantity())
-				.orderProuctionFile(OrderEntity.getOrderProuctionFile())
-				.orderProductionStandard(OrderEntity.getOrderProductionStandard())
-				.orderProductionUnit(OrderEntity.getOrderProductionUnit())
-				.orderProductionDescription(OrderEntity.getOrderProductionDescription())
-				.orderProductionEndDate(OrderEntity.getOrderProductionEndDate())
-				.orderDate(OrderEntity.getOrderDate())
-				.fkClientId(OrderEntity.getFkClientId())
-				.build();
-		
-		return orderDTO;
-	}
-	
-	
-	
-	
 }
