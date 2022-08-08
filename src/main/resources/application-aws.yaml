@@ -7,7 +7,7 @@ cloud:
     stack:
       auto: 'false'
     credentials:
-      instanceProfile: 'true' 
+      instanceProfile: 'true'
       
       
   
