@@ -66,12 +66,11 @@ public class ApiEmployeeController {
 			@Validated @RequestBody UpdateEmployeeDto requestDto) {
 		try {
 			employeeService.updateEmployee(employeeId, requestDto);
-			return ResponseEntity.ok("수정 성공");
 		} catch (Exception e) {
 			e.printStackTrace();
 			// log 추가
 		}
-		return null;
+		return ResponseEntity.ok("수정 성공");
 	}
 	
 	/**

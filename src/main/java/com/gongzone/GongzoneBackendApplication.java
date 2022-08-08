@@ -13,7 +13,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAspectJAutoProxy
 @EnableScheduling
 @SpringBootApplication
-
 @EntityScan(basePackages = { 
     "com.gongzone.production.entity", 
     "com.gongzone.client.entity",
