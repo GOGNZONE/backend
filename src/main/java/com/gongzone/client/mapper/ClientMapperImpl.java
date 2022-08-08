@@ -23,6 +23,7 @@ public class ClientMapperImpl implements ClientMapper {
 
         ClientDto.ClientDtoBuilder clientDto = ClientDto.builder();
 
+        clientDto.clientId( e.getClientId() );
         clientDto.clientName( e.getClientName() );
         clientDto.clientManager( e.getClientManager() );
         clientDto.clientTel( e.getClientTel() );
@@ -41,6 +42,7 @@ public class ClientMapperImpl implements ClientMapper {
 
         Client.ClientBuilder client = Client.builder();
 
+        client.clientId( d.getClientId() );
         client.clientName( d.getClientName() );
         client.clientManager( d.getClientManager() );
         client.clientTel( d.getClientTel() );

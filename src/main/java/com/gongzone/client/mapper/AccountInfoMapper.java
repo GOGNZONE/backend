@@ -30,4 +30,21 @@ public interface AccountInfoMapper extends GenericMapper<AccountInfoDto, ClientA
 
 	        return accountInfoDto.build();
 	}
+	
+	@Override
+	default ClientAccount toEntity(AccountInfoDto d) {
+		  if ( d == null ) {
+	            return null;
+	        }
+
+	        ClientAccount.ClientAccountBuilder clientAccount = ClientAccount.builder();
+
+	        clientAccount.accountId( d.getAccountId() );
+	        clientAccount.accountBank( d.getAccountBank() );
+	        clientAccount.accountNumber( d.getAccountNumber() );
+	        clientAccount.accountDepositor( d.getAccountDepositor() );
+	        clientAccount.client( d.getClient() );
+
+	        return clientAccount.build();
+	}
 }
