@@ -47,7 +47,7 @@ public class ClientAccount {
 	@NotNull(message = "depositor must not be null")
 	private String accountDepositor;
 	
-	@OneToOne(orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToOne
 	@JoinColumn(name = "client_id")
 	@NotNull(message = "client must not be null")
 	@JsonIgnore
