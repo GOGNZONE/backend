@@ -65,9 +65,8 @@ gradle-app.setting
 
 ### properties ###
 application.properties
-*.yaml
 *.yml
+*.yaml
 src/main/resources/application-aws.yaml
 src/main/resources/application-credentials.yaml
 src/main/resources/application.yaml
-src/main/resources/application.yml

@@ -13,32 +13,42 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAspectJAutoProxy
 @EnableScheduling
 @SpringBootApplication
+// entity
 @EntityScan(basePackages = { 
-		"com.gongzone.production.entity",
+		"com.gongzone.production.entity", 
 		"com.gongzone.client.entity",
-		"com.gongzone.employee.entity" })
+		"com.gongzone.employee.entity",
+		"com.gongzone.release.entity",
+		"com.gongzone.delivery.entity"})
 
+// Repository
 @EnableJpaRepositories(basePackages = { 
 		"com.gongzone.production.repository",
 		"com.gongzone.employee.repository",
+		"com.gongzone.release.repository",
 		"com.gongzone.client.repository"})
 
 @ComponentScan(basePackages = { 
+		"com.gongzone.common.errors",
+    
+    // RestController
 		"com.gongzone.employee.apiController",
 		"com.gongzone.production.apiController",
 		"com.gongzone.client.apiController",
-		
+    "com.gongzone.release.apiController",
+    
+    // serivce
 		"com.gongzone.employee.service",
 		"com.gongzone.production.service",
 		"com.gongzone.client.service",
-
-		"com.gongzone.employee.mapper",
-		"com.gongzone.production.mapper",
-		"com.gongzone.client.mapper",
-		
+		"com.gongzone.release.service",
+		"com.gongzone.production.service", 
+    
+    // DTO
 		"com.gongzone.employee.dto",
 		"com.gongzone.production.dto" ,
-		"com.gongzone.client.dto"
+		"com.gongzone.client.dto",
+		"com.gongzone.release.dto",
 		})
 public class GongzoneBackendApplication {
 
