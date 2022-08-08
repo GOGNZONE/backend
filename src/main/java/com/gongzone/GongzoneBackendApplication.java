@@ -26,7 +26,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 , "com.gongzone.order.dto", "com.gongzone.bom.dto", "com.gongzone.storage.dto", "com.gongzone.stock.dto"
 , "com.gongzone.order.service", "com.gongzone.bom.service", "com.gongzone.storage.service", "com.gongzone.stock.service"
 , "com.gongzone.order.controller", "com.gongzone.bom.controller", "com.gongzone.storage.controller", "com.gongzone.stock.controller"
-, "com.gongzone.order.mapper", "com.gongzone.bom.mapper", "com.gongzone.storage.mapper", "com.gongzone.stock.mapper"})
+, "com.gongzone.order.mapper", "com.gongzone.bom.mapper", "com.gongzone.storage.mapper", "com.gongzone.stock.mapper"
+, "com.gongzone.s3.config", "com.gongzone.s3.controller", "com.gongzone.s3.service"
+})
 public class GongzoneBackendApplication {
 
 //    @Bean
