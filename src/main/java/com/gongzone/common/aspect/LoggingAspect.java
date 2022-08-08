@@ -1,4 +1,4 @@
-package com.gongzone.aspect;
+package com.gongzone.common.aspect;
 
 import java.util.Arrays;
 

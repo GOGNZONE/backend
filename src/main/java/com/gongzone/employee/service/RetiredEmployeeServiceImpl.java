@@ -2,11 +2,13 @@ package com.gongzone.employee.service;
 
 import java.util.List;
 
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.employee.dto.RetiredEmployeeDto;
 import com.gongzone.employee.entity.RetiredEmployee;
+import com.gongzone.employee.mapper.RetiredEmployeeMapper;
 import com.gongzone.employee.mapper.RetiredEmployeeMapperImpl;
 import com.gongzone.employee.repository.RetiredEmployeeRepository;
 
@@ -17,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class RetiredEmployeeServiceImpl implements RetiredEmployeeService {
 	
 	private final RetiredEmployeeRepository retiredEmployeeRepository;
-	private final RetiredEmployeeMapperImpl retiredEmployeeMapper;
+	private final RetiredEmployeeMapper retiredEmployeeMapper = Mappers.getMapper(RetiredEmployeeMapper.class);
 	
 	/**
 	 * 전체 퇴사자 조회

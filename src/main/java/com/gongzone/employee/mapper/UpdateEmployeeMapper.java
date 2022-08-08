@@ -2,9 +2,9 @@ package com.gongzone.employee.mapper;
 
 import org.mapstruct.Mapper;
 
+import com.gongzone.common.mapper.GenericMapper;
 import com.gongzone.employee.dto.UpdateEmployeeDto;
 import com.gongzone.employee.entity.Employee;
-import com.gongzone.mapper.GenericMapper;
 
 /**
  * Update Employee Mapping Iterface

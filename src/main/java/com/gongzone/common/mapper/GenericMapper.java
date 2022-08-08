@@ -1,4 +1,4 @@
-package com.gongzone.mapper;
+package com.gongzone.common.mapper;
 
 import java.util.List;
 
