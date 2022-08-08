@@ -3,6 +3,7 @@ package com.gongzone.client.entity;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -40,7 +42,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @EntityListeners(AuditingEntityListener.class)
-public class Client {
+public class Client implements Persistable<Long> {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "client_id")
@@ -76,7 +78,7 @@ public class Client {
 	@JsonIgnore
 	private Employee employee;
 	
-	@OneToOne(mappedBy = "client", fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	private ClientAccount clientAccount;
 	
@@ -100,6 +102,16 @@ public class Client {
 	@PrePersist
 	public void onPrePersist() {
 		this.clientRegisteredDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+	}
+
+	@Override
+	public Long getId() {
+		return clientId;
+	}
+
+	@Override
+	public boolean isNew() {
+		return this.clientRegisteredDate == null;
 	}
 	
 }
