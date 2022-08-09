@@ -103,7 +103,8 @@ public class ReleaseServiceImpl implements ReleaseService {
 	public void deleteRelease(final Long releaseId) throws RestApiException {
 		Release release = releaseRepository.findByReleaseId(releaseId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		releaseRepository.deleteRelease(releaseId);
+//		releaseRepository.deleteRelease(releaseId);
+		releaseRepository.delete(release);
 	}
 
 	
