@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.bom.dto.BOMDTO;
+import com.gongzone.bom.dto.BOMListDTO;
 import com.gongzone.bom.dto.BOMUpdateDTO;
 import com.gongzone.bom.service.BOMServiceImpl;
 
@@ -36,7 +37,7 @@ public class BOMController {
 	 *  @return List<BOMDTO>
 	 */
 	@GetMapping("/list")
-	public List<BOMDTO> findBOM(){
+	public List<BOMListDTO> findBOM(){
 		return bomService.findBOM();
 	}
 	

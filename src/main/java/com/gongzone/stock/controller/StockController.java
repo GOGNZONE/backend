@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.stock.dto.StockDTO;
+import com.gongzone.stock.dto.StockListDTO;
 import com.gongzone.stock.dto.StockUpdateDTO;
 import com.gongzone.stock.service.StockServiceImpl;
 
@@ -35,7 +36,7 @@ public class StockController {
 	 *  @return List<StockDTO>
 	 */
 	@GetMapping("/list")
-	public List<StockDTO> getStock(){
+	public List<StockListDTO> getStock(){
 		return stockService.findStock();
 	}
 	

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.order.dto.OrderDTO;
+import com.gongzone.order.dto.OrderListDTO;
 import com.gongzone.order.dto.OrderUpdateDTO;
 import com.gongzone.order.service.OrderServiceImpl;
 
@@ -37,8 +38,7 @@ public class OrderController {
 	 *  @return  List<OrderDTO>
 	 */
 	@GetMapping("/list")
-	public List<OrderDTO> findOrder(){
-		System.out.println(orderService.findOrder());
+	public List<OrderListDTO> findOrder(){
 		return orderService.findOrder();
 	}
 	
@@ -55,14 +55,13 @@ public class OrderController {
 	
 	
 	/**
-	 * 발주 등록
-	 * @param { OrderDTO }
+	 * 거래처 코드로(clientId) 발주 등록
+	 * @param { clientId, OrderDTO }
 	 * @return void
 	 * */
-	@PostMapping("")
-	public void insertOrder(@RequestBody OrderDTO orderDTO) {
-//		System.out.println(orderDTO);
-		orderService.insertOrder(orderDTO);
+	@PostMapping("/{clientId}")
+	public void insertOrder(@PathVariable Long clientId,@RequestBody OrderDTO orderDto) {
+		orderService.insertOrder(clientId, orderDto);
 	}
 	
 	
@@ -72,7 +71,7 @@ public class OrderController {
 	 * @return void
 	 * */
 	@PutMapping("/{orderId}")
-	public void updateOrder(@PathVariable Long orderId, OrderUpdateDTO updateDto) {
+	public void updateOrder(@PathVariable Long orderId, @RequestBody OrderUpdateDTO updateDto) {
 		orderService.updateOrder(orderId, updateDto);
 	}
 	

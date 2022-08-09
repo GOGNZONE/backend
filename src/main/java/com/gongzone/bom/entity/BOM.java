@@ -20,7 +20,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gongzone.bom.dto.BOMUpdateDTO;
-import com.gongzone.production.entity.Production;
 import com.gongzone.storage.entity.Storage;
 
 import lombok.AllArgsConstructor;
@@ -87,12 +86,7 @@ public class BOM {
 	@ColumnDefault("0")
 	@NotNull
 	private int bomRequiredQuntity;
-	
-	@NotNull
-	@JoinColumn(name="fk_production_bom_id")
-	@ManyToOne(targetEntity = Production.class)
-	private Production production;
-	
+		
 	@JoinColumn(name="fk_stroage_id")
 	@ManyToOne(targetEntity = Storage.class)
 	@NotNull

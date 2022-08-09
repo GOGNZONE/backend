@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.stock.Repository.StockRepository;
 import com.gongzone.stock.dto.StockDTO;
+import com.gongzone.stock.dto.StockListDTO;
 import com.gongzone.stock.dto.StockUpdateDTO;
 import com.gongzone.stock.entity.Stock;
+import com.gongzone.stock.mapper.StockListMapper;
 import com.gongzone.stock.mapper.StockMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -26,16 +28,16 @@ import lombok.RequiredArgsConstructor;
 public class StockServiceImpl implements StockService{
 	private final StockRepository stockRepo;
 	private final StockMapper stockMapper = Mappers.getMapper(StockMapper.class);
-	
+	private final StockListMapper stockListMapper = Mappers.getMapper(StockListMapper.class);
 	
 	/**
 	 *  전체 재고 조회
 	 *  @return List<StockDTO>
 	 */
 	@Override
-	public List<StockDTO> findStock() {
+	public List<StockListDTO> findStock() {
 		List<Stock> list = stockRepo.findAll();
-		return stockMapper.toDtoList(list);
+		return stockListMapper.toDtoList(list);
 	}
 
 	/**

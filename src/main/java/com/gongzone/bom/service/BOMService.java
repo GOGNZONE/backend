@@ -3,6 +3,7 @@ package com.gongzone.bom.service;
 import java.util.List;
 
 import com.gongzone.bom.dto.BOMDTO;
+import com.gongzone.bom.dto.BOMListDTO;
 import com.gongzone.bom.dto.BOMUpdateDTO;
 
 /**
@@ -15,7 +16,7 @@ public interface BOMService {
 	 *  전체 BOM 조회
 	 *  @return List<BOMDTO>
 	 */
-	public List<BOMDTO> findBOM();
+	public List<BOMListDTO> findBOM();
 	
 	/**
 	 * BOM코드(bomId)로 조회

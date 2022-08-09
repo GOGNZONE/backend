@@ -3,6 +3,7 @@ package com.gongzone.stock.service;
 import java.util.List;
 
 import com.gongzone.stock.dto.StockDTO;
+import com.gongzone.stock.dto.StockListDTO;
 import com.gongzone.stock.dto.StockUpdateDTO;
 
 
@@ -17,7 +18,7 @@ public interface StockService {
 	 *  전체 재고 조회
 	 *  @return List<StockDTO>
 	 */
-	public List<StockDTO> findStock();
+	public List<StockListDTO> findStock();
 	
 
 	/**

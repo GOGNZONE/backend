@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ClientDto {
-
+	
 	private Long clientId;
 	private String clientName;
 	private String clientManager;

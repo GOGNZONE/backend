@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.bom.dto.BOMDTO;
+import com.gongzone.bom.dto.BOMListDTO;
 import com.gongzone.bom.dto.BOMUpdateDTO;
 import com.gongzone.bom.entity.BOM;
+import com.gongzone.bom.mapper.BomListMapper;
 import com.gongzone.bom.mapper.BomMapper;
 import com.gongzone.bom.repository.BOMRepository;
 
@@ -25,16 +27,16 @@ import lombok.RequiredArgsConstructor;
 public class BOMServiceImpl implements BOMService{
 	private final BOMRepository bomRepo;
 	private final BomMapper bomMapper = Mappers.getMapper(BomMapper.class);
-	
+	private final BomListMapper bomListMapper = Mappers.getMapper(BomListMapper.class);
 	
 	/**
 	 *  전체 BOM 조회
 	 *  @return List<BOMDTO>
 	 */
 	@Override
-	public List<BOMDTO> findBOM() {
+	public List<BOMListDTO> findBOM() {
 		List<BOM> list = bomRepo.findAll();
-		return bomMapper.toDtoList(list);
+		return bomListMapper.toDtoList(list);
 	}
 
 	/**

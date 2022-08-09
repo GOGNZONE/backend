@@ -6,9 +6,13 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gongzone.client.entity.Client;
+import com.gongzone.client.repository.ClientRepository;
 import com.gongzone.order.dto.OrderDTO;
+import com.gongzone.order.dto.OrderListDTO;
 import com.gongzone.order.dto.OrderUpdateDTO;
 import com.gongzone.order.entity.Order;
+import com.gongzone.order.mapper.OrderListMapper;
 import com.gongzone.order.mapper.OrderMapper;
 import com.gongzone.order.repository.OrderRepository;
 
@@ -25,16 +29,17 @@ import lombok.RequiredArgsConstructor;
 public class OrderServiceImpl implements OrderService{
 	
 	private final OrderRepository orderRepo;
+	private final ClientRepository clientRepository;
 	private final OrderMapper orderMapper = Mappers.getMapper(OrderMapper.class);
-	
+	private final OrderListMapper orderListMapper = Mappers.getMapper(OrderListMapper.class);
 	/**
 	 *  전체 발주 조회
 	 *  @return  List<OrderDTO>
 	 */
 	@Override
-	public List<OrderDTO> findOrder() {
-		List<OrderDTO> list = orderMapper.toDtoList(orderRepo.findAll());
-		return list;
+	public List<OrderListDTO> findOrder() {
+		List<Order> list = orderRepo.findAll();
+		return orderListMapper.toDtoList(list);
 	}
 
 	
@@ -51,13 +56,15 @@ public class OrderServiceImpl implements OrderService{
 	
 	
 	/**
-	 * 발주 등록
-	 * @param { OrderDTO }
+	 * 거래처 코드로(clientId) 발주 등록
+	 * @param { clientId, OrderDTO }
 	 * @return void
 	 * */
 	@Override
-	public void insertOrder(OrderDTO orderDTO) {
-		orderRepo.save(toEntity(orderDTO));
+	public void insertOrder(Long clientId, OrderDTO orderDto) {
+		Client client = clientRepository.findById(clientId).orElseThrow();
+		orderDto.setClient(client);
+		orderRepo.save(toEntity(orderDto));
 		
 	}
 

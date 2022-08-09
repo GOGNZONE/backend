@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,7 +39,7 @@ import lombok.NoArgsConstructor;
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "t_order")
 @IdClass(OrderID.class)
-public class Order {
+public class Order implements Persistable<Long> {
 	
 	@Id
 	@Column(name="order_id")
@@ -110,5 +111,15 @@ public class Order {
 		this.orderProductionUnit = updateDTO.getOrderProductionUnit();
 		this.orderProductionDescription = updateDTO.getOrderProductionDescription();
 		this.orderProductionEndDate = updateDTO.getOrderProductionEndDate();
+	}
+
+	@Override
+	public Long getId() {
+		return orderId;
+	}
+
+	@Override
+	public boolean isNew() {
+		return this.orderDate == null;
 	}
 }

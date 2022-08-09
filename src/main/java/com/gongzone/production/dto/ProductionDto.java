@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class ProductionDto {
-	
 	private Long productionId;
 	
 	private String productionName;
