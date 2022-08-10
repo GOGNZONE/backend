@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.gongzone.employee.dto.EmployeeDto;
 import com.gongzone.employee.dto.EmployeeListDto;
+import com.gongzone.employee.dto.EmployeeResponseDto;
 import com.gongzone.employee.dto.UpdateEmployeeDto;
 
 /**
@@ -42,4 +43,19 @@ public interface EmployeeService {
 	 * @throws IllegalAccessException 
 	 * */
 	public void deleteEmployee(Long employeeId) throws IllegalAccessException;
+	
+	/**
+	 * 마이페이지
+	 * @return EmployeeResponseDto
+	 * @throws RuntimeException 
+	 * */
+	public EmployeeResponseDto getMyInfoBySecurity();
+	
+	/**
+	 * 비밀번호 변경
+	 * @param { employeeEmail, exPassword, newPassword }
+	 * @return EmployeeResponseDto
+	 * @throws RuntimeException 
+	 * */
+	public EmployeeResponseDto changeEmployeePassword(String employeeEmail, String exPassword, String newPassword);
 }
