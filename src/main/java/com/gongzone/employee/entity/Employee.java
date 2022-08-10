@@ -1,18 +1,21 @@
 package com.gongzone.employee.entity;
 
-
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -60,27 +63,38 @@ public class Employee {
 	@Column(name = "employee_role")
 	@Enumerated(value = EnumType.STRING)
 	@NotNull(message = "employee role must not be null")
-	@ColumnDefault("'STAFF'")
 	private EmployeeRole employeeRole;
 	
 	@Column(name = "employee_image", columnDefinition = "TEXT")
 	@ColumnDefault("NULL")
 	private String employeeImage;
+	@OneToMany(mappedBy = "employee", fetch = FetchType.EAGER, orphanRemoval = true)
+	@JsonIgnore
+	private List<Client> clients;
+	
 	
 	/**
-	 * 사원 수정
-	 * @param {UpdateEmployeeDto}
+	 * 유저 수정
+	 * 
+	 * 
+	 * @param {employeeName, employeePhone, employeeAddress, emmployeeEmail}
 	 * @return void
 	 */
-	public void updateEmployeeInfo(Employee employee) {
-		this.employeeName = employee.getEmployeeName();
-		this.employeePhone = employee.getEmployeePhone();
-		this.employeeAddress = employee.getEmployeeAddress();
-		this.employeeEmail = employee.getEmployeeEmail();
+	public void updateEmployeeInfo(
+			String employeeName,
+			String employeePhone,
+			String employeeAddress,
+			String employeeEmail) {
+		this.employeeName = employeeName;
+		this.employeePhone = employeePhone;
+		this.employeeAddress = employeeAddress;
+		this.employeeEmail = employeeEmail;
 	}
 	
 	/**
 	 * 패스워드 재설정
+	 * @throws AuthorizationException  authKey가 employeeId와 일치 하지 않습니다.
+	 * 
 	 * @param {employeePassword}
 	 * @return void
 	 */
