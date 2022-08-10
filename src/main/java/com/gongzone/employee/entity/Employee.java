@@ -65,15 +65,12 @@ public class Employee {
 	@Column(name = "employee_role")
 	@Enumerated(value = EnumType.STRING)
 	@NotNull(message = "employee role must not be null")
-
 	@ColumnDefault("'STAFF'")
-
 	private EmployeeRole employeeRole;
 	
 	@Column(name = "employee_image", columnDefinition = "TEXT")
 	@ColumnDefault("NULL")
 	private String employeeImage;
-	
 
 	/**
 	 * 사원 수정
@@ -90,8 +87,6 @@ public class Employee {
 	
 	/**
 	 * 패스워드 재설정
-
-
 	 * @param {employeePassword}
 	 * @return void
 	 */
