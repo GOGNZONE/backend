@@ -1,6 +1,8 @@
 package com.gongzone;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,6 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableJpaAuditing
 @EnableAspectJAutoProxy
 @EnableScheduling
+@EnableAutoConfiguration
 @SpringBootApplication
 @EntityScan(basePackages = { "com.gongzone.production.entity", "com.gongzone.client.entity",
 		"com.gongzone.employee.entity", "com.gongzone.order.entity", "com.gongzone.bom.entity",
@@ -30,14 +33,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 		"com.gongzone.order.service", "com.gongzone.bom.service", "com.gongzone.storage.service","com.gongzone.client.service","com.gongzone.release.service",
 		"com.gongzone.stock.service", "com.gongzone.s3.service", "com.gongzone.employee.mapper","com.gongzone.client.mapper","com.gongzone.release.mapper",
 		"com.gongzone.order.mapper", "com.gongzone.bom.mapper", "com.gongzone.storage.mapper",
-		"com.gongzone.stock.mapper", "com.gongzone.s3.config" })
-
+		"com.gongzone.stock.mapper", "com.gongzone.s3.config", "com.gongzone.config", "com.gongzone.security.jwt" })
+@SpringBootConfiguration
 public class GongzoneBackendApplication {
-
-//    @Bean
-//    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-//        return builder.build();
-//    }
 
 	public static void main(String[] args) {
 		SpringApplication.run(GongzoneBackendApplication.class, args);
