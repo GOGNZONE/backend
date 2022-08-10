@@ -1,4 +1,4 @@
-	package com.gongzone.s3.config;
+	package com.gongzone.config;
 
 
 import com.amazonaws.auth.AWSCredentials;
