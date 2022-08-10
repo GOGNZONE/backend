@@ -23,3 +23,6 @@ spring:
     include:
       - aws
       - credentials
+
+jwt:
+  secret:
