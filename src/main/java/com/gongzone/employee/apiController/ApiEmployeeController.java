@@ -7,13 +7,16 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gongzone.employee.dto.ChangePasswordRequestDto;
 import com.gongzone.employee.dto.EmployeeDto;
 import com.gongzone.employee.dto.EmployeeListDto;
+import com.gongzone.employee.dto.EmployeeResponseDto;
 import com.gongzone.employee.dto.UpdateEmployeeDto;
 import com.gongzone.employee.service.EmployeeServiceImpl;
 
@@ -89,5 +92,31 @@ public class ApiEmployeeController {
 			// log 추가
 		}
 		return null;
+	}
+	
+	/**
+	 * 마이페이지
+	 * @return EmployeeResponseDto
+	 * @throws RuntimeException 
+	 * */
+	@GetMapping("/mypage")
+	public ResponseEntity<EmployeeResponseDto> getMyInfoBySecurity() {
+		EmployeeResponseDto employeeResponseDto = employeeService.getMyInfoBySecurity();
+		System.out.println(employeeResponseDto.getEmployeeName());
+		return ResponseEntity.ok(employeeResponseDto);
+	}
+	
+	/**
+	 * 비밀번호 변경
+	 * @param { employeeEmail, exPassword, newPassword }
+	 * @return EmployeeResponseDto
+	 * @throws RuntimeException 
+	 * */
+	@PostMapping("/password")
+	public ResponseEntity<EmployeeResponseDto> changeEmployeePassword(@RequestBody ChangePasswordRequestDto requestDto) {
+		return ResponseEntity.ok(employeeService.changeEmployeePassword(
+				requestDto.getEmployeeEmail(),
+				requestDto.getExPassword(), 
+				requestDto.getNewPassword()));
 	}
 }
