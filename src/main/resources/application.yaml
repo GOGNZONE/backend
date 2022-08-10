@@ -1,14 +1,11 @@
 spring:
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: scott
     url: jdbc:mysql://localhost:3306/test
-
+    username: scott
     password: tiger
-  data:
-    jpa:
-      repositories:
-        enabled: "true"
+  
   jpa:
     open-in-view : 'false'
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -24,5 +21,9 @@ spring:
       - aws
       - credentials
 
+logging:
+  level:
+    com.gonzone: debug
+
 jwt:
-  secret:
+  secret: YmFsbG9vbi1wcm9qZWN0LWFpci13ZS1tYWRlLW1lc3Nlbmdlci1jYWxlbmRhci1lbGVjdHJvbmljQXBwcm92YWwtc3ByaW5nLXNlY3VyaXR5
