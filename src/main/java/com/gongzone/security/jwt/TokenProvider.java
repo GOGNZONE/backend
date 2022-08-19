@@ -11,10 +11,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.gongzone.config.SecurityUtil;
 import com.gongzone.employee.dto.TokenDto;
 
 import io.jsonwebtoken.Claims;
@@ -62,11 +64,13 @@ public class TokenProvider {
 	                .setExpiration(tokenExpiresIn)
 	                .signWith(key, SignatureAlgorithm.HS512)
 	                .compact();
+	        
 
 	        return TokenDto.builder()
 	                .grantType(BEARER_TYPE)
 	                .accessToken(accessToken)
 	                .tokenExpiresIn(tokenExpiresIn.getTime())
+	                .employeeRole(authorities)
 	                .build();
 	    }
 

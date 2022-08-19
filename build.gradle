@@ -30,10 +30,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	
-	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
-	implementation 'io.springfox:springfox-swagger2:2.9.2'
-	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
-	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
 	
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'

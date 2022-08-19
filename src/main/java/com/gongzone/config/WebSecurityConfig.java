@@ -26,6 +26,7 @@ public class WebSecurityConfig {
 	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 	private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 	
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -45,7 +46,8 @@ public class WebSecurityConfig {
 			
 			.and()
 			.authorizeRequests()
-			.antMatchers("/auth/**").permitAll()
+			.antMatchers("/api/auth/**").permitAll()
+			.antMatchers("/swagger-ui.html", "/swagger-ui/**").permitAll()
 			.anyRequest().authenticated()
 			
 			.and()

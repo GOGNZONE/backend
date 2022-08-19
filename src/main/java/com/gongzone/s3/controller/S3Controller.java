@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
  */
 
 @RestController
-@RequestMapping("/file")
+@RequestMapping("/api/file")
 @RequiredArgsConstructor
 public class S3Controller {
     private final S3Service service;
@@ -54,7 +54,7 @@ public class S3Controller {
    	 *  @param { fileName }
    	 *  @return String
    	 */	
-    @DeleteMapping("/delete/{fileName}")
+    @DeleteMapping("/{fileName}")
     public ResponseEntity<String> deleteFile(@PathVariable String fileName) {
         return new ResponseEntity<>(service.deleteFile(fileName), HttpStatus.OK);
     }
