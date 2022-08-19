@@ -5,11 +5,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.mapstruct.factory.Mappers;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gongzone.config.SecurityUtil;
 import com.gongzone.employee.dto.EmployeeDto;
 import com.gongzone.employee.dto.EmployeeListDto;
+import com.gongzone.employee.dto.EmployeeResponseDto;
 import com.gongzone.employee.dto.RetiredEmployeeDto;
 import com.gongzone.employee.dto.UpdateEmployeeDto;
 import com.gongzone.employee.entity.Employee;
@@ -28,10 +31,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	private final EmployeeRepository employeeRepository;
 	private final RetiredEmployeeRepository retiredEmployeeRepository;
+	
+	/* Mapper */
 	private final RetiredEmployeeMapper retiredEmployeeMapper = Mappers.getMapper(RetiredEmployeeMapper.class);
 	private final EmployeeMapper employeeMapper = Mappers.getMapper(EmployeeMapper.class);
 	private final EmployeeListMapper employeeListMapper = Mappers.getMapper(EmployeeListMapper.class);
 	private final UpdateEmployeeMapper updateEmployeeMapper = Mappers.getMapper(UpdateEmployeeMapper.class);
+	
+	/* Security */
+	private final PasswordEncoder passwordEncoder;
 	
 	/**
 	 * 전체 사원 조회
@@ -102,6 +110,39 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		retiredEmployeeRepository.save(retiredEmployeeMapper.toEntity(retiredEmployeeDto));
 		employeeRepository.delete(employee);
+	}
+
+	/**
+	 * 마이페이지
+	 * @return EmployeeResponseDto
+	 * @throws RuntimeException 
+	 * */
+	@Override
+	@Transactional(readOnly = true)
+	public EmployeeResponseDto getMyInfoBySecurity() {
+		return employeeRepository.findById(SecurityUtil.getCurrentEmployeeId())
+				.map(EmployeeResponseDto::of)
+				.orElseThrow(() -> new RuntimeException("로그인 사원 정보가 없습니다."));
+	}
+
+	/**
+	 * 비밀번호 변경
+	 * @param { employeeEmail, exPassword, newPassword }
+	 * @return EmployeeResponseDto
+	 * @throws RuntimeException 
+	 * */
+	@Override
+	@Transactional
+	public EmployeeResponseDto changeEmployeePassword(String employeeEmail, String exPassword, String newPassword) {
+		Employee employee = employeeRepository.findById(SecurityUtil.getCurrentEmployeeId()).orElseThrow(
+				() -> new RuntimeException("로그인 사원 정보가 없습니다."));
+		
+		if (!passwordEncoder.matches(exPassword, employee.getEmployeePassword())) {
+			throw new RuntimeException("비밀번호가 맞지 않습니다.");
+		}
+		
+		employee.updateEmployeePassword(passwordEncoder.encode(newPassword));
+		return EmployeeResponseDto.of(employeeRepository.save(employee));
 	}
 
 }

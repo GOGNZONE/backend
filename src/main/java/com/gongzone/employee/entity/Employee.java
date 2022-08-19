@@ -4,8 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.Table;
@@ -33,7 +31,7 @@ import lombok.NoArgsConstructor;
 
 public class Employee {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
 	@Column(name = "employee_id")
 	private Long employeeId;
 	
@@ -41,7 +39,6 @@ public class Employee {
 	@NotNull(message = "name must not be null")
 	private String employeeName;
 	
-
 	@Column(name = "employee_password", length = 100)
 	@NotNull(message = "password must not be null")
 	private String employeePassword;
@@ -55,25 +52,20 @@ public class Employee {
 	
 	@Column(name = "employee_phone", length = 18 ,unique = true)
 	private String employeePhone;
-	
 
 	@Column(name = "employee_hiredate")
 	@NotNull(message = "hiredate must not be null")
 	private String employeeHiredate;
-
 	
 	@Column(name = "employee_role")
 	@Enumerated(value = EnumType.STRING)
 	@NotNull(message = "employee role must not be null")
-
 	@ColumnDefault("'STAFF'")
-
 	private EmployeeRole employeeRole;
 	
 	@Column(name = "employee_image", columnDefinition = "TEXT")
 	@ColumnDefault("NULL")
 	private String employeeImage;
-	
 
 	/**
 	 * 사원 수정
@@ -90,8 +82,6 @@ public class Employee {
 	
 	/**
 	 * 패스워드 재설정
-
-
 	 * @param {employeePassword}
 	 * @return void
 	 */
