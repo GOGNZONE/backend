@@ -64,9 +64,8 @@ gradle-app.setting
 .metadata
 
 ### properties ###
-application.properties
-*.yml
-*.yaml
-src/main/resources/application-aws.yaml
-src/main/resources/application-credentials.yaml
-src/main/resources/application.yaml
+**/application-aws.yaml
+**/application-credentials.yaml
+**/application.properties
+**/application.yaml
+**/application.yml
