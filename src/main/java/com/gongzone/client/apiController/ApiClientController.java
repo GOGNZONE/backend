@@ -19,7 +19,6 @@ import com.gongzone.client.dto.ClientListDto;
 import com.gongzone.client.dto.UpdateClientDto;
 import com.gongzone.client.service.ClientServiceImple;
 
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -34,7 +33,7 @@ public class ApiClientController {
 	 *  전체 거래처 조회
 	 *  @return List<EmployeeListDto>
 	 */
-	@ApiOperation(value = "전체 거래처 조회", notes = "전체 거래처 조회")
+//	@ApiOperation(value = "전체 거래처 조회", notes = "전체 거래처 조회")
 	@GetMapping("/list")
 	public ResponseEntity<List<ClientListDto>> findAllClient() {
 		return ResponseEntity.ok(clientService.findAllClient());
@@ -47,7 +46,7 @@ public class ApiClientController {
 	 *  @param clientId Long
 	 *  @return List<EmployeeListDto>
 	 */
-	@ApiOperation(value = "특정 거래처 조회", notes = "특정 거래처 조회")
+//	@ApiOperation(value = "특정 거래처 조회", notes = "특정 거래처 조회")
 	@GetMapping("{clientId}")
 	public ResponseEntity<ClientInfoDto> findByClientId(@PathVariable Long clientId) {
 		try {
@@ -65,7 +64,7 @@ public class ApiClientController {
 	 *  @param ClientDto
 	 *  @return success -> "등록 성공"
 	 */
-	@ApiOperation(value = "거래처 등록", notes = "거래처 등록")
+//	@ApiOperation(value = "거래처 등록", notes = "거래처 등록")
 	@PostMapping("")
 	public ResponseEntity<String> saveClient(@RequestBody ClientDto clientDto) {
 		try {
@@ -85,7 +84,7 @@ public class ApiClientController {
 	 * @param UpdateClientDto
 	 * @return success -> "수정 성공"
 	 */
-	@ApiOperation(value = "특정 거래처 수정", notes = "특정 거래처 수정")
+//	@ApiOperation(value = "특정 거래처 수정", notes = "특정 거래처 수정")
 	@PutMapping("{clientId}")
 	public ResponseEntity<String> updateClient(@PathVariable Long clientId, @RequestBody UpdateClientDto requestDto) {
 		try {
@@ -104,7 +103,7 @@ public class ApiClientController {
 	 * @param clientId Long
 	 * @return success -> "수정 성공"
 	 */
-	@ApiOperation(value = "거래처 삭제", notes = "거래처 삭제")
+//	@ApiOperation(value = "거래처 삭제", notes = "거래처 삭제")
 	@DeleteMapping("{clientId}")
 	public ResponseEntity<String> deleteClient(@PathVariable Long clientId) {
 		try {

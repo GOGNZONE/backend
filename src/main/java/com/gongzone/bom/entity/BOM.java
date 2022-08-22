@@ -73,19 +73,14 @@ public class BOM {
 	@ColumnDefault("NULL")
 	private String bomDescription;
 	
-	@Column(name="bom_received_data")
+	@Column(name="bom_received_date")
 	@NotNull
 	@CreatedDate
-	private LocalDateTime bomReceivedData;
+	private LocalDateTime bomReceivedDate;
 	
 	@Column(name="bom_file")
 	@NotNull
 	private String bomFile;
-	
-	@Column(name="bom_required_quantity",length=6)
-	@ColumnDefault("0")
-	@NotNull
-	private int bomRequiredQuntity;
 		
 	@JoinColumn(name="fk_stroage_id")
 	@ManyToOne(targetEntity = Storage.class)
@@ -118,7 +113,6 @@ public class BOM {
 		this.bomUnit = updateDto.getBomUnit();
 		this.bomDescription = updateDto.getBomDescription();
 		this.bomFile = updateDto.getBomFile();
-		this.bomRequiredQuntity = updateDto.getBomRequiredQuntity();
 		
 	}
 

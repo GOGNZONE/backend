@@ -28,9 +28,8 @@ public class BOMDTO {
 	private String bomStandard;
 	private String bomUnit;
 	private String bomDescription;
-	private LocalDateTime bomReceivedData;
+	private LocalDateTime bomReceivedDate;
 	private String bomFile;
-	private int bomRequiredQuntity;
 	private Storage storage;
 	private BOM bomParent;
 
