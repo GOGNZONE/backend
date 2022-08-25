@@ -22,16 +22,14 @@ public class AuthApiController {
 
 	private final AuthServiceImpl authService;
 	
+	
 	/**
-	 * 사원 생성(회원가입)
-	 * @throws RuntimeException
-	 * @param EmployeeRequestDto
-	 * @return EmployeeResponseDto
+	 * 최조 ADMIN 계정 만들 때 사용
 	 * */
-	@PostMapping("/register")
-	public ResponseEntity<EmployeeResponseDto> registerEmployee(@RequestBody EmployeeRequestDto requestDto) {
-		return ResponseEntity.ok(authService.registerEmployee(requestDto));
-	}
+//	@PostMapping("/register")
+//	public ResponseEntity<EmployeeResponseDto> registerEmployee(@RequestBody EmployeeRequestDto requestDto) {
+//		return ResponseEntity.ok(authService.registerEmployee(requestDto));
+//	}
 	
 	/**
 	 * 로그인
