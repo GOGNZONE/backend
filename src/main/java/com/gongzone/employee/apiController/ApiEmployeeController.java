@@ -33,23 +33,31 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
-@Tag(name = "employee", description = "사원 관리 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/employee")
+@Tag(name = "employee", description = "사원 관리 API")
 public class ApiEmployeeController {
 
 	private final EmployeeServiceImpl employeeService;
 	private final AuthServiceImpl authService;
-	
+
 	/**
 	 * 사원 생성(회원가입)
+	 * 
 	 * @throws RuntimeException
 	 * @param EmployeeRequestDto
 	 * @return EmployeeResponseDto
-	 * */
+	 */
 	@PostMapping("/register")
-	public ResponseEntity<EmployeeResponseDto> registerEmployee(@RequestBody EmployeeRequestDto requestDto) {
+	@Operation(summary = "사원 등록", description = "사원 등록")
+	public ResponseEntity<EmployeeResponseDto> registerEmployee(@Parameter(
+			name = "test",
+			in = ParameterIn.PATH,
+			description = "test",
+			required = true,
+			example = "1"
+			) @RequestBody EmployeeRequestDto requestDto) {
 		return ResponseEntity.ok(authService.registerEmployee(requestDto));
 	}
 
@@ -62,8 +70,7 @@ public class ApiEmployeeController {
 			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = EmployeeListDto.class))),
 			@ApiResponse(responseCode = "400", description = "BAD REQUEST"),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND"),
-			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
-			})
+			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR") })
 	@GetMapping("/list")
 	public ResponseEntity<List<EmployeeListDto>> findAllEmployee() {
 		return ResponseEntity.ok(employeeService.findAllEmployee());
@@ -75,21 +82,17 @@ public class ApiEmployeeController {
 	 * @param employeeId Long
 	 * @return EmployeeDto
 	 */
-	@Operation(summary = "get employee", description = "특정 사원 정보 가져오기", responses = {
-			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = EmployeeDto.class))),
-			@ApiResponse(responseCode = "400", description = "BAD REQUEST"),
-			@ApiResponse(responseCode = "404", description = "NOT FOUND"),
-			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
-			})	
+	@Operation(summary = "test hello", description = "hello api example")
 	@GetMapping("{employeeId}")
-	public ResponseEntity<EmployeeDto> findByRetiredEmployeeId(@Parameter(name = "employee_id", description = "사원 번호", in = ParameterIn.PATH) @PathVariable Long employeeId) {
+	public ResponseEntity<EmployeeDto> findByRetiredEmployeeId(
+			@Parameter(name = "employee_id", description = "사원 번호", in = ParameterIn.PATH) @PathVariable Long employeeId) {
 		EmployeeDto employeeDto = null;
 		try {
-				  employeeDto = employeeService.findByEmployeeId(employeeId);
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
-			return ResponseEntity.ok(employeeDto);
+			employeeDto = employeeService.findByEmployeeId(employeeId);
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.ok(employeeDto);
 	}
 
 	/**
