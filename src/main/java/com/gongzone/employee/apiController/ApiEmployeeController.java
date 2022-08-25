@@ -50,13 +50,27 @@ public class ApiEmployeeController {
 	 * @return EmployeeResponseDto
 	 */
 	@PostMapping("/register")
-	@Operation(summary = "사원 등록", description = "사원 등록")
+	@Operation(summary = "사원 등록", description = "ADMIN 계정에서만 가능한 사원 등록 기능", responses = {
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = EmployeeResponseDto.class))),
+			@ApiResponse(responseCode = "400", description = "BAD REQUEST"),
+			@ApiResponse(responseCode = "404", description = "NOT FOUND"),
+			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR") })
 	public ResponseEntity<EmployeeResponseDto> registerEmployee(@Parameter(
-			name = "test",
+			name = "사원등록",
 			in = ParameterIn.PATH,
-			description = "test",
+			description = "사원 등록 정보",
 			required = true,
-			example = "1"
+			example = "{\r\n"
+					+ "    \"employeeId\" : 10000,\r\n"
+					+ "    \"employeeName\" : \"tester\",\r\n"
+					+ "    \"employeePassword\" : \"test\",\r\n"
+					+ "    \"employeeAddress\" : \"부산시\",\r\n"
+					+ "    \"employeeEmail\" : \"test@gmail.com\",\r\n"
+					+ "    \"employeePhone\" : \"010-9999-2334\",\r\n"
+					+ "    \"employeeHiredate\" : \"2022/08/10\",\r\n"
+					+ "    \"employeeImage\" : \"staff.png\",\r\n"
+					+ "    \"employeeRole\" : \"ADMIN\"\r\n"
+					+ "}"
 			) @RequestBody EmployeeRequestDto requestDto) {
 		return ResponseEntity.ok(authService.registerEmployee(requestDto));
 	}
@@ -66,7 +80,7 @@ public class ApiEmployeeController {
 	 * 
 	 * @return List<EmployeeListDto>
 	 */
-	@Operation(summary = "get employees", description = "사원 정보 list 가져오기", responses = {
+	@Operation(summary = "사원 리스트", description = "사원 정보 리스트 가져오기", responses = {
 			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = EmployeeListDto.class))),
 			@ApiResponse(responseCode = "400", description = "BAD REQUEST"),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND"),
@@ -82,7 +96,11 @@ public class ApiEmployeeController {
 	 * @param employeeId Long
 	 * @return EmployeeDto
 	 */
-	@Operation(summary = "test hello", description = "hello api example")
+	@Operation(summary = "사원 조회", description = "사원 번호로 사원 정보 조회", responses = {
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = EmployeeDto.class))),
+			@ApiResponse(responseCode = "400", description = "BAD REQUEST"),
+			@ApiResponse(responseCode = "404", description = "NOT FOUND"),
+			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR") })
 	@GetMapping("{employeeId}")
 	public ResponseEntity<EmployeeDto> findByRetiredEmployeeId(
 			@Parameter(name = "employee_id", description = "사원 번호", in = ParameterIn.PATH) @PathVariable Long employeeId) {
@@ -103,7 +121,12 @@ public class ApiEmployeeController {
 	 * @return success -> "수정 성공"
 	 */
 	@PutMapping("{employeeId}")
-	public ResponseEntity<String> updateEmployee(@PathVariable Long employeeId,
+	@Operation(summary = "사원 수정", description = "사원 번호로 사원 정보 조회 후 사원 정보 수정", responses = {
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "수정 성공")),
+			@ApiResponse(responseCode = "400", description = "BAD REQUEST"),
+			@ApiResponse(responseCode = "404", description = "NOT FOUND"),
+			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR") })
+	public ResponseEntity<String> updateEmployee(@Parameter(name = "employee_id", description = "사원 번호", in = ParameterIn.PATH) @PathVariable Long employeeId,
 			@Validated @RequestBody final UpdateEmployeeDto requestDto) {
 		try {
 			employeeService.updateEmployee(employeeId, requestDto);
@@ -121,7 +144,12 @@ public class ApiEmployeeController {
 	 * @return success -> "삭제 성공"
 	 */
 	@DeleteMapping("{employeeId}")
-	public ResponseEntity<String> deleteEmployee(@PathVariable Long employeeId) {
+	@Operation(summary = "사원 삭제", description = "사원 번호로 사원 정보 삭제", responses = {
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "삭제 성공")),
+			@ApiResponse(responseCode = "400", description = "BAD REQUEST"),
+			@ApiResponse(responseCode = "404", description = "NOT FOUND"),
+			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR") })
+	public ResponseEntity<String> deleteEmployee(@Parameter(name = "employee_id", description = "사원 번호", in = ParameterIn.PATH) @PathVariable Long employeeId) {
 		try {
 			employeeService.deleteEmployee(employeeId);
 			return ResponseEntity.ok("삭제 성공");
@@ -138,6 +166,11 @@ public class ApiEmployeeController {
 	 * @return EmployeeResponseDto
 	 * @throws RuntimeException
 	 */
+	@Operation(summary = "마이페이지", description = "로그인 된 사원의 마이페이지", responses = {
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = EmployeeResponseDto.class))),
+			@ApiResponse(responseCode = "400", description = "BAD REQUEST"),
+			@ApiResponse(responseCode = "404", description = "NOT FOUND"),
+			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR") })
 	@GetMapping("/mypage")
 	public ResponseEntity<EmployeeResponseDto> getMyInfoBySecurity() {
 		EmployeeResponseDto employeeResponseDto = employeeService.getMyInfoBySecurity();
