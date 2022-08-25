@@ -9,4 +9,7 @@
 .DS_Store
 application.properties
 *.properties
+**/application.properties
+**/application.yaml
+**/application.yml
 
