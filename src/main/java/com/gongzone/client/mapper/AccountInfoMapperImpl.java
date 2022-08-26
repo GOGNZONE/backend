@@ -9,43 +9,11 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-04T17:11:18+0900",
-    comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 11.0.15 (Eclipse Adoptium)"
+    date = "2022-08-25T15:58:16+0900",
+    comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
 public class AccountInfoMapperImpl implements AccountInfoMapper {
-
-    @Override
-    public AccountInfoDto toDto(ClientAccount e) {
-        if ( e == null ) {
-            return null;
-        }
-
-        AccountInfoDto.AccountInfoDtoBuilder accountInfoDto = AccountInfoDto.builder();
-
-        accountInfoDto.accountId( e.getAccountId() );
-        accountInfoDto.accountBank( e.getAccountBank() );
-        accountInfoDto.accountNumber( e.getAccountNumber() );
-        accountInfoDto.accountDepositor( e.getAccountDepositor() );
-
-        return accountInfoDto.build();
-    }
-
-    @Override
-    public ClientAccount toEntity(AccountInfoDto d) {
-        if ( d == null ) {
-            return null;
-        }
-
-        ClientAccount.ClientAccountBuilder clientAccount = ClientAccount.builder();
-
-        clientAccount.accountId( d.getAccountId() );
-        clientAccount.accountBank( d.getAccountBank() );
-        clientAccount.accountNumber( d.getAccountNumber() );
-        clientAccount.accountDepositor( d.getAccountDepositor() );
-
-        return clientAccount.build();
-    }
 
     @Override
     public List<AccountInfoDto> toDtoList(List<ClientAccount> entityList) {

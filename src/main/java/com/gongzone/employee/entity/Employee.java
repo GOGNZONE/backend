@@ -77,7 +77,7 @@ public class Employee {
 		this.employeePhone = employee.getEmployeePhone();
 		this.employeeAddress = employee.getEmployeeAddress();
 		this.employeeEmail = employee.getEmployeeEmail();
-
+		this.employeeImage = employee.getEmployeeImage();
 	}
 	
 	/**

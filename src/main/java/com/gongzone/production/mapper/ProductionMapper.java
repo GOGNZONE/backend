@@ -13,5 +13,5 @@ import com.gongzone.production.entity.Production;
  * */
 @Mapper(componentModel = "spring")
 public interface ProductionMapper extends GenericMapper<ProductionDto, Production> {
-	
+
 }
