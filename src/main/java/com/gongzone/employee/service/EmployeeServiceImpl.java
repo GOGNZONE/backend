@@ -4,22 +4,23 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.mapstruct.factory.Mappers;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.config.SecurityUtil;
+import com.gongzone.employee.dto.ChangeMyProfile;
 import com.gongzone.employee.dto.EmployeeDto;
 import com.gongzone.employee.dto.EmployeeListDto;
 import com.gongzone.employee.dto.EmployeeResponseDto;
 import com.gongzone.employee.dto.RetiredEmployeeDto;
-import com.gongzone.employee.dto.UpdateEmployeeDto;
 import com.gongzone.employee.entity.Employee;
 import com.gongzone.employee.mapper.EmployeeListMapper;
 import com.gongzone.employee.mapper.EmployeeMapper;
 import com.gongzone.employee.mapper.RetiredEmployeeMapper;
-import com.gongzone.employee.mapper.UpdateEmployeeMapper;
 import com.gongzone.employee.repository.EmployeeRepository;
 import com.gongzone.employee.repository.RetiredEmployeeRepository;
 
@@ -36,7 +37,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private final RetiredEmployeeMapper retiredEmployeeMapper = Mappers.getMapper(RetiredEmployeeMapper.class);
 	private final EmployeeMapper employeeMapper = Mappers.getMapper(EmployeeMapper.class);
 	private final EmployeeListMapper employeeListMapper = Mappers.getMapper(EmployeeListMapper.class);
-	private final UpdateEmployeeMapper updateEmployeeMapper = Mappers.getMapper(UpdateEmployeeMapper.class);
 	
 	/* Security */
 	private final PasswordEncoder passwordEncoder;
@@ -57,7 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * 특정 사원 조회
 	 * 
 	 * @param { employeeId }
-	 * @return List<EmployeeListDto>
+	 * @return EmployeeInfoDto
 	 * @throws IllegalAccessException 
 	 */
 	@Override
@@ -67,30 +67,47 @@ public class EmployeeServiceImpl implements EmployeeService {
 				() -> new IllegalAccessException("존재하지 않는 사원입니다."));
 		return employeeMapper.toDto(employee);
 	}
+	
+	/**
+	 * 마이페이지
+	 * @return EmployeeResponseDto
+	 * @throws RuntimeException 
+	 * */
+	@Override
+	@Transactional(readOnly = true)
+	public EmployeeResponseDto getMyInfoBySecurity() {
+		return employeeRepository.findById(SecurityUtil.getCurrentEmployeeId())
+				.map(EmployeeResponseDto::of)
+				.orElseThrow(() -> new RuntimeException("로그인 사원 정보가 없습니다."));
+	}
 
 	/**
-	 * 사원 정보 수정
-	 * 
-	 * @param { employeeId, UpdateEmployeeDto }
-	 * @return void
-	 * @throws IllegalAccessException 
-	 */
+	 * 마이페이지 수정
+	 * @param { employeeEmail, exPassword, newPassword, employeeName, employeePhone, employeeAddress, employeeImage } ChangeMyProfile
+	 * @return EmployeeResponseDto
+	 * @throws RuntimeException 
+	 * */
 	@Override
 	@Transactional
-	public void updateEmployee(Long employeeId, UpdateEmployeeDto updateDto) throws IllegalAccessException {
-		Employee employee = employeeRepository.findById(employeeId).orElseThrow(
-				() -> new IllegalAccessException("존재하지 않는 사원 입니다."));
+	public EmployeeResponseDto changeEmployeeProfile(@Valid ChangeMyProfile requestDto) throws RuntimeException {
+		Employee employee = employeeRepository.findById(SecurityUtil.getCurrentEmployeeId()).orElseThrow(
+				() -> new RuntimeException("로그인 사원 정보가 없습니다."));
 		
-		employee.updateEmployeeInfo(updateEmployeeMapper.toEntity(updateDto));
-	}	
-
+//		if (!passwordEncoder.matches(requestDto.getExPassword(), employee.getEmployeePassword())) {
+//			throw new RuntimeException("비밀번호가 맞지 않습니다.");
+//		}
+		
+		employee.updateEmployeePassword(passwordEncoder.encode(requestDto.getNewPassword()));
+		employee.updateEmployeeInfo(requestDto.toEntity());
+		return EmployeeResponseDto.of(employeeRepository.save(employee));
+	}
+	
 	/**
-	 * 사원 정보 삭제
-	 * 
+	 * 특정 사원 삭제
 	 * @param { employeeId }
 	 * @return void
 	 * @throws IllegalAccessException 
-	 */
+	 * */
 	@Override
 	@Transactional
 	public void deleteEmployee(Long employeeId) throws IllegalAccessException {
@@ -112,37 +129,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeRepository.delete(employee);
 	}
 
-	/**
-	 * 마이페이지
-	 * @return EmployeeResponseDto
-	 * @throws RuntimeException 
-	 * */
-	@Override
-	@Transactional(readOnly = true)
-	public EmployeeResponseDto getMyInfoBySecurity() {
-		return employeeRepository.findById(SecurityUtil.getCurrentEmployeeId())
-				.map(EmployeeResponseDto::of)
-				.orElseThrow(() -> new RuntimeException("로그인 사원 정보가 없습니다."));
-	}
 
-	/**
-	 * 비밀번호 변경
-	 * @param { employeeEmail, exPassword, newPassword }
-	 * @return EmployeeResponseDto
-	 * @throws RuntimeException 
-	 * */
-	@Override
-	@Transactional
-	public EmployeeResponseDto changeEmployeePassword(String employeeEmail, String exPassword, String newPassword) {
-		Employee employee = employeeRepository.findById(SecurityUtil.getCurrentEmployeeId()).orElseThrow(
-				() -> new RuntimeException("로그인 사원 정보가 없습니다."));
-		
-		if (!passwordEncoder.matches(exPassword, employee.getEmployeePassword())) {
-			throw new RuntimeException("비밀번호가 맞지 않습니다.");
-		}
-		
-		employee.updateEmployeePassword(passwordEncoder.encode(newPassword));
-		return EmployeeResponseDto.of(employeeRepository.save(employee));
-	}
+
+	
 
 }
