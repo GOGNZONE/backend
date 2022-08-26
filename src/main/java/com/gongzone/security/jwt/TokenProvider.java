@@ -11,12 +11,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.gongzone.config.SecurityUtil;
 import com.gongzone.employee.dto.TokenDto;
 
 import io.jsonwebtoken.Claims;
@@ -35,7 +33,7 @@ public class TokenProvider {
 
 	private static final String AUTHORITIES_KEY = "auth";
 	private static final String BEARER_TYPE = "bearer";
-	private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30;
+	private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24;
 	private final Key key;
 
 	// secretKey 생성
