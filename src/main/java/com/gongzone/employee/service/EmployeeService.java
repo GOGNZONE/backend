@@ -2,10 +2,10 @@ package com.gongzone.employee.service;
 
 import java.util.List;
 
+import com.gongzone.employee.dto.ChangeMyProfile;
 import com.gongzone.employee.dto.EmployeeDto;
 import com.gongzone.employee.dto.EmployeeListDto;
 import com.gongzone.employee.dto.EmployeeResponseDto;
-import com.gongzone.employee.dto.UpdateEmployeeDto;
 
 /**
  * Employee Service Interface
@@ -29,14 +29,6 @@ public interface EmployeeService {
 	public EmployeeDto findByEmployeeId(Long employeeId) throws IllegalAccessException;
 	
 	/**
-	 * 사원 수정
-	 * @param { employeeInfoDto }
-	 * @return void
-	 * @throws IllegalAccessException 
-	 * */
-	public void updateEmployee(Long employeeId,UpdateEmployeeDto updateDto) throws IllegalAccessException;
-	
-	/**
 	 * 특정 사원 삭제
 	 * @param { employeeId }
 	 * @return void
@@ -52,10 +44,10 @@ public interface EmployeeService {
 	public EmployeeResponseDto getMyInfoBySecurity();
 	
 	/**
-	 * 비밀번호 변경
-	 * @param { employeeEmail, exPassword, newPassword }
+	 * 마이페이지 수정
+	 * @param { employeeEmail, exPassword, newPassword, employeeName, employeePhone, employeeAddress, employeeImage } ChangeMyProfile
 	 * @return EmployeeResponseDto
 	 * @throws RuntimeException 
 	 * */
-	public EmployeeResponseDto changeEmployeePassword(String employeeEmail, String exPassword, String newPassword);
+	public EmployeeResponseDto changeEmployeeProfile(ChangeMyProfile changeMyProfile);
 }
