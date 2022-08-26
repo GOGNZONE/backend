@@ -6,6 +6,8 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gongzone.client.entity.Client;
+import com.gongzone.client.repository.ClientRepository;
 import com.gongzone.common.errors.errorcode.CommonErrorCode;
 import com.gongzone.common.errors.exception.RestApiException;
 import com.gongzone.production.dto.ProductionDto;
@@ -28,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 public class ProductionServiceImpl implements ProductionService {
 	
 	private final ProductionRepository productionRepository;
+	private final ClientRepository clientRepository;
 	private final ProductionListMapper productionListMapper = Mappers.getMapper(ProductionListMapper.class);
 	private final ProductionMapper productionMapper = Mappers.getMapper(ProductionMapper.class);
 	
@@ -63,6 +66,8 @@ public class ProductionServiceImpl implements ProductionService {
 	@Override
 	@Transactional
 	public void insertProduction(final ProductionDto productionDto) {
+		Client client = clientRepository.findById(productionDto.getClient().getClientId()).orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+		productionDto.setClient(client);
 		productionRepository.save(toEntity(productionDto));
 	}
 	
