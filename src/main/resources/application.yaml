@@ -27,3 +27,19 @@ logging:
 
 jwt:
   secret: YmFsbG9vbi1wcm9qZWN0LWFpci13ZS1tYWRlLW1lc3Nlbmdlci1jYWxlbmRhci1lbGVjdHJvbmljQXBwcm92YWwtc3ByaW5nLXNlY3VyaXR5
+  
+springdoc:
+  version: '@project.version@'
+  api-docs:
+    path: /api-docs
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha
+    path: /swagger-ui.html
+    disable-swagger-default-url: true
+    display-query-params-without-oauth2: true
+    doc-expansion: none
+  paths-to-match:
+    - /api/**
