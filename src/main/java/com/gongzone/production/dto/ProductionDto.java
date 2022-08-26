@@ -1,9 +1,12 @@
 package com.gongzone.production.dto;
 
+import com.gongzone.client.entity.Client;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 생산 품목 상세 조회, 생산 품목 등록 Dto
@@ -13,8 +16,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Getter @Setter
 public class ProductionDto {
+	
 	private Long productionId;
 	
 	private String productionName;
@@ -36,5 +40,7 @@ public class ProductionDto {
 	private String productionReleasedDate;
 	
 	private String productionDate;
+	
+	private Client client;
 	
 }

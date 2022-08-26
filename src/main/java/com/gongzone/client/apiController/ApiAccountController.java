@@ -16,7 +16,7 @@ import com.gongzone.client.dto.AccountDto;
 import com.gongzone.client.dto.AccountInfoDto;
 import com.gongzone.client.service.ClientAccountServiceImpl;
 
-import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -31,7 +31,7 @@ public class ApiAccountController {
 	 * 
 	 * @return List<AccountDto>
 	 */
-	@ApiOperation(value = "전체 계좌 조회", notes = "전체 계좌 조회")
+//	@ApiOperation(value = "전체 계좌 조회", notes = "전체 계좌 조회")
 	@GetMapping("/list")
 	public ResponseEntity<List<AccountDto>> findAllClient() {
 		return ResponseEntity.ok(accountService.findAllClientAccount());
@@ -43,7 +43,7 @@ public class ApiAccountController {
 	 * @param accountId Long
 	 * @return AccountInfoDto
 	 */
-	@ApiOperation(value = "특정 계좌 조회", notes = "특정 계좌 조회")
+//	@ApiOperation(value = "특정 계좌 조회", notes = "특정 계좌 조회")
 	@GetMapping("{accountId}")
 	public ResponseEntity<AccountInfoDto> findByAccountId(@PathVariable Long accountId) {
 		try {
@@ -62,7 +62,7 @@ public class ApiAccountController {
 	 * @param AccountInfoDto
 	 * @return success -> 등록성공
 	 */
-	@ApiOperation(value = "특정 계좌 등록", notes = "특정 계좌 등록")
+//	@ApiOperation(value = "특정 계좌 등록", notes = "특정 계좌 등록")
 	@PostMapping("{clientId}")
 	public ResponseEntity<String> saveAccount(@PathVariable Long clientId, @RequestBody AccountInfoDto accountInfoDto) {
 		try {
@@ -82,7 +82,7 @@ public class ApiAccountController {
 	 * @param AccountDto
 	 * @return success -> 수정 성공
 	 */
-	@ApiOperation(value = "특정 계좌 수정", notes = "특정 계좌 수정")
+//	@ApiOperation(value = "특정 계좌 수정", notes = "특정 계좌 수정")
 	@PutMapping("{accountId}")
 	public ResponseEntity<String> updateAccount(@PathVariable Long accountId, @RequestBody AccountDto accountDto) {
 		try {
@@ -100,7 +100,7 @@ public class ApiAccountController {
 	 * @param clientId       Long
 	 * @return success -> 삭제 성공
 	 */
-	@ApiOperation(value = "특정 계좌 삭제", notes = "특정 계좌 삭제")
+//	@ApiOperation(value = "특정 계좌 삭제", notes = "특정 계좌 삭제")
 	@DeleteMapping("{accountId}")
 	public ResponseEntity<String> updateAccount(@PathVariable Long accountId) {
 		try {
