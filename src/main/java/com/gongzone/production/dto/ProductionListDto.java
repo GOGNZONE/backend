@@ -1,5 +1,9 @@
 package com.gongzone.production.dto;
 
+import java.util.List;
+
+import com.gongzone.release.entity.Release;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,5 +31,7 @@ public class ProductionListDto {
 	private int productionQuantity;
 	
 	private String productionDescription;
+	
+	private List<Release> releases;
 	
 }

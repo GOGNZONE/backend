@@ -34,6 +34,6 @@ public class ProductionUpdateDto {
 	
 	private String productionDescription;
 	
-	private String productionReleasedDate;
+//	private String productionReleasedDate;
 	
 }
