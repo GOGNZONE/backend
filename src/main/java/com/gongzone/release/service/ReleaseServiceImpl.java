@@ -12,7 +12,6 @@ import com.gongzone.common.errors.exception.RestApiException;
 //import com.gongzone.delivery.repository.DeliveryRepository;
 import com.gongzone.production.entity.Production;
 import com.gongzone.production.repository.ProductionRepository;
-import com.gongzone.release.dto.DeliveryDto;
 import com.gongzone.release.dto.ReleaseDto;
 import com.gongzone.release.dto.ReleaseInsertUpdateDto;
 import com.gongzone.release.dto.ReleaseListDto;
@@ -79,10 +78,10 @@ public class ReleaseServiceImpl implements ReleaseService {
 	@Transactional
 	public void insertRelease(final Long productionId, final ReleaseInsertUpdateDto releaseInsertUpdateDto) {
 		Production production = productionRepository.findById(productionId).orElse(null);
-		Delivery delivery = deliveryRepository.save(toDeliveryEntity(releaseInsertUpdateDto.getDelivery()));
+		Delivery delivery = deliveryRepository.save(deliveryMapper.toEntity(releaseInsertUpdateDto.getDeliveryDto()));
 
 		releaseInsertUpdateDto.setProduction(production);
-		releaseInsertUpdateDto.setDelivery(delivery);
+		releaseInsertUpdateDto.setDeliveryDto(deliveryMapper.toDto(delivery));
 		
 		releaseRepository.saveRelease(toEntity(releaseInsertUpdateDto));
 	}
@@ -110,8 +109,8 @@ public class ReleaseServiceImpl implements ReleaseService {
 	public void deleteRelease(final Long releaseId) throws RestApiException {
 		Release release = releaseRepository.findByReleaseId(releaseId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-//		releaseRepository.deleteRelease(releaseId);
-		releaseRepository.delete(release);
+		releaseRepository.deleteRelease(releaseId);
+//		releaseRepository.delete(release);
 	}
 
 	
@@ -123,11 +122,6 @@ public class ReleaseServiceImpl implements ReleaseService {
 	/* MapStruct Mapper ReleaseInsertDto → Release */
 	protected Release toEntity(ReleaseInsertUpdateDto releaseInsertUpdateDto) {
 		return releaseInsertUpdateMapper.toEntity(releaseInsertUpdateDto);
-	}
-	
-	/* MapStruct Mapper DeliveryDto → Delivery */
-	protected Delivery toDeliveryEntity(DeliveryDto deliveryDto) {
-		return deliveryMapper.toEntity(deliveryDto);
 	}
 	
 }
