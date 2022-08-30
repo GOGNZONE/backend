@@ -61,8 +61,7 @@ public class ReleaseRestController {
 	 * @return ResponseEntity<Void>
 	 * */
 	@PostMapping("/{productionId}")
-	public ResponseEntity<Void> insertRelease(@PathVariable final Long productionId, 
-			@RequestBody @Validated final ReleaseInsertUpdateDto releaseInsertUpdateDto) {
+	public ResponseEntity<Void> insertRelease(@PathVariable final Long productionId, @RequestBody @Validated final ReleaseInsertUpdateDto releaseInsertUpdateDto) {
 		releaseServiceImpl.insertRelease(productionId, releaseInsertUpdateDto);
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.build();
