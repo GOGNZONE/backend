@@ -2,6 +2,7 @@ package com.gongzone.production.mapper;
 
 import com.gongzone.production.dto.ProductionListDto;
 import com.gongzone.production.entity.Production;
+import com.gongzone.release.entity.Release;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-25T15:58:16+0900",
+    date = "2022-08-29T22:21:22+0900",
     comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -29,6 +30,10 @@ public class ProductionListMapperImpl implements ProductionListMapper {
         productionListDto.productionPrice( e.getProductionPrice() );
         productionListDto.productionQuantity( e.getProductionQuantity() );
         productionListDto.productionDescription( e.getProductionDescription() );
+        List<Release> list = e.getReleases();
+        if ( list != null ) {
+            productionListDto.releases( new ArrayList<Release>( list ) );
+        }
 
         return productionListDto.build();
     }
@@ -47,6 +52,10 @@ public class ProductionListMapperImpl implements ProductionListMapper {
         production.productionPrice( d.getProductionPrice() );
         production.productionQuantity( d.getProductionQuantity() );
         production.productionDescription( d.getProductionDescription() );
+        List<Release> list = d.getReleases();
+        if ( list != null ) {
+            production.releases( new ArrayList<Release>( list ) );
+        }
 
         return production.build();
     }
