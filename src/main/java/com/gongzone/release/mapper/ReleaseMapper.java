@@ -46,36 +46,9 @@ public interface ReleaseMapper extends GenericMapper<ReleaseDto, Release> {
 		
 		ReleaseDto releaseDetailsDto = new ReleaseDto(
 				releaseId, releaseDate, releaseDescription, 
-				releaseQuantity, releaseTotalPrice, releaseType, 
-				releaseClientDto, releaseProductionDto, deliveryDto);
+				releaseQuantity, releaseTotalPrice, releaseType, releaseClientDto, releaseProductionDto, deliveryDto);
 		return releaseDetailsDto;
 		
 	}
-	
-//	@Override
-//	default Release toEntity(ReleaseDto d) {
-//		
-//		if(d == null) {
-//			return null;
-//		}
-//		
-//		Long releaseId = d.getReleaseId();
-//		String releaseDate = d.getReleaseDate();
-//		String releaseDescription = d.getReleaseDescription();
-//		int releaseQuantity = d.getReleaseQuantity();
-//		Long releaseTotalPrice = d.getReleaseTotalPrice();
-//		String releaseType = d.getReleaseType();
-//		// Production
-//		Production production = releaseProductionMapper.toEntity(d.getReleaseProductionDto());
-//		// Delivery
-//		Delivery delivery = deliveryMapper.toEntity(d.getDeliveryDto());
-//		
-//		Release release = new Release(
-//				releaseId, releaseDate, releaseDescription,
-//				releaseQuantity, releaseTotalPrice, releaseType,
-//				production, delivery);
-//		return release;
-//		
-//	}
 	
 }

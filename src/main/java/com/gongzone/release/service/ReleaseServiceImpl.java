@@ -12,13 +12,17 @@ import com.gongzone.common.errors.exception.RestApiException;
 //import com.gongzone.delivery.repository.DeliveryRepository;
 import com.gongzone.production.entity.Production;
 import com.gongzone.production.repository.ProductionRepository;
+import com.gongzone.release.dto.DeliveryDto;
 import com.gongzone.release.dto.ReleaseDto;
 import com.gongzone.release.dto.ReleaseInsertUpdateDto;
 import com.gongzone.release.dto.ReleaseListDto;
+import com.gongzone.release.entity.Delivery;
 import com.gongzone.release.entity.Release;
 import com.gongzone.release.mapper.ReleaseMapper;
+import com.gongzone.release.mapper.DeliveryMapper;
 import com.gongzone.release.mapper.ReleaseInsertUpdateMapper;
 import com.gongzone.release.mapper.ReleaseListMapper;
+import com.gongzone.release.repository.DeliveryRepository;
 import com.gongzone.release.repository.ReleaseRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -35,10 +39,12 @@ public class ReleaseServiceImpl implements ReleaseService {
 	
 	private final ReleaseRepository releaseRepository;
 	private final ProductionRepository productionRepository;
+	private final DeliveryRepository deliveryRepository;	
 	
 	private final ReleaseListMapper releaseListMapper = Mappers.getMapper(ReleaseListMapper.class);
 	private final ReleaseMapper releaseMapper = Mappers.getMapper(ReleaseMapper.class);
 	private final ReleaseInsertUpdateMapper releaseInsertUpdateMapper = Mappers.getMapper(ReleaseInsertUpdateMapper.class);
+	private final DeliveryMapper deliveryMapper = Mappers.getMapper(DeliveryMapper.class);
 	
 	/**
 	 * 전체 출고 목록 조회
@@ -66,16 +72,17 @@ public class ReleaseServiceImpl implements ReleaseService {
 
 	/**
 	 * 출고 등록
-	 * @param { productionId, releaseInsertUpdateDto }
+	 * @param { productionId, releaseInsertUpdateDto, deliveryDto }
 	 * @return void
 	 * */
 	@Override
 	@Transactional
 	public void insertRelease(final Long productionId, final ReleaseInsertUpdateDto releaseInsertUpdateDto) {
 		Production production = productionRepository.findById(productionId).orElse(null);
+		Delivery delivery = deliveryRepository.save(toDeliveryEntity(releaseInsertUpdateDto.getDelivery()));
 
 		releaseInsertUpdateDto.setProduction(production);
-		releaseInsertUpdateDto.setDelivery(null);
+		releaseInsertUpdateDto.setDelivery(delivery);
 		
 		releaseRepository.saveRelease(toEntity(releaseInsertUpdateDto));
 	}
@@ -116,6 +123,11 @@ public class ReleaseServiceImpl implements ReleaseService {
 	/* MapStruct Mapper ReleaseInsertDto → Release */
 	protected Release toEntity(ReleaseInsertUpdateDto releaseInsertUpdateDto) {
 		return releaseInsertUpdateMapper.toEntity(releaseInsertUpdateDto);
+	}
+	
+	/* MapStruct Mapper DeliveryDto → Delivery */
+	protected Delivery toDeliveryEntity(DeliveryDto deliveryDto) {
+		return deliveryMapper.toEntity(deliveryDto);
 	}
 	
 }
