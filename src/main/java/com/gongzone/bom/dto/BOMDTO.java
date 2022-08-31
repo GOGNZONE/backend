@@ -1,6 +1,6 @@
 package com.gongzone.bom.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.gongzone.bom.entity.BOM;
 import com.gongzone.storage.entity.Storage;
@@ -28,7 +28,7 @@ public class BOMDTO {
 	private String bomStandard;
 	private String bomUnit;
 	private String bomDescription;
-	private LocalDateTime bomReceivedDate;
+	private LocalDate bomReceivedDate;
 	private String bomFile;
 	private Storage storage;
 	private BOM bomParent;

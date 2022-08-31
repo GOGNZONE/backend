@@ -70,7 +70,9 @@ public class StorageController {
 	 * */
 	@PutMapping("{storageId}")
 	public void updateStorage(@PathVariable Long storageId ,@RequestBody StorageUpdateDTO updateDTO ) {
-//		System.out.println(stockDTO);
+		System.out.println(("왜안옴??"));
+		System.out.println(storageId);
+		System.out.println(updateDTO);
 		storageService.updateStorage(storageId,updateDTO);
 	}
 	

@@ -1,7 +1,5 @@
 package com.gongzone.bom.dto;
 
-import com.gongzone.storage.entity.Storage;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +20,6 @@ public class BOMListDTO {
 	private String bomName;
 	private int bomQuantity;
 	private String bomDescription;
-	private Storage storage;
+	private Long bomPrice;
 	
 }

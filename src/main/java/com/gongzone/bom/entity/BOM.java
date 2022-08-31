@@ -1,6 +1,8 @@
 package com.gongzone.bom.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,11 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -75,8 +77,8 @@ public class BOM {
 	
 	@Column(name="bom_received_date")
 	@NotNull
-	@CreatedDate
-	private LocalDateTime bomReceivedDate;
+//	@CreatedDate
+	private LocalDate bomReceivedDate;
 	
 	@Column(name="bom_file")
 	@NotNull
@@ -90,13 +92,12 @@ public class BOM {
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bom_parent_id")
+    @JoinColumn(name = "bom_parent_id", referencedColumnName = "bom_id")
 	@JsonIgnore
-//	@Column(name="bom_parent_id")
 	private BOM bomParent;
 	
-//	@OneToMany(mappedBy = "bomParent")
-//    private List<BOM> child = new ArrayList<>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bomParent")
+    final List<BOM> children = new ArrayList<>();
 	
 	
 	/**

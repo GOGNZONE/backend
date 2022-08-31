@@ -6,8 +6,6 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gongzone.client.entity.Client;
-import com.gongzone.client.repository.ClientRepository;
 import com.gongzone.order.dto.OrderDTO;
 import com.gongzone.order.dto.OrderListDTO;
 import com.gongzone.order.dto.OrderUpdateDTO;
@@ -29,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 public class OrderServiceImpl implements OrderService{
 	
 	private final OrderRepository orderRepo;
-	private final ClientRepository clientRepository;
 	private final OrderMapper orderMapper = Mappers.getMapper(OrderMapper.class);
 	private final OrderListMapper orderListMapper = Mappers.getMapper(OrderListMapper.class);
 	/**
@@ -56,16 +53,13 @@ public class OrderServiceImpl implements OrderService{
 	
 	
 	/**
-	 * 거래처 코드로(clientId) 발주 등록
-	 * @param { clientId, OrderDTO }
+	 * 발주 등록
+	 * @param {  OrderDTO }
 	 * @return void
 	 * */
 	@Override
-	public void insertOrder(Long clientId, OrderDTO orderDto) {
-		Client client = clientRepository.findById(clientId).orElseThrow();
-		orderDto.setClient(client);
+	public void insertOrder(OrderDTO orderDto) {
 		orderRepo.save(toEntity(orderDto));
-		
 	}
 
 	

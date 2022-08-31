@@ -27,7 +27,7 @@ public class BomListMapperImpl implements BomListMapper {
         bOMListDTO.bomName( e.getBomName() );
         bOMListDTO.bomQuantity( e.getBomQuantity() );
         bOMListDTO.bomDescription( e.getBomDescription() );
-        bOMListDTO.storage(e.getStorage());
+        bOMListDTO.bomPrice(e.getBomPrice());
 
         return bOMListDTO.build();
     }
@@ -44,7 +44,7 @@ public class BomListMapperImpl implements BomListMapper {
         bOM.bomName( d.getBomName() );
         bOM.bomQuantity( d.getBomQuantity() );
         bOM.bomDescription( d.getBomDescription() );
-        bOM.storage( d.getStorage() );
+        bOM.bomPrice( d.getBomPrice());
 
         return bOM.build();
     }

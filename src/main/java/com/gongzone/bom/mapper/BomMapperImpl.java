@@ -52,8 +52,8 @@ public class BomMapperImpl implements BomMapper {
         bOM.bomPrice( d.getBomPrice() );
         bOM.bomStandard( d.getBomStandard() );
         bOM.bomUnit( d.getBomUnit() );
-        bOM.bomDescription( d.getBomDescription() );
-        bOM.bomReceivedDate( d.getBomReceivedDate());
+        bOM.bomDescription( d.getBomDescription());
+        bOM.bomReceivedDate(d.getBomReceivedDate());
         bOM.bomFile( d.getBomFile() );
         bOM.storage( d.getStorage() );
         bOM.bomParent( d.getBomParent());

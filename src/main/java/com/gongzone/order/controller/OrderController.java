@@ -55,13 +55,13 @@ public class OrderController {
 	
 	
 	/**
-	 * 거래처 코드로(clientId) 발주 등록
-	 * @param { clientId, OrderDTO }
+	 * 발주 등록
+	 * @param { OrderDTO }
 	 * @return void
 	 * */
-	@PostMapping("/{clientId}")
-	public void insertOrder(@PathVariable Long clientId,@RequestBody OrderDTO orderDto) {
-		orderService.insertOrder(clientId, orderDto);
+	@PostMapping("")
+	public void insertOrder(@RequestBody OrderDTO orderDto) {
+		orderService.insertOrder(orderDto);
 	}
 	
 	
