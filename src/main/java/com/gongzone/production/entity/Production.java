@@ -72,10 +72,6 @@ public class Production {
 	@Column(name = "production_description", columnDefinition = "TEXT")
 	private String productionDescription;
 	
-//	@Column(name = "production_released_date")
-//	@NotNull(message = "production released date cannot be null")
-//	private String productionReleasedDate;
-	
 	@Column(name = "production_date")
 	@NotNull(message = "production date cannot be null")
 	private String productionDate;

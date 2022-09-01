@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.common.errors.exception.RestApiException;
+import com.gongzone.production.dto.ProductionDetailsDto;
 import com.gongzone.production.dto.ProductionDto;
 import com.gongzone.production.dto.ProductionListDto;
 import com.gongzone.production.dto.ProductionUpdateDto;
@@ -48,10 +49,10 @@ public class ProductionRestController {
 	/**
 	 * 생산 품목 코드(production_id)로 생산 품목 상세 조회
 	 * @param { productionId }
-	 * @return ResponseEntity<ProductionDto>
+	 * @return ResponseEntity<ProductionDetailsDto>
 	 * */
 	@GetMapping("/{productionId}")
-	public ResponseEntity<ProductionDto> findByProductionId(@PathVariable final Long productionId) throws RestApiException {
+	public ResponseEntity<ProductionDetailsDto> findByProductionId(@PathVariable final Long productionId) throws RestApiException {
 		return ResponseEntity.ok(productionServiceImpl.findByProductionId(productionId));
 	}
 	

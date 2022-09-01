@@ -96,6 +96,10 @@ public class ReleaseServiceImpl implements ReleaseService {
 	public void updateRelease(final Long releaseId, final ReleaseInsertUpdateDto releaseInsertUpdateDto) throws RestApiException {
 		Release release = releaseRepository.findByReleaseId(releaseId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+		Delivery delivery = deliveryRepository.save(deliveryMapper.toEntity(releaseInsertUpdateDto.getDeliveryDto()));
+		
+		releaseInsertUpdateDto.setDeliveryDto(deliveryMapper.toDto(delivery));
+		
 		release.updateRelease(releaseInsertUpdateDto);
 	}
 
