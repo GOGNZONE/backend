@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gongzone.production.entity.Production;
 import com.gongzone.release.dto.ReleaseInsertUpdateDto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,42 +35,51 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @IdClass(ReleaseId.class)
+@Schema(description = "출고")
 public class Release {
 	
 	@Id
 	@Column(name = "release_id")
+	@Schema(description = "출고 코드")
 	private Long releaseId;
 	
 	@Column(name = "release_date")
 	@NotNull(message = "release date cannot be null")
+	@Schema(description = "출고 일자", nullable = false)
 	private String releaseDate;
 	
 	@Column(name = "release_description", columnDefinition = "TEXT")
+	@Schema(description = "출고 비고 사항")
 	private String releaseDescription;
 	
 	@Column(name = "release_quantity")
 	@NotNull(message = "release quantity cannot be null")
-	@ColumnDefault("0")
+	@ColumnDefault("1")
+	@Schema(description = "출고 수량", nullable = false, defaultValue = "1")
 	private int releaseQuantity;
 	
 	@Column(name = "release_total_price")
 	@NotNull(message = "release total price cannot be null")
 	@ColumnDefault("0")
+	@Schema(description = "공급가액(합계)", nullable = false, defaultValue = "0")
 	private Long releaseTotalPrice;
 	
 	@Column(name = "release_type", length = 10)
 	@NotNull(message = "release type cannot be null")
 	@ColumnDefault("'배송'")
+	@Schema(description = "출고 방식", nullable = false, defaultValue = "배송")
 	private String releaseType;
 	
 	@Id
 	@ManyToOne
 	@JoinColumn(name="fk_production_id")
 	@JsonIgnore
+	@Schema(description = "출고 대상 상품(상품정보)", nullable = false)
 	private Production production;
 	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "fk_delivery_id", nullable = true)
+	@Schema(description = "해당 출고 택배 정보")
 	private Delivery delivery;
 	
 

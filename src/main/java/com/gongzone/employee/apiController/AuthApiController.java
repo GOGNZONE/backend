@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.employee.dto.EmployeeRequestDto;
+import com.gongzone.employee.dto.EmployeeResponseDto;
 import com.gongzone.employee.dto.TokenDto;
 import com.gongzone.employee.service.AuthServiceImpl;
 
@@ -27,10 +28,10 @@ public class AuthApiController {
 	 * @param EmployeeRequestDto
 	 * @return EmployeeResponseDto
 	 * */
-//	@PostMapping("/register")
-//	public ResponseEntity<EmployeeResponseDto> registerEmployee(@RequestBody EmployeeRequestDto requestDto) {
-//		return ResponseEntity.ok(authService.registerEmployee(requestDto));
-//	}
+	@PostMapping("/register")
+	public ResponseEntity<EmployeeResponseDto> registerEmployee(@RequestBody EmployeeRequestDto requestDto) {
+		return ResponseEntity.ok(authService.registerEmployee(requestDto));
+	}
 	
 	/**
 	 * 로그인

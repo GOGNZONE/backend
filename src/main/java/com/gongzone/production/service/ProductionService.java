@@ -2,6 +2,7 @@ package com.gongzone.production.service;
 
 import java.util.List;
 
+import com.gongzone.production.dto.ProductionDetailsDto;
 import com.gongzone.production.dto.ProductionDto;
 import com.gongzone.production.dto.ProductionListDto;
 import com.gongzone.production.dto.ProductionUpdateDto;
@@ -22,9 +23,9 @@ public interface ProductionService {
 	/**
 	 * 생산 품목 코드(production_id)로 생산 품목 조회
 	 * @param { productionId }
-	 * @return ProductionDto
+	 * @return ProductionDetailsDto
 	 * */
-	public ProductionDto findByProductionId(Long productionId);
+	public ProductionDetailsDto findByProductionId(Long productionId);
 	
 	/**
 	 * 생산 품목 등록

@@ -26,7 +26,7 @@ public class ApiRetiredEmployeeController {
 	 *  전체 사원 조회
 	 *  @return List<EmployeeListDto>
 	 */
-	@ApiOperation(value = "전체 퇴사자 조회", notes = "전체 퇴사자 조회")
+//	@ApiOperation(value = "전체 퇴사자 조회", notes = "전체 퇴사자 조회")
 	@GetMapping("/list")
 	public ResponseEntity<List<RetiredEmployeeDto>> findAllEmployee() {
 		return ResponseEntity.ok(retiredEmployeeService.findAllRetiredEmployee());
@@ -37,7 +37,7 @@ public class ApiRetiredEmployeeController {
 	 * @return RetiredEmployeeDto
 	 * @throws IllegalAccessException 
 	 * */
-	@ApiOperation(value = "해당 퇴사자 조회", notes = "해당 퇴사자 조회")
+//	@ApiOperation(value = "해당 퇴사자 조회", notes = "해당 퇴사자 조회")
 	@GetMapping("{retiredEmployeeId}")
 	public ResponseEntity<RetiredEmployeeDto> findByRetiredEmployeeId(@PathVariable Long retiredEmployeeId) {
 		try {
