@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-05T11:36:39+0900",
+    date = "2022-08-25T15:58:16+0900",
     comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -34,6 +34,7 @@ public class ProductionMapperImpl implements ProductionMapper {
         productionDto.productionDescription( e.getProductionDescription() );
         productionDto.productionReleasedDate( e.getProductionReleasedDate() );
         productionDto.productionDate( e.getProductionDate() );
+        productionDto.client( e.getClient() );
 
         return productionDto.build();
     }
@@ -57,6 +58,7 @@ public class ProductionMapperImpl implements ProductionMapper {
         production.productionDescription( d.getProductionDescription() );
         production.productionReleasedDate( d.getProductionReleasedDate() );
         production.productionDate( d.getProductionDate() );
+        production.client( d.getClient() );
 
         return production.build();
     }

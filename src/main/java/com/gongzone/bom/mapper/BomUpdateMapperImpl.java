@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-04T17:12:25+0900",
-    comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 11.0.16 (Eclipse Adoptium)"
+    date = "2022-08-25T15:58:15+0900",
+    comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
 public class BomUpdateMapperImpl implements BomUpdateMapper {
@@ -30,9 +30,9 @@ public class BomUpdateMapperImpl implements BomUpdateMapper {
         bOMUpdateDTO.bomUnit( e.getBomUnit() );
         bOMUpdateDTO.bomDescription( e.getBomDescription() );
         bOMUpdateDTO.bomFile( e.getBomFile() );
-//        bOMUpdateDTO.productionBomId( e.getProductionBomId() );
-//        bOMUpdateDTO.storageId( e.getStorageId() );
-//        bOMUpdateDTO.bomParentId( e.getBomParentId() );
+        bOMUpdateDTO.storage( e.getStorage() );
+        bOMUpdateDTO.bomParent( e.getBomParent() );
+
 
         return bOMUpdateDTO.build();
     }
@@ -52,9 +52,9 @@ public class BomUpdateMapperImpl implements BomUpdateMapper {
         bOM.bomUnit( d.getBomUnit() );
         bOM.bomDescription( d.getBomDescription() );
         bOM.bomFile( d.getBomFile() );
-//        bOM.productionBomId( d.getProductionBomId() );
-//        bOM.storageId( d.getStorageId() );
-//        bOM.bomParentId( d.getBomParentId() );
+        bOM.storage( d.getStorage() );
+        bOM.bomParent( d.getBomParent() );
+
 
         return bOM.build();
     }
