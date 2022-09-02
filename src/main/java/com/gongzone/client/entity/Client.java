@@ -44,7 +44,8 @@ import lombok.NoArgsConstructor;
 @EntityListeners(AuditingEntityListener.class)
 public class Client implements Persistable<Long> {
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "client_id")
 	private Long clientId;
 	

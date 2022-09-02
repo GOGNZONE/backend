@@ -6,6 +6,8 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gongzone.client.entity.Client;
+import com.gongzone.client.repository.ClientRepository;
 import com.gongzone.order.dto.OrderDTO;
 import com.gongzone.order.dto.OrderListDTO;
 import com.gongzone.order.dto.OrderUpdateDTO;
@@ -16,6 +18,7 @@ import com.gongzone.order.repository.OrderRepository;
 
 
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 /**
  * 발주 서비스 인터페이스 구현체
@@ -23,10 +26,12 @@ import lombok.RequiredArgsConstructor;
  * @version 1.0
  * */
 @Service
+@ToString
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 	
 	private final OrderRepository orderRepo;
+	private final ClientRepository clientRepo;
 	private final OrderMapper orderMapper = Mappers.getMapper(OrderMapper.class);
 	private final OrderListMapper orderListMapper = Mappers.getMapper(OrderListMapper.class);
 	/**
@@ -52,14 +57,19 @@ public class OrderServiceImpl implements OrderService{
 
 	
 	
+	
 	/**
 	 * 발주 등록
 	 * @param {  OrderDTO }
 	 * @return void
 	 * */
 	@Override
+	@Transactional
 	public void insertOrder(OrderDTO orderDto) {
-		orderRepo.save(toEntity(orderDto));
+		Client client = clientRepo.findById(orderDto.getClient().getClientId()).orElse(null);
+		orderDto.setClient(client);
+		Order order = toEntity(orderDto);
+		orderRepo.save(order);
 	}
 
 	
@@ -96,7 +106,6 @@ public class OrderServiceImpl implements OrderService{
 	protected Order toEntity(OrderDTO orderDto) {
 		return orderMapper.toEntity(orderDto);
 	}
-	
 }
 	
 

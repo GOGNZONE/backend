@@ -92,7 +92,6 @@ public class Order implements Persistable<Long> {
 	@Id
 	@JoinColumn(name="fk_client_id",nullable = true)
 	@JsonIgnore
-//	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Client.class)
 	@ManyToOne
 	private Client client;
 

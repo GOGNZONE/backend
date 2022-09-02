@@ -16,6 +16,9 @@ configurations {
    }
 }
 
+
+
+
 repositories {
    mavenCentral()
 }
@@ -28,7 +31,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
 	
 	compileOnly 'org.projectlombok:lombok'
@@ -48,6 +50,10 @@ dependencies {
 	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
 	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
+
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+	
 
 }
 
