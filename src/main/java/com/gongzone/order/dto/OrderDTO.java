@@ -1,6 +1,6 @@
 package com.gongzone.order.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.gongzone.client.entity.Client;
 
@@ -31,6 +31,6 @@ public class OrderDTO {
 	private String orderProductionUnit;
 	private String orderProductionDescription;
 	private String orderProductionEndDate;
-	private LocalDateTime orderDate;
+	private LocalDate orderDate;
 	private Client client;
 }

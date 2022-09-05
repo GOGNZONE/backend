@@ -33,5 +33,4 @@ public class SwaggerConfig {
 								"lagyu99@gmail.com"), "License", "License URL",
 						Collections.emptyList()));
 	}
-
 }
