@@ -135,8 +135,12 @@ public class ReleaseServiceImpl implements ReleaseService {
 	public void deleteRelease(final Long releaseId) throws RestApiException {
 		Release release = releaseRepository.findByReleaseId(releaseId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+		Stock stock = stockRepository.findById(release.getProduction().getStock().getStockId()).orElse(null);
+		
+		Long newStockQuantity = (long) (release.getProduction().getProductionQuantity());
+		
+		stock.updateStock(stock.getStockName(), newStockQuantity, stock.getStockDescription());
 		releaseRepository.deleteRelease(releaseId);
-//		releaseRepository.delete(release);
 	}
 
 	

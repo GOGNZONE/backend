@@ -31,7 +31,7 @@ public class ReleaseDto {
 	
 	private String releaseType;
 	
-	private Byte releaseConfirmed;
+//	private Byte releaseConfirmed;
 	
 	// Client Info
 	private ReleaseClientDto client;

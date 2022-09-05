@@ -22,7 +22,7 @@ public interface ReleaseRepository extends JpaRepository<Release, ReleaseId> {
 	Optional<Release> findByReleaseId(@Param("releaseId") Long releaseId);
 
 	@Modifying
-	@Query(value = "INSERT INTO t_release VALUES (:#{#release.releaseId}, :#{#release.releaseDate}, :#{#release.releaseDescription}, :#{#release.releaseQuantity}, :#{#release.releaseTotalPrice}, :#{#release.releaseType}, :#{#release.production}, :#{#release.delivery}) ", nativeQuery = true)
+	@Query(value = "INSERT INTO t_release VALUES (:#{#release.releaseId}, :#{#release.releaseDate}, :#{#release.releaseDescription}, :#{#release.releaseQuantity}, :#{#release.releaseTotalPrice}, :#{#release.releaseType}, :#{#release.releaseConfirmed}, :#{#release.production}, :#{#release.delivery}) ", nativeQuery = true)
 	@Transactional
 	void saveRelease(@Param("release") Release release);
 	
