@@ -24,7 +24,7 @@ public class ReleaseListDto {
 	
 	private String releaseType;
 	
-//	private Byte releaseConfirmed;
+	private Byte releaseConfirmed;
 	
 	private String clientName;
 	

@@ -37,7 +37,7 @@ public interface ReleaseMapper extends GenericMapper<ReleaseDto, Release> {
 		int releaseQuantity = e.getReleaseQuantity();
 		Long releaseTotalPrice = e.getReleaseTotalPrice();
 		String releaseType = e.getReleaseType();
-//		Byte releaseConfirmed = e.getReleaseConfirmed();
+		Byte releaseConfirmed = e.getReleaseConfirmed();
 		// Client
 		ReleaseClientDto releaseClientDto  = releaseClientMapper.toDto(e.getProduction().getClient());
 		// Production
@@ -47,7 +47,7 @@ public interface ReleaseMapper extends GenericMapper<ReleaseDto, Release> {
 		
 		ReleaseDto releaseDetailsDto = new ReleaseDto(
 				releaseId, releaseDate, releaseDescription, 
-				releaseQuantity, releaseTotalPrice, releaseType, releaseClientDto, releaseProductionDto, deliveryDto);
+				releaseQuantity, releaseTotalPrice, releaseType, releaseConfirmed, releaseClientDto, releaseProductionDto, deliveryDto);
 		return releaseDetailsDto;
 		
 	}

@@ -29,7 +29,7 @@ public class ReleaseInsertUpdateMapperImpl implements ReleaseInsertUpdateMapper 
         releaseInsertUpdateDto.releaseQuantity( e.getReleaseQuantity() );
         releaseInsertUpdateDto.releaseTotalPrice( e.getReleaseTotalPrice() );
         releaseInsertUpdateDto.releaseType( e.getReleaseType() );
-//        releaseInsertUpdateDto.releaseConfirmed(e.getReleaseConfirmed());
+        releaseInsertUpdateDto.releaseConfirmed(e.getReleaseConfirmed());
         releaseInsertUpdateDto.production( e.getProduction() );
         releaseInsertUpdateDto.delivery( e.getDelivery() );
 
@@ -50,7 +50,7 @@ public class ReleaseInsertUpdateMapperImpl implements ReleaseInsertUpdateMapper 
         release.releaseQuantity( d.getReleaseQuantity() );
         release.releaseTotalPrice( d.getReleaseTotalPrice() );
         release.releaseType( d.getReleaseType() );
-//        release.releaseConfirmed(d.getReleaseConfirmed());
+        release.releaseConfirmed(d.getReleaseConfirmed());
         release.production( d.getProduction() );
         release.delivery( d.getDelivery() );
 

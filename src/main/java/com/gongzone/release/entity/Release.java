@@ -99,7 +99,7 @@ public class Release {
 		this.releaseQuantity = releaseInsertUpdateDto.getReleaseQuantity();
 		this.releaseTotalPrice = releaseInsertUpdateDto.getReleaseTotalPrice();
 		this.releaseDescription = releaseInsertUpdateDto.getReleaseDescription();
-//		this.releaseConfirmed = releaseInsertUpdateDto.getReleaseConfirmed();
+		this.releaseConfirmed = releaseInsertUpdateDto.getReleaseConfirmed();
 		this.delivery = releaseInsertUpdateDto.getDelivery();
 	}
 	

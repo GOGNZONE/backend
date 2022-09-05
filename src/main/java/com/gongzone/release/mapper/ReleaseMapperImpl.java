@@ -33,7 +33,7 @@ public class ReleaseMapperImpl implements ReleaseMapper {
         release.releaseQuantity( d.getReleaseQuantity() );
         release.releaseTotalPrice( d.getReleaseTotalPrice() );
         release.releaseType( d.getReleaseType() );
-//        release.releaseConfirmed(d.getReleaseConfirmed());
+        release.releaseConfirmed(d.getReleaseConfirmed());
         release.production( releaseProductionDtoToProduction( d.getProduction() ) );
         release.delivery( deliveryDtoToDelivery( d.getDelivery() ) );
 

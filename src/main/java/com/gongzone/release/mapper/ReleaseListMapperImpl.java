@@ -27,7 +27,7 @@ public class ReleaseListMapperImpl implements ReleaseListMapper {
         release.releaseDate( d.getReleaseDate() );
         release.releaseQuantity( d.getReleaseQuantity() );
         release.releaseType( d.getReleaseType() );
-//        release.releaseConfirmed(d.getReleaseConfirmed());
+        release.releaseConfirmed(d.getReleaseConfirmed());
 
         return release.build();
     }

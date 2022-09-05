@@ -118,7 +118,9 @@ public class ProductionServiceImpl implements ProductionService {
 	public void deleteProduction(final Long productionId) throws RestApiException {
 		Production production = productionRepository.findById(productionId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		stockRepository.deleteByStockId(production.getStock().getStockId());
+		if(production.getStock() != null) {
+			stockRepository.deleteByStockId(production.getStock().getStockId());
+		}
 		productionRepository.delete(production);
 	}
 	
