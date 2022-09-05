@@ -1,5 +1,7 @@
 package com.gongzone.production.mapper;
 
+import com.gongzone.client.dto.ReleaseClientDto;
+import com.gongzone.client.entity.Client;
 import com.gongzone.production.dto.ProductionDetailsDto;
 import com.gongzone.production.entity.Production;
 import com.gongzone.release.entity.Release;
@@ -10,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-01T09:37:50+0900",
+    date = "2022-09-03T15:47:35+0900",
     comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -33,7 +35,11 @@ public class ProductionDetailsMapperImpl implements ProductionDetailsMapper {
         production.productionStandard( d.getProductionStandard() );
         production.productionUnit( d.getProductionUnit() );
         production.productionDescription( d.getProductionDescription() );
-        production.productionDate( d.getProductionDate() );
+        production.productionReleasedDate( d.getProductionReleasedDate() );
+        production.productionStartDate( d.getProductionStartDate() );
+        production.productionEndDate(d.getProductionEndDate());
+        production.productionProgress( d.getProductionProgress() );
+        production.client( releaseClientDtoToClient( d.getClient() ) );
         List<Release> list = d.getReleases();
         if ( list != null ) {
             production.releases( new ArrayList<Release>( list ) );
@@ -68,5 +74,21 @@ public class ProductionDetailsMapperImpl implements ProductionDetailsMapper {
         }
 
         return list;
+    }
+
+    protected Client releaseClientDtoToClient(ReleaseClientDto releaseClientDto) {
+        if ( releaseClientDto == null ) {
+            return null;
+        }
+
+        Client.ClientBuilder client = Client.builder();
+
+        client.clientId( releaseClientDto.getClientId() );
+        client.clientName( releaseClientDto.getClientName() );
+        client.clientManager( releaseClientDto.getClientManager() );
+        client.clientTel( releaseClientDto.getClientTel() );
+        client.clientAddress( releaseClientDto.getClientAddress() );
+
+        return client.build();
     }
 }

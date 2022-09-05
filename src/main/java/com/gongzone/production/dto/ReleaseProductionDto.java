@@ -1,5 +1,7 @@
 package com.gongzone.production.dto;
 
+//import com.gongzone.stock.entity.Stock;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,5 +23,9 @@ public class ReleaseProductionDto {
 	private String productionBrandName;
 	
 	private Long productionPrice;
+	
+	private int productionQuantity;
+	
+//	private Stock stock;
 	
 }

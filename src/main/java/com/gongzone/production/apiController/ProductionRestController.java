@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.common.errors.exception.RestApiException;
 import com.gongzone.production.dto.ProductionDetailsDto;
-import com.gongzone.production.dto.ProductionDto;
+import com.gongzone.production.dto.ProductionInsertUpdateDto;
 import com.gongzone.production.dto.ProductionListDto;
-import com.gongzone.production.dto.ProductionUpdateDto;
 import com.gongzone.production.service.ProductionServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,7 +46,7 @@ public class ProductionRestController {
 	 *  전체 생산 품목 조회
 	 *  @return ResponseEntity<List<ProductionListDto>>
 	 */
-	@Operation(summary = "전체 생산품목 조회", description = "생산코드, 생산품목, 브랜드, 제품수량, 단가, 출고일자, 비고 등 등록된 생산 품목에 대한 데이터 제공")
+	@Operation(summary = "전체 생산품목 조회", description = "생산코드, 생산품목, 브랜드, 제품수량, 단가, 출고일자, 진행상황, 비고 등 등록된 생산 품목에 대한 데이터 제공")
 	@ApiResponses({
 		@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = ProductionListDto.class))),
 		@ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(schema = @Schema(example = "잘못된 문법 등으로 인해 클라이언트가 올바르지 못한 요청을 보내 서버가 요청을 이해할 수 없음을 의미합니다."))),
@@ -82,7 +81,7 @@ public class ProductionRestController {
 	
 	/**
 	 * 생산 품목 등록
-	 * @param { ProductionDto }
+	 * @param { productionInsertUpdateDto }
 	 * @return ResponseEntity<Void>
 	 * */
 	@Operation(summary = "생산품목 등록", description = "생산품목, 브랜드, 단가, 제품수량/단위, 규격 등 생산 품목에 대한 데이터 입력")
@@ -94,15 +93,15 @@ public class ProductionRestController {
 		@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버에 오류가 발생하여 응답할 수 없음을 의미합니다. 서버에 오류가 발생했으나 처리 방법을 알 수 없을 경우의 응답입니다.")))
 	})
 	@PostMapping("")
-	public ResponseEntity<Void> insertProduction(@RequestBody @Validated final ProductionDto productionDto) {
-		productionServiceImpl.insertProduction(productionDto);
+	public ResponseEntity<Void> insertProduction(@RequestBody @Validated final ProductionInsertUpdateDto productionInsertUpdateDto) {
+		productionServiceImpl.insertProduction(productionInsertUpdateDto);
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.build();
 	}
 	
 	/**
 	 * 생산 품목 코드(production_id)로 생산 품목 수정
-	 * @param { productionId, productionUpdateDto }
+	 * @param { productionId, productionInsertUpdateDto }
 	 * @return ResponseEntity<Void>
 	 * */
 	@Operation(summary = "생산품목 수정", description = "생산품목, 브랜드, 단가, 제품수량/단위, 규격 등 생산 품목에 대한 데이터 수정")
@@ -115,8 +114,8 @@ public class ProductionRestController {
 	})
 	@PutMapping("/{productionId}")
 	public ResponseEntity<Void> updateProduction(@Parameter(description = "생산 제품 코드") @PathVariable final Long productionId, 
-			@RequestBody @Validated final ProductionUpdateDto productionUpdateDto) throws RestApiException {
-		productionServiceImpl.updateProduction(productionId, productionUpdateDto);
+			@RequestBody @Validated final ProductionInsertUpdateDto productionInsertUpdateDto) throws RestApiException {
+		productionServiceImpl.updateProduction(productionId, productionInsertUpdateDto);
 		return ResponseEntity.noContent()
 				.build();
 	}

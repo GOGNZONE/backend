@@ -25,12 +25,13 @@ public interface ReleaseListMapper extends GenericMapper<ReleaseListDto, Release
 		String releaseDate = e.getReleaseDate();
 		int releaseQuantity = e.getReleaseQuantity();
 		String releaseType = e.getReleaseType();
+		Byte releaseConfirmed = e.getReleaseConfirmed();
 		String clientName = e.getProduction().getClient().getClientName();
 		String productionName = e.getProduction().getProductionName();
 		
 		ReleaseListDto releaseListDto = new ReleaseListDto(
 				releaseId, releaseDate, releaseQuantity,
-				releaseType, clientName, productionName);
+				releaseType, releaseConfirmed, clientName, productionName);
 		return releaseListDto;
 		
 	}

@@ -39,10 +39,16 @@ public class ProductionDetailsDto {
 	
 	private String productionDescription;
 	
-	private String productionDate;
+	private String productionReleasedDate;
 	
-	private ReleaseClientDto releaseClientDto;
+	private String productionStartDate;
 	
+	private String productionEndDate;
+	
+	private Byte productionProgress;
+	
+	private ReleaseClientDto client;
+
 	private List<Release> releases;
 	
 }

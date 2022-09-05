@@ -1,9 +1,7 @@
 package com.gongzone.production.dto;
 
-import java.util.List;
-
 import com.gongzone.client.entity.Client;
-import com.gongzone.release.entity.Release;
+import com.gongzone.stock.entity.Stock;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
-public class ProductionDto {
+public class ProductionInsertUpdateDto {
 	
 	private Long productionId;
 	
@@ -40,10 +38,16 @@ public class ProductionDto {
 	
 	private String productionDescription;
 	
-	private String productionDate;
+	private String productionReleasedDate;
+	
+	private String productionStartDate;
+	
+	private String productionEndDate;
+	
+	private Byte productionProgress;
 	
 	private Client client;
 	
-	private List<Release> releases;
+	private Stock stock;
 	
 }
