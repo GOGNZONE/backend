@@ -26,7 +26,6 @@ public class OrderDTO {
 	private String orderProductionBrandName;
 	private Long orderProductionPrice;
 	private int orderProductionQuantity;
-	private String orderProuctionFile;
 	private String orderProductionStandard;
 	private String orderProductionUnit;
 	private String orderProductionDescription;
