@@ -2,10 +2,10 @@ package com.gongzone.service.client;
 
 import java.util.List;
 
-import com.gongzone.client.dto.ClientDto;
-import com.gongzone.client.dto.ClientInfoDto;
-import com.gongzone.client.dto.ClientListDto;
-import com.gongzone.client.dto.UpdateClientDto;
+import com.gongzone.dto.client.ClientInfoDto;
+import com.gongzone.dto.client.ClientListDto;
+import com.gongzone.dto.client.RegisterClientDto;
+import com.gongzone.dto.client.UpdateClientDto;
 
 /**
  * Client Service Interface
@@ -25,7 +25,7 @@ public interface ClientService {
 	 * @param { ClientInfoDto }
 	 * @return void
 	 * */
-	public void saveClient(ClientDto clientDto);
+	public void saveClient(RegisterClientDto requestDto);
 	
 	/**
 	 * 특정 거래처 조회

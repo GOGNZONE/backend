@@ -1,9 +1,8 @@
 package com.gongzone.service.client;
 
-import java.util.List;
-
-import com.gongzone.client.dto.AccountDto;
-import com.gongzone.client.dto.AccountInfoDto;
+import com.gongzone.dto.client.AccountInfoDto.AccountInfoRequest;
+import com.gongzone.dto.client.AccountInfoDto.AccountInfoResponse;
+import com.gongzone.dto.client.UpdateAccountDto;
 
 /**
  * Client account Service Interface
@@ -11,12 +10,6 @@ import com.gongzone.client.dto.AccountInfoDto;
  * @version 1.0
  * */
 public interface ClientAccountService {
-
-	/**
-	 * 전체 거래처 조회
-	 * @return List<AccountDto>
-	 * */
-	public List<AccountDto> findAllClientAccount();
 	
 	/**
 	 * 특정 거래처 조회
@@ -24,7 +17,7 @@ public interface ClientAccountService {
 	 * @return AccountInfoDto
 	 * @throws IllegalAccessException 
 	 * */
-	public AccountInfoDto findByAccountId(Long accountId) throws IllegalAccessException;
+	public AccountInfoResponse findByAccountId(Long accountId) throws IllegalAccessException;
 	
 	/**
 	 * 거래처 등록
@@ -32,7 +25,7 @@ public interface ClientAccountService {
 	 * @param clientId
 	 * @return void
 	 * */
-	public void saveAccount(Long clientId, AccountInfoDto accountInfoDto);
+	public void saveAccount(Long clientId, AccountInfoRequest requestDto);
 	
 	/**
 	 * 거래처 수정
@@ -40,13 +33,6 @@ public interface ClientAccountService {
 	 * @return void
 	 * @throws IllegalAccessException 
 	 * */
-	public void updateAccount(Long accountId, AccountDto accountDto) throws IllegalAccessException;
+	public void updateAccount(Long accountId, UpdateAccountDto requestDto) throws IllegalAccessException;
 
-	/**
-	 * 특정 거래처 삭제
-	 * @param { accountId }
-	 * @return void
-	 * @throws IllegalAccessException 
-	 * */
-	public void deleteAccount(Long accountId) throws IllegalAccessException;
 }

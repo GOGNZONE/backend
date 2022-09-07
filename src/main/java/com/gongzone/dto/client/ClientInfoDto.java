@@ -1,5 +1,6 @@
-package com.gongzone.client.dto;
+package com.gongzone.dto.client;
 
+import com.gongzone.entity.client.Client;
 import com.gongzone.entity.client.ClientAccount;
 
 import lombok.AllArgsConstructor;
@@ -26,4 +27,16 @@ public class ClientInfoDto {
 	private String clientFile;
 	private ClientAccount account;
 	private String employeeName;
+	
+	public ClientInfoDto(Client client) {
+		this.clientId = client.getClientId();
+		this.clientName = client.getClientName();
+		this.clientManager = client.getClientManager();
+		this.clientTel = client.getClientTel();
+		this.clientAddress = client.getClientAddress();
+		this.clientRegisteredDate = client.getClientRegisteredDate();
+		this.clientFile = client.getClientFile();
+		this.account = client.getClientAccount();
+		this.employeeName = client.getEmployee().getEmployeeName();
+	}
 }

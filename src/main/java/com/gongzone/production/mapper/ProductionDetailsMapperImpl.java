@@ -1,6 +1,6 @@
 package com.gongzone.production.mapper;
 
-import com.gongzone.client.dto.ReleaseClientDto;
+import com.gongzone.dto.client.ReleaseClientDto;
 import com.gongzone.entity.client.Client;
 import com.gongzone.entity.production.Production;
 import com.gongzone.entity.release.Release;

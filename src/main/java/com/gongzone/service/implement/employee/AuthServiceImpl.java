@@ -33,7 +33,7 @@ public class AuthServiceImpl implements AuthService {
 	private final TokenProvider tokenProvider;
 	
 	/**
-	 * 최초 ADMIN 계정 생성
+	 * 계정 생성
 	 * @throws RuntimeException
 	 * @param AuthEmployeeRequest
 	 * @return EmployeeResponseDto

@@ -1,4 +1,6 @@
-package com.gongzone.client.dto;
+package com.gongzone.dto.client;
+
+import com.gongzone.entity.client.Client;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,4 +24,14 @@ public class ClientListDto {
 	private String clientManager;
 	private String clientTel;
 	private String clientRegisteredDate;
+	
+	/* Entity -> DTO */
+	public ClientListDto(Client client) {
+		this.clientId = client.getClientId();
+		this.clientName = client.getClientName();
+		this.clientAddress = client.getClientAddress();
+		this.clientManager = client.getClientManager();
+		this.clientTel = client.getClientTel();
+		this.clientRegisteredDate = client.getClientRegisteredDate();
+	}
 }
