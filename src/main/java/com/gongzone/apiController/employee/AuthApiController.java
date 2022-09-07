@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gongzone.employee.dto.EmployeeRequestDto;
-import com.gongzone.employee.dto.EmployeeResponseDto;
-import com.gongzone.employee.dto.TokenDto;
+import com.gongzone.dto.employee.AuthEmployeeDto.AuthEmployeeRequest;
+import com.gongzone.dto.employee.AuthEmployeeDto.AuthEmployeeResponse;
+import com.gongzone.dto.employee.TokenDto;
 import com.gongzone.service.implement.employee.AuthServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,12 +34,12 @@ public class AuthApiController {
 	 * */
 	@PostMapping("/register")
 	@Operation(summary = "회원 생성", description = "최초 ADMIN 계정을 생성하기 위한 API", responses = {
-			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = EmployeeResponseDto.class))),
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = AuthEmployeeRequest.class))),
 			@ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(schema = @Schema(example = "잘못된 요청입니다"))),
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
-	public ResponseEntity<EmployeeResponseDto> registerEmployee(@RequestBody EmployeeRequestDto requestDto) {
+	public ResponseEntity<AuthEmployeeResponse> registerEmployee(@RequestBody AuthEmployeeRequest requestDto) {
 		return ResponseEntity.ok(authService.registerEmployee(requestDto));
 	}
 	
@@ -56,7 +56,7 @@ public class AuthApiController {
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
-	public ResponseEntity<TokenDto> login(@RequestBody EmployeeRequestDto requestDto) {
+	public ResponseEntity<TokenDto> login(@RequestBody AuthEmployeeRequest requestDto) {
 		return ResponseEntity.ok(authService.login(requestDto));
 	}
 }

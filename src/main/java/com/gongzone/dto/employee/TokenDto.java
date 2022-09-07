@@ -1,4 +1,4 @@
-package com.gongzone.employee.dto;
+package com.gongzone.dto.employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

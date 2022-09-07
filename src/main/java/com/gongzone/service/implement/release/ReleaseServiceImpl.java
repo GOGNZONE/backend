@@ -23,9 +23,6 @@ import com.gongzone.repository.release.DeliveryRepository;
 import com.gongzone.repository.release.ReleaseRepository;
 import com.gongzone.repository.stock.StockRepository;
 import com.gongzone.service.release.ReleaseService;
-import com.gongzone.stock.dto.StockUpdateDTO;
-import com.gongzone.stock.mapper.StockMapper;
-import com.gongzone.stock.mapper.StockUpdateMapper;
 
 import lombok.RequiredArgsConstructor;
 //import lombok.extern.slf4j.Slf4j;

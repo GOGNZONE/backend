@@ -9,7 +9,7 @@ import com.gongzone.entity.employee.Employee;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-	Employee findByEmployeeEmail(String employeeEmail);
+	Optional<Employee> findByEmployeeEmail(String employeeEmail);
 	
 	boolean existsByEmployeeEmail(String employeeEmail);
 	

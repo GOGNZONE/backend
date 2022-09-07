@@ -19,6 +19,7 @@ public class ChangeMyProfile {
 	private String employeeAddress;
 	private String employeeImage;
 	
+	/* DTO -> Entity */
 	public Employee toEntity() {
 		return Employee.builder()
 				.employeeEmail(employeeEmail)

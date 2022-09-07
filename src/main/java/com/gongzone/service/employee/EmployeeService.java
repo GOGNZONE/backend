@@ -2,11 +2,10 @@ package com.gongzone.service.employee;
 
 import java.util.List;
 
+import com.gongzone.dto.employee.AuthEmployeeDto.AuthEmployeeResponse;
 import com.gongzone.dto.employee.ChangeMyProfile;
+import com.gongzone.dto.employee.EmployeeListDto.EmployeeListResponse;
 import com.gongzone.dto.employee.EmployeeInfoDto.EmployeeInfoResponse;
-import com.gongzone.employee.dto.EmployeeListDto;
-import com.gongzone.employee.dto.EmployeeResponseDto;
-import com.gongzone.exception.ResourceNotFoundException;
 
 /**
  * Employee Service Interface
@@ -17,9 +16,9 @@ public interface EmployeeService {
 	
 	/**
 	 * 전체 사원 조회
-	 * @return List<EmployeeListResponseDto>
+	 * @return List<EmployeeListResponse>
 	 * */
-	public List<EmployeeListDto> findAllEmployee();
+	public List<EmployeeListResponse> findAllEmployee();
 	
 	/**
 	 * 특정 사원 조회
@@ -28,7 +27,7 @@ public interface EmployeeService {
 	 * @throws IllegalAccessException 
 	 * @throws ResourceNotFoundException 
 	 * */
-	public EmployeeInfoResponse findByEmployeeId(Long employeeId) throws IllegalAccessException, ResourceNotFoundException;
+	public EmployeeInfoResponse findByEmployeeId(Long employeeId) throws IllegalAccessException;
 	
 	/**
 	 * 특정 사원 삭제
@@ -43,7 +42,7 @@ public interface EmployeeService {
 	 * @return EmployeeResponseDto
 	 * @throws RuntimeException 
 	 * */
-	public EmployeeResponseDto getMyInfoBySecurity();
+	public AuthEmployeeResponse getMyInfoBySecurity();
 	
 	/**
 	 * 마이페이지 수정
@@ -51,5 +50,5 @@ public interface EmployeeService {
 	 * @return EmployeeResponseDto
 	 * @throws RuntimeException 
 	 * */
-	public EmployeeResponseDto changeEmployeeProfile(ChangeMyProfile changeMyProfile);
+	public AuthEmployeeResponse changeEmployeeProfile(ChangeMyProfile changeMyProfile);
 }

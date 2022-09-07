@@ -3,24 +3,21 @@ package com.gongzone.service.implement.employee;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import org.mapstruct.factory.Mappers;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.config.SecurityUtil;
+import com.gongzone.dto.employee.AuthEmployeeDto.AuthEmployeeResponse;
 import com.gongzone.dto.employee.ChangeMyProfile;
+import com.gongzone.dto.employee.EmployeeListDto.EmployeeListResponse;
+import com.gongzone.dto.employee.RetiredEmployeeDto.RetiredEmployeeRequest;
 import com.gongzone.dto.employee.EmployeeInfoDto.EmployeeInfoResponse;
-import com.gongzone.employee.dto.EmployeeListDto;
-import com.gongzone.employee.dto.EmployeeResponseDto;
-import com.gongzone.employee.dto.RetiredEmployeeDto;
-import com.gongzone.employee.mapper.EmployeeListMapper;
-import com.gongzone.employee.mapper.RetiredEmployeeMapper;
 import com.gongzone.entity.employee.Employee;
-import com.gongzone.exception.ResourceNotFoundException;
 import com.gongzone.repository.employee.EmployeeRepository;
 import com.gongzone.repository.employee.RetiredEmployeeRepository;
 import com.gongzone.service.employee.EmployeeService;
@@ -34,10 +31,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private final EmployeeRepository employeeRepository;
 	private final RetiredEmployeeRepository retiredEmployeeRepository;
 	
-	/* Mapper */
-	private final RetiredEmployeeMapper retiredEmployeeMapper = Mappers.getMapper(RetiredEmployeeMapper.class);
-	private final EmployeeListMapper employeeListMapper = Mappers.getMapper(EmployeeListMapper.class);
-	
 	/* Security */
 	private final PasswordEncoder passwordEncoder;
 	
@@ -48,10 +41,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 */
 	@Override
 	@Transactional(readOnly = true)
-	public List<EmployeeListDto> findAllEmployee() {
-		List<Employee> employees = employeeRepository.findAll();
-		return employeeListMapper.toDtoList(employees);
+	public List<EmployeeListResponse> findAllEmployee() {
+		List<EmployeeListResponse> employees = employeeRepository.findAll()
+				.stream()
+				.map(EmployeeListResponse::new)
+				.collect(Collectors.toList());
+		return employees;
+//		return employeeListMapper.toDtoList(employees);
 	}
+
 
 	/**
 	 * 특정 사원 조회
@@ -62,9 +60,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 */
 	@Override
 	@Transactional(readOnly = true)
-	public EmployeeInfoResponse findByEmployeeId(Long employeeId) throws ResourceNotFoundException  {
+	public EmployeeInfoResponse findByEmployeeId(Long employeeId) {
 		Employee employee = employeeRepository.findById(employeeId).orElseThrow(
-				() -> new ResourceNotFoundException("존재하지 않는 사원입니다."));
+				() -> new IllegalArgumentException("해당하는 사원 없음"));
 		return new EmployeeInfoResponse(employee);
 	}
 	
@@ -75,9 +73,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * */
 	@Override
 	@Transactional(readOnly = true)
-	public EmployeeResponseDto getMyInfoBySecurity() {
+	public AuthEmployeeResponse getMyInfoBySecurity() {
 		return employeeRepository.findById(SecurityUtil.getCurrentEmployeeId())
-				.map(EmployeeResponseDto::of)
+				.map(AuthEmployeeResponse::of)
 				.orElseThrow(() -> new RuntimeException("로그인 사원 정보가 없습니다."));
 	}
 
@@ -89,17 +87,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * */
 	@Override
 	@Transactional
-	public EmployeeResponseDto changeEmployeeProfile(@Valid ChangeMyProfile requestDto) throws RuntimeException {
+	public AuthEmployeeResponse changeEmployeeProfile(@Valid ChangeMyProfile requestDto) throws RuntimeException {
 		Employee employee = employeeRepository.findById(SecurityUtil.getCurrentEmployeeId()).orElseThrow(
 				() -> new RuntimeException("로그인 사원 정보가 없습니다."));
 		
-//		if (!passwordEncoder.matches(requestDto.getExPassword(), employee.getEmployeePassword())) {
-//			throw new RuntimeException("비밀번호가 맞지 않습니다.");
-//		}
 		
 		employee.updateEmployeePassword(passwordEncoder.encode(requestDto.getNewPassword()));
 		employee.updateEmployeeInfo(requestDto.toEntity());
-		return EmployeeResponseDto.of(employeeRepository.save(employee));
+		return AuthEmployeeResponse.of(employeeRepository.save(employee));
 	}
 	
 	/**
@@ -113,8 +108,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public void deleteEmployee(Long employeeId) throws IllegalAccessException {
 		Employee employee = employeeRepository.findById(employeeId).orElseThrow(
 				() -> new IllegalAccessException("존재하지 않는 사원 입니다."));
-		
-		RetiredEmployeeDto retiredEmployeeDto = new RetiredEmployeeDto(
+
+		RetiredEmployeeRequest retiredEmployeeDto = new RetiredEmployeeRequest(
 				employee.getEmployeeId(),
 				employee.getEmployeeName(),
 				employee.getEmployeeAddress(),
@@ -125,12 +120,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 				employee.getEmployeeRole(),
 				employee.getEmployeeImage());
 		
-		retiredEmployeeRepository.save(retiredEmployeeMapper.toEntity(retiredEmployeeDto));
+		retiredEmployeeRepository.save(retiredEmployeeDto.toEntity());
+		
 		employeeRepository.delete(employee);
 	}
-
-
-
-	
 
 }

@@ -1,13 +1,12 @@
 package com.gongzone.service.implement.employee;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gongzone.employee.dto.RetiredEmployeeDto;
-import com.gongzone.employee.mapper.RetiredEmployeeMapper;
+import com.gongzone.dto.employee.RetiredEmployeeDto.RetiredEmployeeResponse;
 import com.gongzone.entity.employee.RetiredEmployee;
 import com.gongzone.repository.employee.RetiredEmployeeRepository;
 import com.gongzone.service.employee.RetiredEmployeeService;
@@ -19,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 public class RetiredEmployeeServiceImpl implements RetiredEmployeeService {
 	
 	private final RetiredEmployeeRepository retiredEmployeeRepository;
-	private final RetiredEmployeeMapper retiredEmployeeMapper = Mappers.getMapper(RetiredEmployeeMapper.class);
 	
 	/**
 	 * 전체 퇴사자 조회
@@ -28,9 +26,13 @@ public class RetiredEmployeeServiceImpl implements RetiredEmployeeService {
 	 */
 	@Transactional(readOnly = true)
 	@Override
-	public List<RetiredEmployeeDto> findAllRetiredEmployee() {
-		List<RetiredEmployee> retiredEmployees = retiredEmployeeRepository.findAll();
-		return retiredEmployeeMapper.toDtoList(retiredEmployees);
+	public List<RetiredEmployeeResponse> findAllRetiredEmployee() {
+		List<RetiredEmployeeResponse> retiredEmployees = retiredEmployeeRepository.findAll()
+				.stream()
+				.map(RetiredEmployeeResponse::new)
+				.collect(Collectors.toList());
+				
+		return retiredEmployees;
 	}
 
 	/**
@@ -56,11 +58,10 @@ public class RetiredEmployeeServiceImpl implements RetiredEmployeeService {
 	 * @throws IllegalAccessException 
 	 */
 	@Override
-	public RetiredEmployeeDto findByRetiredEmployeeId(Long retiredEmployeeId) throws IllegalAccessException {
+	public RetiredEmployeeResponse findByRetiredEmployeeId(Long retiredEmployeeId) throws IllegalAccessException {
 		RetiredEmployee retiredEmployee = retiredEmployeeRepository.findById(retiredEmployeeId).orElseThrow(
 				() -> new IllegalAccessException("해당하는 사원을 찾을 수 없습니다."));
 		
-		return retiredEmployeeMapper.toDto(retiredEmployee);
+		return new RetiredEmployeeResponse(retiredEmployee);
 	}
-
 }

@@ -7,9 +7,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gongzone.employee.dto.EmployeeRequestDto;
-import com.gongzone.employee.dto.EmployeeResponseDto;
-import com.gongzone.employee.dto.TokenDto;
+import com.gongzone.dto.employee.AuthEmployeeDto.AuthEmployeeRequest;
+import com.gongzone.dto.employee.AuthEmployeeDto.AuthEmployeeResponse;
+import com.gongzone.dto.employee.TokenDto;
 import com.gongzone.entity.employee.Employee;
 import com.gongzone.repository.employee.EmployeeRepository;
 import com.gongzone.security.jwt.TokenProvider;
@@ -33,19 +33,19 @@ public class AuthServiceImpl implements AuthService {
 	private final TokenProvider tokenProvider;
 	
 	/**
-	 * 사원 생성(회원가입)
+	 * 최초 ADMIN 계정 생성
 	 * @throws RuntimeException
-	 * @param EmployeeRequestDto
+	 * @param AuthEmployeeRequest
 	 * @return EmployeeResponseDto
 	 * */
 	@Override
-	public EmployeeResponseDto registerEmployee(EmployeeRequestDto requestDto) {
+	public AuthEmployeeResponse registerEmployee(AuthEmployeeRequest requestDto) {
 		if (employeeRepository.existsByEmployeeEmail(requestDto.getEmployeeEmail())) {
 			throw new RuntimeException("이미 존재하는 사원입니다.");
 		}
 		
-		Employee employee = requestDto.toEmployee(passwordEncoder);
-		return EmployeeResponseDto.of(employeeRepository.save(employee));
+		Employee employee = requestDto.toEntity(passwordEncoder);
+		return AuthEmployeeResponse.of(employeeRepository.save(employee));
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class AuthServiceImpl implements AuthService {
 	 * @return TokenDto
 	 * */
 	@Override
-	public TokenDto login(EmployeeRequestDto requestDto) {
+	public TokenDto login(AuthEmployeeRequest requestDto) {
 		UsernamePasswordAuthenticationToken authenticationToken = requestDto.toAuthentication();
 		
 		Authentication authentication = managerBuilder.getObject().authenticate(authenticationToken);

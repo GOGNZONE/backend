@@ -6,22 +6,18 @@ import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.gongzone.dto.employee.AuthEmployeeDto.AuthEmployeeRequest;
+import com.gongzone.dto.employee.AuthEmployeeDto.AuthEmployeeResponse;
 import com.gongzone.dto.employee.ChangeMyProfile;
-import com.gongzone.dto.employee.EmployeeInfoDto;
+import com.gongzone.dto.employee.EmployeeListDto.EmployeeListResponse;
 import com.gongzone.dto.employee.EmployeeInfoDto.EmployeeInfoResponse;
-import com.gongzone.employee.dto.EmployeeListDto;
-import com.gongzone.employee.dto.EmployeeRequestDto;
-import com.gongzone.employee.dto.EmployeeResponseDto;
-import com.gongzone.exception.ResourceNotFoundException;
 import com.gongzone.service.implement.employee.AuthServiceImpl;
 import com.gongzone.service.implement.employee.EmployeeServiceImpl;
 
@@ -33,9 +29,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/employee")
@@ -49,18 +43,18 @@ public class ApiEmployeeController {
 	 * 사원 생성(회원가입)
 	 * 
 	 * @throws RuntimeException
-	 * @param EmployeeRequestDto
+	 * @param AuthEmployeeRequest
 	 * @return EmployeeResponseDto
 	 */
 	@PostMapping("/register")
 	@Operation(summary = "사원 등록", description = "ADMIN 계정에서만 가능한 사원 등록 기능", responses = {
-			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = EmployeeResponseDto.class))),
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = AuthEmployeeResponse.class))),
 			@ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(schema = @Schema(example = "잘못된 요청입니다"))),
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
-	public ResponseEntity<EmployeeResponseDto> registerEmployee(
-			@Parameter(name = "사원등록", in = ParameterIn.PATH, description = "사원 등록 정보", required = true) @Valid @RequestBody EmployeeRequestDto requestDto) {
+	public ResponseEntity<AuthEmployeeResponse> registerEmployee(
+			@Parameter(name = "사원등록", in = ParameterIn.PATH, description = "사원 등록 정보", required = true) @Valid @RequestBody AuthEmployeeRequest requestDto) {
 		return ResponseEntity.ok(authService.registerEmployee(requestDto));
 	}
 
@@ -70,13 +64,13 @@ public class ApiEmployeeController {
 	 * @return List<EmployeeListDto>
 	 */
 	@Operation(summary = "사원 리스트", description = "사원 정보 리스트 가져오기", responses = {
-			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = EmployeeListDto.class))),
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = EmployeeListResponse.class))),
 			@ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(schema = @Schema(example = "잘못된 요청입니다"))),
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
 	@GetMapping("/list")
-	public ResponseEntity<List<EmployeeListDto>> findAllEmployee() {
+	public ResponseEntity<List<EmployeeListResponse>> findAllEmployee() {
 		return ResponseEntity.ok(employeeService.findAllEmployee());
 	}
 
@@ -88,7 +82,7 @@ public class ApiEmployeeController {
 	 * @throws IllegalAccessException
 	 */
 	@Operation(summary = "사원 조회", description = "사원 번호로 사원 정보 조회", responses = {
-			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = EmployeeInfoDto.class))),
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = EmployeeInfoResponse.class))),
 			@ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(schema = @Schema(example = "잘못된 요청입니다"))),
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
@@ -106,14 +100,14 @@ public class ApiEmployeeController {
 	 * @throws RuntimeException
 	 */
 	@Operation(summary = "마이페이지", description = "로그인 된 사원의 마이페이지", responses = {
-			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = EmployeeResponseDto.class))),
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = AuthEmployeeResponse.class))),
 			@ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(schema = @Schema(example = "잘못된 요청입니다"))),
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
 	@GetMapping("/mypage")
-	public ResponseEntity<EmployeeResponseDto> getMyInfoBySecurity() {
-		EmployeeResponseDto employeeResponseDto = employeeService.getMyInfoBySecurity();
+	public ResponseEntity<AuthEmployeeResponse> getMyInfoBySecurity() {
+		AuthEmployeeResponse employeeResponseDto = employeeService.getMyInfoBySecurity();
 		return ResponseEntity.ok(employeeResponseDto);
 	}
 
@@ -126,13 +120,13 @@ public class ApiEmployeeController {
 	 * @throws RuntimeException
 	 */
 	@Operation(summary = "마이페이지 정보 재설정", description = "마이페이지 정보(이메일, 비밀번호, 이름, 전화번호, 주소, 사진) 재설정)", responses = {
-			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = EmployeeResponseDto.class))),
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = AuthEmployeeResponse.class))),
 			@ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(schema = @Schema(example = "잘못된 요청입니다"))),
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
 	@PostMapping("/edit")
-	public ResponseEntity<EmployeeResponseDto> changeEmployeeProfile(
+	public ResponseEntity<AuthEmployeeResponse> changeEmployeeProfile(
 			@Parameter(name = "ChangePasswordRequestDto", description = "회원정보 재설정", in = ParameterIn.PATH) @Valid @RequestBody final ChangeMyProfile requestDto) {
 		return ResponseEntity.ok(employeeService.changeEmployeeProfile(requestDto));
 	}

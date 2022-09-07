@@ -2,7 +2,7 @@ package com.gongzone.service.employee;
 
 import java.util.List;
 
-import com.gongzone.employee.dto.RetiredEmployeeDto;
+import com.gongzone.dto.employee.RetiredEmployeeDto.RetiredEmployeeResponse;
 
 public interface RetiredEmployeeService {
 
@@ -10,14 +10,14 @@ public interface RetiredEmployeeService {
 	 * 전체 퇴사자 조회
 	 * @return List<RetiredEmployeeDto>
 	 * */
-	public List<RetiredEmployeeDto> findAllRetiredEmployee();
+	public List<RetiredEmployeeResponse> findAllRetiredEmployee();
 
 	/**
 	 * 퇴사자 상세 조회
 	 * @return RetiredEmployeeDto
 	 * @throws IllegalAccessException 
 	 * */
-	public RetiredEmployeeDto findByRetiredEmployeeId(Long retiredEmployeeId) throws IllegalAccessException;
+	public RetiredEmployeeResponse findByRetiredEmployeeId(Long retiredEmployeeId) throws IllegalAccessException;
 	
 	
 	/**

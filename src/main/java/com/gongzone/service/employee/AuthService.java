@@ -1,8 +1,8 @@
 package com.gongzone.service.employee;
 
-import com.gongzone.employee.dto.EmployeeRequestDto;
-import com.gongzone.employee.dto.EmployeeResponseDto;
-import com.gongzone.employee.dto.TokenDto;
+import com.gongzone.dto.employee.AuthEmployeeDto.AuthEmployeeRequest;
+import com.gongzone.dto.employee.AuthEmployeeDto.AuthEmployeeResponse;
+import com.gongzone.dto.employee.TokenDto;
 
 /**
  * Employee Auth Service Interface
@@ -17,7 +17,7 @@ public interface AuthService {
 	 * @param EmployeeRequestDto
 	 * @return EmployeeResponseDto
 	 * */
-	public EmployeeResponseDto registerEmployee(EmployeeRequestDto requestDto);
+	public AuthEmployeeResponse registerEmployee(AuthEmployeeRequest requestDto);
 	
 	/**
 	 * 로그인
@@ -25,7 +25,7 @@ public interface AuthService {
 	 * @param EmployeeRequestDto
 	 * @return TokenDto
 	 * */
-	public TokenDto login(EmployeeRequestDto requestDto);
+	public TokenDto login(AuthEmployeeRequest requestDto);
 		
 	
 }
