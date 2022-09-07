@@ -1,15 +1,11 @@
 package com.gongzone.service.implement.client;
 
-import java.util.List;
-
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gongzone.client.dto.AccountDto;
-import com.gongzone.client.dto.AccountInfoDto;
-import com.gongzone.client.mapper.AccountInfoMapper;
-import com.gongzone.client.mapper.AccountMapper;
+import com.gongzone.dto.client.AccountInfoDto.AccountInfoRequest;
+import com.gongzone.dto.client.AccountInfoDto.AccountInfoResponse;
+import com.gongzone.dto.client.UpdateAccountDto;
 import com.gongzone.entity.client.Client;
 import com.gongzone.entity.client.ClientAccount;
 import com.gongzone.repository.client.ClientAccountRepository;
@@ -24,20 +20,6 @@ public class ClientAccountServiceImpl implements ClientAccountService {
 	
 	private final ClientAccountRepository accountRepository;
 	private final ClientRepository clientRepository;
-	private final AccountInfoMapper accountInfoMapper = Mappers.getMapper(AccountInfoMapper.class);
-	private final AccountMapper accountMapper = Mappers.getMapper(AccountMapper.class);
-	
-	/**
-	 * 전체 거래처 조회
-	 * 
-	 * @return List<AccountDto>
-	 */
-	@Override
-	@Transactional(readOnly = true)
-	public List<AccountDto> findAllClientAccount() {
-		List<ClientAccount> accounts = accountRepository.findAll();
-		return accountMapper.toDtoList(accounts);
-	}
 	
 	/**
 	 * 특정 거래처 조회
@@ -47,9 +29,9 @@ public class ClientAccountServiceImpl implements ClientAccountService {
 	 */
 	@Override
 	@Transactional(readOnly = true)
-	public AccountInfoDto findByAccountId(Long accountId) throws IllegalAccessException {
+	public AccountInfoResponse findByAccountId(Long accountId) throws IllegalAccessException {
 		ClientAccount account = accountRepository.findById(accountId).orElseThrow();
-		return accountInfoMapper.toDto(account);
+		return new AccountInfoResponse(account);
 	}
 	
 	/**
@@ -61,13 +43,12 @@ public class ClientAccountServiceImpl implements ClientAccountService {
 	 */
 	@Override
 	@Transactional
-	public void saveAccount(Long clientId, AccountInfoDto accountInfoDto) {
+	public void saveAccount(Long clientId, AccountInfoRequest accountInfoDto) {
 		Client client = clientRepository.findById(clientId).orElseThrow(
 				() -> new IllegalArgumentException("해당하는 거래처가 존재하지 않습니다."));
 		
 		accountInfoDto.setClient(client);
-		ClientAccount account =  accountInfoDto.toEntity();
-		accountRepository.save(account);
+		accountRepository.save(accountInfoDto.toEntity());
 	}
 	
 	/**
@@ -80,31 +61,14 @@ public class ClientAccountServiceImpl implements ClientAccountService {
 	 */
 	@Override
 	@Transactional
-	public void updateAccount(Long accountId, AccountDto accountDto) throws IllegalAccessException {
+	public void updateAccount(Long accountId, UpdateAccountDto updateAccountDto) throws IllegalAccessException {
 		ClientAccount account = accountRepository.findById(accountId).orElseThrow(
 				() -> new IllegalArgumentException("해당하는 계좌정보가 존재하지 않습니다."));
 		
 		account.updateClientAccount(
-				accountDto.getAccountBank(),
-				accountDto.getAccountNumber(),
-				accountDto.getAccountDepositor());
+				updateAccountDto.getAccountBank(),
+				updateAccountDto.getAccountNumber(),
+				updateAccountDto.getAccountDepositor());
 	}
 	
-	/**
-	 * 거래처 삭제
-	 * 
-	 * @throws IllegalAccessException
-	 * @param accountId Long
-	 * @return void
-	 */
-	@Override
-	@Transactional
-	public void deleteAccount(Long accountId) throws IllegalAccessException {
-		ClientAccount account = accountRepository.findById(accountId).orElseThrow(
-				() -> new IllegalArgumentException("해당하는 계좌정보가 존재하지 않습니다."));
-		
-		accountRepository.delete(account);
-	}
-
-
 }

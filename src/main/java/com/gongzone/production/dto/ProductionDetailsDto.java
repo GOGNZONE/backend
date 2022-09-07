@@ -2,7 +2,7 @@ package com.gongzone.production.dto;
 
 import java.util.List;
 
-import com.gongzone.client.dto.ReleaseClientDto;
+import com.gongzone.dto.client.ReleaseClientDto;
 import com.gongzone.entity.release.Release;
 
 import lombok.AllArgsConstructor;

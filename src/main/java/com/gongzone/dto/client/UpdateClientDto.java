@@ -1,4 +1,6 @@
-package com.gongzone.client.dto;
+package com.gongzone.dto.client;
+
+import com.gongzone.entity.client.Client;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,4 +23,15 @@ public class UpdateClientDto {
 	private String clientAddress;
 	private String clientFile;
 	private String clientManager;
+	
+	public Client toEntity() {
+		Client client = Client.builder()
+				.clientName(clientName)
+				.clientTel(clientTel)
+				.clientAddress(clientAddress)
+				.clientFile(clientFile)
+				.clientManager(clientManager)
+				.build();
+		return client;
+	}
 }

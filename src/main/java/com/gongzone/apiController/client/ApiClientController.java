@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gongzone.client.dto.ClientDto;
-import com.gongzone.client.dto.ClientInfoDto;
-import com.gongzone.client.dto.ClientListDto;
-import com.gongzone.client.dto.UpdateClientDto;
+import com.gongzone.dto.client.ClientInfoDto;
+import com.gongzone.dto.client.ClientListDto;
+import com.gongzone.dto.client.RegisterClientDto;
+import com.gongzone.dto.client.UpdateClientDto;
 import com.gongzone.service.implement.client.ClientServiceImple;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -63,13 +63,8 @@ public class ApiClientController {
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
-	public ResponseEntity<ClientInfoDto> findByClientId(@PathVariable Long clientId) {
-		try {
-			return ResponseEntity.ok(clientService.findByClientId(clientId));
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public ResponseEntity<ClientInfoDto> findByClientId(@PathVariable Long clientId) throws IllegalAccessException {
+		return ResponseEntity.ok(clientService.findByClientId(clientId));
 	}
 	
 	/**
@@ -86,14 +81,9 @@ public class ApiClientController {
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
-	public ResponseEntity<String> saveClient(@RequestBody ClientDto clientDto) {
-		try {
-			clientService.saveClient(clientDto);
-		} catch (Exception e) {
-			e.printStackTrace();
-			// log 생성
-		}
-		return ResponseEntity.ok("등록 성공");
+	public ResponseEntity<String> saveClient(@RequestBody RegisterClientDto clientDto) {
+		clientService.saveClient(clientDto);
+		return ResponseEntity.ok().body("등록 성공");
 	}
 	
 	/**
@@ -111,14 +101,9 @@ public class ApiClientController {
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
-	public ResponseEntity<String> updateClient(@PathVariable Long clientId, @RequestBody UpdateClientDto requestDto) {
-		try {
-			clientService.updateClient(clientId, requestDto);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-			// log 생성
-		}
-		return ResponseEntity.ok("수정 성공");
+	public ResponseEntity<String> updateClient(@PathVariable Long clientId, @RequestBody UpdateClientDto requestDto) throws IllegalAccessException {
+		clientService.updateClient(clientId, requestDto);
+		return ResponseEntity.ok().body("수정 성공");
 	}
 	
 	/**
@@ -135,14 +120,8 @@ public class ApiClientController {
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
-	public ResponseEntity<String> deleteClient(@PathVariable Long clientId) {
-		try {
-			clientService.deleteClient(clientId);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-			// log생성
-		}
-		return ResponseEntity.ok("삭제 성공");
-		
+	public ResponseEntity<String> deleteClient(@PathVariable Long clientId) throws IllegalAccessException {
+		clientService.deleteClient(clientId);
+		return ResponseEntity.ok().body("삭제 성공");
 	}
 }

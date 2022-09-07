@@ -1,19 +1,15 @@
 package com.gongzone.service.implement.client;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gongzone.client.dto.ClientDto;
-import com.gongzone.client.dto.ClientInfoDto;
-import com.gongzone.client.dto.ClientListDto;
-import com.gongzone.client.dto.UpdateClientDto;
-import com.gongzone.client.mapper.ClientInfoMapper;
-import com.gongzone.client.mapper.ClientListMapper;
-import com.gongzone.client.mapper.ClientMapper;
-import com.gongzone.client.mapper.UpdateClientMapper;
+import com.gongzone.dto.client.ClientInfoDto;
+import com.gongzone.dto.client.ClientListDto;
+import com.gongzone.dto.client.RegisterClientDto;
+import com.gongzone.dto.client.UpdateClientDto;
 import com.gongzone.entity.client.Client;
 import com.gongzone.entity.employee.Employee;
 import com.gongzone.repository.client.ClientRepository;
@@ -28,10 +24,6 @@ public class ClientServiceImple implements ClientService {
 
 	private final ClientRepository clientRepository;
 	private final EmployeeRepository employeeRepository;
-	private final ClientInfoMapper clientInfoMapper = Mappers.getMapper(ClientInfoMapper.class);
-	private final ClientListMapper clientListMapper = Mappers.getMapper(ClientListMapper.class);
-	private final ClientMapper clientMapper = Mappers.getMapper(ClientMapper.class);
-	private final UpdateClientMapper updateClientMapper = Mappers.getMapper(UpdateClientMapper.class);
 
 	/**
 	 * 전체 거래처 조회
@@ -41,8 +33,11 @@ public class ClientServiceImple implements ClientService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<ClientListDto> findAllClient() {
-		List<Client> clients = clientRepository.findAll();
-		return clientListMapper.toDtoList(clients);
+		List<ClientListDto> clients = clientRepository.findAll()
+				.stream()
+				.map(ClientListDto::new)
+				.collect(Collectors.toList());
+				return clients;
 	}
 
 	/**
@@ -56,22 +51,24 @@ public class ClientServiceImple implements ClientService {
 	public ClientInfoDto findByClientId(Long clientId) throws IllegalAccessException {
 		Client client = clientRepository.findById(clientId)
 				.orElseThrow(() -> new IllegalArgumentException("해당하는 거래처가 존재하지 않습니다."));
-		return clientInfoMapper.toDto(client);
+		return new ClientInfoDto(client);
 	}
+
 
 	/**
 	 * 거래처 등록
 	 * 
 	 * @param ClientDto
-	 * @return ClientInfoDto
+	 * @return RegisterClientDto
 	 */
 	@Override
 	@Transactional
-	public void saveClient(ClientDto clientDto) {
+	public void saveClient(RegisterClientDto clientDto) {
 		Employee employee = employeeRepository.findById(clientDto.getEmployee().getEmployeeId())
 				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사원입니다."));
 		clientDto.setEmployee(employee);
-		clientRepository.save(clientMapper.toEntity(clientDto));
+		
+		clientRepository.save(clientDto.toEntity());
 	}
 
 	/**
@@ -88,7 +85,7 @@ public class ClientServiceImple implements ClientService {
 		Client client = clientRepository.findById(clientId)
 				.orElseThrow(() -> new IllegalArgumentException("해당하는 거래처가 존재하지 않습니다."));
 
-		client.updateClient(updateClientMapper.toEntity(updateDto));
+		client.updateClient(updateDto.toEntity());
 	}
 
 	/**

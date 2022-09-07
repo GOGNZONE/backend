@@ -3,9 +3,9 @@ package com.gongzone.release.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-import com.gongzone.client.dto.ReleaseClientDto;
 import com.gongzone.client.mapper.ReleaseClientMapper;
 import com.gongzone.common.mapper.GenericMapper;
+import com.gongzone.dto.client.ReleaseClientDto;
 import com.gongzone.entity.release.Release;
 import com.gongzone.production.dto.ReleaseProductionDto;
 import com.gongzone.production.mapper.ReleaseProductionMapper;

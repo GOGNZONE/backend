@@ -1,4 +1,4 @@
-package com.gongzone.client.dto;
+package com.gongzone.dto.client;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,15 +17,10 @@ import lombok.NoArgsConstructor;
 public class ReleaseClientDto {
 	
 	private Long clientId;
-	
 	private String clientName;
-	
 	private String clientManager;
-	
 	private String clientTel;
-	
 	private String clientAddress;
-	
 	private String employeeName;
 	
 }
