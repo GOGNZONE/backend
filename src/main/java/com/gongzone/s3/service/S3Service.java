@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 
 @Service
 @Slf4j
@@ -23,13 +24,14 @@ public class S3Service {
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucketName;
-
+    Date date = new Date();
     private final AmazonS3 s3Client;
-
+    long timeMilli = date.getTime();
+ 
     public String uploadFile(MultipartFile file) {
         File fileObj = convertMultiPartFileToFile(file);
         String fileName = file.getOriginalFilename();
-        s3Client.putObject(new PutObjectRequest(bucketName, "folder/"+fileName, fileObj));
+        s3Client.putObject(new PutObjectRequest(bucketName, timeMilli+"_"+fileName, fileObj));
         fileObj.delete();
         return "File uploaded : " + fileName;
     }
