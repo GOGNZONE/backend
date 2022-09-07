@@ -13,5 +13,5 @@ import com.gongzone.release.entity.Release;
  * */
 @Mapper(componentModel = "spring")
 public interface ReleaseInsertUpdateMapper extends GenericMapper<ReleaseInsertUpdateDto, Release> {
-
+	
 }

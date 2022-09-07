@@ -2,9 +2,9 @@ package com.gongzone.production.service;
 
 import java.util.List;
 
-import com.gongzone.production.dto.ProductionDto;
+import com.gongzone.production.dto.ProductionDetailsDto;
+import com.gongzone.production.dto.ProductionInsertUpdateDto;
 import com.gongzone.production.dto.ProductionListDto;
-import com.gongzone.production.dto.ProductionUpdateDto;
 
 /**
  * 생산 서비스 인터페이스
@@ -22,23 +22,23 @@ public interface ProductionService {
 	/**
 	 * 생산 품목 코드(production_id)로 생산 품목 조회
 	 * @param { productionId }
-	 * @return ProductionDto
+	 * @return ProductionDetailsDto
 	 * */
-	public ProductionDto findByProductionId(Long productionId);
+	public ProductionDetailsDto findByProductionId(Long productionId);
 	
 	/**
 	 * 생산 품목 등록
-	 * @param { productionDto }
+	 * @param { productionInsertDto }
 	 * @return void
 	 * */
-	public void insertProduction(ProductionDto productionDto);
+	public void insertProduction(ProductionInsertUpdateDto productionInsertUpdateDto);
 	
 	/**
 	 * 생산 품목 코드(production_id)로 생산 품목 수정
-	 * @param { productionId, productionDto }
+	 * @param { productionId, productionInsertUpdateDto }
 	 * @return void
 	 * */
-	public void updateProduction(Long productionId, ProductionUpdateDto productionUpdateDto);
+	public void updateProduction(Long productionId, ProductionInsertUpdateDto productionInsertUpdateDto);
 	
 	/**
 	 * 생산 품목 코드(production_id)로 생산 품목 삭제

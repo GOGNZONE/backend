@@ -28,7 +28,7 @@ public interface ReleaseService {
 	
 	/**
 	 * 출고 등록
-	 * @param { productionId, releaseInsertUpdateDto }
+	 * @param { productionId, releaseInsertUpdateDto}
 	 * @return void
 	 * */
 	public void insertRelease(Long productionId, ReleaseInsertUpdateDto releaseInsertDto);

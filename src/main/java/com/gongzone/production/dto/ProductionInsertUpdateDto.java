@@ -1,20 +1,24 @@
 package com.gongzone.production.dto;
 
+import com.gongzone.client.entity.Client;
+import com.gongzone.stock.entity.Stock;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
- * 생산 품목 수정 Dto
+ * 생산 품목 등록 Dto
  * @author Hanju Park
  * @version 1.0
  * */
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-public class ProductionUpdateDto {
+@Getter @Setter
+public class ProductionInsertUpdateDto {
 	
 	private Long productionId;
 	
@@ -35,5 +39,15 @@ public class ProductionUpdateDto {
 	private String productionDescription;
 	
 	private String productionReleasedDate;
+	
+	private String productionStartDate;
+	
+	private String productionEndDate;
+	
+	private Byte productionProgress;
+	
+	private Client client;
+	
+	private Stock stock;
 	
 }

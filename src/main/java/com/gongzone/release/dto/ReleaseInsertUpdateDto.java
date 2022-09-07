@@ -32,6 +32,8 @@ public class ReleaseInsertUpdateDto {
 	
 	private String releaseType;
 	
+	private Byte releaseConfirmed;
+	
 	private Production production;
 	
 	private Delivery delivery;

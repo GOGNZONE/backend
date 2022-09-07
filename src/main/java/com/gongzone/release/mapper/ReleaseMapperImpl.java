@@ -1,6 +1,10 @@
 package com.gongzone.release.mapper;
 
+import com.gongzone.production.dto.ReleaseProductionDto;
+import com.gongzone.production.entity.Production;
+import com.gongzone.release.dto.DeliveryDto;
 import com.gongzone.release.dto.ReleaseDto;
+import com.gongzone.release.entity.Delivery;
 import com.gongzone.release.entity.Release;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-25T15:58:16+0900",
+    date = "2022-09-03T15:47:35+0900",
     comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -29,6 +33,9 @@ public class ReleaseMapperImpl implements ReleaseMapper {
         release.releaseQuantity( d.getReleaseQuantity() );
         release.releaseTotalPrice( d.getReleaseTotalPrice() );
         release.releaseType( d.getReleaseType() );
+        release.releaseConfirmed(d.getReleaseConfirmed());
+        release.production( releaseProductionDtoToProduction( d.getProduction() ) );
+        release.delivery( deliveryDtoToDelivery( d.getDelivery() ) );
 
         return release.build();
     }
@@ -59,5 +66,33 @@ public class ReleaseMapperImpl implements ReleaseMapper {
         }
 
         return list;
+    }
+
+    protected Production releaseProductionDtoToProduction(ReleaseProductionDto releaseProductionDto) {
+        if ( releaseProductionDto == null ) {
+            return null;
+        }
+
+        Production.ProductionBuilder production = Production.builder();
+
+        production.productionName( releaseProductionDto.getProductionName() );
+        production.productionBrandName( releaseProductionDto.getProductionBrandName() );
+        production.productionPrice( releaseProductionDto.getProductionPrice() );
+
+        return production.build();
+    }
+
+    protected Delivery deliveryDtoToDelivery(DeliveryDto deliveryDto) {
+        if ( deliveryDto == null ) {
+            return null;
+        }
+
+        Delivery.DeliveryBuilder delivery = Delivery.builder();
+
+        delivery.deliveryId( deliveryDto.getDeliveryId() );
+        delivery.deliveryCompanyName( deliveryDto.getDeliveryCompanyName() );
+        delivery.deliveryTrackingNumber( deliveryDto.getDeliveryTrackingNumber() );
+
+        return delivery.build();
     }
 }

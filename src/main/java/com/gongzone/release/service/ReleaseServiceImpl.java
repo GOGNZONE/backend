@@ -15,11 +15,18 @@ import com.gongzone.production.repository.ProductionRepository;
 import com.gongzone.release.dto.ReleaseDto;
 import com.gongzone.release.dto.ReleaseInsertUpdateDto;
 import com.gongzone.release.dto.ReleaseListDto;
+import com.gongzone.release.entity.Delivery;
 import com.gongzone.release.entity.Release;
 import com.gongzone.release.mapper.ReleaseMapper;
 import com.gongzone.release.mapper.ReleaseInsertUpdateMapper;
 import com.gongzone.release.mapper.ReleaseListMapper;
+import com.gongzone.release.repository.DeliveryRepository;
 import com.gongzone.release.repository.ReleaseRepository;
+import com.gongzone.stock.Repository.StockRepository;
+import com.gongzone.stock.dto.StockUpdateDTO;
+import com.gongzone.stock.entity.Stock;
+import com.gongzone.stock.mapper.StockMapper;
+import com.gongzone.stock.mapper.StockUpdateMapper;
 
 import lombok.RequiredArgsConstructor;
 //import lombok.extern.slf4j.Slf4j;
@@ -35,6 +42,8 @@ public class ReleaseServiceImpl implements ReleaseService {
 	
 	private final ReleaseRepository releaseRepository;
 	private final ProductionRepository productionRepository;
+	private final DeliveryRepository deliveryRepository;	
+	private final StockRepository stockRepository;
 	
 	private final ReleaseListMapper releaseListMapper = Mappers.getMapper(ReleaseListMapper.class);
 	private final ReleaseMapper releaseMapper = Mappers.getMapper(ReleaseMapper.class);
@@ -73,10 +82,19 @@ public class ReleaseServiceImpl implements ReleaseService {
 	@Transactional
 	public void insertRelease(final Long productionId, final ReleaseInsertUpdateDto releaseInsertUpdateDto) {
 		Production production = productionRepository.findById(productionId).orElse(null);
+		Stock stock = stockRepository.findById(production.getStock().getStockId()).orElse(null);
 
-		releaseInsertUpdateDto.setProduction(production);
-		releaseInsertUpdateDto.setDelivery(null);
+		if(releaseInsertUpdateDto.getDelivery().getDeliveryCompanyName() != "" && releaseInsertUpdateDto.getDelivery().getDeliveryTrackingNumber() != "") {
+			Delivery delivery = deliveryRepository.save(releaseInsertUpdateDto.getDelivery());
+			releaseInsertUpdateDto.setDelivery(delivery);
+		} else {
+			releaseInsertUpdateDto.setDelivery(null);
+		}
 		
+		Long newStockQuantity = (long) (production.getProductionQuantity() - releaseInsertUpdateDto.getReleaseQuantity());
+
+		stock.updateStock(production.getProductionName(), newStockQuantity, production.getProductionDescription());
+		releaseInsertUpdateDto.setProduction(production);
 		releaseRepository.saveRelease(toEntity(releaseInsertUpdateDto));
 	}
 	
@@ -90,6 +108,20 @@ public class ReleaseServiceImpl implements ReleaseService {
 	public void updateRelease(final Long releaseId, final ReleaseInsertUpdateDto releaseInsertUpdateDto) throws RestApiException {
 		Release release = releaseRepository.findByReleaseId(releaseId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+		Production production = releaseInsertUpdateDto.getProduction();
+		Stock stock = stockRepository.findById(release.getProduction().getStock().getStockId()).orElse(null);
+		
+		if(releaseInsertUpdateDto.getDelivery() != null) {
+			Delivery delivery = deliveryRepository.save(releaseInsertUpdateDto.getDelivery());
+			releaseInsertUpdateDto.setDelivery(delivery);
+		} else {
+			releaseInsertUpdateDto.setDelivery(null);
+		}
+		
+		Long newStockQuantity = (long) (production.getProductionQuantity() - releaseInsertUpdateDto.getReleaseQuantity());
+		
+		stock.updateStock(stock.getStockName(), newStockQuantity, stock.getStockDescription());
+		releaseInsertUpdateDto.setProduction(production);
 		release.updateRelease(releaseInsertUpdateDto);
 	}
 
@@ -103,8 +135,12 @@ public class ReleaseServiceImpl implements ReleaseService {
 	public void deleteRelease(final Long releaseId) throws RestApiException {
 		Release release = releaseRepository.findByReleaseId(releaseId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-//		releaseRepository.deleteRelease(releaseId);
-		releaseRepository.delete(release);
+		Stock stock = stockRepository.findById(release.getProduction().getStock().getStockId()).orElse(null);
+		
+		Long newStockQuantity = (long) (release.getProduction().getProductionQuantity());
+		
+		stock.updateStock(stock.getStockName(), newStockQuantity, stock.getStockDescription());
+		releaseRepository.deleteRelease(releaseId);
 	}
 
 	

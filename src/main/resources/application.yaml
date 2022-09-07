@@ -1,5 +1,4 @@
 spring:
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://gongzone-db.cmjrreikybyw.ap-northeast-2.rds.amazonaws.com:3306/gongzone
@@ -36,3 +35,20 @@ springdoc.override-with-generic-response: false
 springdoc:
   api-docs:
     path: /api/v1/api-docs
+    
+# AWS
+cloud:
+  aws:
+    s3:
+      bucket: gongzone1bucket
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: 'false'
+    credentials:
+      instanceProfile: 'true'
+      accessKey: AKIAT36Y7MRM2YQZ2U4L
+      secretKey: 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
+      
+      
+  
