@@ -1,10 +1,11 @@
 package com.gongzone.production.mapper;
 
 import com.gongzone.client.dto.ReleaseClientDto;
-import com.gongzone.client.entity.Client;
+import com.gongzone.entity.client.Client;
+import com.gongzone.entity.production.Production;
+import com.gongzone.entity.release.Release;
 import com.gongzone.production.dto.ProductionDetailsDto;
-import com.gongzone.production.entity.Production;
-import com.gongzone.release.entity.Release;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;

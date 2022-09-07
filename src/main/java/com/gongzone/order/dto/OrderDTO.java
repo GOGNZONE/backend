@@ -2,7 +2,7 @@ package com.gongzone.order.dto;
 
 import java.time.LocalDate;
 
-import com.gongzone.client.entity.Client;
+import com.gongzone.entity.client.Client;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

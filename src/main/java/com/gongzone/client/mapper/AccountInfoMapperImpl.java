@@ -1,7 +1,8 @@
 package com.gongzone.client.mapper;
 
 import com.gongzone.client.dto.AccountInfoDto;
-import com.gongzone.client.entity.ClientAccount;
+import com.gongzone.entity.client.ClientAccount;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;

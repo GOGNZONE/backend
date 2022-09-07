@@ -1,7 +1,8 @@
 package com.gongzone.production.mapper;
 
+import com.gongzone.entity.production.Production;
 import com.gongzone.production.dto.ReleaseProductionDto;
-import com.gongzone.production.entity.Production;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;

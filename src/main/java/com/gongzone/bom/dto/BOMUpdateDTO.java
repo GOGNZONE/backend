@@ -1,7 +1,7 @@
 package com.gongzone.bom.dto;
 
-import com.gongzone.bom.entity.BOM;
-import com.gongzone.storage.entity.Storage;
+import com.gongzone.entity.bom.BOM;
+import com.gongzone.entity.storage.Storage;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

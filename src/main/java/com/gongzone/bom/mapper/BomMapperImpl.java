@@ -1,7 +1,8 @@
 package com.gongzone.bom.mapper;
 
 import com.gongzone.bom.dto.BOMDTO;
-import com.gongzone.bom.entity.BOM;
+import com.gongzone.entity.bom.BOM;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;

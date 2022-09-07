@@ -1,7 +1,8 @@
 package com.gongzone.release.mapper;
 
+import com.gongzone.entity.release.Delivery;
 import com.gongzone.release.dto.DeliveryDto;
-import com.gongzone.release.entity.Delivery;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;

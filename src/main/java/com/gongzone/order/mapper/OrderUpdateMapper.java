@@ -3,8 +3,8 @@ package com.gongzone.order.mapper;
 import org.mapstruct.Mapper;
 
 import com.gongzone.common.mapper.GenericMapper;
+import com.gongzone.entity.order.Order;
 import com.gongzone.order.dto.OrderUpdateDTO;
-import com.gongzone.order.entity.Order;
 
 
 /**

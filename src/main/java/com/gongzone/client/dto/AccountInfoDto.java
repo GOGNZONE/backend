@@ -1,7 +1,7 @@
 package com.gongzone.client.dto;
 
-import com.gongzone.client.entity.Client;
-import com.gongzone.client.entity.ClientAccount;
+import com.gongzone.entity.client.Client;
+import com.gongzone.entity.client.ClientAccount;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

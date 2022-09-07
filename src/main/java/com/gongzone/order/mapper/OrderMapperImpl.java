@@ -1,7 +1,8 @@
 package com.gongzone.order.mapper;
 
+import com.gongzone.entity.order.Order;
 import com.gongzone.order.dto.OrderDTO;
-import com.gongzone.order.entity.Order;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;

@@ -3,8 +3,8 @@ package com.gongzone.stock.mapper;
 import org.mapstruct.Mapper;
 
 import com.gongzone.common.mapper.GenericMapper;
+import com.gongzone.entity.stock.Stock;
 import com.gongzone.stock.dto.StockDTO;
-import com.gongzone.stock.entity.Stock;
 
 
 /**

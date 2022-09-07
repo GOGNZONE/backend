@@ -1,7 +1,7 @@
 package com.gongzone.production.dto;
 
-import com.gongzone.client.entity.Client;
-import com.gongzone.stock.entity.Stock;
+import com.gongzone.entity.client.Client;
+import com.gongzone.entity.stock.Stock;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
