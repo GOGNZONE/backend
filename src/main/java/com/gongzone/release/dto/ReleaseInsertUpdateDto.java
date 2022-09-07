@@ -1,7 +1,6 @@
 package com.gongzone.release.dto;
 
 import com.gongzone.production.entity.Production;
-import com.gongzone.release.entity.Delivery;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,6 +33,6 @@ public class ReleaseInsertUpdateDto {
 	
 	private Production production;
 	
-	private Delivery delivery;
+	private DeliveryDto deliveryDto;
 	
 }

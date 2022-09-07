@@ -10,10 +10,12 @@ import com.gongzone.client.entity.Client;
 import com.gongzone.client.repository.ClientRepository;
 import com.gongzone.common.errors.errorcode.CommonErrorCode;
 import com.gongzone.common.errors.exception.RestApiException;
+import com.gongzone.production.dto.ProductionDetailsDto;
 import com.gongzone.production.dto.ProductionDto;
 import com.gongzone.production.dto.ProductionListDto;
 import com.gongzone.production.dto.ProductionUpdateDto;
 import com.gongzone.production.entity.Production;
+import com.gongzone.production.mapper.ProductionDetailsMapper;
 import com.gongzone.production.mapper.ProductionListMapper;
 import com.gongzone.production.mapper.ProductionMapper;
 import com.gongzone.production.repository.ProductionRepository;
@@ -31,8 +33,10 @@ public class ProductionServiceImpl implements ProductionService {
 	
 	private final ProductionRepository productionRepository;
 	private final ClientRepository clientRepository;
+	
 	private final ProductionListMapper productionListMapper = Mappers.getMapper(ProductionListMapper.class);
 	private final ProductionMapper productionMapper = Mappers.getMapper(ProductionMapper.class);
+	private final ProductionDetailsMapper productionDetailsMapper = Mappers.getMapper(ProductionDetailsMapper.class);
 	
 	/**
 	 *  전체 생산 목록 조회
@@ -48,14 +52,14 @@ public class ProductionServiceImpl implements ProductionService {
 	/**
 	 * 생산 품목 코드(production_id)로 생산 품목 상세 조회
 	 * @param { productionId }
-	 * @return ProductionDto
+	 * @return ProductionDetailsDto
 	 * */
 	@Override
 	@Transactional(readOnly = true)
-	public ProductionDto findByProductionId(final Long productionId) throws RestApiException {
+	public ProductionDetailsDto findByProductionId(final Long productionId) throws RestApiException {
 		Production production = productionRepository.findById(productionId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		return toDTO(production);
+		return productionDetailsMapper.toDto(production);
 	}
 	
 	/**
@@ -97,11 +101,6 @@ public class ProductionServiceImpl implements ProductionService {
 		productionRepository.delete(production);
 	}
 	
-	
-	/* MapStruct Mapper Production → ProductionDTO */
-	protected ProductionDto toDTO(Production production) {
-		return productionMapper.toDto(production);
-	}
 	
 	/* MapStruct Mapper ProductionDTO → Production */
 	protected Production toEntity(ProductionDto productionDto) {

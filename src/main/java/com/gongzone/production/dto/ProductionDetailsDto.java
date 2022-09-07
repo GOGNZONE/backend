@@ -2,25 +2,24 @@ package com.gongzone.production.dto;
 
 import java.util.List;
 
-import com.gongzone.client.entity.Client;
+import com.gongzone.client.dto.ReleaseClientDto;
 import com.gongzone.release.entity.Release;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
- * 생산 품목 등록 Dto
+ * 생산 상세 조회 Dto
  * @author Hanju Park
  * @version 1.0
  * */
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
-public class ProductionDto {
+@Getter
+public class ProductionDetailsDto {
 	
 	private Long productionId;
 	
@@ -42,7 +41,7 @@ public class ProductionDto {
 	
 	private String productionDate;
 	
-	private Client client;
+	private ReleaseClientDto releaseClientDto;
 	
 	private List<Release> releases;
 	
