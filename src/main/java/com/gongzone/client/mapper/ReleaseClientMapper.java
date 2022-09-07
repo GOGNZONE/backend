@@ -3,8 +3,8 @@ package com.gongzone.client.mapper;
 import org.mapstruct.Mapper;
 
 import com.gongzone.client.dto.ReleaseClientDto;
-import com.gongzone.client.entity.Client;
 import com.gongzone.common.mapper.GenericMapper;
+import com.gongzone.entity.client.Client;
 
 /**
  * ReleaseClientDto ↔ Client

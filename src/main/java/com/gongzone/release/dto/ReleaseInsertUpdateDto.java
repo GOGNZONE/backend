@@ -1,7 +1,7 @@
 package com.gongzone.release.dto;
 
-import com.gongzone.production.entity.Production;
-import com.gongzone.release.entity.Delivery;
+import com.gongzone.entity.production.Production;
+import com.gongzone.entity.release.Delivery;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

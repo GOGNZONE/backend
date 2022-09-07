@@ -1,7 +1,8 @@
 package com.gongzone.stock.mapper;
 
+import com.gongzone.entity.stock.Stock;
 import com.gongzone.stock.dto.StockUpdateDTO;
-import com.gongzone.stock.entity.Stock;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;

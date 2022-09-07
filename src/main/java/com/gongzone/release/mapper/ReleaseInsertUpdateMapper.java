@@ -3,8 +3,8 @@ package com.gongzone.release.mapper;
 import org.mapstruct.Mapper;
 
 import com.gongzone.common.mapper.GenericMapper;
+import com.gongzone.entity.release.Release;
 import com.gongzone.release.dto.ReleaseInsertUpdateDto;
-import com.gongzone.release.entity.Release;
 
 /**
  * ReleaseInsertDto ↔ Release

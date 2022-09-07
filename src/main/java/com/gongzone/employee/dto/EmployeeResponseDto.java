@@ -1,7 +1,7 @@
 package com.gongzone.employee.dto;
 
-import com.gongzone.employee.entity.Employee;
-import com.gongzone.employee.entity.EmployeeRole;
+import com.gongzone.entity.employee.Employee;
+import com.gongzone.entity.employee.EmployeeRole;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,8 @@
 package com.gongzone.employee.mapper;
 
 import com.gongzone.employee.dto.RetiredEmployeeDto;
-import com.gongzone.employee.entity.RetiredEmployee;
+import com.gongzone.entity.employee.RetiredEmployee;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;

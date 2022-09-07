@@ -29,3 +29,5 @@
 [2022-09-07 12:00:54:77590390] WARN  2180 --- [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.multipart.support.MissingServletRequestPartException: Required request part 'file' is not present]
 [2022-09-07 12:04:01:77777656] INFO  2180 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 [2022-09-07 12:04:01:77777658] INFO  2180 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+[2022-09-07 15:34:25:29725] INFO  4684 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+[2022-09-07 15:34:25:29726] INFO  4684 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms

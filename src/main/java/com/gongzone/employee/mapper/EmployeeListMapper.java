@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 
 import com.gongzone.common.mapper.GenericMapper;
 import com.gongzone.employee.dto.EmployeeListDto;
-import com.gongzone.employee.entity.Employee;
+import com.gongzone.entity.employee.Employee;
 
 /**
  * Employee List Mapping Iterface

@@ -1,7 +1,8 @@
 package com.gongzone.storage.mapper;
 
+import com.gongzone.entity.storage.Storage;
 import com.gongzone.storage.dto.StorageDTO;
-import com.gongzone.storage.entity.Storage;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;

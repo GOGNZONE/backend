@@ -1,7 +1,8 @@
 package com.gongzone.employee.mapper;
 
 import com.gongzone.employee.dto.EmployeeListDto;
-import com.gongzone.employee.entity.Employee;
+import com.gongzone.entity.employee.Employee;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;

@@ -8,9 +8,9 @@ import org.mapstruct.factory.Mappers;
 
 import com.gongzone.client.mapper.ReleaseClientMapper;
 import com.gongzone.common.mapper.GenericMapper;
+import com.gongzone.entity.production.Production;
+import com.gongzone.entity.release.Release;
 import com.gongzone.production.dto.ProductionDetailsDto;
-import com.gongzone.production.entity.Production;
-import com.gongzone.release.entity.Release;
 
 /**
  * ProductionDetailsDto ↔ Production

@@ -6,11 +6,11 @@ import org.mapstruct.factory.Mappers;
 import com.gongzone.client.dto.ReleaseClientDto;
 import com.gongzone.client.mapper.ReleaseClientMapper;
 import com.gongzone.common.mapper.GenericMapper;
+import com.gongzone.entity.release.Release;
 import com.gongzone.production.dto.ReleaseProductionDto;
 import com.gongzone.production.mapper.ReleaseProductionMapper;
 import com.gongzone.release.dto.DeliveryDto;
 import com.gongzone.release.dto.ReleaseDto;
-import com.gongzone.release.entity.Release;
 
 /**
  * ReleaseDto ↔ Release 

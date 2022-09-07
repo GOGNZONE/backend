@@ -1,6 +1,6 @@
 package com.gongzone.client.dto;
 
-import com.gongzone.employee.entity.Employee;
+import com.gongzone.entity.employee.Employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
