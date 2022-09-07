@@ -29,7 +29,7 @@ public class S3Service {
     public String uploadFile(MultipartFile file) {
         File fileObj = convertMultiPartFileToFile(file);
         String fileName = file.getOriginalFilename();
-        s3Client.putObject(new PutObjectRequest(bucketName, fileName, fileObj));
+        s3Client.putObject(new PutObjectRequest(bucketName, "folder/"+fileName, fileObj));
         fileObj.delete();
         return "File uploaded : " + fileName;
     }

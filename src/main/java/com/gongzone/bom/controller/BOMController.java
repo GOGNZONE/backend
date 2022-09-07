@@ -17,6 +17,7 @@ import com.gongzone.bom.dto.BOMListDTO;
 import com.gongzone.bom.dto.BOMUpdateDTO;
 import com.gongzone.bom.service.BOMServiceImpl;
 
+
 import lombok.RequiredArgsConstructor;
 
 
@@ -51,6 +52,12 @@ public class BOMController {
 		return bomService.findBOMByBomId(bomId);
 	}
 	
+//	@GetMapping("/{bomId}")
+//	public  ResponseEntity<BOMDTO> findBOMByBomId(@PathVariable Long bomId) {
+//		return 	ResponseEntity.ok(bomService.findBOMByBomId(bomId));
+//	}
+//	
+	
 	/**
 	 * BOM 등록
 	 * @param { BOMDTO }
@@ -59,7 +66,7 @@ public class BOMController {
 	@PostMapping("")
 	public void insertBOM(@RequestBody BOMDTO bomDTO) {
 		System.out.println(bomDTO);
-//		bomService.insertBOM(bomDTO);
+		bomService.insertBOM(bomDTO);
 	}
 	
 	/**
