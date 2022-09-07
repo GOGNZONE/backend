@@ -64,7 +64,7 @@ public class ProductionServiceImpl implements ProductionService {
 	 * */
 	@Override
 	@Transactional(readOnly = true)
-	public ProductionDetailsDto findByProductionId(final Long productionId) throws RestApiException {
+	public ProductionDetailsDto findByProductionId(final Long productionId) {
 		Production production = productionRepository.findById(productionId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		return productionDetailsMapper.toDto(production);
@@ -90,7 +90,7 @@ public class ProductionServiceImpl implements ProductionService {
 	 * */
 	@Override
 	@Transactional
-	public void updateProduction(final Long productionId, final ProductionInsertUpdateDto productionInsertUpdateDto) throws RestApiException {
+	public void updateProduction(final Long productionId, final ProductionInsertUpdateDto productionInsertUpdateDto) {
 		Production production = productionRepository.findById(productionId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		
@@ -115,7 +115,7 @@ public class ProductionServiceImpl implements ProductionService {
 	 * */
 	@Override
 	@Transactional
-	public void deleteProduction(final Long productionId) throws RestApiException {
+	public void deleteProduction(final Long productionId) {
 		Production production = productionRepository.findById(productionId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		if(production.getStock() != null) {

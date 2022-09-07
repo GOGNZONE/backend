@@ -1,6 +1,7 @@
 package com.gongzone.release.apiController;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.common.errors.exception.RestApiException;
-import com.gongzone.production.dto.ProductionListDto;
 import com.gongzone.release.dto.ReleaseDto;
 import com.gongzone.release.dto.ReleaseInsertUpdateDto;
 import com.gongzone.release.dto.ReleaseListDto;
@@ -59,7 +59,7 @@ public class ReleaseRestController {
 	@GetMapping("/list")
 	public ResponseEntity<List<ReleaseListDto>> findAllReleases() {
 		final List<ReleaseListDto> response = releaseServiceImpl.findAllReleases();
-		return ResponseEntity.ok(response);
+		return ResponseEntity.ok().body(response);
 	}
 	
 	/**
@@ -77,13 +77,13 @@ public class ReleaseRestController {
 	})
 	@GetMapping("/{releaseId}")
 	public ResponseEntity<ReleaseDto> findByReleaseId(@Parameter(description = "출고 코드") @PathVariable final Long releaseId) throws RestApiException {
-		return ResponseEntity.ok(releaseServiceImpl.findByReleaseId(releaseId));
+		return ResponseEntity.ok().body(releaseServiceImpl.findByReleaseId(releaseId));
 	}
 	
 	/**
 	 * 출고 등록
 	 * @param { productionId, releaseInsertUpdateDto }
-	 * @return ResponseEntity<Void>
+	 * @return ResponseEntity<Objects>
 	 * */
 	@Operation(summary = "출고 등록", description = "출고 대상 생산품목에 대한 출고코드, 출고일자, 출고수량 등 출고에 대한 데이터와 택배사에 대한 데이터 입력")
 	@ApiResponses({
@@ -94,7 +94,7 @@ public class ReleaseRestController {
 		@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버에 오류가 발생하여 응답할 수 없음을 의미합니다. 서버에 오류가 발생했으나 처리 방법을 알 수 없을 경우의 응답입니다.")))
 	})
 	@PostMapping("/{productionId}")
-	public ResponseEntity<Void> insertRelease(@Parameter(description = "생산 제품 코드") @PathVariable final Long productionId, @RequestBody @Validated final ReleaseInsertUpdateDto releaseInsertUpdateDto) {
+	public ResponseEntity<Objects> insertRelease(@Parameter(description = "생산 제품 코드") @PathVariable final Long productionId, @RequestBody @Validated final ReleaseInsertUpdateDto releaseInsertUpdateDto) {
 		releaseServiceImpl.insertRelease(productionId, releaseInsertUpdateDto);
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.build();
@@ -103,7 +103,7 @@ public class ReleaseRestController {
 	/**
 	 * 출고 코드(release_id)로 출고 수정
 	 * @param { releaseId, releaseInsertUpdateDto }
-	 * @return ResponseEntity<Void>
+	 * @return ResponseEntity<Objects>
 	 * */
 	@Operation(summary = "출고내역 수정", description = "출고일자, 수량, 공급가액(합계), 비고 등 출고 내역에 대한 데이터 수정 및 택배사 데이터 수정 및 등록")
 	@ApiResponses({
@@ -114,7 +114,7 @@ public class ReleaseRestController {
 		@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버에 오류가 발생하여 응답할 수 없음을 의미합니다. 서버에 오류가 발생했으나 처리 방법을 알 수 없을 경우의 응답입니다.")))
 	})
 	@PutMapping("/{releaseId}")
-	public ResponseEntity<Void> updateRelease(@Parameter(description = "출고 코드") @PathVariable final Long releaseId, 
+	public ResponseEntity<Objects> updateRelease(@Parameter(description = "출고 코드") @PathVariable final Long releaseId, 
 			@RequestBody @Validated final ReleaseInsertUpdateDto releaseInsertUpdateDto) throws RestApiException {
 		releaseServiceImpl.updateRelease(releaseId, releaseInsertUpdateDto);
 		return ResponseEntity.noContent()
@@ -124,7 +124,7 @@ public class ReleaseRestController {
 	/**
 	 * 출고 코드(release_id)로 출고 삭제
 	 * @param { releaseId }
-	 * @return ResponseEntity<Void>
+	 * @return ResponseEntity<Objects>
 	 * */
 	@Operation(summary = "출고내역 삭제", description = "해당 출고내역 삭제")
 	@ApiResponses({
@@ -135,7 +135,7 @@ public class ReleaseRestController {
 		@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버에 오류가 발생하여 응답할 수 없음을 의미합니다. 서버에 오류가 발생했으나 처리 방법을 알 수 없을 경우의 응답입니다.")))
 	})
 	@DeleteMapping("/{releaseId}")
-	public ResponseEntity<Void> deleteRelease(@Parameter(description = "출고 코드") @PathVariable final Long releaseId) throws RestApiException {
+	public ResponseEntity<Objects> deleteRelease(@Parameter(description = "출고 코드") @PathVariable final Long releaseId) throws RestApiException {
 		releaseServiceImpl.deleteRelease(releaseId);
 		return ResponseEntity.noContent()
 				.build();
