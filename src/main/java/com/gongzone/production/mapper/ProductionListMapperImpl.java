@@ -3,6 +3,7 @@ package com.gongzone.production.mapper;
 import com.gongzone.production.dto.ProductionListDto;
 import com.gongzone.production.entity.Production;
 import com.gongzone.release.entity.Release;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-31T23:16:36+0900",
+    date = "2022-09-03T15:47:35+0900",
     comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 17.0.3 (Eclipse Adoptium)"
 )
 @Component
@@ -30,6 +31,9 @@ public class ProductionListMapperImpl implements ProductionListMapper {
         productionListDto.productionPrice( e.getProductionPrice() );
         productionListDto.productionQuantity( e.getProductionQuantity() );
         productionListDto.productionDescription( e.getProductionDescription() );
+        productionListDto.productionProgress( e.getProductionProgress() );
+        productionListDto.productionReleasedDate( e.getProductionReleasedDate() );
+        productionListDto.productionEndDate(e.getProductionEndDate());
         List<Release> list = e.getReleases();
         if ( list != null ) {
             productionListDto.releases( new ArrayList<Release>( list ) );
@@ -52,10 +56,14 @@ public class ProductionListMapperImpl implements ProductionListMapper {
         production.productionPrice( d.getProductionPrice() );
         production.productionQuantity( d.getProductionQuantity() );
         production.productionDescription( d.getProductionDescription() );
+        production.productionReleasedDate( d.getProductionReleasedDate() );
+        production.productionProgress( d.getProductionProgress() );
+        production.productionEndDate(d.getProductionEndDate());
         List<Release> list = d.getReleases();
         if ( list != null ) {
             production.releases( new ArrayList<Release>( list ) );
         }
+
 
         return production.build();
     }

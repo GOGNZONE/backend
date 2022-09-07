@@ -28,6 +28,7 @@ public class ApiRetiredEmployeeController {
 	 *  전체 퇴사자 조회
 	 *  @return List<EmployeeListDto>
 	 */
+	@ApiOperation(value = "전체 퇴사자 조회", notes = "전체 퇴사자 조회")
 	@GetMapping("/list")
 	@Operation(summary = "전체 퇴사자 조회", description = "ADMIN 계정에서만 가능한 퇴사자 조회 기능", responses = {
 			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = RetiredEmployeeDto.class))),
@@ -44,6 +45,7 @@ public class ApiRetiredEmployeeController {
 	 * @return RetiredEmployeeDto
 	 * @throws IllegalAccessException 
 	 * */
+	@ApiOperation(value = "해당 퇴사자 조회", notes = "해당 퇴사자 조회")
 	@Operation(summary = "퇴사자 상세 조회", description = "ADMIN 계정에서만 가능한 퇴사자 상세 조회 기능", responses = {
 			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = RetiredEmployeeDto.class))),
 			@ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(schema = @Schema(example = "잘못된 요청입니다"))),

@@ -3,6 +3,7 @@ package com.gongzone.production.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -18,8 +20,9 @@ import org.hibernate.annotations.ColumnDefault;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gongzone.client.entity.Client;
-import com.gongzone.production.dto.ProductionUpdateDto;
+import com.gongzone.production.dto.ProductionInsertUpdateDto;
 import com.gongzone.release.entity.Release;
+import com.gongzone.stock.entity.Stock;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -83,10 +86,25 @@ public class Production {
 	@Schema(description = "생산 제품 비고")
 	private String productionDescription;
 	
-	@Column(name = "production_date")
-	@NotNull(message = "production date cannot be null")
-	@Schema(description = "생산 제품 생성 일자", nullable = false)
-	private String productionDate;
+	@Column(name="production_released_date")
+	@NotNull(message = "production released date cannot be null")
+	@Schema(description = "생산 제품 출고 일자", nullable = false)
+	private String productionReleasedDate;
+	
+	@Column(name = "production_start_date")
+	@NotNull(message = "production start date cannot be null")
+	@Schema(description = "제품 생산 시작 일자", nullable = false)
+	private String productionStartDate;
+	
+	@Column(name="production_end_date")
+	@Schema(description = "제품 생산 완료 일자")
+	private String productionEndDate;
+	
+	@Column(name="production_progress")
+	@NotNull(message="production progress cannot be null")
+	@ColumnDefault("0")
+	@Schema(description = "생산 제품 진행 상황", defaultValue = "생산 시작전", nullable = false)
+	private Byte productionProgress;
 	
 	@ManyToOne
 	@JoinColumn(name = "fk_client_id", nullable = true)
@@ -98,21 +116,32 @@ public class Production {
 	@Schema(description = "생산 제품에 대한 출고내역")
 	List<Release> releases = new ArrayList<>();
 	
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name="fk_stock_id", nullable = true)
+	@Schema(description = "재고")
+	private Stock stock;
+	
+	
 	/**
 	 * 생산 품목 수정 메서드
-	 * @param { productionUpdateDto }
+	 * @param { productionInsertUpdateDto }
 	 * @return void
 	 * */
-	public void updateProduction(ProductionUpdateDto productionUpdateDto) {
-		this.productionName = productionUpdateDto.getProductionName();
-		this.productionBrandName = productionUpdateDto.getProductionBrandName();
-		this.productionPrice = productionUpdateDto.getProductionPrice();
-		this.productionQuantity = productionUpdateDto.getProductionQuantity();
-		this.productionFile = productionUpdateDto.getProductionFile();
-		this.productionStandard = productionUpdateDto.getProductionStandard();
-		this.productionUnit = productionUpdateDto.getProductionUnit();
-		this.productionDescription = productionUpdateDto.getProductionDescription();
-//		this.productionReleasedDate = productionUpdateDto.getProductionReleasedDate();
+	public void updateProduction(ProductionInsertUpdateDto productionInsertUpdateDto) {
+		this.productionName = productionInsertUpdateDto.getProductionName();
+		this.productionBrandName = productionInsertUpdateDto.getProductionBrandName();
+		this.productionPrice = productionInsertUpdateDto.getProductionPrice();
+		this.productionQuantity = productionInsertUpdateDto.getProductionQuantity();
+		this.productionFile = productionInsertUpdateDto.getProductionFile();
+		this.productionStandard = productionInsertUpdateDto.getProductionStandard();
+		this.productionUnit = productionInsertUpdateDto.getProductionUnit();
+		this.productionDescription = productionInsertUpdateDto.getProductionDescription();
+		this.productionReleasedDate = productionInsertUpdateDto.getProductionReleasedDate();
+		this.productionStartDate = productionInsertUpdateDto.getProductionStartDate();
+		this.productionEndDate = productionInsertUpdateDto.getProductionEndDate();
+		this.productionProgress = productionInsertUpdateDto.getProductionProgress();
+		this.client = productionInsertUpdateDto.getClient();
+		this.stock = productionInsertUpdateDto.getStock();
 	}
 	
 }

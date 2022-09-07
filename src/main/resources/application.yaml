@@ -1,10 +1,9 @@
 spring:
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://gongzone-db.cmjrreikybyw.ap-northeast-2.rds.amazonaws.com:3306/gongzone
-    username: gongzone
-    password: gongzone123
+    url: jdbc:mysql://localhost:3306/scott
+    username: scott
+    password: tiger
   
   jpa:
     open-in-view : 'false'

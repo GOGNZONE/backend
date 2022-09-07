@@ -32,6 +32,12 @@ public class ProductionListDto {
 	
 	private String productionDescription;
 	
+	private Byte productionProgress;
+	
+	private String productionReleasedDate;
+	
+	private String productionEndDate;
+	
 	private List<Release> releases;
 	
 }

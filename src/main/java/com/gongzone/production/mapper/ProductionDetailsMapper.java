@@ -40,8 +40,11 @@ public interface ProductionDetailsMapper extends GenericMapper<ProductionDetails
 		productionDetailsDto.productionStandard( e.getProductionStandard() );
 		productionDetailsDto.productionUnit( e.getProductionUnit() );
 		productionDetailsDto.productionDescription( e.getProductionDescription() );
-		productionDetailsDto.productionDate( e.getProductionDate() );
-		productionDetailsDto.releaseClientDto(releaseClientMapper.toDto(e.getClient()));
+		productionDetailsDto.productionReleasedDate(e.getProductionReleasedDate());
+		productionDetailsDto.productionStartDate( e.getProductionStartDate() );
+		productionDetailsDto.productionEndDate(e.getProductionEndDate());
+		productionDetailsDto.productionProgress(e.getProductionProgress());
+		productionDetailsDto.client(releaseClientMapper.toDto(e.getClient()));
         List<Release> list = e.getReleases();
         if ( list != null ) {
         	productionDetailsDto.releases( new ArrayList<Release>( list ) );

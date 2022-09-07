@@ -31,13 +31,15 @@ public class ReleaseDto {
 	
 	private String releaseType;
 	
+	private Byte releaseConfirmed;
+	
 	// Client Info
-	private ReleaseClientDto releaseClientDto;
+	private ReleaseClientDto client;
 	
 	// Production Info
-	private ReleaseProductionDto releaseProductionDto;
+	private ReleaseProductionDto production;
 	
 	// Delivery Info
-	private DeliveryDto deliveryDto;
+	private DeliveryDto delivery;
 	
 }

@@ -70,6 +70,12 @@ public class Release {
 	@Schema(description = "출고 방식", nullable = false, defaultValue = "배송")
 	private String releaseType;
 	
+	@Column(name="release_confirmed")
+	@NotNull(message="release confirmed cannot be null")
+	@ColumnDefault("0")
+	@Schema(description = "출고 확정 여부", defaultValue = "확정전", nullable = false)
+	private Byte releaseConfirmed;
+	
 	@Id
 	@ManyToOne
 	@JoinColumn(name="fk_production_id")
@@ -85,7 +91,7 @@ public class Release {
 
 	/**
 	 * 출고 현황 수정 메서드
-	 * @param { releaseDto }
+	 * @param { releaseInsertUpdateDto }
 	 * @return void
 	 * */
 	public void updateRelease(ReleaseInsertUpdateDto releaseInsertUpdateDto) {
@@ -93,6 +99,8 @@ public class Release {
 		this.releaseQuantity = releaseInsertUpdateDto.getReleaseQuantity();
 		this.releaseTotalPrice = releaseInsertUpdateDto.getReleaseTotalPrice();
 		this.releaseDescription = releaseInsertUpdateDto.getReleaseDescription();
+		this.releaseConfirmed = releaseInsertUpdateDto.getReleaseConfirmed();
+		this.delivery = releaseInsertUpdateDto.getDelivery();
 	}
 	
 }
