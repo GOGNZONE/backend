@@ -64,8 +64,8 @@ public class StorageServiceImpl implements StorageService {
 	 * @return void
 	 * */
 	@Override
-	public void insertStorage(StorageRequest storageDTO) {
-		storageRepo.save(storageDTO.toEntity());
+	public void insertStorage(StorageRequest request) {
+		storageRepo.save(request.toEntity());
 	}
 
 	/**
@@ -75,7 +75,6 @@ public class StorageServiceImpl implements StorageService {
 	 * */
 	@Override
 	public void updateStorage(Long storageId, StorageUpdateDTO updateDTO) {
-//		Storage storage = storageMapper.toEntity(findStorageByStorageId(storageId));
 		Storage storage = storageRepo.findByStorageId(storageId);
 		
 		storage.updateStorage(updateDTO.getStorageAddress(), updateDTO.getStorageCategory(), updateDTO.getStorageDescription());

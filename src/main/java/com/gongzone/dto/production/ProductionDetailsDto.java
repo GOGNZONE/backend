@@ -1,8 +1,10 @@
 package com.gongzone.dto.production;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.gongzone.dto.client.ReleaseClientDto;
+import com.gongzone.dto.release.ReleaseDto;
 import com.gongzone.entity.production.Production;
 import com.gongzone.entity.release.Release;
 import com.gongzone.entity.stock.Stock;
@@ -37,7 +39,7 @@ public class ProductionDetailsDto {
 	private String productionEndDate;
 	private Byte productionProgress;
 	private ReleaseClientDto client;
-	private List<Release> releases;
+	private List<ReleaseDto> releases;
 	private Stock stock;
 	
 	/** Entity -> DTO */
@@ -56,7 +58,7 @@ public class ProductionDetailsDto {
 		this.productionEndDate = production.getProductionEndDate();
 		this.productionProgress = production.getProductionProgress();
 		this.client = new ReleaseClientDto(production.getClient());
-		this.releases = production.getReleases();
+		this.releases = production.getReleases().stream().map(ReleaseDto::new).collect(Collectors.toList());
 		this.stock = production.getStock();
 	}
 

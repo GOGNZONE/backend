@@ -30,7 +30,7 @@ public interface StorageService {
 	 * @param { storageDTO }
 	 * @return void
 	 * */
-	public void insertStorage(StorageRequest storageDTO);
+	public void insertStorage(StorageRequest request);
 	/**
 	 * 창고 수정(production_id)로 생산 품목 수정
 	 * @param { stockId, storageDTO }

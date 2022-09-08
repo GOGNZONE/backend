@@ -70,6 +70,7 @@ public class ProductionInsertUpdateDto {
 				.client(client)
 				.stock(stock)
 				.build();
+		
 		return production;
 	}
 	

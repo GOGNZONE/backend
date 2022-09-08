@@ -91,8 +91,8 @@ public class StorageController {
 		@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버에 오류가 발생하여 응답할 수 없음을 의미합니다. 서버에 오류가 발생했으나 처리 방법을 알 수 없을 경우의 응답입니다.")))
 	})
 		@PostMapping("")
-	public void insertStorage(@RequestBody StorageRequest storageDTO) {
-		storageService.insertStorage(storageDTO);
+	public void insertStorage(@RequestBody StorageRequest request) {
+		storageService.insertStorage(request);
 	}
 	
 	/**
