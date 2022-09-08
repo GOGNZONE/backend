@@ -33,8 +33,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	 * RestApiException 에러 처리
 	 * */
 	@ExceptionHandler(RestApiException.class)
-	public String handleRestApi(final RestApiException e) {
-		return "please";
+	public ResponseEntity<Object> handleFactoryException(final RestApiException e) {
+		final ErrorCode errorCode = e.getErrorCode();
+		return handleExceptionInternal(errorCode);
 	}
 	
 	/**
