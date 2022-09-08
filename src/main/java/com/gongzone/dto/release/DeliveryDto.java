@@ -1,4 +1,6 @@
-package com.gongzone.release.dto;
+package com.gongzone.dto.release;
+
+import com.gongzone.entity.release.Delivery;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,4 +24,10 @@ public class DeliveryDto {
 	
 	private String deliveryTrackingNumber;
 	
+	/* Entity -> DTO*/
+	public DeliveryDto(Delivery delivery) {
+		this.deliveryId = delivery.getDeliveryId();
+		this.deliveryCompanyName = delivery.getDeliveryCompanyName();
+		this.deliveryTrackingNumber = delivery.getDeliveryTrackingNumber();
+	}
 }

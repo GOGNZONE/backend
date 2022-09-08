@@ -1,7 +1,8 @@
-package com.gongzone.release.dto;
+package com.gongzone.dto.release;
 
 import com.gongzone.entity.production.Production;
 import com.gongzone.entity.release.Delivery;
+import com.gongzone.entity.release.Release;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,5 +38,21 @@ public class ReleaseInsertUpdateDto {
 	private Production production;
 	
 	private Delivery delivery;
+	
+	/* DTO -> Entity */
+	public Release toEntity() {
+		Release release = Release.builder()
+				.releaseId(releaseId)
+				.releaseDate(releaseDate)
+				.releaseDescription(releaseDescription)
+				.releaseQuantity(releaseQuantity)
+				.releaseTotalPrice(releaseTotalPrice)
+				.releaseType(releaseType)
+				.releaseConfirmed(releaseConfirmed)
+				.production(production)
+				.delivery(delivery)
+				.build();
+		return release;
+	}
 	
 }

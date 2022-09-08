@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.common.errors.exception.RestApiException;
-import com.gongzone.release.dto.ReleaseDto;
-import com.gongzone.release.dto.ReleaseInsertUpdateDto;
-import com.gongzone.release.dto.ReleaseListDto;
+import com.gongzone.dto.release.ReleaseDto;
+import com.gongzone.dto.release.ReleaseInsertUpdateDto;
+import com.gongzone.dto.release.ReleaseListDto;
 import com.gongzone.service.implement.release.ReleaseServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;

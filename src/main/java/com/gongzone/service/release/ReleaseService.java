@@ -2,9 +2,9 @@ package com.gongzone.service.release;
 
 import java.util.List;
 
-import com.gongzone.release.dto.ReleaseDto;
-import com.gongzone.release.dto.ReleaseInsertUpdateDto;
-import com.gongzone.release.dto.ReleaseListDto;
+import com.gongzone.dto.release.ReleaseDto;
+import com.gongzone.dto.release.ReleaseInsertUpdateDto;
+import com.gongzone.dto.release.ReleaseListDto;
 
 /**
  * 출고 서비스 인터페이스

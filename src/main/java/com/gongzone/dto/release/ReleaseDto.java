@@ -1,7 +1,8 @@
-package com.gongzone.release.dto;
+package com.gongzone.dto.release;
 
 import com.gongzone.dto.client.ReleaseClientDto;
 import com.gongzone.dto.production.ReleaseProductionDto;
+import com.gongzone.entity.release.Release;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,5 +42,17 @@ public class ReleaseDto {
 	
 	// Delivery Info
 	private DeliveryDto delivery;
+	
+	public ReleaseDto(Release release) {
+		this.releaseId = release.getReleaseId();
+		this.releaseDate = release.getReleaseDate();
+		this.releaseDescription = release.getReleaseDescription();
+		this.releaseQuantity = release.getReleaseQuantity();
+		this.releaseTotalPrice = release.getReleaseTotalPrice();
+		this.releaseType = release.getReleaseType();
+		this.releaseConfirmed = release.getReleaseConfirmed();
+		this.client = new ReleaseClientDto(release.getProduction().getClient());
+		this.delivery = new DeliveryDto(release.getDelivery());
+	}
 	
 }
