@@ -1,4 +1,6 @@
-package com.gongzone.order.dto;
+package com.gongzone.dto.order;
+
+import com.gongzone.entity.order.Order;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,5 +25,14 @@ public class OrderListDTO {
 	private Long orderProductionPrice;
 	private int orderProductionQuantity;
 	private String orderProductionDescription;
+	
+	public OrderListDTO(Order order) {
+		this.orderId = order.getId();
+		this.orderProductionName = order.getOrderProductionName();
+		this.orderProductionBrandName = order.getOrderProductionBrandName();
+		this.orderProductionPrice = order.getOrderProductionPrice();
+		this.orderProductionQuantity = order.getOrderProductionQuantity();
+		this.orderProductionDescription = order.getOrderProductionDescription();
+	}
 
 }
