@@ -5,6 +5,7 @@ import java.util.List;
 import com.gongzone.dto.client.ReleaseClientDto;
 import com.gongzone.entity.production.Production;
 import com.gongzone.entity.release.Release;
+import com.gongzone.entity.stock.Stock;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,6 +38,7 @@ public class ProductionDetailsDto {
 	private Byte productionProgress;
 	private ReleaseClientDto client;
 	private List<Release> releases;
+	private Stock stock;
 	
 	/** Entity -> DTO */
 	public ProductionDetailsDto(Production production) {
@@ -55,6 +57,7 @@ public class ProductionDetailsDto {
 		this.productionProgress = production.getProductionProgress();
 		this.client = new ReleaseClientDto(production.getClient());
 		this.releases = production.getReleases();
+		this.stock = production.getStock();
 	}
 
 }
