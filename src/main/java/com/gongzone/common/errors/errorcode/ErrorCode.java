@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
  * @author Hanju Park
  * @version 1.0
  * */
+
 public interface ErrorCode {
 	
 	String name();
