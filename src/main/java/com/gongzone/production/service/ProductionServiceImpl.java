@@ -64,7 +64,7 @@ public class ProductionServiceImpl implements ProductionService {
 	 * */
 	@Override
 	@Transactional(readOnly = true)
-	public ProductionDetailsDto findByProductionId(final Long productionId) {
+	public ProductionDetailsDto findByProductionId(final Long productionId) throws RestApiException {
 		Production production = productionRepository.findById(productionId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		return productionDetailsMapper.toDto(production);
@@ -95,7 +95,7 @@ public class ProductionServiceImpl implements ProductionService {
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		
 		if(productionInsertUpdateDto.getProductionProgress() == 2) {
-			Storage storage = storageRepository.findById(1L).orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+			Storage storage = storageRepository.findById(productionInsertUpdateDto.getStock().getStorage().getStorageId()).orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 			StockUpdateDTO stockDto = new StockUpdateDTO(
 					productionInsertUpdateDto.getProductionName(), 
 					Long.valueOf(productionInsertUpdateDto.getProductionQuantity()),
@@ -103,6 +103,9 @@ public class ProductionServiceImpl implements ProductionService {
 					storage);
 			Stock stock = stockRepository.save(stockUpdateMapper.toEntity(stockDto));
 			productionInsertUpdateDto.setStock(stock);
+		} else if(production.getStock() != null) {
+			stockRepository.deleteByStockId(production.getStock().getStockId());
+			productionInsertUpdateDto.setStock(null);
 		}
 		
 		production.updateProduction(productionInsertUpdateDto);

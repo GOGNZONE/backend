@@ -44,6 +44,7 @@ public class ProductionDetailsMapperImpl implements ProductionDetailsMapper {
         if ( list != null ) {
             production.releases( new ArrayList<Release>( list ) );
         }
+        production.stock(d.getStock());
 
         return production.build();
     }

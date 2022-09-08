@@ -116,7 +116,7 @@ public class Production {
 	@Schema(description = "생산 제품에 대한 출고내역")
 	List<Release> releases = new ArrayList<>();
 	
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(orphanRemoval = true)
 	@JoinColumn(name="fk_stock_id", nullable = true)
 	@Schema(description = "재고")
 	private Stock stock;

@@ -33,7 +33,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 		"com.gongzone.order.service", "com.gongzone.bom.service", "com.gongzone.storage.service","com.gongzone.client.service","com.gongzone.release.service",
 		"com.gongzone.stock.service", "com.gongzone.s3.service", "com.gongzone.employee.mapper","com.gongzone.client.mapper","com.gongzone.release.mapper",
 		"com.gongzone.order.mapper", "com.gongzone.bom.mapper", "com.gongzone.storage.mapper",
-		"com.gongzone.stock.mapper", "com.gongzone.s3.config", "com.gongzone.config", "com.gongzone.security.jwt" })
+		"com.gongzone.stock.mapper", "com.gongzone.s3.config", "com.gongzone.config", "com.gongzone.security.jwt", "com.gongzone.common.errors" })
 @SpringBootConfiguration
 public class GongzoneBackendApplication {
 

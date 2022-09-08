@@ -38,7 +38,7 @@ public interface ProductionService {
 	 * @param { productionId, productionInsertUpdateDto }
 	 * @return void
 	 * */
-	public void updateProduction(Long productionId, ProductionInsertUpdateDto productionInsertUpdateDto);
+	public void updateProduction(Long productionId, ProductionInsertUpdateDto productionInsertUpdateDto2);
 	
 	/**
 	 * 생산 품목 코드(production_id)로 생산 품목 삭제

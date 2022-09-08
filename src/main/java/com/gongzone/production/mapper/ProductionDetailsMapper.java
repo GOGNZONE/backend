@@ -49,6 +49,7 @@ public interface ProductionDetailsMapper extends GenericMapper<ProductionDetails
         if ( list != null ) {
         	productionDetailsDto.releases( new ArrayList<Release>( list ) );
         }
+        productionDetailsDto.stock(e.getStock());
 
         return productionDetailsDto.build();
         

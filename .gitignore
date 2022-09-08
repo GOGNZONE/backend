@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -25,7 +24,6 @@ target/
 *.iml
 *.ipr
 
-=======
 .gradle
 .settings
 .classpath
@@ -36,7 +34,6 @@ target/
 *.iml
 *.ipr
 
->>>>>>> 72c25662b0303118518df8442e39e8f84880377e
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -81,8 +78,6 @@ gradle-app.setting
 **/application-credentials.yaml
 **/application.properties
 **/application.yaml
-<<<<<<< HEAD
 **/application.yml
-=======
+*.log
 **/application.yml
->>>>>>> 72c25662b0303118518df8442e39e8f84880377e

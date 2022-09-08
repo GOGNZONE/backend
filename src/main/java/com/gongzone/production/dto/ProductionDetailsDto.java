@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.gongzone.client.dto.ReleaseClientDto;
 import com.gongzone.release.entity.Release;
+import com.gongzone.stock.entity.Stock;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -50,5 +51,7 @@ public class ProductionDetailsDto {
 	private ReleaseClientDto client;
 
 	private List<Release> releases;
+	
+	private Stock stock;
 	
 }
