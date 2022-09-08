@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongzone.dto.stock.StockDTO;
+import com.gongzone.dto.stock.StockDTO.StockRequest;
 import com.gongzone.dto.stock.StockListDTO;
 import com.gongzone.dto.stock.StockUpdateDTO;
 import com.gongzone.service.implement.stock.StockServiceImpl;
@@ -88,8 +89,8 @@ public class StockController {
 		@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버에 오류가 발생하여 응답할 수 없음을 의미합니다. 서버에 오류가 발생했으나 처리 방법을 알 수 없을 경우의 응답입니다.")))
 	})
 	@PostMapping("")
-	public void insertStock(@RequestBody StockDTO stockDTO) {
-		stockService.insertStock(stockDTO);
+	public void insertStock(@RequestBody StockRequest stockRequest) {
+		stockService.insertStock(stockRequest);
 	}
 	
 	
