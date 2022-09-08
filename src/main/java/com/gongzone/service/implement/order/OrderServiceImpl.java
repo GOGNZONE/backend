@@ -1,18 +1,17 @@
 package com.gongzone.service.implement.order;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gongzone.dto.order.OrderDTO.OrderRequest;
+import com.gongzone.dto.order.OrderDTO.OrderResponse;
+import com.gongzone.dto.order.OrderListDTO;
+import com.gongzone.dto.order.OrderUpdateDTO;
 import com.gongzone.entity.client.Client;
 import com.gongzone.entity.order.Order;
-import com.gongzone.order.dto.OrderDTO;
-import com.gongzone.order.dto.OrderListDTO;
-import com.gongzone.order.dto.OrderUpdateDTO;
-import com.gongzone.order.mapper.OrderListMapper;
-import com.gongzone.order.mapper.OrderMapper;
 import com.gongzone.repository.client.ClientRepository;
 import com.gongzone.repository.order.OrderRepository;
 import com.gongzone.service.order.OrderService;
@@ -32,16 +31,18 @@ public class OrderServiceImpl implements OrderService{
 	
 	private final OrderRepository orderRepo;
 	private final ClientRepository clientRepo;
-	private final OrderMapper orderMapper = Mappers.getMapper(OrderMapper.class);
-	private final OrderListMapper orderListMapper = Mappers.getMapper(OrderListMapper.class);
 	/**
 	 *  전체 발주 조회
 	 *  @return  List<OrderDTO>
 	 */
 	@Override
 	public List<OrderListDTO> findOrder() {
-		List<Order> list = orderRepo.findAll();
-		return orderListMapper.toDtoList(list);
+		List<OrderListDTO> orders = orderRepo.findAll()
+				.stream()
+				.map(OrderListDTO::new)
+				.collect(Collectors.toList());
+		
+		return orders;
 	}
 
 	
@@ -51,8 +52,9 @@ public class OrderServiceImpl implements OrderService{
 	 * @return OrderDTO
 	 * */
 	@Override
-	public OrderDTO findOrderByOrderId(Long orderId) {
-			return toDTO(orderRepo.findOrderByOrderId(orderId));
+	public OrderResponse findOrderByOrderId(Long orderId) {
+		Order order = orderRepo.findOrderByOrderId(orderId);
+		return new OrderResponse(order);
 		}
 
 	
@@ -60,16 +62,15 @@ public class OrderServiceImpl implements OrderService{
 	
 	/**
 	 * 발주 등록
-	 * @param {  OrderDTO }
+	 * @param { OrderDTO }
 	 * @return void
 	 * */
 	@Override
 	@Transactional
-	public void insertOrder(OrderDTO orderDto) {
+	public void insertOrder(OrderRequest orderDto) {
 		Client client = clientRepo.findById(orderDto.getClient().getClientId()).orElse(null);
 		orderDto.setClient(client);
-		Order order = toEntity(orderDto);
-		orderRepo.save(order);
+		orderRepo.save(orderDto.toEntity());
 	}
 
 	
@@ -97,15 +98,6 @@ public class OrderServiceImpl implements OrderService{
 		orderRepo.deleteOrderByOrderId(orderId);
 	}
 
-	/* MapStruct Mapper Production ↔ ProductionDTO */
-	protected OrderDTO toDTO(Order order) {
-		return orderMapper.toDto(order);
-	}
-	
-	/* MapStruct Mapper ProductionDTO ↔ Production */
-	protected Order toEntity(OrderDTO orderDto) {
-		return orderMapper.toEntity(orderDto);
-	}
 }
 	
 

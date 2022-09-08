@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gongzone.order.dto.OrderDTO;
-import com.gongzone.order.dto.OrderListDTO;
-import com.gongzone.order.dto.OrderUpdateDTO;
+import com.gongzone.dto.order.OrderDTO.OrderRequest;
+import com.gongzone.dto.order.OrderDTO.OrderResponse;
+import com.gongzone.dto.order.OrderListDTO;
+import com.gongzone.dto.order.OrderUpdateDTO;
 import com.gongzone.service.implement.order.OrderServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -66,14 +67,14 @@ public class OrderController {
 	 * */
 	@Operation(summary = "발주 상세 조회", description = "발주 코드로 조회하여 발주에 대한 상세 데이터 제공")
 	@ApiResponses({
-		@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = OrderDTO.class))),
+		@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = OrderResponse.class))),
 		@ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(schema = @Schema(example = "잘못된 문법 등으로 인해 클라이언트가 올바르지 못한 요청을 보내 서버가 요청을 이해할 수 없음을 의미합니다."))),
 		@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "인증되지 않은 사용자가 인증이 필요한 리소스를 요청하는 경우의 응답 입니다."))),
 		@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "요청한 리소스가 존재하지 않음을 의미합니다."))),
 		@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버에 오류가 발생하여 응답할 수 없음을 의미합니다. 서버에 오류가 발생했으나 처리 방법을 알 수 없을 경우의 응답입니다.")))
 	})
 	@GetMapping("/{orderId}")
-	public OrderDTO findOrderByOrderId(@PathVariable Long orderId) {
+	public OrderResponse findOrderByOrderId(@PathVariable Long orderId) {
 		return orderService.findOrderByOrderId(orderId);
 	}
 	
@@ -92,7 +93,7 @@ public class OrderController {
 		@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버에 오류가 발생하여 응답할 수 없음을 의미합니다. 서버에 오류가 발생했으나 처리 방법을 알 수 없을 경우의 응답입니다.")))
 	})
 	@PostMapping("")
-	public void insertOrder(@RequestBody OrderDTO orderDto) {
+	public void insertOrder(@RequestBody OrderRequest orderDto) {
 		orderService.insertOrder(orderDto);
 	}
 	

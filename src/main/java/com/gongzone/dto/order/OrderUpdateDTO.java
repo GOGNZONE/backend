@@ -1,4 +1,4 @@
-package com.gongzone.order.dto;
+package com.gongzone.dto.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

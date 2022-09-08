@@ -2,9 +2,11 @@ package com.gongzone.service.order;
 
 import java.util.List;
 
-import com.gongzone.order.dto.OrderDTO;
-import com.gongzone.order.dto.OrderListDTO;
-import com.gongzone.order.dto.OrderUpdateDTO;
+import com.gongzone.dto.order.OrderDTO.OrderRequest;
+import com.gongzone.dto.order.OrderDTO.OrderResponse;
+import com.gongzone.dto.order.OrderListDTO;
+import com.gongzone.dto.order.OrderUpdateDTO;
+
 /**
  * 발주 서비스 인터페이스
  * @author kangdonghyeon
@@ -14,7 +16,7 @@ public interface OrderService {
 	
 	/**
 	 *  전체 발주 조회
-	 *  @return  List<OrderDTO>
+	 *  @return  List<OrderListDTO>
 	 */
 	public List<OrderListDTO> findOrder();
 	
@@ -23,14 +25,14 @@ public interface OrderService {
 	 * @param { orderId }
 	 * @return OrderDTO
 	 * */
-	public OrderDTO findOrderByOrderId(Long orderId);
+	public OrderResponse findOrderByOrderId(Long orderId);
 	
 	/**
 	 * 발주 등록
 	 * @param { OrderDTO }
 	 * @return void
 	 * */
-	public void insertOrder(OrderDTO orderDto);
+	public void insertOrder(OrderRequest orderDto);
 	
 	/**
 	 * 발주 코드(order_id)로 수정

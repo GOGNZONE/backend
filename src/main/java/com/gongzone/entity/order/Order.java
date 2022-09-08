@@ -18,8 +18,8 @@ import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gongzone.dto.order.OrderUpdateDTO;
 import com.gongzone.entity.client.Client;
-import com.gongzone.order.dto.OrderUpdateDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
