@@ -1,7 +1,7 @@
 package com.gongzone.release.dto;
 
 import com.gongzone.dto.client.ReleaseClientDto;
-import com.gongzone.production.dto.ReleaseProductionDto;
+import com.gongzone.dto.production.ReleaseProductionDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gongzone.dto.stock.StockDTO;
+import com.gongzone.dto.stock.StockListDTO;
+import com.gongzone.dto.stock.StockUpdateDTO;
 import com.gongzone.service.implement.stock.StockServiceImpl;
-import com.gongzone.stock.dto.StockDTO;
-import com.gongzone.stock.dto.StockListDTO;
-import com.gongzone.stock.dto.StockUpdateDTO;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

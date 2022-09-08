@@ -1,6 +1,7 @@
-package com.gongzone.production.dto;
+package com.gongzone.dto.production;
 
 import com.gongzone.entity.client.Client;
+import com.gongzone.entity.production.Production;
 import com.gongzone.entity.stock.Stock;
 
 import lombok.AllArgsConstructor;
@@ -49,5 +50,27 @@ public class ProductionInsertUpdateDto {
 	private Client client;
 	
 	private Stock stock;
+	
+	/* DTO -> Entity */
+	public Production toEntity() {
+		Production production = Production.builder()
+				.productionId(productionId)
+				.productionName(productionName)
+				.productionBrandName(productionBrandName)
+				.productionPrice(productionPrice)
+				.productionQuantity(productionQuantity)
+				.productionFile(productionFile)
+				.productionStandard(productionStandard)
+				.productionUnit(productionUnit)
+				.productionDescription(productionDescription)
+				.productionReleasedDate(productionReleasedDate)
+				.productionStartDate(productionStartDate)
+				.productionEndDate(productionEndDate)
+				.productionProgress(productionProgress)
+				.client(client)
+				.stock(stock)
+				.build();
+		return production;
+	}
 	
 }

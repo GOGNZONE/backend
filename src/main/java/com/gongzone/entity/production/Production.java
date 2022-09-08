@@ -19,10 +19,10 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gongzone.dto.production.ProductionInsertUpdateDto;
 import com.gongzone.entity.client.Client;
 import com.gongzone.entity.release.Release;
 import com.gongzone.entity.stock.Stock;
-import com.gongzone.production.dto.ProductionInsertUpdateDto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

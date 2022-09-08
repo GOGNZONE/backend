@@ -1,30 +1,26 @@
 package com.gongzone.service.implement.production;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.common.errors.errorcode.CommonErrorCode;
 import com.gongzone.common.errors.exception.RestApiException;
+import com.gongzone.dto.production.ProductionDetailsDto;
+import com.gongzone.dto.production.ProductionInsertUpdateDto;
+import com.gongzone.dto.production.ProductionListDto;
+import com.gongzone.dto.stock.StockUpdateDTO;
 import com.gongzone.entity.client.Client;
 import com.gongzone.entity.production.Production;
 import com.gongzone.entity.stock.Stock;
 import com.gongzone.entity.storage.Storage;
-import com.gongzone.production.dto.ProductionDetailsDto;
-import com.gongzone.production.dto.ProductionInsertUpdateDto;
-import com.gongzone.production.dto.ProductionListDto;
-import com.gongzone.production.mapper.ProductionDetailsMapper;
-import com.gongzone.production.mapper.ProductionListMapper;
-import com.gongzone.production.mapper.ProductionInsertUpdateMapper;
 import com.gongzone.repository.client.ClientRepository;
 import com.gongzone.repository.production.ProductionRepository;
 import com.gongzone.repository.stock.StockRepository;
 import com.gongzone.repository.storage.StorageRepository;
 import com.gongzone.service.production.ProductionService;
-import com.gongzone.stock.dto.StockUpdateDTO;
-import com.gongzone.stock.mapper.StockUpdateMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -42,11 +38,6 @@ public class ProductionServiceImpl implements ProductionService {
 	private final StorageRepository storageRepository;
 	private final StockRepository stockRepository;
 	
-	private final ProductionListMapper productionListMapper = Mappers.getMapper(ProductionListMapper.class);
-	private final ProductionInsertUpdateMapper productionMapper = Mappers.getMapper(ProductionInsertUpdateMapper.class);
-	private final ProductionDetailsMapper productionDetailsMapper = Mappers.getMapper(ProductionDetailsMapper.class);
-	private final StockUpdateMapper stockUpdateMapper = Mappers.getMapper(StockUpdateMapper.class);
-	
 	/**
 	 *  전체 생산 목록 조회
 	 *  @return List<ProductionListDto>
@@ -54,8 +45,11 @@ public class ProductionServiceImpl implements ProductionService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<ProductionListDto> findAllProductions() {
-		List<Production> productions = productionRepository.findAll();
-		return productionListMapper.toDtoList(productions);
+		List<ProductionListDto> productions = productionRepository.findAll()
+				.stream()
+				.map(ProductionListDto::new)
+				.collect(Collectors.toList());
+		return productions;
 	}
 	
 	/**
@@ -68,7 +62,7 @@ public class ProductionServiceImpl implements ProductionService {
 	public ProductionDetailsDto findByProductionId(final Long productionId) {
 		Production production = productionRepository.findById(productionId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		return productionDetailsMapper.toDto(production);
+		return new ProductionDetailsDto(production);
 	}
 	
 	/**
@@ -79,9 +73,11 @@ public class ProductionServiceImpl implements ProductionService {
 	@Override
 	@Transactional
 	public void insertProduction(final ProductionInsertUpdateDto productionInsertUpdateDto) {
-		Client client = clientRepository.findById(productionInsertUpdateDto.getClient().getClientId()).orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+		Client client = clientRepository.findById(productionInsertUpdateDto.getClient().getClientId()).orElseThrow(
+				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		productionInsertUpdateDto.setClient(client);
-		productionRepository.save(toEntity(productionInsertUpdateDto));
+		
+		productionRepository.save(productionInsertUpdateDto.toEntity());
 	}
 	
 	/**
@@ -102,7 +98,7 @@ public class ProductionServiceImpl implements ProductionService {
 					Long.valueOf(productionInsertUpdateDto.getProductionQuantity()),
 					productionInsertUpdateDto.getProductionDescription(),
 					storage);
-			Stock stock = stockRepository.save(stockUpdateMapper.toEntity(stockDto));
+			Stock stock = stockRepository.save(stockDto.toEntity());
 			productionInsertUpdateDto.setStock(stock);
 		}
 		
@@ -123,12 +119,6 @@ public class ProductionServiceImpl implements ProductionService {
 			stockRepository.deleteByStockId(production.getStock().getStockId());
 		}
 		productionRepository.delete(production);
-	}
-	
-	
-	/* MapStruct Mapper ProductionDTO → Production */
-	protected Production toEntity(ProductionInsertUpdateDto productionDto) {
-		return productionMapper.toEntity(productionDto);
 	}
 
 }
