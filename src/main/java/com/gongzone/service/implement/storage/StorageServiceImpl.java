@@ -1,18 +1,18 @@
 package com.gongzone.service.implement.storage;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
+import com.gongzone.dto.storage.StorageDTO.StorageRequest;
+import com.gongzone.dto.storage.StorageDTO.StorageResponse;
+import com.gongzone.dto.storage.StorageUpdateDTO;
 import com.gongzone.entity.storage.Storage;
 import com.gongzone.repository.storage.StorageRepository;
 import com.gongzone.service.storage.StorageService;
-import com.gongzone.storage.dto.StorageDTO;
-import com.gongzone.storage.dto.StorageUpdateDTO;
-import com.gongzone.storage.mapper.StorageMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,21 +25,23 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class StorageServiceImpl implements StorageService {
-
 	
 	private final StorageRepository storageRepo;
-	private final StorageMapper storageMapper = Mappers.getMapper(StorageMapper.class);
-	
 	
 	/**
 	 *  전체 창고 조회
-	 *  @return  List<StorageDTO>
+	 *  @return  List<StorageDTOStorageResponse
 	 */
 	@Override
 	@Transactional
-	public List<StorageDTO> findStorage() {
-		List<Storage> storage =  storageRepo.findAll();
-		return storageMapper.toDtoList(storage);
+	public List<StorageResponse> findStorage() {
+		List<StorageResponse> storage =  storageRepo.findAll()
+				.stream()
+				.map(StorageResponse::new)
+				.collect(Collectors.toList());
+		
+		return storage;
+				
 	}
 
 	
@@ -49,8 +51,10 @@ public class StorageServiceImpl implements StorageService {
 	 * @return StorageDTO
 	 * */
 	@Override
-	public StorageDTO findStorageByStorageId(Long storageId) {
-		return storageMapper.toDto(storageRepo.findByStorageId(storageId));
+	public StorageResponse findStorageByStorageId(Long storageId) {
+		Storage storage = storageRepo.findByStorageId(storageId);
+		
+		return new StorageResponse(storage);
 	}
 
 	
@@ -60,9 +64,8 @@ public class StorageServiceImpl implements StorageService {
 	 * @return void
 	 * */
 	@Override
-	public void insertStorage(StorageDTO storageDTO) {
-		Storage storageEntity = storageMapper.toEntity(storageDTO);
-		storageRepo.save(storageEntity);
+	public void insertStorage(StorageRequest storageDTO) {
+		storageRepo.save(storageDTO.toEntity());
 	}
 
 	/**
@@ -72,7 +75,9 @@ public class StorageServiceImpl implements StorageService {
 	 * */
 	@Override
 	public void updateStorage(Long storageId, StorageUpdateDTO updateDTO) {
-		Storage storage = storageMapper.toEntity(findStorageByStorageId(storageId));
+//		Storage storage = storageMapper.toEntity(findStorageByStorageId(storageId));
+		Storage storage = storageRepo.findByStorageId(storageId);
+		
 		storage.updateStorage(updateDTO.getStorageAddress(), updateDTO.getStorageCategory(), updateDTO.getStorageDescription());
 		storageRepo.save(storage);
 	}
