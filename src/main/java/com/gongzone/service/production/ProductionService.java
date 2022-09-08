@@ -2,9 +2,9 @@ package com.gongzone.service.production;
 
 import java.util.List;
 
-import com.gongzone.production.dto.ProductionDetailsDto;
-import com.gongzone.production.dto.ProductionInsertUpdateDto;
-import com.gongzone.production.dto.ProductionListDto;
+import com.gongzone.dto.production.ProductionDetailsDto;
+import com.gongzone.dto.production.ProductionInsertUpdateDto;
+import com.gongzone.dto.production.ProductionListDto;
 
 /**
  * 생산 서비스 인터페이스

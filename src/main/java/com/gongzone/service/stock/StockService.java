@@ -2,9 +2,10 @@ package com.gongzone.service.stock;
 
 import java.util.List;
 
-import com.gongzone.stock.dto.StockDTO;
-import com.gongzone.stock.dto.StockListDTO;
-import com.gongzone.stock.dto.StockUpdateDTO;
+import com.gongzone.dto.stock.StockDTO;
+import com.gongzone.dto.stock.StockDTO.StockRequest;
+import com.gongzone.dto.stock.StockListDTO;
+import com.gongzone.dto.stock.StockUpdateDTO;
 
 
 /**
@@ -30,10 +31,10 @@ public interface StockService {
 	
 	/**
 	 * 재고 등록
-	 * @param { stockDTO }
+	 * @param { stockRequest }
 	 * @return void
 	 * */
-	public void insertStock(StockDTO stockDTO);
+	public void insertStock(StockRequest stockRequest);
 	
 	
 	/**

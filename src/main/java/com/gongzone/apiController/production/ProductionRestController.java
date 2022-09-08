@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gongzone.production.dto.ProductionDetailsDto;
-import com.gongzone.production.dto.ProductionInsertUpdateDto;
-import com.gongzone.production.dto.ProductionListDto;
+import com.gongzone.dto.production.ProductionDetailsDto;
+import com.gongzone.dto.production.ProductionInsertUpdateDto;
+import com.gongzone.dto.production.ProductionListDto;
 import com.gongzone.service.implement.production.ProductionServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;

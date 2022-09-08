@@ -1,4 +1,6 @@
-package com.gongzone.production.dto;
+package com.gongzone.dto.production;
+
+import com.gongzone.entity.production.Production;
 
 //import com.gongzone.stock.entity.Stock;
 
@@ -27,5 +29,12 @@ public class ReleaseProductionDto {
 	private int productionQuantity;
 	
 //	private Stock stock;
+	
+	public ReleaseProductionDto(Production production) {
+		this.productionName = production.getProductionName();
+		this.productionBrandName = production.getProductionBrandName();
+		this.productionPrice = production.getProductionPrice();
+		this.productionQuantity = production.getProductionQuantity();
+	}
 	
 }

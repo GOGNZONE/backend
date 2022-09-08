@@ -24,6 +24,7 @@ public class UpdateClientDto {
 	private String clientFile;
 	private String clientManager;
 	
+	/* DTO -> Entity */
 	public Client toEntity() {
 		Client client = Client.builder()
 				.clientName(clientName)

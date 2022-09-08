@@ -1,19 +1,18 @@
 package com.gongzone.service.implement.stock;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gongzone.dto.stock.StockDTO;
+import com.gongzone.dto.stock.StockDTO.StockRequest;
+import com.gongzone.dto.stock.StockListDTO;
+import com.gongzone.dto.stock.StockUpdateDTO;
 import com.gongzone.entity.stock.Stock;
 import com.gongzone.repository.stock.StockRepository;
 import com.gongzone.service.stock.StockService;
-import com.gongzone.stock.dto.StockDTO;
-import com.gongzone.stock.dto.StockListDTO;
-import com.gongzone.stock.dto.StockUpdateDTO;
-import com.gongzone.stock.mapper.StockListMapper;
-import com.gongzone.stock.mapper.StockMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,17 +27,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StockServiceImpl implements StockService{
 	private final StockRepository stockRepo;
-	private final StockMapper stockMapper = Mappers.getMapper(StockMapper.class);
-	private final StockListMapper stockListMapper = Mappers.getMapper(StockListMapper.class);
 	
 	/**
 	 *  전체 재고 조회
-	 *  @return List<StockDTO>
+	 *  @return List<StockListDTO>
 	 */
 	@Override
 	public List<StockListDTO> findStock() {
-		List<Stock> list = stockRepo.findAll();
-		return stockListMapper.toDtoList(list);
+		List<StockListDTO> list = stockRepo.findAll()
+				.stream()
+				.map(StockListDTO::new)
+				.collect(Collectors.toList());
+		return list;
 	}
 
 	/**
@@ -48,7 +48,9 @@ public class StockServiceImpl implements StockService{
 	 * */
 	@Override
 	public StockDTO findStockByStockId(Long stockId) {
-		return toDTO(stockRepo.findStockByStockId(stockId));
+//		return toDTO(stockRepo.findStockByStockId(stockId));
+		Stock stock = stockRepo.findStockByStockId(stockId);
+		return new StockDTO(stock);
 	}
 
 	/**
@@ -57,8 +59,8 @@ public class StockServiceImpl implements StockService{
 	 * @return void
 	 * */
 	@Override
-	public void insertStock(StockDTO stockDTO) {
-		stockRepo.save(toEntity(stockDTO));
+	public void insertStock(StockRequest stockRequest) {
+		stockRepo.save(stockRequest.toEntity());
 		
 	}
 
@@ -69,7 +71,8 @@ public class StockServiceImpl implements StockService{
 	 * */
 	@Override
 	public void updateStock(Long stockId, StockUpdateDTO updateDTO) {
-		Stock stock = toEntity(findStockByStockId(stockId));
+		Stock stock = stockRepo.findById(stockId).orElseThrow(
+				() -> new IllegalArgumentException("재고가 존재하지 않습니"));
 		stock.updateStock(updateDTO.getStockName(), updateDTO.getStockQuantity(), updateDTO.getStockDescription());
 		stockRepo.save(stock);
 		
@@ -84,18 +87,6 @@ public class StockServiceImpl implements StockService{
 	@Transactional
 	public void deleteStock(Long stockId) {
 		stockRepo.deleteByStockId(stockId);
-	}
-
-	
-	
-	/* MapStruct Mapper Production ↔ ProductionDTO */
-	protected StockDTO toDTO(Stock stock) {
-		return stockMapper.toDto(stock);
-	}
-	
-	/* MapStruct Mapper ProductionDTO ↔ Production */
-	protected Stock toEntity(StockDTO stockDto) {
-		return stockMapper.toEntity(stockDto);
 	}
 	
 }

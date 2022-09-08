@@ -1,4 +1,6 @@
-package com.gongzone.stock.dto;
+package com.gongzone.dto.stock;
+
+import com.gongzone.entity.stock.Stock;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,11 +18,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class StockListDTO {
 	private Long stockId;
 	private String stockName;
 	private Long stockQuantity;
 	private String stockDescription;
+	
+	public StockListDTO(Stock stock) {
+		this.stockId = stock.getStockId();
+		this.stockName = stock.getStockName();
+		this.stockQuantity = stock.getStockQuantity();
+		this.stockDescription = stock.getStockDescription();
+	}
 
 }
