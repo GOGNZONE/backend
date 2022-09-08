@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gongzone.bom.dto.BOMDTO;
-import com.gongzone.bom.dto.BOMListDTO;
-import com.gongzone.bom.dto.BOMUpdateDTO;
+import com.gongzone.dto.bom.BOMDTO.BomRequest;
+import com.gongzone.dto.bom.BOMDTO.BomResponse;
+import com.gongzone.dto.bom.BOMListDTO;
+import com.gongzone.dto.bom.BOMUpdateDTO;
 import com.gongzone.service.implement.bom.BOMServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -47,7 +48,7 @@ public class BOMController {
 	 * @return BOMDTO
 	 * */
 	@GetMapping("/{bomId}")
-	public BOMDTO findBOMByBomId(@PathVariable Long bomId) {
+	public BomResponse findBOMByBomId(@PathVariable Long bomId) {
 		return bomService.findBOMByBomId(bomId);
 	}
 	
@@ -63,7 +64,7 @@ public class BOMController {
 	 * @return void
 	 * */
 	@PostMapping("")
-	public void insertBOM(@RequestBody BOMDTO bomDTO) {
+	public void insertBOM(@RequestBody BomRequest bomDTO) {
 		System.out.println(bomDTO);
 		bomService.insertBOM(bomDTO);
 	}
@@ -74,7 +75,7 @@ public class BOMController {
 	 * @return void
 	 * */
 	@PutMapping("/{bomId}")
-	public void updateBOM(@PathVariable Long bomId,@RequestBody BOMUpdateDTO updateDTO) {
+	public void updateBOM(@PathVariable Long bomId, @RequestBody BOMUpdateDTO updateDTO) {
 //		System.out.println(updateDTO);
 		bomService.updateBOM(bomId, updateDTO);
 	}

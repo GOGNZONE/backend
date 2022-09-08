@@ -21,7 +21,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gongzone.bom.dto.BOMUpdateDTO;
+import com.gongzone.dto.bom.BOMUpdateDTO;
 import com.gongzone.entity.storage.Storage;
 
 import lombok.AllArgsConstructor;
@@ -97,8 +97,6 @@ public class BOM {
 	@NotNull
 	@JsonIgnore
 	private Storage storage;
-	
-	
 	
 	@ManyToOne
 //	(fetch = FetchType.LAZY)

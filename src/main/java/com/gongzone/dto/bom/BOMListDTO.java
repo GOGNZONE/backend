@@ -1,4 +1,6 @@
-package com.gongzone.bom.dto;
+package com.gongzone.dto.bom;
+
+import com.gongzone.entity.bom.BOM;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,5 +23,13 @@ public class BOMListDTO {
 	private int bomQuantity;
 	private String bomDescription;
 	private Long bomPrice;
+	
+	public BOMListDTO(BOM bom) {
+		this.bomId = bom.getBomId();
+		this.bomName = bom.getBomName();
+		this.bomQuantity = bom.getBomQuantity();
+		this.bomDescription = bom.getBomDescription();
+		this.bomPrice = bom.getBomPrice();
+	}
 	
 }

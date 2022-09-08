@@ -1,16 +1,15 @@
 package com.gongzone.service.implement.bom;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gongzone.bom.dto.BOMDTO;
-import com.gongzone.bom.dto.BOMListDTO;
-import com.gongzone.bom.dto.BOMUpdateDTO;
-import com.gongzone.bom.mapper.BomListMapper;
-import com.gongzone.bom.mapper.BomMapper;
+import com.gongzone.dto.bom.BOMDTO.BomRequest;
+import com.gongzone.dto.bom.BOMDTO.BomResponse;
+import com.gongzone.dto.bom.BOMListDTO;
+import com.gongzone.dto.bom.BOMUpdateDTO;
 import com.gongzone.entity.bom.BOM;
 import com.gongzone.repository.bom.BOMRepository;
 import com.gongzone.service.bom.BOMService;
@@ -26,17 +25,19 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BOMServiceImpl implements BOMService{
 	private final BOMRepository bomRepo;
-	private final BomMapper bomMapper = Mappers.getMapper(BomMapper.class);
-	private final BomListMapper bomListMapper = Mappers.getMapper(BomListMapper.class);
 	
 	/**
 	 *  전체 BOM 조회
-	 *  @return List<BOMDTO>
+	 *  @return List<BOMListDTO>
 	 */
 	@Override
 	public List<BOMListDTO> findBOM() {
-		List<BOM> list = bomRepo.findAll();
-		return bomListMapper.toDtoList(list);
+		List<BOMListDTO> list = bomRepo.findAll()
+				.stream()
+				.map(BOMListDTO::new)
+				.collect(Collectors.toList());
+		
+		return list;
 	}
 
 	/**
@@ -45,8 +46,9 @@ public class BOMServiceImpl implements BOMService{
 	 * @return BOMDTO
 	 * */
 	@Override
-	public BOMDTO findBOMByBomId(Long bomId) {
-		return toDTO(bomRepo.findBOMByBomId(bomId));
+	public BomResponse findBOMByBomId(Long bomId) {
+		BOM bom = bomRepo.findBOMByBomId(bomId);
+		return new BomResponse(bom);
 	
 	}
 
@@ -56,8 +58,8 @@ public class BOMServiceImpl implements BOMService{
 	 * @return void
 	 * */
 	@Override
-	public void insertBOM(BOMDTO bomDTO) {
-		bomRepo.save(toEntity(bomDTO));
+	public void insertBOM(BomRequest bomDTO) {
+		bomRepo.save(bomDTO.toEntity());
 	}
 
 	/**
@@ -84,14 +86,4 @@ public class BOMServiceImpl implements BOMService{
 		bomRepo.deleteBOMByBomId(bomId);
 	}
 
-	/* MapStruct Mapper Production ↔ ProductionDTO */
-	protected BOMDTO toDTO(BOM bom) {
-		return bomMapper.toDto(bom);
-	}
-	
-	/* MapStruct Mapper ProductionDTO ↔ Production */
-	protected BOM toEntity(BOMDTO bomDto) {
-		return bomMapper.toEntity(bomDto);
-	}
-	
 }
