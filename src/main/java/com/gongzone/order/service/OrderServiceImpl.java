@@ -18,6 +18,7 @@ import com.gongzone.order.repository.OrderRepository;
 
 
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 /**
  * 발주 서비스 인터페이스 구현체
@@ -25,11 +26,12 @@ import lombok.RequiredArgsConstructor;
  * @version 1.0
  * */
 @Service
+@ToString
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 	
 	private final OrderRepository orderRepo;
-	private final ClientRepository clientRepository;
+	private final ClientRepository clientRepo;
 	private final OrderMapper orderMapper = Mappers.getMapper(OrderMapper.class);
 	private final OrderListMapper orderListMapper = Mappers.getMapper(OrderListMapper.class);
 	/**
@@ -55,17 +57,19 @@ public class OrderServiceImpl implements OrderService{
 
 	
 	
+	
 	/**
-	 * 거래처 코드로(clientId) 발주 등록
-	 * @param { clientId, OrderDTO }
+	 * 발주 등록
+	 * @param {  OrderDTO }
 	 * @return void
 	 * */
 	@Override
-	public void insertOrder(Long clientId, OrderDTO orderDto) {
-		Client client = clientRepository.findById(clientId).orElseThrow();
+	@Transactional
+	public void insertOrder(OrderDTO orderDto) {
+		Client client = clientRepo.findById(orderDto.getClient().getClientId()).orElse(null);
 		orderDto.setClient(client);
-		orderRepo.save(toEntity(orderDto));
-		
+		Order order = toEntity(orderDto);
+		orderRepo.save(order);
 	}
 
 	
@@ -102,7 +106,6 @@ public class OrderServiceImpl implements OrderService{
 	protected Order toEntity(OrderDTO orderDto) {
 		return orderMapper.toEntity(orderDto);
 	}
-	
 }
 	
 

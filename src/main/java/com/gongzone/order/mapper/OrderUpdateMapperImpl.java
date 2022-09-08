@@ -27,7 +27,6 @@ public class OrderUpdateMapperImpl implements OrderUpdateMapper {
         orderUpdateDTO.orderProductionBrandName( e.getOrderProductionBrandName() );
         orderUpdateDTO.orderProductionPrice( e.getOrderProductionPrice() );
         orderUpdateDTO.orderProductionQuantity( e.getOrderProductionQuantity() );
-        orderUpdateDTO.orderProuctionFile( e.getOrderProuctionFile() );
         orderUpdateDTO.orderProductionStandard( e.getOrderProductionStandard() );
         orderUpdateDTO.orderProductionUnit( e.getOrderProductionUnit() );
         orderUpdateDTO.orderProductionDescription( e.getOrderProductionDescription() );
@@ -48,7 +47,6 @@ public class OrderUpdateMapperImpl implements OrderUpdateMapper {
         order.orderProductionBrandName( d.getOrderProductionBrandName() );
         order.orderProductionPrice( d.getOrderProductionPrice() );
         order.orderProductionQuantity( d.getOrderProductionQuantity() );
-        order.orderProuctionFile( d.getOrderProuctionFile() );
         order.orderProductionStandard( d.getOrderProductionStandard() );
         order.orderProductionUnit( d.getOrderProductionUnit() );
         order.orderProductionDescription( d.getOrderProductionDescription() );

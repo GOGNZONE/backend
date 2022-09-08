@@ -1,5 +1,8 @@
 package com.gongzone.bom.dto;
 
+import com.gongzone.bom.entity.BOM;
+import com.gongzone.storage.entity.Storage;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,4 +27,6 @@ public class BOMUpdateDTO {
 	private String bomDescription;
 	private String bomFile;
 	private int bomRequiredQuntity;
+	private Storage storage;
+	private BOM bomParent;
 }

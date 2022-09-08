@@ -26,11 +26,11 @@ public interface OrderService {
 	public OrderDTO findOrderByOrderId(Long orderId);
 	
 	/**
-	 * 거래처 코드로(clientId) 발주 등록
-	 * @param { clientId, OrderDTO }
+	 * 발주 등록
+	 * @param { OrderDTO }
 	 * @return void
 	 * */
-	public void insertOrder(Long clientId, OrderDTO orderDto);
+	public void insertOrder(OrderDTO orderDto);
 	
 	/**
 	 * 발주 코드(order_id)로 수정

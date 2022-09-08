@@ -28,7 +28,6 @@ public class OrderMapperImpl implements OrderMapper {
         orderDTO.orderProductionBrandName( e.getOrderProductionBrandName() );
         orderDTO.orderProductionPrice( e.getOrderProductionPrice() );
         orderDTO.orderProductionQuantity( e.getOrderProductionQuantity() );
-        orderDTO.orderProuctionFile( e.getOrderProuctionFile() );
         orderDTO.orderProductionStandard( e.getOrderProductionStandard() );
         orderDTO.orderProductionUnit( e.getOrderProductionUnit() );
         orderDTO.orderProductionDescription( e.getOrderProductionDescription() );
@@ -52,7 +51,6 @@ public class OrderMapperImpl implements OrderMapper {
         order.orderProductionBrandName( d.getOrderProductionBrandName() );
         order.orderProductionPrice( d.getOrderProductionPrice() );
         order.orderProductionQuantity( d.getOrderProductionQuantity() );
-        order.orderProuctionFile( d.getOrderProuctionFile() );
         order.orderProductionStandard( d.getOrderProductionStandard() );
         order.orderProductionUnit( d.getOrderProductionUnit() );
         order.orderProductionDescription( d.getOrderProductionDescription() );

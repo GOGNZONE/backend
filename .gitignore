@@ -24,6 +24,16 @@ target/
 *.iml
 *.ipr
 
+.gradle
+.settings
+.classpath
+.project
+/bin
+/build
+.idea
+*.iml
+*.ipr
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -70,3 +80,4 @@ gradle-app.setting
 **/application.yaml
 **/application.yml
 *.log
+**/application.yml

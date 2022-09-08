@@ -1,7 +1,7 @@
 package com.gongzone.order.entity;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -64,10 +64,6 @@ public class Order implements Persistable<Long> {
 	@NotNull(message = "orderProductionQuantity must not be null")
 	private int orderProductionQuantity;
 	
-	@Column(name="order_production_file", length=80)
-	@ColumnDefault("NULL")
-	private String orderProuctionFile;
-	
 	@Column(name="order_production_standard", length=10)
 	@ColumnDefault("NULL")
 	private String orderProductionStandard;
@@ -87,12 +83,11 @@ public class Order implements Persistable<Long> {
 	@CreatedDate
 	@Column(name="order_date")
 	@NotNull(message = "orderDate must not be null")
-	private LocalDateTime orderDate;
+	private LocalDate orderDate;
 	
 	@Id
 	@JoinColumn(name="fk_client_id",nullable = true)
 	@JsonIgnore
-//	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Client.class)
 	@ManyToOne
 	private Client client;
 
@@ -106,7 +101,6 @@ public class Order implements Persistable<Long> {
 		this.orderProductionBrandName = updateDTO.getOrderProductionBrandName();
 		this.orderProductionPrice = updateDTO.getOrderProductionPrice();
 		this.orderProductionQuantity = updateDTO.getOrderProductionQuantity();
-		this.orderProuctionFile = updateDTO.getOrderProuctionFile();
 		this.orderProductionStandard = updateDTO.getOrderProductionStandard();
 		this.orderProductionUnit = updateDTO.getOrderProductionUnit();
 		this.orderProductionDescription = updateDTO.getOrderProductionDescription();

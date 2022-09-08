@@ -30,7 +30,9 @@ public class BomUpdateMapperImpl implements BomUpdateMapper {
         bOMUpdateDTO.bomUnit( e.getBomUnit() );
         bOMUpdateDTO.bomDescription( e.getBomDescription() );
         bOMUpdateDTO.bomFile( e.getBomFile() );
-        bOMUpdateDTO.bomRequiredQuntity( e.getBomRequiredQuntity() );
+        bOMUpdateDTO.storage( e.getStorage() );
+        bOMUpdateDTO.bomParent( e.getBomParent() );
+
 
         return bOMUpdateDTO.build();
     }
@@ -50,7 +52,9 @@ public class BomUpdateMapperImpl implements BomUpdateMapper {
         bOM.bomUnit( d.getBomUnit() );
         bOM.bomDescription( d.getBomDescription() );
         bOM.bomFile( d.getBomFile() );
-        bOM.bomRequiredQuntity( d.getBomRequiredQuntity() );
+        bOM.storage( d.getStorage() );
+        bOM.bomParent( d.getBomParent() );
+
 
         return bOM.build();
     }
