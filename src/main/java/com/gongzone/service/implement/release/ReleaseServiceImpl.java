@@ -1,23 +1,20 @@
 package com.gongzone.service.implement.release;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.common.errors.errorcode.CommonErrorCode;
 import com.gongzone.common.errors.exception.RestApiException;
+import com.gongzone.dto.release.ReleaseDto;
+import com.gongzone.dto.release.ReleaseInsertUpdateDto;
+import com.gongzone.dto.release.ReleaseListDto;
 import com.gongzone.entity.production.Production;
 import com.gongzone.entity.release.Delivery;
 import com.gongzone.entity.release.Release;
 import com.gongzone.entity.stock.Stock;
-import com.gongzone.release.dto.ReleaseDto;
-import com.gongzone.release.dto.ReleaseInsertUpdateDto;
-import com.gongzone.release.dto.ReleaseListDto;
-import com.gongzone.release.mapper.ReleaseMapper;
-import com.gongzone.release.mapper.ReleaseInsertUpdateMapper;
-import com.gongzone.release.mapper.ReleaseListMapper;
 import com.gongzone.repository.production.ProductionRepository;
 import com.gongzone.repository.release.DeliveryRepository;
 import com.gongzone.repository.release.ReleaseRepository;
@@ -41,10 +38,6 @@ public class ReleaseServiceImpl implements ReleaseService {
 	private final DeliveryRepository deliveryRepository;	
 	private final StockRepository stockRepository;
 	
-	private final ReleaseListMapper releaseListMapper = Mappers.getMapper(ReleaseListMapper.class);
-	private final ReleaseMapper releaseMapper = Mappers.getMapper(ReleaseMapper.class);
-	private final ReleaseInsertUpdateMapper releaseInsertUpdateMapper = Mappers.getMapper(ReleaseInsertUpdateMapper.class);
-	
 	/**
 	 * 전체 출고 목록 조회
 	 * @return List<ReleaseListDto>
@@ -52,8 +45,12 @@ public class ReleaseServiceImpl implements ReleaseService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<ReleaseListDto> findAllReleases() {
-		List<Release> releases = releaseRepository.findAll();
-		return releaseListMapper.toDtoList(releases);
+		List<ReleaseListDto> releases = releaseRepository.findAll()
+				.stream()
+				.map(ReleaseListDto::new)
+				.collect(Collectors.toList());
+		
+		return releases;
 	}
 
 	/**
@@ -66,7 +63,8 @@ public class ReleaseServiceImpl implements ReleaseService {
 	public ReleaseDto findByReleaseId(final Long releaseId) throws RestApiException {
 		Release release = releaseRepository.findByReleaseId(releaseId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		return toDto(release); 
+
+		return new ReleaseDto(release);
 	}
 
 	/**
@@ -91,7 +89,7 @@ public class ReleaseServiceImpl implements ReleaseService {
 
 		stock.updateStock(production.getProductionName(), newStockQuantity, production.getProductionDescription());
 		releaseInsertUpdateDto.setProduction(production);
-		releaseRepository.saveRelease(toEntity(releaseInsertUpdateDto));
+		releaseRepository.saveRelease(releaseInsertUpdateDto.toEntity());
 	}
 	
 	/**
@@ -138,16 +136,4 @@ public class ReleaseServiceImpl implements ReleaseService {
 		stock.updateStock(stock.getStockName(), newStockQuantity, stock.getStockDescription());
 		releaseRepository.deleteRelease(releaseId);
 	}
-
-	
-	/* MapStruct Mapper Release → ReleaseDto */
-	protected ReleaseDto toDto(Release release) {
-		return releaseMapper.toDto(release);
-	}
-	
-	/* MapStruct Mapper ReleaseInsertDto → Release */
-	protected Release toEntity(ReleaseInsertUpdateDto releaseInsertUpdateDto) {
-		return releaseInsertUpdateMapper.toEntity(releaseInsertUpdateDto);
-	}
-	
 }

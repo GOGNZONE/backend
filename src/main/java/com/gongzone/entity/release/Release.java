@@ -14,8 +14,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gongzone.dto.release.ReleaseInsertUpdateDto;
 import com.gongzone.entity.production.Production;
-import com.gongzone.release.dto.ReleaseInsertUpdateDto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
