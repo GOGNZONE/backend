@@ -1,6 +1,4 @@
-package com.gongzone.bom.dto;
-
-import java.time.LocalDate;
+package com.gongzone.dto.bom;
 
 import com.gongzone.entity.bom.BOM;
 import com.gongzone.entity.storage.Storage;
@@ -12,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 
 /**
- * BOM DTO
+ * BOM업데이트 DTO
  * @author kangdonghyeon
  * @version 1.0
  */
@@ -20,17 +18,30 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BOMDTO {
-	private Long bomId;
+public class BOMUpdateDTO {
 	private String bomName;
 	private int bomQuantity;
 	private Long bomPrice;
 	private String bomStandard;
 	private String bomUnit;
 	private String bomDescription;
-	private LocalDate bomReceivedDate;
 	private String bomFile;
+	private int bomRequiredQuntity;
 	private Storage storage;
 	private BOM bomParent;
-
+	
+	public BOM toEntity(BOM bom) {
+		BOM bomEntity = BOM.builder()
+				.bomName(bomName)
+				.bomQuantity(bomQuantity)
+				.bomPrice(bomPrice)
+				.bomStandard(bomStandard)
+				.bomUnit(bomUnit)
+				.bomDescription(bomDescription)
+				.bomFile(bomFile)
+				.storage(storage)
+				.bomParent(bomParent)
+				.build();
+		return bomEntity;
+	}
 }

@@ -2,9 +2,10 @@ package com.gongzone.service.bom;
 
 import java.util.List;
 
-import com.gongzone.bom.dto.BOMDTO;
-import com.gongzone.bom.dto.BOMListDTO;
-import com.gongzone.bom.dto.BOMUpdateDTO;
+import com.gongzone.dto.bom.BOMDTO.BomRequest;
+import com.gongzone.dto.bom.BOMDTO.BomResponse;
+import com.gongzone.dto.bom.BOMListDTO;
+import com.gongzone.dto.bom.BOMUpdateDTO;
 
 /**
  * BOM 서비스 인터페이스
@@ -23,14 +24,14 @@ public interface BOMService {
 	 * @param { bomId }
 	 * @return BOMDTO
 	 * */
-	public BOMDTO findBOMByBomId(Long bomId);
+	public BomResponse findBOMByBomId(Long bomId);
 	
 	/**
 	 * BOM 등록
 	 * @param { BOMDTO }
 	 * @return void
 	 * */
-	public void insertBOM(BOMDTO bomDTO);
+	public void insertBOM(BomRequest bomDTO);
 	
 	/**
 	 * BOM 코드(bomId)로 수정
