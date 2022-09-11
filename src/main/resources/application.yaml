@@ -51,4 +51,33 @@ cloud:
       secretKey: 3onEGfS1RzFh0xZs6S/Pv2uyTB3baownf9+xZr46
       
       
+# NGINX      
+# spring:
+#  config:
+#    activate:
+#      on-profile: real1
+#  datasource:
+#    url: jdbc:mysql://host주소:3306/db명
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: 아이디
+#    password: 패스워드  
+#
+#server:  
+#  port: 8081
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: real2
+#  datasource:
+#    url: jdbc:mysql://host주소:3306/db명
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: 아이디
+#    password: 패스워드  
+#
+#server:  
+#  port: 8082     
+#      
+      
+      
   
