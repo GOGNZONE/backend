@@ -1,5 +1,7 @@
 package com.gongzone.dto.release;
 
+import com.gongzone.entity.client.Client;
+import com.gongzone.entity.release.Delivery;
 import com.gongzone.entity.release.Release;
 
 import lombok.AllArgsConstructor;
@@ -28,9 +30,11 @@ public class ReleaseListDto {
 	
 	private Byte releaseConfirmed;
 	
-	private String clientName;
+	private Client client;
 	
 	private String productionName;
+	
+	private Delivery delivery;
 	
 	/* Entity -> DTO */
 	public ReleaseListDto(Release release) {
@@ -39,8 +43,9 @@ public class ReleaseListDto {
 		this.releaseQuantity = release.getReleaseQuantity();
 		this.releaseType = release.getReleaseType();
 		this.releaseConfirmed = release.getReleaseConfirmed();
-		this.clientName = release.getProduction().getClient().getClientName();
+		this.client = release.getProduction().getClient();
 		this.productionName = release.getProduction().getProductionName();
+		this.delivery = release.getDelivery();
 	}
 	
 }
