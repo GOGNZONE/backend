@@ -2,6 +2,7 @@ package com.gongzone.dto.release;
 
 import com.gongzone.dto.client.ReleaseClientDto;
 import com.gongzone.dto.production.ReleaseProductionDto;
+import com.gongzone.entity.release.Delivery;
 import com.gongzone.entity.release.Release;
 
 import lombok.AllArgsConstructor;
@@ -41,7 +42,7 @@ public class ReleaseDto {
 	private ReleaseProductionDto production;
 	
 	// Delivery Info
-	private DeliveryDto delivery;
+	private Delivery delivery;
 	
 	public ReleaseDto(Release release) {
 		this.releaseId = release.getReleaseId();
@@ -52,7 +53,8 @@ public class ReleaseDto {
 		this.releaseType = release.getReleaseType();
 		this.releaseConfirmed = release.getReleaseConfirmed();
 		this.client = new ReleaseClientDto(release.getProduction().getClient());
-		this.delivery = new DeliveryDto(release.getDelivery());
+		this.production = new ReleaseProductionDto(release.getProduction());
+		this.delivery = release.getDelivery();
 	}
 	
 }
