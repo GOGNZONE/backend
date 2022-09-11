@@ -4,7 +4,7 @@ jdk:
 
 branches:
   only:
-    - master
+    - feature/donghyeon/travis-cicd
 
 cache:
   directories:
@@ -27,8 +27,8 @@ deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY # travis repo settings에 설정된 값
     secret_access_key: $AWS_SECRET_KEY # travis repo settings에 설정된 값
-    bucket: travis-study # 버킷명
-    region: ap-northeast-2
+    bucket: gongzone-cicd # 버킷명
+    region: ap-northeast-1
     skip_cleanup: true
     acl: private # zip 파일 접근은 private
     local_dir: deploy # before_deploy에서 생성한 디렉토리로 해당 위치의 파일들만 S3로 전송
@@ -41,10 +41,10 @@ deploy:
     bundle_type: zip # 압축 확장자
     application: travis # codeDeploy 애플리케이션 명
     deployment_group: travis # 배포 그룹 명
-    regoin: ap-northeast-2
+    regoin: ap-northeast-1
     wait-until-deployed: true
 
 notifications:
   email:
     recipients:
-      - cjs1863@gmail.com
+      - kdhyeon4237@gmail.com
