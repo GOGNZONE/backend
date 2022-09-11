@@ -63,7 +63,7 @@ public class ReleaseServiceImpl implements ReleaseService {
 	public ReleaseDto findByReleaseId(final Long releaseId) throws RestApiException {
 		Release release = releaseRepository.findByReleaseId(releaseId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-
+		
 		return new ReleaseDto(release);
 	}
 
