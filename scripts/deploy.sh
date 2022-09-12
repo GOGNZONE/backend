@@ -1,5 +1,5 @@
 #!/bin/bash
-REPOSITORY=/home/ec2-user/app
+REPOSITORY=/home/ubuntu/app
 PROJECT_NAME=aws-test
 
 echo "> Build 파일 복사"
