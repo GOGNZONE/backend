@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gongzone.common.errors.errorcode.CommonErrorCode;
+import com.gongzone.common.errors.exception.RestApiException;
 import com.gongzone.dto.stock.StockDTO;
 import com.gongzone.dto.stock.StockDTO.StockRequest;
 import com.gongzone.dto.stock.StockListDTO;
@@ -46,31 +48,30 @@ public class StockServiceImpl implements StockService{
 	 * */
 	@Override
 	public StockDTO findStockByStockId(Long stockId) {
-//		return toDTO(stockRepo.findStockByStockId(stockId));
-		Stock stock = stockRepo.findStockByStockId(stockId);
+		Stock stock = stockRepo.findStockByStockId(stockId)
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		return new StockDTO(stock);
 	}
 
 	/**
 	 * 재고 등록
-	 * @param { stockDTO }
+	 * @param { StockRequest }
 	 * @return void
 	 * */
 	@Override
 	public void insertStock(StockRequest stockRequest) {
 		stockRepo.save(stockRequest.toEntity());
-		
 	}
 
 	/**
 	 * 재고 코드(stockId)로 수정
-	 * @param { stockId, stockDTO }
+	 * @param { stockId, StockUpdateDTO }
 	 * @return void
 	 * */
 	@Override
 	public void updateStock(Long stockId, StockUpdateDTO updateDTO) {
 		Stock stock = stockRepo.findById(stockId).orElseThrow(
-				() -> new IllegalArgumentException("재고가 존재하지 않습니"));
+				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		stock.updateStock(updateDTO.getStockName(), updateDTO.getStockQuantity(), updateDTO.getStockDescription());
 		stockRepo.save(stock);
 		
@@ -84,7 +85,7 @@ public class StockServiceImpl implements StockService{
 	@Override
 	@Transactional
 	public void deleteStock(Long stockId) {
-		stockRepo.deleteByStockId(stockId);
+		stockRepo.deleteByStockId(stockId).orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 	}
 	
 }

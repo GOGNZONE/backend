@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.dto.order.OrderDTO.OrderRequest;
 import com.gongzone.dto.order.OrderDTO.OrderResponse;
+import com.gongzone.common.errors.errorcode.CommonErrorCode;
+import com.gongzone.common.errors.exception.RestApiException;
 import com.gongzone.dto.order.OrderListDTO;
 import com.gongzone.dto.order.OrderUpdateDTO;
 import com.gongzone.entity.client.Client;
@@ -48,27 +50,27 @@ public class OrderServiceImpl implements OrderService{
 	
 	/**
 	 * 발주 코드(orderId)로 조회
-	 * @param { orderId }
+	 * @param orderId 
 	 * @return OrderDTO
 	 * */
 	@Override
 	public OrderResponse findOrderByOrderId(Long orderId) {
-		Order order = orderRepo.findOrderByOrderId(orderId);
+		Order order = orderRepo.findOrderByOrderId(orderId).orElseThrow(
+				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		return new OrderResponse(order);
 		}
-
-	
-	
 	
 	/**
 	 * 발주 등록
-	 * @param { OrderDTO }
-	 * @return void
+	 * @param  { OrderRequest }
+	 * @return void 
+	 * @throws RESOURCE_NOT_FOUND
 	 * */
 	@Override
 	@Transactional
 	public void insertOrder(OrderRequest orderDto) {
-		Client client = clientRepo.findById(orderDto.getClient().getClientId()).orElse(null);
+		Client client = clientRepo.findById(orderDto.getClient().getClientId())
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		orderDto.setClient(client);
 		orderRepo.save(orderDto.toEntity());
 	}
@@ -76,12 +78,13 @@ public class OrderServiceImpl implements OrderService{
 	
 	/**
 	 * 발주 코드(order_id)로 수정
-	 * @param { OrderDTO }
+	 * @param { OrderUpdateDTO }, orderId
 	 * @return void
 	 * */
 	@Override
 	public void updateOrder(Long orderId, OrderUpdateDTO updateDTO) {
-		Order order = orderRepo.findOrderByOrderId(orderId);
+		Order order = orderRepo.findOrderByOrderId(orderId).orElseThrow(
+				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		order.updateOrder(updateDTO);
 		orderRepo.save(order);
 	}
@@ -89,13 +92,14 @@ public class OrderServiceImpl implements OrderService{
 	
 	/**
 	 * 발주 코드(orderId)로 삭제
-	 * @param { orderId }
+	 * @param orderId
 	 * @return void
 	 * */
 	@Override
 	@Transactional
 	public void deleteOrder(Long orderId) {
-		orderRepo.deleteOrderByOrderId(orderId);
+		orderRepo.deleteOrderByOrderId(orderId)
+		.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 	}
 
 }

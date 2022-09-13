@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gongzone.common.errors.errorcode.CommonErrorCode;
+import com.gongzone.common.errors.exception.RestApiException;
 import com.gongzone.dto.client.ClientInfoDto;
 import com.gongzone.dto.client.ClientListDto;
 import com.gongzone.dto.client.RegisterClientDto;
@@ -48,9 +50,9 @@ public class ClientServiceImple implements ClientService {
 	 */
 	@Override
 	@Transactional(readOnly = true)
-	public ClientInfoDto findByClientId(Long clientId) throws IllegalAccessException {
+	public ClientInfoDto findByClientId(Long clientId) {
 		Client client = clientRepository.findById(clientId)
-				.orElseThrow(() -> new IllegalArgumentException("해당하는 거래처가 존재하지 않습니다."));
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		return new ClientInfoDto(client);
 	}
 
@@ -65,7 +67,7 @@ public class ClientServiceImple implements ClientService {
 	@Transactional
 	public void saveClient(RegisterClientDto clientDto) {
 		Employee employee = employeeRepository.findById(clientDto.getEmployee().getEmployeeId())
-				.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사원입니다."));
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		clientDto.setEmployee(employee);
 		
 		clientRepository.save(clientDto.toEntity());
@@ -81,9 +83,9 @@ public class ClientServiceImple implements ClientService {
 	 */
 	@Override
 	@Transactional
-	public void updateClient(Long clientId, UpdateClientDto updateDto) throws IllegalAccessException {
+	public void updateClient(Long clientId, UpdateClientDto updateDto) {
 		Client client = clientRepository.findById(clientId)
-				.orElseThrow(() -> new IllegalArgumentException("해당하는 거래처가 존재하지 않습니다."));
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 
 		client.updateClient(updateDto.toEntity());
 	}
@@ -97,9 +99,9 @@ public class ClientServiceImple implements ClientService {
 	 */
 	@Override
 	@Transactional
-	public void deleteClient(Long clientId) throws IllegalAccessException {
+	public void deleteClient(Long clientId) {
 		Client client = clientRepository.findById(clientId)
-				.orElseThrow(() -> new IllegalArgumentException("해당하는 거래처가 존재하지 않습니다."));
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 
 		clientRepository.delete(client);
 	}

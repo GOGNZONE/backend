@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gongzone.common.errors.errorcode.CommonErrorCode;
+import com.gongzone.common.errors.exception.RestApiException;
 import com.gongzone.dto.employee.RetiredEmployeeDto.RetiredEmployeeResponse;
 import com.gongzone.entity.employee.RetiredEmployee;
 import com.gongzone.repository.employee.RetiredEmployeeRepository;
@@ -43,9 +45,9 @@ public class RetiredEmployeeServiceImpl implements RetiredEmployeeService {
 	 * @throws IllegalAccessException 
 	 */
 	@Override
-	public void deleteRetiredEmployee(Long retiredEmployeeId) throws IllegalAccessException {
+	public void deleteRetiredEmployee(Long retiredEmployeeId) {
 		RetiredEmployee retiredEmployee = retiredEmployeeRepository.findById(retiredEmployeeId).orElseThrow(
-				() -> new IllegalAccessException("해당하는 사원을 찾을 수 없습니다."));
+				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		
 		retiredEmployeeRepository.delete(retiredEmployee);
 	}
@@ -58,9 +60,9 @@ public class RetiredEmployeeServiceImpl implements RetiredEmployeeService {
 	 * @throws IllegalAccessException 
 	 */
 	@Override
-	public RetiredEmployeeResponse findByRetiredEmployeeId(Long retiredEmployeeId) throws IllegalAccessException {
+	public RetiredEmployeeResponse findByRetiredEmployeeId(Long retiredEmployeeId) {
 		RetiredEmployee retiredEmployee = retiredEmployeeRepository.findById(retiredEmployeeId).orElseThrow(
-				() -> new IllegalAccessException("해당하는 사원을 찾을 수 없습니다."));
+				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		
 		return new RetiredEmployeeResponse(retiredEmployee);
 	}

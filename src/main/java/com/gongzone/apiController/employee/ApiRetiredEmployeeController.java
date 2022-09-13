@@ -55,8 +55,8 @@ public class ApiRetiredEmployeeController {
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
 	@GetMapping("{retiredEmployeeId}")
-	public ResponseEntity<RetiredEmployeeResponse> findByRetiredEmployeeId(@PathVariable Long retiredEmployeeId) throws IllegalAccessException {
-			return ResponseEntity.ok(retiredEmployeeService.findByRetiredEmployeeId(retiredEmployeeId));
+	public ResponseEntity<RetiredEmployeeResponse> findByRetiredEmployeeId(@PathVariable Long retiredEmployeeId) {
+			return ResponseEntity.ok().body(retiredEmployeeService.findByRetiredEmployeeId(retiredEmployeeId));
 	}
 	
 	/**
@@ -65,13 +65,13 @@ public class ApiRetiredEmployeeController {
 	 * @throws IllegalAccessException 
 	 * */
 	@Operation(summary = "퇴사자 삭제", description = "ADMIN 계정에서만 가능한 퇴사자 삭제 기능", responses = {
-			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(example = "삭제 완료"))),
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(example = "삭제 성공"))),
 			@ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(schema = @Schema(example = "잘못된 요청입니다"))),
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
 	@DeleteMapping("{retiredEmployeeId}")
-	public ResponseEntity<String> deleteRetiredEmployee(@PathVariable Long retiredEmployeeId) throws IllegalAccessException {
+	public ResponseEntity<String> deleteRetiredEmployee(@PathVariable Long retiredEmployeeId) {
 			retiredEmployeeService.deleteRetiredEmployee(retiredEmployeeId);
 			return ResponseEntity.ok("삭제 성공");
 		

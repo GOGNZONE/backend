@@ -1,6 +1,8 @@
 package com.gongzone.repository.storage;
 
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +15,7 @@ import com.gongzone.entity.storage.Storage;
  */
 @Repository
 public interface StorageRepository extends JpaRepository<Storage, Long> {
-	public Storage findByStorageId(Long storageId);
-	public void deleteByStorageId(Long storageId);
+	public Optional<Storage> findByStorageId(Long storageId);
+	public Optional<Storage> deleteByStorageId(Long storageId);
 
 }

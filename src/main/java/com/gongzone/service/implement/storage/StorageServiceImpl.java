@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.gongzone.dto.storage.StorageDTO.StorageRequest;
 import com.gongzone.dto.storage.StorageDTO.StorageResponse;
+import com.gongzone.common.errors.errorcode.CommonErrorCode;
+import com.gongzone.common.errors.exception.RestApiException;
 import com.gongzone.dto.storage.StorageUpdateDTO;
 import com.gongzone.entity.storage.Storage;
 import com.gongzone.repository.storage.StorageRepository;
@@ -52,7 +54,8 @@ public class StorageServiceImpl implements StorageService {
 	 * */
 	@Override
 	public StorageResponse findStorageByStorageId(Long storageId) {
-		Storage storage = storageRepo.findByStorageId(storageId);
+		Storage storage = storageRepo.findByStorageId(storageId)
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		
 		return new StorageResponse(storage);
 	}
@@ -60,7 +63,7 @@ public class StorageServiceImpl implements StorageService {
 	
 	/**
 	 * 창고 등록
-	 * @param { storageDTO }
+	 * @param { StorageRequest }
 	 * @return void
 	 * */
 	@Override
@@ -70,12 +73,13 @@ public class StorageServiceImpl implements StorageService {
 
 	/**
 	 * 창고 수정(StorageId)로 생산 품목 수정
-	 * @param { stockId, storageDTO }
+	 * @param { storageId, StorageUpdateDTO }
 	 * @return void
 	 * */
 	@Override
 	public void updateStorage(Long storageId, StorageUpdateDTO updateDTO) {
-		Storage storage = storageRepo.findByStorageId(storageId);
+		Storage storage = storageRepo.findByStorageId(storageId)
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		
 		storage.updateStorage(updateDTO.getStorageAddress(), updateDTO.getStorageCategory(), updateDTO.getStorageDescription());
 		storageRepo.save(storage);
@@ -89,7 +93,7 @@ public class StorageServiceImpl implements StorageService {
 	@Override
 	@Transactional
 	public void deleteStorage(Long storageId) {
-		storageRepo.deleteByStorageId(storageId);
+		storageRepo.deleteByStorageId(storageId).orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		
 	}
 
