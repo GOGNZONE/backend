@@ -1,5 +1,5 @@
 #!/bin/bash
-REPOSITORY=/home/ubuntu/gongzone-back
+REPOSITORY=/home/ubuntu/backend
 PROJECT_NAME=aws-test
 
 echo "> Build 파일 복사"
