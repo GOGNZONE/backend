@@ -41,7 +41,7 @@ deploy:
     - provider: codedeploy
       access_key_id: $AWS_ACCESS_KEY # travis repo settings에 설정된 값
       secret_access_key: $AWS_SECRET_KEY # travis repo settings에 설정된 값
-      bucket: travis-study # 버킷명
+      bucket: gongzone-cicd # 버킷명
       key: aws-test.zip # 빌드 파일을 압축해서 전달
       bundle_type: zip # 압축 확장자
       application: travis # codeDeploy 애플리케이션 명
