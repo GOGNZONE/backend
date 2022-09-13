@@ -1,6 +1,7 @@
 package com.gongzone.apiController.employee;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.validation.Valid;
 
@@ -126,9 +127,10 @@ public class ApiEmployeeController {
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
 	@PostMapping("/edit")
-	public ResponseEntity<AuthEmployeeResponse> changeEmployeeProfile(
+	public ResponseEntity<Objects> changeEmployeeProfile(
 			@Parameter(name = "ChangePasswordRequestDto", description = "회원정보 재설정", in = ParameterIn.PATH) @Valid @RequestBody final ChangeMyProfile requestDto) {
-		return ResponseEntity.ok(employeeService.changeEmployeeProfile(requestDto));
+				employeeService.changeEmployeeProfile(requestDto);
+				return ResponseEntity.noContent().build();
 	}
 
 	/**

@@ -69,7 +69,7 @@ public class Employee {
 
 	/**
 	 * 사원 수정
-	 * @param {UpdateEmployeeDto}
+	 * @param {employeeName,employeePhone,employeeAddress,employeeEmail,employeeImage} UpdateEmployeeDto
 	 * @return void
 	 */
 	public void updateEmployeeInfo(Employee employee) {

@@ -87,14 +87,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * */
 	@Override
 	@Transactional
-	public AuthEmployeeResponse changeEmployeeProfile(@Valid ChangeMyProfile requestDto) throws RuntimeException {
+	public void changeEmployeeProfile(@Valid ChangeMyProfile requestDto) throws RuntimeException {
 		Employee employee = employeeRepository.findById(SecurityUtil.getCurrentEmployeeId()).orElseThrow(
 				() -> new RuntimeException("로그인 사원 정보가 없습니다."));
 		
-		
 		employee.updateEmployeePassword(passwordEncoder.encode(requestDto.getNewPassword()));
 		employee.updateEmployeeInfo(requestDto.toEntity());
-		return AuthEmployeeResponse.of(employeeRepository.save(employee));
 	}
 	
 	/**
