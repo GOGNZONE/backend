@@ -48,6 +48,8 @@ deploy:
       deployment_group: travis # 배포 그룹 명
       regoin: ap-northeast-1
       wait-until-deployed: true
+      on:
+          all_branches: true
 
 notifications:
     email:
