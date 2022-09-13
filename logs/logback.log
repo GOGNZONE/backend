@@ -60,3 +60,7 @@
 [2022-09-08 14:55:33:1248976] INFO  3944 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
 [2022-09-08 14:57:36:1372310] INFO  3944 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 [2022-09-08 14:57:36:1372313] INFO  3944 --- [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+[2022-09-13 09:30:50:48781] INFO  16116 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+[2022-09-13 09:30:50:48782] INFO  16116 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+[2022-09-13 09:34:13:251359] INFO  16116 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+[2022-09-13 09:34:13:251360] INFO  16116 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
