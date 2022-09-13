@@ -35,6 +35,9 @@ deploy:
       acl: private # zip 파일 접근은 private
       local_dir: deploy # before_deploy에서 생성한 디렉토리로 해당 위치의 파일들만 S3로 전송
       wait-until-deployed: true
+      on:
+          all_branches: true
+
     - provider: codedeploy
       access_key_id: $AWS_ACCESS_KEY # travis repo settings에 설정된 값
       secret_access_key: $AWS_SECRET_KEY # travis repo settings에 설정된 값
