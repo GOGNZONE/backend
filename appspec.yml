@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source:  /
-    destination: /home/ubuntu/gongzone-back/zip/
+    destination: /home/ubuntu/backend/zip/
     overwrite: yes
 
 permissions:
