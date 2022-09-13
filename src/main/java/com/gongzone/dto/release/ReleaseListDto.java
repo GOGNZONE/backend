@@ -30,9 +30,13 @@ public class ReleaseListDto {
 	
 	private Byte releaseConfirmed;
 	
+	private Long releaseTotalPrice;
+	
 	private Client client;
 	
 	private String productionName;
+	
+	private int productionQuantity;
 	
 	private Delivery delivery;
 	
@@ -43,8 +47,10 @@ public class ReleaseListDto {
 		this.releaseQuantity = release.getReleaseQuantity();
 		this.releaseType = release.getReleaseType();
 		this.releaseConfirmed = release.getReleaseConfirmed();
+		this.releaseTotalPrice = release.getReleaseTotalPrice();
 		this.client = release.getProduction().getClient();
 		this.productionName = release.getProduction().getProductionName();
+		this.productionQuantity = release.getProduction().getProductionQuantity();
 		this.delivery = release.getDelivery();
 	}
 	
