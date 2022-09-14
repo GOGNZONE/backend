@@ -37,6 +37,10 @@ public class ClientInfoDto {
 		this.clientRegisteredDate = client.getClientRegisteredDate();
 		this.clientFile = client.getClientFile();
 		this.account = client.getClientAccount();
-		this.employeeName = client.getEmployee().getEmployeeName();
+		if(client.getEmployee() == null) {
+			this.employeeName = null;
+		} else {
+			this.employeeName = client.getEmployee().getEmployeeName();
+		}
 	}
 }

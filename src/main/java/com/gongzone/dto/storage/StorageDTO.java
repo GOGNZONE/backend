@@ -25,7 +25,9 @@ public class StorageDTO {
 	private String storageCategory;
 	private String storageDescription;
 	
+	@Getter
 	public static class StorageRequest {
+		private Long storageId;
 		private String storageAddress;
 		private String storageCategory;
 		private String storageDescription;
@@ -33,6 +35,7 @@ public class StorageDTO {
 		/* DTO -> Entity */
 		public Storage toEntity() {
 			Storage storage = Storage.builder()
+					.storageId(storageId)
 					.storageAddress(storageAddress)
 					.storageCategory(storageCategory)
 					.storageDescription(storageDescription)

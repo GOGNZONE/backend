@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.gongzone.common.errors.errorcode.CommonErrorCode;
+import com.gongzone.common.errors.exception.RestApiException;
 import com.gongzone.config.SecurityUtil;
 import com.gongzone.dto.employee.AuthEmployeeDto.AuthEmployeeResponse;
 import com.gongzone.dto.employee.ChangeMyProfile;
@@ -36,7 +38,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	/**
 	 * 전체 사원 조회
-	 * 
 	 * @return List<EmployeeListDto>
 	 */
 	@Override
@@ -47,7 +48,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 				.map(EmployeeListResponse::new)
 				.collect(Collectors.toList());
 		return employees;
-//		return employeeListMapper.toDtoList(employees);
 	}
 
 
@@ -56,13 +56,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * 
 	 * @param { employeeId }
 	 * @return EmployeeInfoDto
-	 * @throws IllegalAccessException 
 	 */
 	@Override
 	@Transactional(readOnly = true)
 	public EmployeeInfoResponse findByEmployeeId(Long employeeId) {
 		Employee employee = employeeRepository.findById(employeeId).orElseThrow(
-				() -> new IllegalArgumentException("해당하는 사원 없음"));
+				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		return new EmployeeInfoResponse(employee);
 	}
 	
@@ -87,27 +86,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * */
 	@Override
 	@Transactional
-	public AuthEmployeeResponse changeEmployeeProfile(@Valid ChangeMyProfile requestDto) throws RuntimeException {
+	public void changeEmployeeProfile(@Valid ChangeMyProfile requestDto) throws RuntimeException {
 		Employee employee = employeeRepository.findById(SecurityUtil.getCurrentEmployeeId()).orElseThrow(
 				() -> new RuntimeException("로그인 사원 정보가 없습니다."));
 		
-		
 		employee.updateEmployeePassword(passwordEncoder.encode(requestDto.getNewPassword()));
 		employee.updateEmployeeInfo(requestDto.toEntity());
-		return AuthEmployeeResponse.of(employeeRepository.save(employee));
 	}
 	
 	/**
 	 * 특정 사원 삭제
 	 * @param { employeeId }
 	 * @return void
-	 * @throws IllegalAccessException 
 	 * */
 	@Override
 	@Transactional
-	public void deleteEmployee(Long employeeId) throws IllegalAccessException {
+	public void deleteEmployee(Long employeeId) {
 		Employee employee = employeeRepository.findById(employeeId).orElseThrow(
-				() -> new IllegalAccessException("존재하지 않는 사원 입니다."));
+				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 
 		RetiredEmployeeRequest retiredEmployeeDto = new RetiredEmployeeRequest(
 				employee.getEmployeeId(),

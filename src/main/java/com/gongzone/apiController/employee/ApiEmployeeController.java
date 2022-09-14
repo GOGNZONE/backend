@@ -1,6 +1,7 @@
 package com.gongzone.apiController.employee;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.validation.Valid;
 
@@ -120,15 +121,16 @@ public class ApiEmployeeController {
 	 * @throws RuntimeException
 	 */
 	@Operation(summary = "마이페이지 정보 재설정", description = "마이페이지 정보(이메일, 비밀번호, 이름, 전화번호, 주소, 사진) 재설정)", responses = {
-			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = AuthEmployeeResponse.class))),
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(hidden = true))),
 			@ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(schema = @Schema(example = "잘못된 요청입니다"))),
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
 	@PostMapping("/edit")
-	public ResponseEntity<AuthEmployeeResponse> changeEmployeeProfile(
+	public ResponseEntity<Objects> changeEmployeeProfile(
 			@Parameter(name = "ChangePasswordRequestDto", description = "회원정보 재설정", in = ParameterIn.PATH) @Valid @RequestBody final ChangeMyProfile requestDto) {
-		return ResponseEntity.ok(employeeService.changeEmployeeProfile(requestDto));
+				employeeService.changeEmployeeProfile(requestDto);
+				return ResponseEntity.noContent().build();
 	}
 
 	/**
@@ -136,24 +138,18 @@ public class ApiEmployeeController {
 	 * 
 	 * @param { employeeId }
 	 * @return void
-	 * @throws IllegalAccessException
 	 */
 	@DeleteMapping("{employeeId}")
 	@Operation(summary = "사원 삭제", description = "사원 번호로 사원 정보 삭제시 퇴사자 추가", responses = {
-			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(example = "삭제 완료"))),
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(hidden = true))),
 			@ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(schema = @Schema(example = "잘못된 요청입니다"))),
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
-	public ResponseEntity<String> deleteEmployee(
-			@Parameter(name = "employee_id", description = "사원 번호", in = ParameterIn.PATH) @PathVariable Long employeeId) {
-		try {
+	public ResponseEntity<Object> deleteEmployee(
+			@Parameter(name = "employee_id", description = "사원 번호", in = ParameterIn.PATH) @PathVariable final Long employeeId) {
 			employeeService.deleteEmployee(employeeId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			// log 추가
-		}
-		return ResponseEntity.ok("삭제 성공");
+		return ResponseEntity.noContent().build();
 	}
 
 }

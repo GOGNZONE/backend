@@ -5,6 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.dto.client.AccountInfoDto.AccountInfoRequest;
 import com.gongzone.dto.client.AccountInfoDto.AccountInfoResponse;
+import com.gongzone.common.errors.errorcode.CommonErrorCode;
+import com.gongzone.common.errors.exception.RestApiException;
 import com.gongzone.dto.client.UpdateAccountDto;
 import com.gongzone.entity.client.Client;
 import com.gongzone.entity.client.ClientAccount;
@@ -29,7 +31,7 @@ public class ClientAccountServiceImpl implements ClientAccountService {
 	 */
 	@Override
 	@Transactional(readOnly = true)
-	public AccountInfoResponse findByAccountId(Long accountId) throws IllegalAccessException {
+	public AccountInfoResponse findByAccountId(Long accountId) {
 		ClientAccount account = accountRepository.findById(accountId).orElseThrow();
 		return new AccountInfoResponse(account);
 	}
@@ -45,8 +47,7 @@ public class ClientAccountServiceImpl implements ClientAccountService {
 	@Transactional
 	public void saveAccount(Long clientId, AccountInfoRequest accountInfoDto) {
 		Client client = clientRepository.findById(clientId).orElseThrow(
-				() -> new IllegalArgumentException("해당하는 거래처가 존재하지 않습니다."));
-		
+				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		accountInfoDto.setClient(client);
 		accountRepository.save(accountInfoDto.toEntity());
 	}
@@ -54,17 +55,15 @@ public class ClientAccountServiceImpl implements ClientAccountService {
 	/**
 	 * 계좌정보 수정
 	 * 
-	 * @throws IllegalAccessException
 	 * @param accountId Long
 	 * @param AccountDto
 	 * @return void
 	 */
 	@Override
 	@Transactional
-	public void updateAccount(Long accountId, UpdateAccountDto updateAccountDto) throws IllegalAccessException {
+	public void updateAccount(Long accountId, UpdateAccountDto updateAccountDto) {
 		ClientAccount account = accountRepository.findById(accountId).orElseThrow(
-				() -> new IllegalArgumentException("해당하는 계좌정보가 존재하지 않습니다."));
-		
+				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		account.updateClientAccount(
 				updateAccountDto.getAccountBank(),
 				updateAccountDto.getAccountNumber(),

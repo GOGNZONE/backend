@@ -2,7 +2,9 @@ package com.gongzone.apiController.client;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,7 @@ import com.gongzone.dto.client.UpdateClientDto;
 import com.gongzone.service.implement.client.ClientServiceImple;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -46,13 +49,12 @@ public class ApiClientController {
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
 	public ResponseEntity<List<ClientListDto>> findAllClient() {
-		return ResponseEntity.ok(clientService.findAllClient());
+		return ResponseEntity.ok().body(clientService.findAllClient());
 	}
 	
 	/**
 	 *  특정 거래처 조회
 	 *  
-	 *  @throws IllegalAccessException
 	 *  @param clientId Long
 	 *  @return List<EmployeeListDto>
 	 */
@@ -63,27 +65,26 @@ public class ApiClientController {
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
-	public ResponseEntity<ClientInfoDto> findByClientId(@PathVariable Long clientId) throws IllegalAccessException {
-		return ResponseEntity.ok(clientService.findByClientId(clientId));
+	public ResponseEntity<ClientInfoDto> findByClientId(@Parameter(description = "거래처 코드") @PathVariable Long clientId) {
+		return ResponseEntity.ok().body(clientService.findByClientId(clientId));
 	}
 	
 	/**
 	 *  거래처 등록
 	 *  
-	 *  @throws IllegalAccessException
 	 *  @param ClientDto
 	 *  @return success -> "등록 성공"
 	 */
 	@PostMapping("")
 	@Operation(summary = "거래처 등록", description = "거래처 등록", responses = {
-			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(example = "등록 완료"))),
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(hidden = true))),
 			@ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(schema = @Schema(example = "잘못된 요청입니다"))),
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
-	public ResponseEntity<String> saveClient(@RequestBody RegisterClientDto clientDto) {
+	public ResponseEntity<Object> saveClient(@RequestBody @Validated final RegisterClientDto clientDto) {
 		clientService.saveClient(clientDto);
-		return ResponseEntity.ok().body("등록 성공");
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
 	/**
@@ -101,9 +102,10 @@ public class ApiClientController {
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
-	public ResponseEntity<String> updateClient(@PathVariable Long clientId, @RequestBody UpdateClientDto requestDto) throws IllegalAccessException {
+	public ResponseEntity<Object> updateClient(@Parameter(description = "거래처 코드") @PathVariable final Long clientId,
+			@RequestBody @Validated final UpdateClientDto requestDto) {
 		clientService.updateClient(clientId, requestDto);
-		return ResponseEntity.ok().body("수정 성공");
+		return ResponseEntity.noContent().build();
 	}
 	
 	/**
@@ -120,8 +122,8 @@ public class ApiClientController {
 			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
 			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
-	public ResponseEntity<String> deleteClient(@PathVariable Long clientId) throws IllegalAccessException {
+	public ResponseEntity<Object> deleteClient(@Parameter(description = "거래처 코드") @PathVariable final Long clientId) throws IllegalAccessException {
 		clientService.deleteClient(clientId);
-		return ResponseEntity.ok().body("삭제 성공");
+		return ResponseEntity.noContent().build();
 	}
 }

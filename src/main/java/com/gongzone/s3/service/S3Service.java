@@ -30,6 +30,7 @@ public class S3Service {
     long timeMilli = date.getTime();
  
     public String uploadFile(MultipartFile file) {
+        System.out.println(bucketName);
         File fileObj = convertMultiPartFileToFile(file);
         String fileName = file.getOriginalFilename();
         s3Client.putObject(new PutObjectRequest(bucketName, fileName, fileObj));

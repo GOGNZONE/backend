@@ -1,5 +1,7 @@
 package com.gongzone.repository.stock;
 
+
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +15,6 @@ import com.gongzone.entity.stock.Stock;
 
 @Repository
 public interface StockRepository extends JpaRepository<Stock, Long> {
-	public Stock findStockByStockId(Long stockId);
-	public void deleteByStockId(Long stockId);
+	public Optional<Stock> findStockByStockId(Long stockId);
+	public Optional<Stock> deleteByStockId(Long stockId);
 }

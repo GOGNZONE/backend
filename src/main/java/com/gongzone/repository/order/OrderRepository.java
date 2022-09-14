@@ -1,6 +1,8 @@
 package com.gongzone.repository.order;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,10 +17,8 @@ import com.gongzone.entity.order.OrderID;
  * */
 @Repository
 public interface OrderRepository extends JpaRepository<Order, OrderID> {
-	public Order findOrderByOrderId(Long orderId);
-
+	public Optional<Order> findOrderByOrderId(Long orderId);
 	public List<Order> findAll();
-
-	public void deleteOrderByOrderId(Long orderId);
+	public Optional<Order> deleteOrderByOrderId(Long orderId);
 
 }

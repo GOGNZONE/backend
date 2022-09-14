@@ -50,5 +50,5 @@ public interface EmployeeService {
 	 * @return EmployeeResponseDto
 	 * @throws RuntimeException 
 	 * */
-	public AuthEmployeeResponse changeEmployeeProfile(ChangeMyProfile changeMyProfile);
+	public void changeEmployeeProfile(ChangeMyProfile changeMyProfile);
 }
