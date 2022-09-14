@@ -55,7 +55,6 @@ public class ReleaseDto {
 		this.client = new ReleaseClientDto(release.getProduction().getClient());
 		this.production = new ReleaseProductionDto(release.getProduction());
 		this.delivery = release.getDelivery();
-
 	}
 	
 }
