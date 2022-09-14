@@ -54,4 +54,4 @@ deploy:
 notifications:
     email:
         recipients:
-            - kdhyeon4237@gmail.com
+            - none

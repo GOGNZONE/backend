@@ -1,5 +1,5 @@
 #!/bin/bash
-REPOSITORY=/home/ubuntu/backend
+REPOSITORY=/home/ubuntu/backend/zip
 PROJECT_NAME=aws-test
 
 echo "> Build 파일 복사"

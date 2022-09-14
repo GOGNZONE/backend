@@ -1,2 +1,0 @@
-[2022-09-08 09:55:57:156493555] INFO  2180 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-[2022-09-08 09:55:57:156493558] INFO  2180 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
