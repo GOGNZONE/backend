@@ -1,12 +1,12 @@
 #!/bin/bash
 REPOSITORY=/home/ubuntu/backend/zip
 FILE = /home/ubuntu/file
-PROJECT_NAME=aws-test
+PROJECT_NAME=gongzone
 
 echo "> Build 파일 복사"
-cp $REPOSITORY/* $FILE/
+mkdir -p $FILE
+cp $REPOSITORY/*.jar $FILE
 
-# cp $REPOSITORY/*.jar $REPOSITORY/
 
 echo "> 현재 구동중인 애플리케이션 pid 확인"
 
@@ -34,4 +34,5 @@ sudo chmod +x $JAR_NAME
 
 echo "> $JAR_NAME 실행"
 
-nohup java -jar $JAR_NAME > $FILE/nohup.out 2>&1 &
+# nohup java -jar $JAR_NAME > $FILE/nohup.out 2>&1 &
+sudo nohup java -jar $JAR_NAME > $REALREPOSITORY/nohup.out 2>&1 &
