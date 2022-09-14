@@ -1,10 +1,12 @@
 #!/bin/bash
 REPOSITORY=/home/ubuntu/backend/zip
+FILE = /home/ubuntu/file
 PROJECT_NAME=aws-test
 
 echo "> Build 파일 복사"
-cp $REPOSITORY/* /home/ubuntu/file/
-cp $REPOSITORY/*.jar $REPOSITORY/
+cp $REPOSITORY/* $FILE/
+
+# cp $REPOSITORY/*.jar $REPOSITORY/
 
 echo "> 현재 구동중인 애플리케이션 pid 확인"
 
@@ -22,7 +24,7 @@ fi
 
 echo "> 새 어플리케이션 배포"
 
-JAR_NAME=$(ls -tr $REPOSITORY/*.jar | tail -n 1)
+JAR_NAME=$(ls -tr $FILE/*.jar | tail -n 1)
 
 echo "> JAR Name: $JAR_NAME"
 
@@ -32,4 +34,4 @@ chmod +x $JAR_NAME
 
 echo "> $JAR_NAME 실행"
 
-nohup java -jar $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
+nohup java -jar $JAR_NAME > $FILE/nohup.out 2>&1 &
