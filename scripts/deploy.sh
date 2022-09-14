@@ -1,11 +1,10 @@
 #!/bin/bash
 REPOSITORY=/home/ubuntu/backend/zip
-FILE = /home/ubuntu/file
 PROJECT_NAME=gongzone
 
 echo "> Build 파일 복사"
-mkdir -p $FILE
-cp $REPOSITORY/*.jar $FILE
+mkdir /home/ubuntu/file
+cp $REPOSITORY/*.jar /home/ubuntu/file/
 
 
 echo "> 현재 구동중인 애플리케이션 pid 확인"
@@ -24,13 +23,13 @@ fi
 
 echo "> 새 어플리케이션 배포"
 
-JAR_NAME=$(ls -tr $FILE/*.jar | tail -n 1)
+JAR_NAME=$(ls -tr /home/ubuntu/file/*.jar | tail -n 1)
 
 echo "> JAR Name: $JAR_NAME"
 
 echo "> $JAR_NAME 에 실행권한 추가"
 
-sudo chmod +x $JAR_NAME
+sudo chmod 755 $JAR_NAME
 
 echo "> $JAR_NAME 실행"
 
