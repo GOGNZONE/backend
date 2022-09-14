@@ -74,6 +74,5 @@ public class ApiRetiredEmployeeController {
 	public ResponseEntity<String> deleteRetiredEmployee(@PathVariable Long retiredEmployeeId) {
 			retiredEmployeeService.deleteRetiredEmployee(retiredEmployeeId);
 			return ResponseEntity.ok("삭제 성공");
-		
 	}
 }

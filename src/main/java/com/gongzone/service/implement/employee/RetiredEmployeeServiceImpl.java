@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gongzone.common.errors.errorcode.CommonErrorCode;
 import com.gongzone.common.errors.exception.RestApiException;
+
 import com.gongzone.dto.employee.RetiredEmployeeDto.RetiredEmployeeResponse;
 import com.gongzone.entity.employee.RetiredEmployee;
 import com.gongzone.repository.employee.RetiredEmployeeRepository;
@@ -48,7 +49,6 @@ public class RetiredEmployeeServiceImpl implements RetiredEmployeeService {
 	public void deleteRetiredEmployee(Long retiredEmployeeId) {
 		RetiredEmployee retiredEmployee = retiredEmployeeRepository.findById(retiredEmployeeId).orElseThrow(
 				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		
 		retiredEmployeeRepository.delete(retiredEmployee);
 	}
 
@@ -63,7 +63,6 @@ public class RetiredEmployeeServiceImpl implements RetiredEmployeeService {
 	public RetiredEmployeeResponse findByRetiredEmployeeId(Long retiredEmployeeId) {
 		RetiredEmployee retiredEmployee = retiredEmployeeRepository.findById(retiredEmployeeId).orElseThrow(
 				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		
 		return new RetiredEmployeeResponse(retiredEmployee);
 	}
 }

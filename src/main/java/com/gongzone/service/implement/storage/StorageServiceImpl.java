@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.gongzone.dto.storage.StorageDTO.StorageRequest;
 import com.gongzone.dto.storage.StorageDTO.StorageResponse;
+
 import com.gongzone.common.errors.errorcode.CommonErrorCode;
 import com.gongzone.common.errors.exception.RestApiException;
 import com.gongzone.dto.storage.StorageUpdateDTO;
@@ -56,7 +57,6 @@ public class StorageServiceImpl implements StorageService {
 	public StorageResponse findStorageByStorageId(Long storageId) {
 		Storage storage = storageRepo.findByStorageId(storageId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		
 		return new StorageResponse(storage);
 	}
 
@@ -80,7 +80,6 @@ public class StorageServiceImpl implements StorageService {
 	public void updateStorage(Long storageId, StorageUpdateDTO updateDTO) {
 		Storage storage = storageRepo.findByStorageId(storageId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		
 		storage.updateStorage(updateDTO.getStorageAddress(), updateDTO.getStorageCategory(), updateDTO.getStorageDescription());
 		storageRepo.save(storage);
 	}
@@ -94,7 +93,6 @@ public class StorageServiceImpl implements StorageService {
 	@Transactional
 	public void deleteStorage(Long storageId) {
 		storageRepo.deleteByStorageId(storageId).orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		
 	}
 
 }

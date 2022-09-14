@@ -48,7 +48,6 @@ public class ClientAccountServiceImpl implements ClientAccountService {
 	public void saveAccount(Long clientId, AccountInfoRequest accountInfoDto) {
 		Client client = clientRepository.findById(clientId).orElseThrow(
 				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		
 		accountInfoDto.setClient(client);
 		accountRepository.save(accountInfoDto.toEntity());
 	}
@@ -65,7 +64,6 @@ public class ClientAccountServiceImpl implements ClientAccountService {
 	public void updateAccount(Long accountId, UpdateAccountDto updateAccountDto) {
 		ClientAccount account = accountRepository.findById(accountId).orElseThrow(
 				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		
 		account.updateClientAccount(
 				updateAccountDto.getAccountBank(),
 				updateAccountDto.getAccountNumber(),

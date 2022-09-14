@@ -86,7 +86,6 @@ public class ClientServiceImple implements ClientService {
 	public void updateClient(Long clientId, UpdateClientDto updateDto) {
 		Client client = clientRepository.findById(clientId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-
 		client.updateClient(updateDto.toEntity());
 	}
 
@@ -102,7 +101,6 @@ public class ClientServiceImple implements ClientService {
 	public void deleteClient(Long clientId) {
 		Client client = clientRepository.findById(clientId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-
 		clientRepository.delete(client);
 	}
 

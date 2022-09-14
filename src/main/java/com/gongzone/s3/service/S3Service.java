@@ -20,6 +20,7 @@ import java.util.Date;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+
 public class S3Service {
 
     @Value("${cloud.aws.s3.bucket}")
@@ -39,8 +40,11 @@ public class S3Service {
 
 
     public byte[] downloadFile(String fileName) {
-        S3Object s3Object = s3Client.getObject(bucketName, fileName);
-        S3ObjectInputStream inputStream = s3Object.getObjectContent();
+       
+    	
+    	S3Object s3Object = s3Client.getObject(bucketName, fileName);
+        S3ObjectInputStream inputStream = s3Object.getObjectContent(); 
+        System.out.println(s3Object.getObjectContent().toString());
         try {
             byte[] content = IOUtils.toByteArray(inputStream);
             return content;

@@ -1,0 +1,57 @@
+language: java
+jdk:
+    - openjdk11
+
+branches:
+    only:
+        # - feature/donghyeon/travis-cicd
+
+cache:
+    directories:
+        - "$HOME/.m2/repository"
+        - "$HOME/.gradle"
+
+before_script:
+    - chmod +x gradlew
+
+script: "./gradlew clean build"
+
+before_deploy:
+    - mkdir -p before-deploy
+    - cp scripts/*.sh before-deploy/
+    - cp appspec.yml before-deploy/
+    - cp build/libs/*.jar before-deploy/
+    - cd before-deploy && zip -r before-deploy *
+    - cd ../ && mkdir -p deploy
+    - mv before-deploy/before-deploy.zip deploy/aws-test.zip
+
+deploy:
+    - provider: s3
+      access_key_id: $AWS_ACCESS_KEY # travis repo settings에 설정된 값
+      secret_access_key: $AWS_SECRET_KEY # travis repo settings에 설정된 값
+      bucket: gongzone-cicd # 버킷명
+      region: ap-northeast-1
+      skip_cleanup: true
+      acl: private # zip 파일 접근은 private
+      local_dir: deploy # before_deploy에서 생성한 디렉토리로 해당 위치의 파일들만 S3로 전송
+      wait-until-deployed: true
+      on:
+          all_branches: true
+
+    - provider: codedeploy
+      access_key_id: $AWS_ACCESS_KEY # travis repo settings에 설정된 값
+      secret_access_key: $AWS_SECRET_KEY # travis repo settings에 설정된 값
+      bucket: gongzone-cicd # 버킷명
+      key: aws-test.zip # 빌드 파일을 압축해서 전달
+      bundle_type: zip # 압축 확장자
+      application: travis # codeDeploy 애플리케이션 명
+      deployment_group: travis # 배포 그룹 명
+      regoin: ap-northeast-1
+      wait-until-deployed: true
+      on:
+          all_branches: true
+
+notifications:
+    email:
+        recipients:
+            - none
