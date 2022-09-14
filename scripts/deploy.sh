@@ -35,4 +35,4 @@ sudo chmod 755 $REPOSITORY
 echo "> $JAR_NAME 실행"
 
 # nohup java -jar $JAR_NAME > $FILE/nohup.out 2>&1 &
-sudo nohup java -jar $JAR_NAME > $REALREPOSITORY/nohup.out 2>&1 &
+sudo nohup java -jar $JAR_NAME > /home/ubuntu/file/nohup.out 2>&1 &
