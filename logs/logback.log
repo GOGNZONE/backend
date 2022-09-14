@@ -11,3 +11,5 @@
 [2022-09-14 15:31:38:1737729] INFO  16536 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 [2022-09-14 15:33:17:1836369] INFO  16536 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 [2022-09-14 15:33:17:1836370] INFO  16536 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+[2022-09-14 15:51:19:131860] INFO  11060 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+[2022-09-14 15:51:19:131861] INFO  11060 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms

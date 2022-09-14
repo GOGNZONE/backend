@@ -18,7 +18,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EntityScan(basePackages = { "com.gongzone.entity"})
 @EnableJpaRepositories(basePackages = { "com.gongzone.repository" })
-
 @ComponentScan(basePackages = { "com.gongzone.apiController",
 		 "com.gongzone.s3.controller", "com.gongzone.employee.dto","com.gongzone.release.dto",
 		"com.gongzone.production.dto", "com.gongzone.order.dto", "com.gongzone.bom.dto", "com.gongzone.storage.dto","com.gongzone.client.dto", "com.gongzone.stock.dto", 
