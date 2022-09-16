@@ -74,6 +74,7 @@ public class OrderServiceImpl implements OrderService{
 	public void insertOrder(OrderRequest orderDto) {
 		Client client = clientRepo.findById(orderDto.getClient().getClientId())
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+		System.out.println(orderDto.getOrderProductionBrandName());
 		orderDto.setClient(client);
 		orderRepo.save(orderDto.toEntity());
 	}
