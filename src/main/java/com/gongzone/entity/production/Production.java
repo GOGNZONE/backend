@@ -122,6 +122,11 @@ public class Production {
 	@Schema(description = "재고")
 	private Stock stock;
 	
+	@OneToMany(mappedBy = "production")
+	@Schema(description = "생산 제품에 대한 이력사항")
+	@Builder.Default
+	List<ProductionHistory> productionHistory = new ArrayList<>();
+	
 	
 	/**
 	 * 생산 품목 수정 메서드

@@ -28,8 +28,6 @@ public class ReleaseProductionDto {
 	
 	private int productionQuantity;
 	
-//	private Stock stock;
-	
 	public ReleaseProductionDto(Production production) {
 		this.productionName = production.getProductionName();
 		this.productionBrandName = production.getProductionBrandName();
