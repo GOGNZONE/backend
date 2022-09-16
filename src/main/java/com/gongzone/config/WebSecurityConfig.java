@@ -35,7 +35,7 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
-//			.httpBasic().disable()
+			.httpBasic().disable()
 			.csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			
@@ -47,7 +47,7 @@ public class WebSecurityConfig {
 			.and()
 			.authorizeRequests()
 			.antMatchers("/api/auth/**").permitAll()
-			.antMatchers("/swagger-ui/**", "/api-document.html", "/v1/api-docs/**").permitAll()
+			.antMatchers("/api/swagger-ui/**", "/api/api-document.html", "/api/v1/api-docs/**").permitAll()
 			.anyRequest().authenticated()
 			
 			.and()

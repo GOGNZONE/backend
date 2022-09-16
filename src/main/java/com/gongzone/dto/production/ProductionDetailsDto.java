@@ -40,6 +40,7 @@ public class ProductionDetailsDto {
 	private ReleaseClientDto client;
 	private List<ReleaseDto> releases;
 	private Stock stock;
+	private List<ProductionHistoryListDto> productionHistory;
 	
 	/** Entity -> DTO */
 	public ProductionDetailsDto(Production production) {
@@ -59,6 +60,7 @@ public class ProductionDetailsDto {
 		this.client = new ReleaseClientDto(production.getClient());
 		this.releases = production.getReleases().stream().map(ReleaseDto::new).collect(Collectors.toList());
 		this.stock = production.getStock();
+		this.productionHistory = production.getProductionHistory().stream().map(ProductionHistoryListDto::new).collect(Collectors.toList());
 	}
 
 }
