@@ -4,7 +4,7 @@ jdk:
 
 branches:
     only:
-        # - feature/donghyeon/travis-cicd
+        - develop
 
 cache:
     directories:
