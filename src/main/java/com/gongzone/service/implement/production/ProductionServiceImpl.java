@@ -1,5 +1,8 @@
 package com.gongzone.service.implement.production;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.gongzone.common.errors.errorcode.CommonErrorCode;
 import com.gongzone.common.errors.exception.RestApiException;
 import com.gongzone.dto.production.ProductionDetailsDto;
+import com.gongzone.dto.production.ProductionHistoryInsertDto;
 import com.gongzone.dto.production.ProductionInsertUpdateDto;
 import com.gongzone.dto.production.ProductionListDto;
 import com.gongzone.dto.stock.StockUpdateDTO;
@@ -17,6 +21,7 @@ import com.gongzone.entity.production.Production;
 import com.gongzone.entity.stock.Stock;
 import com.gongzone.entity.storage.Storage;
 import com.gongzone.repository.client.ClientRepository;
+import com.gongzone.repository.production.ProductionHistoryRepository;
 import com.gongzone.repository.production.ProductionRepository;
 import com.gongzone.repository.stock.StockRepository;
 import com.gongzone.repository.storage.StorageRepository;
@@ -37,6 +42,7 @@ public class ProductionServiceImpl implements ProductionService {
 	private final ClientRepository clientRepository;
 	private final StorageRepository storageRepository;
 	private final StockRepository stockRepository;
+	private final ProductionHistoryRepository productionHistoryRepository;
 	
 	/**
 	 *  전체 생산 목록 조회
@@ -90,6 +96,15 @@ public class ProductionServiceImpl implements ProductionService {
 	public void updateProduction(final Long productionId, final ProductionInsertUpdateDto productionInsertUpdateDto) {
 		Production production = productionRepository.findById(productionId)
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		
+		if(productionInsertUpdateDto.getProductionProgress() != production.getProductionProgress()) {
+			ProductionHistoryInsertDto productionHistoryInsertDto = new ProductionHistoryInsertDto(timestamp.getTime(), (byte) 0, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), productionInsertUpdateDto.getProductionProgress().toString(), production);
+			productionHistoryRepository.saveProductionHistory(productionHistoryInsertDto.toEntity());
+		} else if(!production.equals(productionInsertUpdateDto.toEntity())) {
+			ProductionHistoryInsertDto productionHistoryInsertDto = new ProductionHistoryInsertDto(timestamp.getTime(), (byte) 1, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), productionInsertUpdateDto.getProductionDescription(), production);
+			productionHistoryRepository.saveProductionHistory(productionHistoryInsertDto.toEntity());
+		}
 		
 		if(productionInsertUpdateDto.getProductionProgress() == 2) {
 			Storage storage = storageRepository.findById(productionInsertUpdateDto.getStock().getStorage().getStorageId()).orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
@@ -104,7 +119,7 @@ public class ProductionServiceImpl implements ProductionService {
 			stockRepository.deleteByStockId(production.getStock().getStockId());
 			productionInsertUpdateDto.setStock(null);
 		}
-		
+
 		production.updateProduction(productionInsertUpdateDto);
 	}
 
