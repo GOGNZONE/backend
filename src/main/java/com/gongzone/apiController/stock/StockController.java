@@ -109,6 +109,8 @@ public class StockController {
 	})
 	@PutMapping("/{stockId}")
 	public void updateStock(@PathVariable Long stockId, @RequestBody StockUpdateDTO updateDto) {
+		System.out.println("=============" + stockId);
+		System.out.println("=============" + updateDto);
 		stockService.updateStock(stockId, updateDto);
 	}
 	
