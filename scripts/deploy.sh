@@ -15,6 +15,7 @@ if [ -z "$CURRENT_PID" ]; then
 else
     echo "> kill -9 $CURRENT_PID"
     kill -9 $CURRENT_PID
+    kill -9 $CURRENT_PID
     sleep 5
 fi
 
@@ -31,5 +32,5 @@ sudo chmod 755 $REPOSITORY
 echo "> $JAR_NAME 실행"
 
 # nohup java -jar $JAR_NAME > $FILE/nohup.out 2>&1 &
-sudo nohup java -jar $JAR_NAME &
-# sudo nohup java -jar $JAR_NAME > /home/ubuntu/file/nohup.out 2>&1 &
+# sudo nohup java -jar $JAR_NAME &
+nohup java -jar $JAR_NAME > /home/ubuntu/file/nohup.out 2>&1 &
