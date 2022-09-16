@@ -40,12 +40,12 @@ public class OrderServiceImpl implements OrderService{
 	 *  @return  List<OrderDTO>
 	 */
 	@Override
+	@Transactional
 	public List<OrderListDTO> findOrder() {
 		List<OrderListDTO> orders = orderRepo.findAll()
 				.stream()
 				.map(OrderListDTO::new)
 				.collect(Collectors.toList());
-		
 		return orders;
 	}
 
@@ -56,6 +56,7 @@ public class OrderServiceImpl implements OrderService{
 	 * @return OrderDTO
 	 * */
 	@Override
+	@Transactional
 	public OrderResponse findOrderByOrderId(Long orderId) {
 		Order order = orderRepo.findOrderByOrderId(orderId).orElseThrow(
 				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
@@ -84,14 +85,14 @@ public class OrderServiceImpl implements OrderService{
 	 * @return void
 	 * */
 	@Override
+	@Transactional
 	public void updateOrder(Long orderId, OrderUpdateDTO updateDTO) {
 		Order order = orderRepo.findOrderByOrderId(orderId).orElseThrow(
 				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		order.updateOrder(updateDTO);
-		orderRepo.save(order);
+		order.updateOrder(updateDTO.toEntity());
+//		orderRepo.save(order);
 	}
 
-	
 	/**
 	 * 발주 코드(orderId)로 삭제
 	 * @param orderId
@@ -103,7 +104,6 @@ public class OrderServiceImpl implements OrderService{
 		orderRepo.deleteOrderByOrderId(orderId)
 		.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 	}
-
 }
 	
 

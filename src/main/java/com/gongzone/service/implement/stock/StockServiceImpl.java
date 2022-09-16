@@ -28,7 +28,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StockServiceImpl implements StockService{
 	private final StockRepository stockRepo;
-	
 	/**
 	 *  전체 재고 조회
 	 *  @return List<StockListDTO>
@@ -73,7 +72,7 @@ public class StockServiceImpl implements StockService{
 	public void updateStock(Long stockId, StockUpdateDTO updateDTO) {
 		Stock stock = stockRepo.findById(stockId).orElseThrow(
 				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		stock.updateStock(updateDTO.getStockName(), updateDTO.getStockQuantity(), updateDTO.getStockDescription());
+		stock.updateStock2(updateDTO.getStockName(), updateDTO.getStockQuantity(), updateDTO.getStockDescription(), updateDTO.getStorage());
 		stockRepo.save(stock);
 		
 	}

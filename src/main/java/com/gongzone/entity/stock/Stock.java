@@ -60,10 +60,18 @@ public class Stock {
 	 * @param {stockName, stockQuantity, stockDescription}
 	 * @return void
 	 */
-	public void updateStock(String stockName, Long stockQuantity, String stockDescription) {
+	public void updateStock(String stockName, Long stockQuantity, String stockDescription ) {
 		this.stockName = stockName;
 		this.stockQuantity = stockQuantity;
 		this.stockDescription = stockDescription;
 	}
+	
+	public void updateStock2(String stockName, Long stockQuantity, String stockDescription,Storage storage ) {
+		this.stockName = stockName;
+		this.stockQuantity = stockQuantity;
+		this.stockDescription = stockDescription;
+		this.storage = storage;
+	}
+	
 	
 }

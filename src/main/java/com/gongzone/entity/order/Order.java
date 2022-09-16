@@ -96,15 +96,16 @@ public class Order implements Persistable<Long> {
 	 * @param {orderDTO}
 	 * @return  void 
 	 */
-	public void updateOrder(OrderUpdateDTO updateDTO) {
-		this.orderProductionName = updateDTO.getOrderProductionName();
-		this.orderProductionBrandName = updateDTO.getOrderProductionBrandName();
-		this.orderProductionPrice = updateDTO.getOrderProductionPrice();
-		this.orderProductionQuantity = updateDTO.getOrderProductionQuantity();
-		this.orderProductionStandard = updateDTO.getOrderProductionStandard();
-		this.orderProductionUnit = updateDTO.getOrderProductionUnit();
-		this.orderProductionDescription = updateDTO.getOrderProductionDescription();
-		this.orderProductionEndDate = updateDTO.getOrderProductionEndDate();
+	public void updateOrder(OrderUpdateDTO order) {
+		this.orderProductionName = order.getOrderProductionName();
+		this.orderProductionBrandName = order.getOrderProductionBrandName();
+		this.orderProductionPrice = order.getOrderProductionPrice();
+		this.orderProductionQuantity = order.getOrderProductionQuantity();
+		this.orderProductionStandard = order.getOrderProductionStandard();
+		this.orderProductionUnit = order.getOrderProductionUnit();
+		this.orderProductionDescription = order.getOrderProductionDescription();
+		this.orderProductionEndDate = order.getOrderProductionEndDate();
+//		this.client = order.getClient();
 	}
 
 	@Override
