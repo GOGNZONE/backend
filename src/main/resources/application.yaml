@@ -29,7 +29,7 @@ jwt:
 
 # Swagger
 spring.mvc.pathmatch.matching-strategy: ANT_PATH_MATCHER
-springdoc.swagger-ui.path: /api-document.html
+springdoc.swagger-ui.path: /api/api-document.html
 springdoc.cache.disabled: true
 springdoc.override-with-generic-response: false
 springdoc:
