@@ -90,7 +90,6 @@ public class Client implements Persistable<Long> {
 	 * @author kimmingyu
 	 * @version 1.0
 	 */
-	
 	public void updateClient(Client client) {
 		this.clientName = client.clientName;
 		this.clientTel = client.clientTel;
