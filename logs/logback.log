@@ -1,6 +1,0 @@
-[2022-09-15 10:44:36:48220] INFO  5324 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-[2022-09-15 10:44:36:48223] INFO  5324 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-[2022-09-15 17:34:39:24651669] INFO  5324 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-[2022-09-15 17:34:39:24651671] INFO  5324 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-[2022-09-15 17:46:16:25348214] INFO  5324 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-[2022-09-15 17:46:16:25348216] INFO  5324 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
