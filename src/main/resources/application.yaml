@@ -21,7 +21,6 @@ spring:
       - credentials
 
 logging:
-  path: ./
   level:
     com.gonzone: debug
 
