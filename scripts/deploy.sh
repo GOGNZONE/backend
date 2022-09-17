@@ -15,6 +15,7 @@ if [ -z "$CURRENT_PID" ]; then
 else
     echo "> kill -9 $CURRENT_PID"
     sudo kill -9 $CURRENT_PID
+    echo "삭제된냐?"
     sleep 5
 fi
 
