@@ -26,7 +26,7 @@ echo "> JAR Name: $JAR_NAME"
 echo "> $JAR_NAME 에 실행권한 추가"
 
 sudo chmod 777 /home/ubuntu/file/logs
-sudo chown ubuntu:ubuntu /home/ubuntu/file/logs
+sudo chown -R ubuntu:ubuntu /home/ubuntu/file/logs
 sudo chown sudo chmod 755 $JAR_NAME
 sudo chmod 755 $REPOSITORY
 
