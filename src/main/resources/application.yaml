@@ -20,9 +20,9 @@ spring:
       - aws
       - credentials
 
-logging:
-  level:
-    com.gonzone: debug
+#logging:
+#  level:
+#    com.gonzone: debug
 
 jwt:
   secret: YmFsbG9vbi1wcm9qZWN0LWFpci13ZS1tYWRlLW1lc3Nlbmdlci1jYWxlbmRhci1lbGVjdHJvbmljQXBwcm92YWwtc3ByaW5nLXNlY3VyaXR5
