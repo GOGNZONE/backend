@@ -25,14 +25,8 @@ echo "> JAR Name: $JAR_NAME"
 
 echo "> $JAR_NAME 에 실행권한 추가"
 
-sudo chmod 755 /home/ubuntu/file/logs/
-sudo chmod 666 /home/ubuntu/file/logs/logback.log
-sudo chown -R ubuntu:ubuntu /home/ubuntu/file/logs
-sudo chown sudo chmod 755 $JAR_NAME
 sudo chmod 755 $REPOSITORY
 
 echo "> $JAR_NAME 실행"
 
-# nohup java -jar $JAR_NAME > $FILE/nohup.out 2>&1 &
-# sudo nohup java -jar $JAR_NAME &
-nohup java -jar $JAR_NAME > /home/ubuntu/file/nohup.out 2>&1 &
+sudo nohup java -jar $JAR_NAME&
