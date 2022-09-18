@@ -51,4 +51,11 @@ public interface EmployeeService {
 	 * @throws RuntimeException 
 	 * */
 	public void changeEmployeeProfile(ChangeMyProfile changeMyProfile);
+	
+	/**
+	 * 비밀번호 수정
+	 * @param { newPassword } ChangeMyProfile
+	 * */
+	public void changePassword(ChangeMyProfile changeMyProfile);
+	
 }

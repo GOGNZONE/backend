@@ -90,8 +90,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee employee = employeeRepository.findById(SecurityUtil.getCurrentEmployeeId()).orElseThrow(
 				() -> new RuntimeException("로그인 사원 정보가 없습니다."));
 		
-		employee.updateEmployeePassword(passwordEncoder.encode(requestDto.getNewPassword()));
 		employee.updateEmployeeInfo(requestDto.toEntity());
+		employeeRepository.save(employee);
+	}
+	
+	/**
+	 * 비밀번호 재설정
+	 * @param { newPassword } ChangeMyProfile
+	 * @return EmployeeResponseDto
+	 * @throws RuntimeException 
+	 * */
+	@Override
+	@Transactional
+	public void changePassword(@Valid ChangeMyProfile requestDto) throws RuntimeException {
+		Employee employee = employeeRepository.findById(SecurityUtil.getCurrentEmployeeId()).orElseThrow(
+				() -> new RuntimeException("로그인 사원 정보가 없습니다."));
+				
+		employee.updateEmployeePassword(passwordEncoder.encode(requestDto.getNewPassword()));
+		employeeRepository.save(employee);
 	}
 	
 	/**

@@ -128,8 +128,29 @@ public class ApiEmployeeController {
 			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
 	@PostMapping("/edit")
 	public ResponseEntity<Objects> changeEmployeeProfile(
-			@Parameter(name = "ChangePasswordRequestDto", description = "회원정보 재설정", in = ParameterIn.PATH) @Valid @RequestBody final ChangeMyProfile requestDto) {
+			@Parameter(name = "ChangeMyProfile", description = "회원정보 재설정", in = ParameterIn.PATH) @Valid @RequestBody final ChangeMyProfile requestDto) {
 				employeeService.changeEmployeeProfile(requestDto);
+				return ResponseEntity.noContent().build();
+	}
+	
+	/**
+	 * 비밀번호 재설정
+	 * 
+	 * @param { newPassword } ChangeMyProfile
+	 * @return EmployeeResponseDto
+	 * @throws RuntimeException
+	 */
+	@Operation(summary = "비밀번호 재설정", description = "비밀번호 재설정", responses = {
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(hidden = true))),
+			@ApiResponse(responseCode = "400", description = "BAD REQUEST", content = @Content(schema = @Schema(example = "잘못된 요청입니다"))),
+			@ApiResponse(responseCode = "401", description = "UNAUTHORIZED", content = @Content(schema = @Schema(example = "권한이 없습니다"))),
+			@ApiResponse(responseCode = "404", description = "NOT FOUND", content = @Content(schema = @Schema(example = "페이지를 찾을 수 없습니다"))),
+			@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버 에러"))) })
+	@PostMapping("/password")
+	public ResponseEntity<Objects> changePassword(
+			@Parameter(name = "ChangePasswordRequestDto", description = "회원정보 재설정", in = ParameterIn.PATH) @Valid @RequestBody final ChangeMyProfile requestDto) {
+			System.out.println(requestDto.getNewPassword());	
+			employeeService.changePassword(requestDto);
 				return ResponseEntity.noContent().build();
 	}
 
@@ -151,5 +172,7 @@ public class ApiEmployeeController {
 			employeeService.deleteEmployee(employeeId);
 		return ResponseEntity.noContent().build();
 	}
+	
+	
 
 }
