@@ -28,5 +28,6 @@ echo "> $JAR_NAME 에 실행권한 추가"
 sudo chmod 755 $REPOSITORY
 
 echo "> $JAR_NAME 실행"
+echo "> cicd test"
 
 sudo nohup java -jar $JAR_NAME&
