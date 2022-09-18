@@ -43,7 +43,6 @@ public class Order implements Persistable<Long> {
 	
 	@Id
 	@Column(name="order_id")
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long orderId;
 	
 	@Column(name="order_production_name", length=30)
@@ -86,7 +85,7 @@ public class Order implements Persistable<Long> {
 	private LocalDate orderDate;
 	
 	@Id
-	@JoinColumn(name="fk_client_id",nullable = true)
+	@JoinColumn(name="fk_client_id", nullable = false)
 	@JsonIgnore
 	@ManyToOne
 	private Client client;
@@ -105,7 +104,7 @@ public class Order implements Persistable<Long> {
 		this.orderProductionUnit = order.getOrderProductionUnit();
 		this.orderProductionDescription = order.getOrderProductionDescription();
 		this.orderProductionEndDate = order.getOrderProductionEndDate();
-//		this.client = order.getClient();
+		this.client = order.getClient();
 	}
 
 	@Override

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gongzone.dto.order.OrderDTO.OrderRequest;
 import com.gongzone.dto.order.OrderDTO.OrderResponse;
 import com.gongzone.dto.order.OrderListDTO;
-import com.gongzone.dto.order.OrderUpdateDTO;
 import com.gongzone.service.implement.order.OrderServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -112,7 +111,7 @@ public class OrderController {
 		@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버에 오류가 발생하여 응답할 수 없음을 의미합니다. 서버에 오류가 발생했으나 처리 방법을 알 수 없을 경우의 응답입니다.")))
 	})
 	@PutMapping("/{orderId}")
-	public void updateOrder(@PathVariable Long orderId, @RequestBody OrderUpdateDTO updateDto) {
+	public void updateOrder(@PathVariable Long orderId, @RequestBody OrderRequest updateDto) {
 		orderService.updateOrder(orderId, updateDto);
 	}
 	

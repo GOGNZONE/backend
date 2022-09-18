@@ -5,7 +5,6 @@ import java.util.List;
 import com.gongzone.dto.order.OrderDTO.OrderRequest;
 import com.gongzone.dto.order.OrderDTO.OrderResponse;
 import com.gongzone.dto.order.OrderListDTO;
-import com.gongzone.dto.order.OrderUpdateDTO;
 
 /**
  * 발주 서비스 인터페이스
@@ -39,7 +38,7 @@ public interface OrderService {
 	 * @param { orderId, OrderDTO }
 	 * @return void
 	 * */
-	public void updateOrder(Long orderId, OrderUpdateDTO updateDTO);
+	public void updateOrder(Long orderId, OrderRequest updateDTO);
 	
 	/**
 	 * 발주 코드(orderId)로 삭제

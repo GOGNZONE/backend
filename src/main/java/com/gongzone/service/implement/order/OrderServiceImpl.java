@@ -13,7 +13,6 @@ import com.gongzone.common.errors.errorcode.CommonErrorCode;
 import com.gongzone.common.errors.exception.RestApiException;
 
 import com.gongzone.dto.order.OrderListDTO;
-import com.gongzone.dto.order.OrderUpdateDTO;
 import com.gongzone.entity.client.Client;
 import com.gongzone.entity.order.Order;
 import com.gongzone.repository.client.ClientRepository;
@@ -74,7 +73,7 @@ public class OrderServiceImpl implements OrderService{
 	public void insertOrder(OrderRequest orderDto) {
 		Client client = clientRepo.findById(orderDto.getClient().getClientId())
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		System.out.println(orderDto.getOrderProductionBrandName());
+		
 		orderDto.setClient(client);
 		orderRepo.save(orderDto.toEntity());
 	}
@@ -87,12 +86,17 @@ public class OrderServiceImpl implements OrderService{
 	 * */
 	@Override
 	@Transactional
-	public void updateOrder(Long orderId, OrderUpdateDTO updateDTO) {
-		Order order = orderRepo.findOrderByOrderId(orderId).orElseThrow(
-				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		order.updateOrder(updateDTO.toEntity());
-//		orderRepo.save(order);
+	public void updateOrder(Long orderId, OrderRequest requestDto) {
+		orderRepo.deleteOrderByOrderId(orderId)
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+		
+		Client client = clientRepo.findById(requestDto.getClient().getClientId())
+				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+		
+		requestDto.setClient(client);
+		orderRepo.save(requestDto.toEntity());
 	}
+
 
 	/**
 	 * 발주 코드(orderId)로 삭제
