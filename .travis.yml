@@ -4,11 +4,10 @@ jdk:
 
 branches:
     only:
-        - develop
+        - fix/donghyeon
 
 cache:
     directories:
-        - "$HOME/.m2/repository"
         - "$HOME/.gradle"
 
 before_script:
