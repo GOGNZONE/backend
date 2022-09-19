@@ -31,7 +31,7 @@ public class OrderDTO {
 	private String orderProductionUnit;
 	private String orderProductionDescription;
 	private String orderProductionEndDate;
-	private LocalDate orderDate;
+	private String orderDate;
 	private Client client;
 	
 	@Data
@@ -45,7 +45,7 @@ public class OrderDTO {
 		private String orderProductionUnit;
 		private String orderProductionDescription;
 		private String orderProductionEndDate;
-		private LocalDate orderDate;
+		private String orderDate;
 		private Client client;
 		
 		/* DTO -> Entity */
@@ -78,7 +78,7 @@ public class OrderDTO {
 		private String orderProductionUnit;
 		private String orderProductionDescription;
 		private String orderProductionEndDate;
-		private LocalDate orderDate;
+		private String orderDate;
 		private Client client;
 		
 		public OrderResponse(Order order) {

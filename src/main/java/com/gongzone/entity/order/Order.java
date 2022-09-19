@@ -2,6 +2,8 @@ package com.gongzone.entity.order;
 
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -9,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -82,7 +85,7 @@ public class Order implements Persistable<Long> {
 	@CreatedDate
 	@Column(name="order_date")
 	@NotNull(message = "orderDate must not be null")
-	private LocalDate orderDate;
+	private String orderDate;
 	
 	@Id
 	@JoinColumn(name="fk_client_id", nullable = false)
@@ -105,6 +108,11 @@ public class Order implements Persistable<Long> {
 		this.orderProductionDescription = order.getOrderProductionDescription();
 		this.orderProductionEndDate = order.getOrderProductionEndDate();
 		this.client = order.getClient();
+	}
+	
+	@PrePersist
+	public void onPrePersist() {
+		this.orderDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
 
 	@Override

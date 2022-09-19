@@ -13,9 +13,10 @@ import com.gongzone.entity.release.ReleaseId;
 
 /**
  * 출고 리포지토리
+ * 
  * @author Hanju Park
  * @version 1.0
- * */
+ */
 public interface ReleaseRepository extends JpaRepository<Release, ReleaseId> {
 
 	@Query(value = "SELECT r FROM Release r WHERE r.releaseId = :releaseId")
@@ -25,7 +26,7 @@ public interface ReleaseRepository extends JpaRepository<Release, ReleaseId> {
 	@Query(value = "INSERT INTO t_release VALUES (:#{#release.releaseId}, :#{#release.releaseConfirmed}, :#{#release.releaseDate}, :#{#release.releaseDescription}, :#{#release.releaseQuantity}, :#{#release.releaseTotalPrice}, :#{#release.releaseType}, :#{#release.production}, :#{#release.delivery}) ", nativeQuery = true)
 	@Transactional
 	void saveRelease(@Param("release") Release release);
-	
+
 	@Modifying
 	@Query(value = "DELETE FROM t_release WHERE release_id = :releaseId", nativeQuery = true)
 	@Transactional

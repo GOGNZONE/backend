@@ -20,7 +20,6 @@ import com.gongzone.repository.order.OrderRepository;
 import com.gongzone.service.order.OrderService;
 
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 
 /**
  * 발주 서비스 인터페이스 구현체
@@ -28,7 +27,6 @@ import lombok.ToString;
  * @version 1.0
  * */
 @Service
-@ToString
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 	
@@ -73,9 +71,9 @@ public class OrderServiceImpl implements OrderService{
 	public void insertOrder(OrderRequest orderDto) {
 		Client client = clientRepo.findById(orderDto.getClient().getClientId())
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		
+	
 		orderDto.setClient(client);
-		orderRepo.save(orderDto.toEntity());
+		orderRepo.saveOrder(orderDto.toEntity());
 	}
 
 	
@@ -94,7 +92,7 @@ public class OrderServiceImpl implements OrderService{
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
 		
 		requestDto.setClient(client);
-		orderRepo.save(requestDto.toEntity());
+		orderRepo.saveOrder(requestDto.toEntity());
 	}
 
 
