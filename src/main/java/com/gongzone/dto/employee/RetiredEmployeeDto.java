@@ -1,9 +1,5 @@
 package com.gongzone.dto.employee;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import javax.validation.constraints.NotNull;
 
 import com.gongzone.entity.employee.EmployeeRole;
 import com.gongzone.entity.employee.RetiredEmployee;

@@ -82,4 +82,5 @@ public class RetiredEmployee {
 	public void onPrePersist() {
 		this.employeeRetiredDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
+	
 }
