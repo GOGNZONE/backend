@@ -31,3 +31,4 @@ echo "> $JAR_NAME 실행"
 echo "> cicd test"
 
 sudo nohup java -jar $JAR_NAME& 
+echo ">testst"
