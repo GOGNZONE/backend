@@ -18,6 +18,7 @@ import com.gongzone.dto.bom.BOMListDTO;
 import com.gongzone.dto.bom.BOMUpdateDTO;
 import com.gongzone.service.implement.bom.BOMServiceImpl;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 
@@ -29,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/BOM")
 @RequiredArgsConstructor
+@Tag(name = "BOM", description = "BOM 관리 API")
 public class BOMController {
 	private final BOMServiceImpl bomService;
 	

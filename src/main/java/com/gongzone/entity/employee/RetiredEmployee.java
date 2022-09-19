@@ -1,5 +1,8 @@
 package com.gongzone.entity.employee;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -7,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -46,7 +50,7 @@ public class RetiredEmployee {
 	@ColumnDefault("NULL")
 	private String employeeAddress;
 
-	@Column(name = "employee_email", length = 30, unique = true)
+	@Column(name = "employee_email", length = 30)
 	private String employeeEmail;
 	
 	@Column(name = "employee_phone", length = 18 ,unique = true)
@@ -72,4 +76,9 @@ public class RetiredEmployee {
 	@Column(name = "employee_image", columnDefinition = "TEXT")
 	@ColumnDefault("NULL")
 	private String employeeImage;
+	
+	@PrePersist
+	public void onPrePersist() {
+		this.employeeRetiredDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	}
 }

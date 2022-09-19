@@ -128,12 +128,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 				employee.getEmployeeEmail(),
 				employee.getEmployeePhone(),
 				employee.getEmployeeHiredate(),
-				LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
 				employee.getEmployeeRole(),
 				employee.getEmployeeImage());
 		
 		retiredEmployeeRepository.save(retiredEmployeeDto.toEntity());
-		
 		employeeRepository.delete(employee);
 	}
 

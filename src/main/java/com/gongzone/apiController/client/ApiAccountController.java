@@ -20,12 +20,14 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 //import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/account")
 @RequiredArgsConstructor
+@Tag(name = "CLIENT_ACCOUNT", description = "거래처 계좌 관련 API")
 public class ApiAccountController {
 
 	private final ClientAccountServiceImpl accountService;

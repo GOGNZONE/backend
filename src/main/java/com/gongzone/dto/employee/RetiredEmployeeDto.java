@@ -1,5 +1,10 @@
 package com.gongzone.dto.employee;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import javax.validation.constraints.NotNull;
+
 import com.gongzone.entity.employee.EmployeeRole;
 import com.gongzone.entity.employee.RetiredEmployee;
 
@@ -40,7 +45,6 @@ public class RetiredEmployeeDto {
 		private String employeeEmail;
 		private String employeePhone;
 		private String employeeHiredate;
-		private String employeeRetiredDate;
 		private EmployeeRole employeeRole;
 		private String employeeImage;
 		
@@ -53,12 +57,12 @@ public class RetiredEmployeeDto {
 					.employeeEmail(employeeEmail)
 					.employeePhone(employeePhone)
 					.employeeHiredate(employeeHiredate)
-					.employeeRetiredDate(employeeRetiredDate)
 					.employeeRole(employeeRole)
 					.employeeImage(employeeImage)
 					.build();
 			return retiredEmployee;
 		}
+
 	}
 	
 	@Getter

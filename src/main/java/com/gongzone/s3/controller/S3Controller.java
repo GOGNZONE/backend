@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.gongzone.s3.service.S3Service;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 
@@ -18,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/file")
 @RequiredArgsConstructor
+@Tag(name = "FILE", description = "FILE 관리 API")
 public class S3Controller {
     private final S3Service service;
 

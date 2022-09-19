@@ -17,11 +17,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/retired-employee")
 @RequiredArgsConstructor
+@Tag(name = "RETIRED_EMPLOYEE", description = "퇴사자 관리 API")
 public class ApiRetiredEmployeeController {
 	
 	private final RetiredEmployeeServiceImpl retiredEmployeeService;
