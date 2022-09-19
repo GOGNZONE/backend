@@ -30,4 +30,4 @@ sudo chmod 755 $REPOSITORY
 echo "> $JAR_NAME 실행"
 echo "> cicd test"
 
-sudo nohup java -jar $JAR_NAME&
+sudo nohup java -jar $JAR_NAME& > /home/ubuntu/file/nohup.out 2>&1 &
