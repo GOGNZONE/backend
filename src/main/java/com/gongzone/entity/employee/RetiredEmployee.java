@@ -77,6 +77,7 @@ public class RetiredEmployee {
 	@ColumnDefault("NULL")
 	private String employeeImage;
 	
+	/* 해당 엔티티를 저장하기 전에 실행 */
 	@PrePersist
 	public void onPrePersist() {
 		this.employeeRetiredDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));

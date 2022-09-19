@@ -33,7 +33,7 @@ public class TokenProvider {
 
 	private static final String AUTHORITIES_KEY = "auth";
 	private static final String BEARER_TYPE = "bearer";
-	private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24;
+	private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 12;
 	private final Key key;
 
 	// secretKey 생성
@@ -50,11 +50,7 @@ public class TokenProvider {
 	                .collect(Collectors.joining(","));
 
 	        long now = (new Date()).getTime();
-
-
 	        Date tokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
-
-	        System.out.println(tokenExpiresIn);
 
 	        String accessToken = Jwts.builder()
 	                .setSubject(authentication.getName())
