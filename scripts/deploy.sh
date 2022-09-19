@@ -8,7 +8,7 @@ cp $REPOSITORY/*.jar /home/ubuntu/file/
 
 
 echo "> 현재 구동중인 애플리케이션 pid 확인"
-CURRENT_PID=$(pgrep -fl jar | awk '{print $1}')
+CURRENT_PID=$(pgrep -fl jar | awk '{print $1}')https://github.com/GOGNZONE/backend/blob/develop/scripts/deploy.sh
 echo "현재 구동중인 어플리케이션 pid: $CURRENT_PID" 
 if [ -z "$CURRENT_PID" ]; then
     echo "> 현재 구동중인 애플리케이션이 없으므로 종료하지 않습니다."
@@ -30,4 +30,4 @@ sudo chmod 755 $REPOSITORY
 echo "> $JAR_NAME 실행"
 echo "> cicd test"
 
-sudo nohup java -jar $JAR_NAME& > /home/ubuntu/file/nohup.out 2>&1 &
+sudo nohup java -jar $JAR_NAME& 
