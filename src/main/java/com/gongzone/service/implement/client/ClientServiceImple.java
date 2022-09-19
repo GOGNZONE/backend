@@ -68,8 +68,8 @@ public class ClientServiceImple implements ClientService {
 	public void saveClient(RegisterClientDto clientDto) {
 		Employee employee = employeeRepository.findById(clientDto.getEmployee().getEmployeeId())
 				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		
 		clientDto.setEmployee(employee);
+		
 		clientRepository.save(clientDto.toEntity());
 	}
 

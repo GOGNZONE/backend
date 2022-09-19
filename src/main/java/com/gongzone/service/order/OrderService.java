@@ -13,11 +13,11 @@ import com.gongzone.dto.order.OrderListDTO;
  * */
 public interface OrderService {
 	
-//	/**
-//	 *  전체 발주 조회
-//	 *  @return  List<OrderListDTO>
-//	 */
-//	public List<OrderListDTO> findOrder();
+	/**
+	 *  전체 발주 조회
+	 *  @return  List<OrderListDTO>
+	 */
+	public List<OrderListDTO> findOrder();
 	
 	/**
 	 * 발주 코드(orderId)로 조회
