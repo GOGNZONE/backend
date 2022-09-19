@@ -38,15 +38,15 @@ public class OrderServiceImpl implements OrderService{
 	 *  전체 발주 조회
 	 *  @return  List<OrderDTO>
 	 */
-	@Override
-	@Transactional
-	public List<OrderListDTO> findOrder() {
-		List<OrderListDTO> orders = orderRepo.findAll()
-				.stream()
-				.map(OrderListDTO::new)
-				.collect(Collectors.toList());
-		return orders;
-	}
+//	@Override
+//	@Transactional
+//	public List<OrderListDTO> findOrder() {
+//		List<OrderListDTO> orders = orderRepo.findAll()
+//				.stream()
+//				.map(OrderListDTO::new)
+//				.collect(Collectors.toList());
+//		return orders;
+//	}
 
 	
 	/**
