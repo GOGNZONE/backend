@@ -1,10 +1,6 @@
 package com.gongzone.apiController.order;
 
 import java.util.List;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -96,9 +92,8 @@ public class OrderController {
 		@ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(example = "서버에 오류가 발생하여 응답할 수 없음을 의미합니다. 서버에 오류가 발생했으나 처리 방법을 알 수 없을 경우의 응답입니다.")))
 	})
 	@PostMapping("")
-	public ResponseEntity<Object> insertOrder(@Validated final @RequestBody OrderRequest orderDto) {
+	public void insertOrder(@RequestBody OrderRequest orderDto) {
 		orderService.insertOrder(orderDto);
-		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
 	
