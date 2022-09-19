@@ -3,6 +3,7 @@ REPOSITORY=/home/ubuntu/backend/zip
 PROJECT_NAME=gongzone
 
 echo "> Build 파일 복사"
+rm -rf /home/ubuntu/file
 mkdir /home/ubuntu/file
 cp $REPOSITORY/*.jar /home/ubuntu/file/
 
