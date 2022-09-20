@@ -50,19 +50,20 @@ public class TokenProvider {
 	                .collect(Collectors.joining(","));
 
 	        long now = (new Date()).getTime();
+	        long expireTime = now + ACCESS_TOKEN_EXPIRE_TIME;
 	        Date tokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
-
+	        
 	        String accessToken = Jwts.builder()
 	                .setSubject(authentication.getName())
 	                .claim(AUTHORITIES_KEY, authorities)
 	                .setExpiration(tokenExpiresIn)
 	                .signWith(key, SignatureAlgorithm.HS512)
 	                .compact();
-	        
 
 	        return TokenDto.builder()
 	                .grantType(BEARER_TYPE)
 	                .accessToken(accessToken)
+	                .tokenExpiresIn(expireTime)
 	                .build();
 	    }
 
@@ -89,7 +90,7 @@ public class TokenProvider {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
-        } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
+        } catch (SecurityException | MalformedJwtException e) {
             log.info("잘못된 JWT 서명입니다.");
         } catch (ExpiredJwtException e) {
             log.info("만료된 JWT 토큰입니다.");
