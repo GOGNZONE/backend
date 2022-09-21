@@ -37,106 +37,106 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class ProductionServiceImpl implements ProductionService {
-	
-	private final ProductionRepository productionRepository;
-	private final ClientRepository clientRepository;
-	private final StorageRepository storageRepository;
-	private final StockRepository stockRepository;
-	private final ProductionHistoryRepository productionHistoryRepository;
-	
-	/**
-	 *  전체 생산 목록 조회
-	 *  @return List<ProductionListDto>
-	 */
-	@Override
-	@Transactional(readOnly = true)
-	public List<ProductionListDto> findAllProductions() {
-		List<ProductionListDto> productions = productionRepository.findAll()
-				.stream()
-				.map(ProductionListDto::new)
-				.collect(Collectors.toList());
-		return productions;
-	}
-	
-	/**
-	 * 생산 품목 코드(production_id)로 생산 품목 상세 조회
-	 * @param { productionId }
-	 * @return ProductionDetailsDto
-	 * */
-	@Override
-	@Transactional(readOnly = true)
-	public ProductionDetailsDto findByProductionId(final Long productionId) {
-		Production production = productionRepository.findById(productionId)
-				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		return new ProductionDetailsDto(production);
-	}
-	
-	/**
-	 * 생산 품목 등록
-	 * @param { productionInsertDto }
-	 * @return void
-	 * */
-	@Override
-	@Transactional
-	public void insertProduction(final ProductionInsertUpdateDto productionInsertUpdateDto) {
-		Client client = clientRepository.findById(productionInsertUpdateDto.getClient().getClientId()).orElseThrow(
-				() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		productionInsertUpdateDto.setClient(client);
-		
-		productionRepository.save(productionInsertUpdateDto.toEntity());
-	}
-	
-	/**
-	 * 생산 품목 코드(production_id)로 생산 품목 수정
-	 * @param { productionId, ProductionInsertUpdateDto }
-	 * @return void
-	 * */
-	@Override
-	@Transactional
-	public void updateProduction(final Long productionId, final ProductionInsertUpdateDto productionInsertUpdateDto) {
-		Production production = productionRepository.findById(productionId)
-				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		
-		if(productionInsertUpdateDto.getProductionProgress() != production.getProductionProgress()) {
-			ProductionHistoryInsertDto productionHistoryInsertDto = new ProductionHistoryInsertDto(timestamp.getTime(), (byte) 0, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), productionInsertUpdateDto.getProductionProgress().toString(), production);
-			productionHistoryRepository.saveProductionHistory(productionHistoryInsertDto.toEntity());
-		} else if(!production.equals(productionInsertUpdateDto.toEntity())) {
-			ProductionHistoryInsertDto productionHistoryInsertDto = new ProductionHistoryInsertDto(timestamp.getTime(), (byte) 1, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), productionInsertUpdateDto.getProductionDescription(), production);
-			productionHistoryRepository.saveProductionHistory(productionHistoryInsertDto.toEntity());
-		}
-		
-		if(productionInsertUpdateDto.getProductionProgress() == 2) {
-			Storage storage = storageRepository.findById(productionInsertUpdateDto.getStock().getStorage().getStorageId()).orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-			StockUpdateDTO stockDto = new StockUpdateDTO(
-					productionInsertUpdateDto.getProductionName(), 
-					Long.valueOf(productionInsertUpdateDto.getProductionQuantity()),
-					null,
-					storage);
-			Stock stock = stockRepository.save(stockDto.toEntity());
-			productionInsertUpdateDto.setStock(stock);
-		} else if(production.getStock() != null) {
-			stockRepository.deleteByStockId(production.getStock().getStockId());
-			productionInsertUpdateDto.setStock(null);
-		}
+   
+   private final ProductionRepository productionRepository;
+   private final ClientRepository clientRepository;
+   private final StorageRepository storageRepository;
+   private final StockRepository stockRepository;
+   private final ProductionHistoryRepository productionHistoryRepository;
+   
+   /**
+    *  전체 생산 목록 조회
+    *  @return List<ProductionListDto>
+    */
+   @Override
+   @Transactional(readOnly = true)
+   public List<ProductionListDto> findAllProductions() {
+      List<ProductionListDto> productions = productionRepository.findAll()
+            .stream()
+            .map(ProductionListDto::new)
+            .collect(Collectors.toList());
+      return productions;
+   }
+   
+   /**
+    * 생산 품목 코드(production_id)로 생산 품목 상세 조회
+    * @param { productionId }
+    * @return ProductionDetailsDto
+    * */
+   @Override
+   @Transactional(readOnly = true)
+   public ProductionDetailsDto findByProductionId(final Long productionId) {
+      Production production = productionRepository.findById(productionId)
+            .orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+      return new ProductionDetailsDto(production);
+   }
+   
+   /**
+    * 생산 품목 등록
+    * @param { productionInsertDto }
+    * @return void
+    * */
+   @Override
+   @Transactional
+   public void insertProduction(final ProductionInsertUpdateDto productionInsertUpdateDto) {
+      Client client = clientRepository.findById(productionInsertUpdateDto.getClient().getClientId()).orElseThrow(
+            () -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+      productionInsertUpdateDto.setClient(client);
+      
+      productionRepository.save(productionInsertUpdateDto.toEntity());
+   }
+   
+   /**
+    * 생산 품목 코드(production_id)로 생산 품목 수정
+    * @param { productionId, ProductionInsertUpdateDto }
+    * @return void
+    * */
+   @Override
+   @Transactional
+   public void updateProduction(final Long productionId, final ProductionInsertUpdateDto productionInsertUpdateDto) {
+      Production production = productionRepository.findById(productionId)
+            .orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+      Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+      
+      if(productionInsertUpdateDto.getProductionProgress() != production.getProductionProgress()) {
+         ProductionHistoryInsertDto productionHistoryInsertDto = new ProductionHistoryInsertDto(timestamp.getTime(), (byte) 0, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), productionInsertUpdateDto.getProductionProgress().toString(), production);
+         productionHistoryRepository.saveProductionHistory(productionHistoryInsertDto.toEntity());
+      } else if(!production.equals(productionInsertUpdateDto.toEntity())) {
+         ProductionHistoryInsertDto productionHistoryInsertDto = new ProductionHistoryInsertDto(timestamp.getTime(), (byte) 1, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), productionInsertUpdateDto.getProductionDescription(), production);
+         productionHistoryRepository.saveProductionHistory(productionHistoryInsertDto.toEntity());
+      }
+      
+      if(productionInsertUpdateDto.getProductionProgress() == 2) {
+         Storage storage = storageRepository.findById(productionInsertUpdateDto.getStock().getStorage().getStorageId()).orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+         StockUpdateDTO stockDto = new StockUpdateDTO(
+               productionInsertUpdateDto.getProductionName(), 
+               Long.valueOf(productionInsertUpdateDto.getProductionQuantity()),
+               null,
+               storage);
+         Stock stock = stockRepository.save(stockDto.toEntity());
+         productionInsertUpdateDto.setStock(stock);
+      } else if(production.getStock() != null) {
+         stockRepository.deleteByStockId(production.getStock().getStockId());
+         productionInsertUpdateDto.setStock(null);
+      }
 
-		production.updateProduction(productionInsertUpdateDto);
-	}
+      production.updateProduction(productionInsertUpdateDto);
+   }
 
-	/**
-	 * 생산 품목 코드(production_id)로 생산 품목 삭제
-	 * @param { productionId }
-	 * @return void
-	 * */
-	@Override
-	@Transactional
-	public void deleteProduction(final Long productionId) {
-		Production production = productionRepository.findById(productionId)
-				.orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
-		if(production.getStock() != null) {
-			stockRepository.deleteByStockId(production.getStock().getStockId());
-		}
-		productionRepository.delete(production);
-	}
+   /**
+    * 생산 품목 코드(production_id)로 생산 품목 삭제
+    * @param { productionId }
+    * @return void
+    * */
+   @Override
+   @Transactional
+   public void deleteProduction(final Long productionId) {
+      Production production = productionRepository.findById(productionId)
+            .orElseThrow(() -> new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND));
+//      if(production.getStock() != null) {
+//         stockRepository.deleteByStockId(production.getStock().getStockId());
+//      }
+      productionRepository.delete(production);
+   }
 
 }

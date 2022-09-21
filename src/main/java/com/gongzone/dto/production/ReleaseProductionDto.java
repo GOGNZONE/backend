@@ -19,20 +19,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class ReleaseProductionDto {
-	
-	private String productionName;
-	
-	private String productionBrandName;
-	
-	private Long productionPrice;
-	
-	private int productionQuantity;
-	
-	public ReleaseProductionDto(Production production) {
-		this.productionName = production.getProductionName();
-		this.productionBrandName = production.getProductionBrandName();
-		this.productionPrice = production.getProductionPrice();
-		this.productionQuantity = production.getProductionQuantity();
-	}
-	
+   
+   private Long productionId;
+   
+   private String productionName;
+   
+   private String productionBrandName;
+   
+   private Long productionPrice;
+   
+   private int productionQuantity;
+   
+   public ReleaseProductionDto(Production production) {
+      this.productionId = production.getProductionId();
+      this.productionName = production.getProductionName();
+      this.productionBrandName = production.getProductionBrandName();
+      this.productionPrice = production.getProductionPrice();
+      this.productionQuantity = production.getProductionQuantity();
+   }
+   
 }
