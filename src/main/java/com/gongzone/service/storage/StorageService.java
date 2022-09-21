@@ -31,9 +31,10 @@ public interface StorageService {
 	 * @return void
 	 * */
 	public void insertStorage(StorageRequest request);
+	
 	/**
 	 * 창고 수정(production_id)로 생산 품목 수정
-	 * @param { stockId, storageDTO }
+	 * @param { stockId, storageDTO } 
 	 * @return void
 	 * */
 	public void updateStorage(Long stockId, StorageUpdateDTO updateDTO);
