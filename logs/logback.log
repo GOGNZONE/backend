@@ -1,0 +1,6 @@
+[2022-09-21 10:06:53:139128314] INFO  5716 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+[2022-09-21 10:06:53:139128317] INFO  5716 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+[2022-09-21 10:43:47:141341742] INFO  5716 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+[2022-09-21 10:43:47:141341744] INFO  5716 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+[2022-09-21 11:32:50:144285091] INFO  5716 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+[2022-09-21 11:32:50:144285098] INFO  5716 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
